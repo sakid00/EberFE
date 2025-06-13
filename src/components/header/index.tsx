@@ -22,10 +22,10 @@ const navigationList = [
   { name: 'Contact Us', navigation: '' },
 ];
 
-const langList = ['EN', 'ID'];
+const langList = ['IDN','EN'];
 
 const Header = () => {
-  const [langValue, setLangValue] = useState('');
+  const [langValue, setLangValue] = useState<string>('IDN');
   const handleChange = (event: SelectChangeEvent) => {
     setLangValue(event.target.value);
   };
@@ -49,17 +49,25 @@ const Header = () => {
         <Image src={logo} width={100} height={100} alt="" />
         <Box className="flex flex-row">{navigationBar}</Box>
         <Box>
-          <FormControl className="bg-white opacity-20 rounded-2xl w-15 h-10 items-center">
+          <FormControl className="bg-white opacity-20 rounded-2xl w-20 h-10 items-center">
             <Select
               value={langValue}
               onChange={handleChange}
-              className="w-15 h-10 border-0"
+              className="w-20 h-10 border-0"
             >
               {langMenu}
             </Select>
           </FormControl>
-          <IconButton size="medium">
-            <SearchIcon className="bg-white rounded-2xl ml-2 opacity-20" />
+          <IconButton
+            sx={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              width: 40,
+              height: 40,
+              borderRadius: 20,
+              marginLeft: 1,
+            }}
+          >
+            <SearchIcon sx={{ color: 'white' }} />
           </IconButton>
         </Box>
       </Box>

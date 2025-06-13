@@ -6,12 +6,18 @@ import EmailIcon from '@mui/icons-material/EmailOutlined';
 import PhoneIcon from '@mui/icons-material/CallOutlined';
 import BusinessIcon from '@mui/icons-material/BusinessOutlined';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
+import { Plus_Jakarta_Sans } from 'next/font/google'
+
+const font = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '700']
+})
 
 const Footer = () => {
   const contactInfoList = [
     {
       logo: <LocationIcon />,
-      desc: 'Millennium Centennial Center, 38th Floor, Jl. Jend Sudirman Kav.25, Jakarta 12920, Indonesia',
+      desc: `Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia`,
     },
     {
       logo: <EmailIcon />,
@@ -45,13 +51,13 @@ const Footer = () => {
     return (
       <Box className="flex mt-4" key={index}>
         {val.logo}
-        <Typography marginLeft={1}>{val.desc}</Typography>
+        <Typography marginLeft={1} sx={{ whiteSpace: 'pre-line' }}>{val.desc}</Typography>
       </Box>
     );
   });
-  const subsidiariesListMap = subsidiariesList.map((val) => {
+  const subsidiariesListMap = subsidiariesList.map((val, index) => {
     return (
-      <Box className="flex mt-4">
+      <Box className="flex mt-4" key={index}>
         {val.logo}
         <Typography marginLeft={1}>{val.name}</Typography>
       </Box>
@@ -60,8 +66,9 @@ const Footer = () => {
 
   return (
     <footer>
-      <Box className="mb-100">
-        <Box className="flex flex-row items-center justify-between w-1/2">
+      <Box className="justify-center align-center pt-[10vh] px-[10vw] pb-[2vh]">
+        <Box className='flex flex-col'>
+        <Box className="flex flex-row items-center w-1/2">
           <Image src={logo} className="w-30 h-15" alt="" />
           <Divider
             orientation="vertical"
@@ -71,14 +78,11 @@ const Footer = () => {
               backgroundColor: '#8F92A7',
               borderRadius: 10,
               height: 100,
-              width: 4,
+              width: 2,
             }}
           />
-          <Typography>
-            Established in 2021, Eber Group oversees four top-performing
-            chemical manufacturing companies operating across Indonesia,
-            delivering high-performance specialty materials and chemical
-            solutions.
+          <Typography className={`${font.className}`} sx={{ whiteSpace: 'pre-line' }}>
+           {"Established in 2021, Eber Group oversees four\n top-performing chemical manufacturing companies operating across\n Indonesia, delivering high-performance specialty materials and chemical\n solutions."}
           </Typography>
         </Box>
         <Box className="flex mt-4 w-1/2">
@@ -93,21 +97,22 @@ const Footer = () => {
         </Box>
         <Divider
           variant="middle"
+          className='flex self-center'
           sx={{
-            marginY: 2,
+            marginTop: '5vh',
+            marginBottom: '2vh',
             backgroundColor: '#8F92A7',
             borderRadius: 10,
             height: 1,
-            width: '90%',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: '80vw',
           }}
         />
-        <Box className="flex">
+        <Box className="flex justify-center">
           <CopyrightIcon />
           <Typography marginLeft={0.5}>
             2025 Eber Group. All right reserved
           </Typography>
+        </Box>
         </Box>
       </Box>
     </footer>
