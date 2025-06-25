@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
-import logo from '../../../public/eber_logo.png';
-import bgHeader from '../../../public/background/bg_header.png';
+import logo from '@public/eber_logo.png';
+import bgHeader from '@public/background/bg_header.png';
 import {
   Box,
   Button,
@@ -20,7 +20,7 @@ const navigationList = [
   { name: 'About Us', navigation: 'about-us' },
   { name: 'Corporate', navigation: 'corporate' },
   { name: 'Product', navigation: '/product' },
-  { name: 'Careers', navigation: '/carreers' },
+  { name: 'Careers', navigation: '/careers' },
   { name: 'Contact Us', navigation: '/contact-us' },
 ];
 
@@ -63,7 +63,15 @@ const Header = () => {
       <Image
         src={bgHeader}
         alt=""
-        style={{ position: 'absolute', width: '100vw', height: '30vh', right: '10vw', left: 0, top: 0, zIndex: -1000}}
+        style={{
+          position: 'absolute',
+          width: '100vw',
+          height: '30vh',
+          right: '10vw',
+          left: 0,
+          top: 0,
+          zIndex: -1000,
+        }}
       />
       <Box className="flex flex-row justify-around items-center mt-10 mb-20">
         <Image src={logo} alt="" style={{ width: '6vw', height: '4vh' }} />

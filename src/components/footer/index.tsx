@@ -71,10 +71,10 @@ const Footer = () => {
       <Box
         sx={{
           backgroundImage: `url(/background/bg_footer.png)`,
-          backgroundSize: 'auto',
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
-        className="justify-center align-center pt-[5vh] px-[10vw] pb-[2vh] z-100 mt-[5vh]"
+        className="justify-center align-center pt-[5vh] px-[10vw] pb-[2vh] z-100"
       >
         <Box className="flex flex-col">
           <Box className="flex flex-row items-center w-1/2">
