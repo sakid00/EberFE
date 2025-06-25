@@ -4,6 +4,7 @@ import Photo from '@public/photo/field_person.png';
 import EmailIcon from '@public/icon/email_purple.svg';
 import PhoneIcon from '@public/icon/phone_purple.svg';
 import LocationIcon from '@public/icon/location_purple.svg';
+import DualColorText from '@/components/dualColorText';
 
 const infoList = [
   { logo: EmailIcon, title: 'Email', desc: 'info@ebergroup.com' },
@@ -39,22 +40,7 @@ const SubmitApplicationPage = () => {
         <Typography variant="h6" sx={{ color: 'black' }}>
           Join Our Team
         </Typography>
-        <Box className="flex mt-1">
-          <Typography variant="h4" sx={{ color: 'black' }}>
-            {"Let's Build,\u00a0"}
-          </Typography>
-          <Typography
-            variant="h4"
-            sx={{
-              background:
-                'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            The Future Together
-          </Typography>
-        </Box>
+        <DualColorText text1="Let's Build,\u00a0" text2='The Future Together' />
         <Typography
           variant="body1"
           sx={{ marginTop: 1, color: 'rgba(75, 85, 99, 1)' }}
