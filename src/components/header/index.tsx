@@ -13,7 +13,8 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 const navigationList = [
   { name: 'Home', navigation: '/' },
@@ -32,26 +33,41 @@ const Header = () => {
     setLangValue(event.target.value);
   };
   const router = useRouter();
+  const pathName = usePathname();
 
   const navigationBar = navigationList.map((val, index) => {
+    const isPathName =
+      pathName
+        .substring(1)
+        .replaceAll('-', '')
+        .includes(val.name.toLowerCase().replaceAll(' ', '')) ||
+      (pathName === '/' && val.name === 'Home');
+
     return (
-      <Button
+      <motion.div
         key={index}
-        variant="text"
-        onClick={() => {
-          router.push(val.navigation);
-        }}
-        sx={{
-          textTransform: 'none',
-          color: 'rgba(255, 255, 255, 0.5)',
-          fontSize: '1.3rem',
-          marginRight: 4,
-        }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.2 }}
       >
-        {val.name}
-      </Button>
+        <Button
+          variant="text"
+          onClick={() => {
+            router.push(val.navigation);
+          }}
+          sx={{
+            textTransform: 'none',
+            color: isPathName ? 'white' : 'rgba(255, 255, 255, 0.5)',
+            fontSize: '1rem',
+            marginRight: 4,
+          }}
+        >
+          {val.name}
+        </Button>
+      </motion.div>
     );
   });
+
   const langMenu = langList.map((val) => (
     <MenuItem key={val} value={val}>
       {val}
@@ -73,9 +89,15 @@ const Header = () => {
           zIndex: -1000,
         }}
       />
-      <Box className="flex flex-row justify-around items-center mt-10 mb-20">
-        <Image src={logo} alt="" style={{ width: '6vw', height: '4vh' }} />
-        <Box className="flex flex-row">{navigationBar}</Box>
+      <Box className="flex flex-row justify-around items-center mt-10 mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+        >
+          <Image src={logo} alt="" style={{ width: '8vw', height: '5vh' }} />
+        </motion.div>
+        <motion.div className="flex flex-row">{navigationBar}</motion.div>
         <Box>
           <FormControl className="bg-white opacity-20 rounded-2xl w-20 h-10 items-center">
             <Select
