@@ -23,9 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body >
+      <body>
         <Header />
-        <Box className={`${font.variable} my-[15vh]`}>{children}</Box>
+        <Box className={`${font.variable} my-[10vh]`}>{children}</Box>
         <Footer />
       </body>
     </html>
