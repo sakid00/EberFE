@@ -4,6 +4,7 @@ import Photo from '@public/photo/chem_person.png';
 import EmailIcon from '@public/icon/email_purple.svg';
 import PhoneIcon from '@public/icon/phone_purple.svg';
 import LocationIcon from '@public/icon/location_purple.svg';
+import DualColorText from '@/components/dualColorText';
 
 const infoList = [
   { logo: EmailIcon, title: 'Email', desc: 'info@ebergroup.com' },
@@ -34,27 +35,18 @@ const ContactUsPage = () => {
   });
 
   return (
-    <Box className="flex items-center justify-center px-[10vw]">
-      <Box className="bg-white p-8 w-1/3 h-full rounded-xl">
+    <Box className="flex items-end justify-center px-[10vw]">
+      <Box className="bg-white p-8 max-w-1/2 h-full rounded-xl">
         <Typography variant="h6" sx={{ color: 'black' }}>
           Get in touch
         </Typography>
-        <Box className="flex mt-1">
-          <Typography variant="h4" sx={{ color: 'black' }}>
-            {"Let's Chat,\u00a0"}
-          </Typography>
-          <Typography
-            variant="h4"
-            sx={{
-              background:
-                'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Reach Out to Us
-          </Typography>
-        </Box>
+        <DualColorText
+          text1={"Let's Chat,\u00a0"}
+          text2=" Reach Out to Us"
+          inline
+          text1Variant="h4"
+          text2Variant="h4"
+        />
         <Typography
           variant="body1"
           sx={{ marginTop: 1, color: 'rgba(75, 85, 99, 1)' }}
@@ -100,7 +92,7 @@ const ContactUsPage = () => {
           Submit
         </Button>
       </Box>
-      <Box className="flex flex-col justify-end ml-5 items-center h-[58vh]">
+      <Box className="flex flex-col justify-end ml-5 items-center h-full">
         <Image
           src={Photo}
           style={{
@@ -109,7 +101,9 @@ const ContactUsPage = () => {
           }}
           alt=""
         />
-        <Box className="bg-white w-fit py-5 px-10 rounded-xl">{infoListMap}</Box>
+        <Box className="bg-white w-fit py-5 px-10 rounded-xl">
+          {infoListMap}
+        </Box>
       </Box>
     </Box>
   );

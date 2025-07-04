@@ -35,12 +35,18 @@ const SubmitApplicationPage = () => {
   });
 
   return (
-    <Box className="flex items-center justify-center px-[10vw]">
-      <Box className="bg-white p-8 w-1/3 h-full rounded-xl">
+    <Box className="flex items-end justify-center px-[10vw]">
+      <Box className="bg-white p-8 max-w-1/2 h-full rounded-xl">
         <Typography variant="h6" sx={{ color: 'black' }}>
           Join Our Team
         </Typography>
-        <DualColorText text1="Let's Build,\u00a0" text2='The Future Together' />
+        <DualColorText
+          text1={"Let's Build,\u00a0"}
+          text2="The Future Together"
+          text1Variant="h4"
+          text2Variant="h4"
+          inline
+        />
         <Typography
           variant="body1"
           sx={{ marginTop: 1, color: 'rgba(75, 85, 99, 1)' }}
@@ -86,7 +92,7 @@ const SubmitApplicationPage = () => {
           Submit
         </Button>
       </Box>
-      <Box className="flex flex-col justify-end ml-5 items-center h-[58vh]">
+      <Box className="flex flex-col justify-end ml-5 items-center h-full">
         <Image
           src={Photo}
           style={{
@@ -95,7 +101,9 @@ const SubmitApplicationPage = () => {
           }}
           alt=""
         />
-        <Box className="bg-white w-fit py-5 px-10 rounded-xl">{infoListMap}</Box>
+        <Box className="bg-white w-fit py-5 px-10 rounded-xl">
+          {infoListMap}
+        </Box>
       </Box>
     </Box>
   );
