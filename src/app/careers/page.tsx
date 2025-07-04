@@ -1,4 +1,5 @@
 'use client';
+import DualColorText from '@/components/dualColorText';
 import {
   Accordion,
   AccordionDetails,
@@ -86,21 +87,14 @@ const CareersPage = () => {
 
   return (
     <Box className="flex px-[10vw] z-50">
-      <Box className="bg-white w-1/6 rounded-xl py-10 px-5 max-h-[33vh]">
-        <Box className="flex">
-          <Typography variant="h4" color="black">{`Our\u00a0`}</Typography>
-          <Typography
-            variant="h4"
-            sx={{
-              background:
-                'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
-          >
-            Open
-          </Typography>
-        </Box>
+      <Box className="bg-white max-w-1/4 h-1/5 rounded-xl py-10 px-5">
+        <DualColorText
+          text1={'Our\u00a0'}
+          text2="Open"
+          text1Variant="h4"
+          text2Variant="h4"
+          inline
+        />
         <Typography
           variant="h4"
           sx={{
