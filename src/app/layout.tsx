@@ -4,6 +4,7 @@ import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Box } from '@mui/material';
+import ParticlesBackground from '@/components/BackgroundParticles';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -23,9 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="overflow-x-hidden overscroll-none">
         <Header />
-        <Box className={`${font.variable} my-[10vh]`}>{children}</Box>
+        <Box className={`${font.variable} my-[10vh] px-[10vw]`}>
+          <ParticlesBackground />
+          {children}
+        </Box>
         <Footer />
       </body>
     </html>
