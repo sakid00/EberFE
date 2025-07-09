@@ -18,9 +18,10 @@ import { motion } from 'framer-motion';
 
 const navigationList = [
   { name: 'Home', navigation: '/' },
-  { name: 'About Us', navigation: 'about-us' },
-  { name: 'Corporate', navigation: 'corporate' },
+  { name: 'About Us', navigation: '/about-us' },
+  { name: 'Corporate', navigation: '/corporate' },
   { name: 'Product', navigation: '/product' },
+  { name: 'Activity', navigation: '/activity' },
   { name: 'Careers', navigation: '/careers' },
   { name: 'Contact Us', navigation: '/contact-us' },
 ];
@@ -86,11 +87,12 @@ const Header = () => {
           right: '10vw',
           left: 0,
           top: 0,
-          zIndex: -1000,
+          zIndex: 0,
         }}
       />
       <Box className="flex flex-row justify-around items-center mt-10 mb-10">
         <motion.div
+          style={{ zIndex: 1 }}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
