@@ -35,7 +35,7 @@ const SubmitApplicationPage = () => {
   });
 
   return (
-    <Box className="flex items-end justify-center px-[10vw]">
+    <Box className="flex items-end justify-center">
       <Box className="bg-white p-8 max-w-1/2 h-full rounded-xl">
         <Typography variant="h6" sx={{ color: 'black' }}>
           Join Our Team

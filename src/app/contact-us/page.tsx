@@ -35,8 +35,8 @@ const ContactUsPage = () => {
   });
 
   return (
-    <Box className="flex items-end justify-center px-[10vw]">
-      <Box className="bg-white p-8 max-w-1/2 h-full rounded-xl">
+    <Box className="flex items-end justify-center">
+      <Box className="bg-white p-8 max-w-1/2 h-full rounded-xl z-100">
         <Typography variant="h6" sx={{ color: 'black' }}>
           Get in touch
         </Typography>
@@ -92,7 +92,7 @@ const ContactUsPage = () => {
           Submit
         </Button>
       </Box>
-      <Box className="flex flex-col justify-end ml-5 items-center h-full">
+      <Box className="flex flex-col justify-end ml-5 items-center h-full z-100">
         <Image
           src={Photo}
           style={{
