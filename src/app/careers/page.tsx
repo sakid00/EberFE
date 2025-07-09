@@ -86,8 +86,8 @@ const CareersPage = () => {
   });
 
   return (
-    <Box className="flex px-[10vw] z-50">
-      <Box className="bg-white max-w-1/4 h-1/5 rounded-xl py-10 px-5">
+    <Box className="flex z-100">
+      <Box className="bg-white max-w-1/4 h-1/5 rounded-xl py-10 px-5 z-100">
         <DualColorText
           text1={'Our\u00a0'}
           text2="Open"
