@@ -11,7 +11,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -30,11 +30,21 @@ const langList = ['IDN', 'EN'];
 
 const Header = () => {
   const [langValue, setLangValue] = useState<string>('IDN');
+  const [isAnimating, setIsAnimating] = useState(false);
   const handleChange = (event: SelectChangeEvent) => {
     setLangValue(event.target.value);
   };
   const router = useRouter();
   const pathName = usePathname();
+
+  useEffect(() => {
+    setIsAnimating(true);
+    const timer = setTimeout(() => {
+      setIsAnimating(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [pathName]);
 
   const navigationBar = navigationList.map((val, index) => {
     const isPathName =
@@ -48,8 +58,16 @@ const Header = () => {
       <motion.div
         key={index}
         initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut', delay: index * 0.2 }}
+        animate={{
+          opacity: isAnimating ? 0 : 1,
+          y: isAnimating ? -20 : 0,
+          scale: isAnimating ? 0.95 : 1,
+        }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeInOut',
+          delay: isAnimating ? 0 : index * 0.1,
+        }}
       >
         <Button
           variant="text"
@@ -94,13 +112,36 @@ const Header = () => {
         <motion.div
           style={{ zIndex: 1 }}
           initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+          animate={{
+            opacity: isAnimating ? 0 : 1,
+            y: isAnimating ? -30 : 0,
+            scale: isAnimating ? 0.9 : 1,
+          }}
+          transition={{
+            duration: 0.4,
+            ease: 'easeInOut',
+            delay: isAnimating ? 0 : 0.2,
+          }}
         >
           <Image src={logo} alt="" style={{ width: '8vw', height: '5vh' }} />
         </motion.div>
-        <motion.div className="flex flex-row">{navigationBar}</motion.div>
-        <Box>
+        <motion.div
+          className="flex flex-row"
+          animate={{
+            opacity: isAnimating ? 0.3 : 1,
+            y: isAnimating ? -10 : 0,
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
+          {navigationBar}
+        </motion.div>
+        <motion.div
+          animate={{
+            opacity: isAnimating ? 0.5 : 1,
+            scale: isAnimating ? 0.95 : 1,
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+        >
           <FormControl className="bg-white opacity-20 rounded-2xl w-20 h-10 items-center">
             <Select
               value={langValue}
@@ -121,7 +162,7 @@ const Header = () => {
           >
             <SearchIcon sx={{ color: 'white' }} />
           </IconButton>
-        </Box>
+        </motion.div>
       </Box>
     </header>
   );
