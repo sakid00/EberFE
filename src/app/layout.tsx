@@ -5,6 +5,7 @@ import Footer from '@/components/footer';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Box } from '@mui/material';
 import ParticlesBackground from '@/components/BackgroundParticles';
+import ThemeWrapper from '@/components/ThemeWrapper';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -13,8 +14,9 @@ export const metadata: Metadata = {
 
 const font = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-Jakarta',
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-plus-jakarta-sans',
+  display: 'swap',
 });
 
 export default function RootLayout({
@@ -24,13 +26,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="overflow-x-hidden overscroll-none">
-        <Header />
-        <Box className={`${font.variable} my-[10vh] px-[10vw]`}>
-          <ParticlesBackground />
-          {children}
-        </Box>
-        <Footer />
+      <body
+        className={`${font.className} ${font.variable} overflow-x-hidden overscroll-none`}
+      >
+        <ThemeWrapper>
+          <Header />
+          <Box className={`my-[10vh] px-[10vw]`}>
+            <ParticlesBackground />
+            {children}
+          </Box>
+          <Footer />
+        </ThemeWrapper>
       </body>
     </html>
   );

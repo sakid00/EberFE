@@ -6,12 +6,6 @@ import EmailIcon from '@mui/icons-material/EmailOutlined';
 import PhoneIcon from '@mui/icons-material/CallOutlined';
 import BusinessIcon from '@mui/icons-material/BusinessOutlined';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
-import { Plus_Jakarta_Sans } from 'next/font/google';
-
-const font = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
 
 const Footer = () => {
   const contactInfoList = [
@@ -91,7 +85,6 @@ const Footer = () => {
               }}
             />
             <Typography
-              className={`${font.className}`}
               sx={{ whiteSpace: 'pre-line' }}
             >
               {
