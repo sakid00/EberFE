@@ -6,6 +6,7 @@ import { useState } from 'react';
 import HeaderImage from '@public/photo/header_corporate.png';
 import { Map } from '@mui/icons-material';
 import useStyles from './style';
+import dynamic from 'next/dynamic';
 
 const companyList: listType[] = [
   {
@@ -66,12 +67,7 @@ const CorporateContainer = () => {
           TPY in 1986 then final expansion capacity to 82.000 TPY.
         </Typography>
 
-        <Grid
-          container
-          spacing={2}
-          className="mt-6"
-          sx={{ maxWidth: '1000px', marginLeft: 'auto' }}
-        >
+        <Grid container spacing={2} className="mt-6">
           <Grid component={'span'} size={6}>
             <Box className="p-4 border border-gray-200 rounded-lg">
               <Typography variant="h6" color="#030712">
@@ -122,12 +118,7 @@ const CorporateContainer = () => {
           area app. 16,2 Hectare, located in Tangerang – Banten Province.
         </Typography>
 
-        <Grid
-          container
-          spacing={2}
-          className="mt-6"
-          sx={{ maxWidth: '1000px', marginLeft: 'auto' }}
-        >
+        <Grid container spacing={2} className="mt-6">
           <Grid component={'span'} size={4}>
             <Box className="p-4 border border-gray-200 rounded-lg">
               <Typography variant="h6" color="#030712">
@@ -165,4 +156,6 @@ const CorporateContainer = () => {
   );
 };
 
-export default CorporateContainer;
+export default dynamic(() => Promise.resolve(CorporateContainer), {
+  ssr: false,
+});
