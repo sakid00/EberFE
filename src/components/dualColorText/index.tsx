@@ -6,6 +6,8 @@ interface IDualColorTextProps {
   text2: string;
   text2Variant?: TypographyVariant;
   inline?: boolean;
+  color?: string;
+  fontWeight?: number;
 }
 
 const DualColorText = ({
@@ -14,19 +16,21 @@ const DualColorText = ({
   inline,
   text1Variant,
   text2Variant,
+  color,
+  fontWeight,
 }: IDualColorTextProps) => {
   return (
     <Box className={`${inline ? 'flex' : ''} mt-1`}>
       <Typography
         variant={text1Variant}
-        fontWeight={800}
-        sx={{ color: 'black' }}
+        fontWeight={fontWeight ?? 800}
+        sx={{ color: color ?? 'black' }}
       >
         {text1}
       </Typography>
       <Typography
         variant={text2Variant}
-        fontWeight={800}
+        fontWeight={fontWeight ?? 800}
         sx={{
           background:
             'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
