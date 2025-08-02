@@ -1,103 +1,104 @@
+import { Box, Button, Typography } from '@mui/material';
+import DualColorText from '@/components/dualColorText';
 import Image from 'next/image';
+import bgHeader from '@public/background/homepage_header_bg.png';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{' '}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Image
+        src={bgHeader}
+        alt=""
+        style={{
+          position: 'absolute',
+          width: '100vw',
+          height: '65vh',
+          right: '10vw',
+          left: 0,
+          top: 0,
+          zIndex: -1,
+        }}
+      />
+      <Box
+        id="home-header"
+        className="flex-1 items-center justify-center h-[65vh] z-1"
+      >
+        <Box id="home-header-left-side">
+          <h2 className="text-6xl font-bold">Innovating</h2>
+          <DualColorText
+            text1={'as\u00a0'}
+            text2="Sustainable"
+            text1Variant="h2"
+            text2Variant="h2"
+            inline
+            color="white"
+          />
+          <h2 className="text-6xl font-bold">Future</h2>
+          <Typography className="w-1/4" style={{ marginTop: '20px' }}>
+            Established in 2021, Eber Group oversees four top-performing
+            chemical manufacturing companies operating across Indonesia.
+          </Typography>
+          <Box id="buttons-wrapper" className="flex flex-row gap-4 mt-8">
+            <Button
+              size="small"
+              sx={{
+                color: 'white',
+                background:
+                  'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+                padding: 2,
+                borderRadius: 10,
+                fontWeight: 600,
+              }}
+            >
+              Explore Our Product
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              sx={{
+                color: 'white',
+                background: 'transparent',
+                padding: 2,
+                borderRadius: 10,
+                fontWeight: 600,
+                borderColor: '#786C95',
+                borderWidth: 1,
+              }}
+            >
+              Custom Product
+            </Button>
+          </Box>
+        </Box>
+      </Box>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Box
+        id="home-second-section"
+        className="flex flex-col items-center justify-center"
+      >
+        <DualColorText
+          text1={'Leader in\u00a0'}
+          text2="High-Performance"
+          text1Variant="h4"
+          text2Variant="h4"
+          fontWeight={700}
+          inline
+        />
+        <Typography variant="h4" fontWeight={700} className=" text-black">
+          Specialty Materials
+        </Typography>
+        <Typography
+          variant="body1"
+          flexWrap={'wrap'}
+          className=" text-[#4B5563]"
+          textAlign={'center'}
+          fontSize={'18px'}
+          style={{ width: '70%', marginTop: '20px' }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          Established in 2021, Eber Group oversees four top-performing chemical
+          manufacturing companies operating across Indonesia, bringing together
+          decades of expertise and innovation in the petrochemical industry.
+        </Typography>
+      </Box>
+    </>
   );
 }
