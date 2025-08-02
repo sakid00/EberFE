@@ -95,19 +95,21 @@ const Header = () => {
 
   return (
     <header>
-      <Image
-        src={bgHeader}
-        alt=""
-        style={{
-          position: 'absolute',
-          width: '100vw',
-          height: '30vh',
-          right: '10vw',
-          left: 0,
-          top: 0,
-          zIndex: 0,
-        }}
-      />
+      {pathName !== '/' && pathName !== '/about-us' && (
+        <Image
+          src={bgHeader}
+          alt=""
+          style={{
+            position: 'absolute',
+            width: '100vw',
+            height: '30vh',
+            right: '10vw',
+            left: 0,
+            top: 0,
+            zIndex: 0,
+          }}
+        />
+      )}
       <Box className="flex flex-row justify-around items-center mt-10 mb-10">
         <motion.div
           style={{ zIndex: 1 }}
