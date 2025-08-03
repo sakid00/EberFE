@@ -10,7 +10,9 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-plus-jakarta-sans);
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo,
+    monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,4 +36,121 @@ body {
 /* Additional font utilities for Tailwind */
 .font-plus-jakarta {
   font-family: var(--font-plus-jakarta-sans);
+}
+
+.clip-custom-shape {
+  clip-path: path(
+    'M671.801 13.3419C417.516 36.2922 135.085 116.274 15.2304 160.496C5.94809 163.921 0 172.777 0 182.671V640C0 653.255 10.7451 664 24 664H1248C1261.25 664 1272 653.255 1272 640V46.9426C1272 35.7595 1264.34 26.0344 1253.38 23.8326C1129.22 -1.1005 924.497 -9.4651 671.801 13.3419Z'
+  );
+}
+
+/* Tangki image gradient overlay styles */
+.tangki-image-container {
+  display: inline-block;
+}
+
+.tangki-gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    /* rgba(255, 255, 255, 255.1) 70%, */ transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* Scroll Animation Styles */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-on-scroll.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-fade-in {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.animate-fade-in.animate-visible {
+  opacity: 1;
+}
+
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-slide-left.animate-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-slide-right {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-slide-right.animate-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-scale {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-scale.animate-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animate-stagger {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.animate-stagger.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay classes */
+.animate-delay-100 {
+  transition-delay: 0.1s;
+}
+.animate-delay-200 {
+  transition-delay: 0.2s;
+}
+.animate-delay-300 {
+  transition-delay: 0.3s;
+}
+.animate-delay-400 {
+  transition-delay: 0.4s;
+}
+.animate-delay-500 {
+  transition-delay: 0.5s;
+}
+.animate-delay-600 {
+  transition-delay: 0.6s;
+}
+.animate-delay-700 {
+  transition-delay: 0.7s;
+}
+.animate-delay-800 {
+  transition-delay: 0.8s;
 }
