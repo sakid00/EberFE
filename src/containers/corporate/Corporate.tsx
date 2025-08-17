@@ -1,5 +1,5 @@
 'use client';
-import SidebarList, { listType } from '@/components/SidebarList/SidebarList';
+import SidebarList, { listType } from '@/components/SidebarList';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -29,6 +29,8 @@ const CorporateContainer = () => {
         selected={selectedCompany}
         setSelected={setSelectedCompany}
         list={companyList}
+        text1={'Our\u00a0'}
+        text2="Key"
       />
       <Box className="flex-1 p-8 ml-4 bg-white rounded-xl z-100">
         <Image

@@ -1,77 +1,80 @@
-import advancedSVG from '@public/svg/advanced.svg';
-import expertSVG from '@public/svg/expert.svg';
-import focusSVG from '@public/svg/focus.svg';
-import recycleSVG from '@public/svg/recycle.svg';
-import collabSVG from '@public/icon/collab.svg';
-import rndSVG from '@public/icon/rnd.svg';
-import sustainSVG from '@public/icon/sustain.svg';
-import transfromSVG from '@public/icon/transform.svg';
+import slide1 from '@public/icon/isoqar-ukas.svg';
+import slide2 from '@public/icon/isokar-ukas22.svg';
+import slide3 from '@public/icon/intertek-certification.svg';
+import slide4 from '@public/icon/logo-smk3.svg';
+import accountability from '@public/icon/accountability.svg';
+import ethical from '@public/icon/ethical.svg';
+import transparency from '@public/icon/transparency.svg';
+import ingenuity from '@public/icon/ingenuity.svg';
+import responsibility from '@public/icon/responsibilty.svg';
+import safety from '@public/icon/safety.svg';
+import innovation from '@public/icon/innovation.svg';
+import trust from '@public/icon/trust.svg';
+import quality from '@public/icon/quality.svg';
+import creativity from '@public/icon/creativity.svg';
+import centricity from '@public/icon/centricity.svg';
+import growth from '@public/icon/growth.svg';
+import client from '@public/icon/client.svg';
 
-export const SPECIALTY_DATA = [
+export const CERTIFICATION_DATA = [slide1, slide2, slide3, slide4];
+
+export const CORPORATE_DATA = [
   {
-    title: 'Advanced Materials',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
-    img: advancedSVG,
+    title: 'Transparency',
+    desc: 'We maintain open communication with stakeholders and provide clear, accurate information about our operations & performance.',
+    img: transparency,
   },
   {
-    title: 'Innovation Focus',
-    desc: 'Focused on sustainable chemical production and innovation.',
-    img: focusSVG,
+    title: 'Accountability',
+    desc: 'Our leadership team takes responsibility for decisions and actions, with clear reporting structures and performance metrics.',
+    img: accountability,
   },
   {
-    title: 'Sustainability',
-    desc: 'Specialized in solvent production and chemical solutions.',
-    img: recycleSVG,
-  },
-  {
-    title: 'Expert Team',
-    desc: 'Leading producer of petrochemical products and solutions.',
-    img: expertSVG,
+    title: 'Ethical Practices',
+    desc: 'We adhere to the highest ethical standards in all business dealings, with a comprehensive code of conduct guiding our actions.',
+    img: ethical,
   },
 ];
 
-export const SUBSIDIARIES_DATA = [
+export const VALUES_DATA = [
   {
-    title: 'PT Eternal Buana Chemical Industries',
-    location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    title: 'Social Responsibility',
+    img: responsibility,
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
-    location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    title: 'Safety',
+    img: safety,
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
-    location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    title: 'Innovation',
+    img: innovation,
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
-    location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
-  },
-];
-
-export const INNOVATION_DATA = [
-  {
-    title: 'Research & Development',
-    desc: 'Continuous investment in R&D to develop cutting-edge chemical solutions and materials.',
-    img: rndSVG,
+    title: 'Ingenuity',
+    img: ingenuity,
   },
   {
-    title: 'Digital Transformation',
-    desc: 'Leveraging advanced technologies to optimize our manufacturing processes and operations.',
-    img: transfromSVG,
+    title: 'Trust',
+    img: trust,
   },
   {
-    title: 'Sustainable Solutions',
-    desc: 'Developing eco-friendly products and processes to minimize environmental impact.',
-    img: sustainSVG,
+    title: 'Quality',
+    img: quality,
   },
   {
-    title: 'Collaborative Innovation',
-    desc: 'Partnering with industry leaders and research institutions to drive breakthrough innovations.',
-    img: collabSVG,
+    title: 'Creativity',
+    img: creativity,
+  },
+  {
+    title: 'Centricity',
+    img: centricity,
+  },
+  {
+    title: 'Growth',
+    img: growth,
+  },
+  {
+    title: 'Client',
+    img: client,
   },
 ];

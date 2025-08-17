@@ -10,7 +10,7 @@ interface InnovationCardProps {
 export const InnovationCard = ({ data, index }: InnovationCardProps) => (
   <Box
     id={`innovation-${index}`}
-    className={`flex flex-col justify-center items-center bg-white w-[40%] h-[25vh] py-10 px-6 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+    className={`flex flex-col justify-center items-center bg-white w-[40%] h-[40vh] py-10 px-6 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
   >
     <Image src={data.img} alt={`innovation-img-${index}`} />
     <Typography

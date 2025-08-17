@@ -1,7 +1,7 @@
 export { HeaderSection } from './HeaderSection';
-export { SpecialtySection } from './SpecialtySection';
-export { CustomProductSection } from './CustomProductSection';
-export { SubsidiariesSection } from './SubsidiariesSection';
-export { InnovationSection } from './InnovationSection';
-export { useScrollAnimation } from './hooks/useScrollAnimation';
+export { CertificationSection } from './CertifcationSection';
+export { PrincipleSection } from './PrincipleSection';
+export { CorporateSection } from './CorporateSection';
+export { ValueSection } from './ValueSection';
+export { useScrollAnimation } from '@hooks/useScrollAnimation';
 export * from './constants';
