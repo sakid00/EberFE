@@ -1,6 +1,6 @@
 import { Box, Typography, TypographyVariant } from '@mui/material';
 
-interface IDualColorTextProps {
+export interface IDualColorTextProps {
   text1: string;
   text1Variant?: TypographyVariant;
   text2: string;

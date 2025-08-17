@@ -31,6 +31,8 @@ const CorporateContainer = () => {
         list={companyList}
         text1={'Our\u00a0'}
         text2="Key"
+        secondaryText="Subsidiaries"
+        inline
       />
       <Box className="flex-1 p-8 ml-4 bg-white rounded-xl z-100">
         <Image
