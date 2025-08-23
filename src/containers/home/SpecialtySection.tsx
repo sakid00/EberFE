@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText';
-import { SpecialtyCard } from './components/SpecialtyCard';
+import { SpecialtyCard } from '../../components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
 
 export const SpecialtySection = () => (

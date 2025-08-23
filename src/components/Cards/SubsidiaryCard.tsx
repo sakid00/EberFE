@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import headerImage from '@public/photo/header_corporate.png';
 import locationSVG from '@public/icon/location.svg';
-import { SUBSIDIARIES_DATA } from '../constants';
+import { SUBSIDIARIES_DATA } from '../../containers/home/constants';
 
 interface SubsidiaryCardProps {
   data: (typeof SUBSIDIARIES_DATA)[0];

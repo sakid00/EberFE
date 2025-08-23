@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText';
 import Image from 'next/image';
 import tangki from '@public/photo/tangki.png';
-import { InnovationCard } from './components/InnovationCard';
+import { InnovationCard } from '../../components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
 
 export const InnovationSection = () => (

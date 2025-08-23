@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { VALUES_DATA } from '../constants';
+import { VALUES_DATA } from '../../containers/about-us/constants';
 
 interface ValueCardProps {
   data: (typeof VALUES_DATA)[0];

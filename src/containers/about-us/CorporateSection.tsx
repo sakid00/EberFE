@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText';
-import { CorporateCard } from './components/CorporateCard';
+import { CorporateCard } from '../../components/Cards/CorporateCard';
 import { CORPORATE_DATA } from './constants';
 
 export const CorporateSection = () => (

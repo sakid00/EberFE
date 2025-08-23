@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { SPECIALTY_DATA } from '../constants';
+import { SPECIALTY_DATA } from '../../containers/home/constants';
 
 interface SpecialtyCardProps {
   data: (typeof SPECIALTY_DATA)[0];

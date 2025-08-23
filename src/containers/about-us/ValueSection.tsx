@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { ValueCard } from './components/ValueCard';
+import { ValueCard } from '../../components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
 import fieldPerson from '@public/photo/chem_person.png';

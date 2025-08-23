@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText';
-import { SubsidiaryCard } from './components/SubsidiaryCard';
+import { SubsidiaryCard } from '../../components/Cards/SubsidiaryCard';
 import { SUBSIDIARIES_DATA } from './constants';
 
 export const SubsidiariesSection = () => (

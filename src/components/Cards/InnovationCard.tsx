@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { INNOVATION_DATA } from '../constants';
+import { INNOVATION_DATA } from '../../containers/home/constants';
 
 interface InnovationCardProps {
   data: (typeof INNOVATION_DATA)[0];

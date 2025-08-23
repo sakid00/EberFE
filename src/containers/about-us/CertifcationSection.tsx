@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText';
-import { CertificationCard } from './components/CertificationCard';
+import { CertificationCard } from '../../components/Cards/CertificationCard';
 import { CERTIFICATION_DATA } from './constants';
 
 export const CertificationSection = () => (
