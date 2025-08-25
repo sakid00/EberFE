@@ -9,9 +9,10 @@ interface IInfoBoxProps {
     desc: string;
   }[];
   photo: StaticImageData;
+  imageStyle?: React.CSSProperties;
 }
 
-const InfoBox: React.FC<IInfoBoxProps> = ({ infoList, photo }) => {
+const InfoBox: React.FC<IInfoBoxProps> = ({ infoList, photo, imageStyle }) => {
   const infoListMap = infoList.map((val, index) => {
     return (
       <Box
@@ -30,7 +31,7 @@ const InfoBox: React.FC<IInfoBoxProps> = ({ infoList, photo }) => {
 
   return (
     <Box sx={styles.container}>
-      <Image src={photo} style={styles.imageStyle} alt="image" />
+      <Image src={photo} style={imageStyle ?? styles.imageStyle} alt="image" />
       <Box sx={styles.infoCard}>{infoListMap}</Box>
     </Box>
   );

@@ -7,14 +7,16 @@ const FormBox = ({
   description,
   text1,
   text2,
+  formBoxStyle,
 }: {
   title: string;
   description: string;
   text1: string;
   text2: string;
+  formBoxStyle?: React.CSSProperties;
 }) => {
   return (
-    <Box sx={styles.formBox}>
+    <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
       <Typography sx={styles.getInTouchText}>{title}</Typography>
       <DualColorText
         text1={text1}
