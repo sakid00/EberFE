@@ -19,8 +19,9 @@ const ContactUsContainer = ({
         description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?"
         text1={"Let's Chat,\u00a0"}
         text2=" Reach Out to Us"
+        formBoxStyle={styles.formBoxStyle}
       />
-      <InfoBox infoList={list} photo={photo} />
+      <InfoBox infoList={list} photo={photo} imageStyle={styles.imageStyle} />
     </Box>
   );
 };
