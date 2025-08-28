@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/dualColorText';
+import DualColorText from '@/components/DualColorText';
 import { CertificationCard } from '../../components/Cards/CertificationCard';
 import { CERTIFICATION_DATA } from './constants';
 

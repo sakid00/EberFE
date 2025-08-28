@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/dualColorText';
+import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
 import bgHeader from '@public/background/homepage_header_bg.png';
 

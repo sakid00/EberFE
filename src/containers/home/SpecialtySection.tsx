@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/dualColorText';
+import DualColorText from '@/components/DualColorText';
 import { SpecialtyCard } from '../../components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
 
@@ -8,7 +8,7 @@ export const SpecialtySection = () => (
     id="home-second-section"
     className="flex flex-col items-center justify-center animate-on-scroll"
   >
-    <Box className="flex flex-col animate-fade-in justify-center">
+    <Box className="flex flex-col animate-fade-in justify-center items-center">
       <DualColorText
         text1={'Leader in\u00a0'}
         text2="High-Performance"
