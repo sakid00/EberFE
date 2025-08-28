@@ -44,7 +44,7 @@ const ActivityCard = ({
         </Box>
         <Box className="flex flex-col gap-1 p-2">
           <Typography
-            fontSize={'24px'}
+            fontSize={'1.5em'}
             fontWeight={800}
             color="#030712"
             flexWrap={'wrap'}
@@ -60,14 +60,14 @@ const ActivityCard = ({
           </Typography>
           <Box className="flex flex-row gap-2 items-center">
             <Image src={calendar} alt="calender" width={15} height={15} />
-            <Typography fontSize={'16px'} fontWeight={400} color="#784791">
+            <Typography fontSize={'0.875em'} fontWeight={400} color="#784791">
               {date ?? 'April 2, 2025'}
             </Typography>
           </Box>
 
           {!hideDesc && (
             <Typography
-              fontSize={'14px'}
+              fontSize={'0.875em'}
               fontWeight={400}
               color="#4B5563"
               sx={{

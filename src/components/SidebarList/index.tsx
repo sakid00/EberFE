@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DualColorText, { IDualColorTextProps } from '../dualColorText';
+import DualColorText, { IDualColorTextProps } from '../DualColorText';
 import { useState } from 'react';
 
 export interface listType {
@@ -60,14 +60,15 @@ const SidebarList: React.FC<ISidebarListProps> = ({
           className={`items-center ${selected === index ? 'bg-[#D6CBE3]' : 'bg-[#F3F5F7]'} p-4 ${selected === index ? 'border-[#784791]' : 'border-transparent'} border-2 rounded-xl mb-4`}
         >
           <Typography
-            variant="caption"
+            fontSize={'0.875em'}
+            fontWeight={400}
             color={selected === index ? '#784791' : '#4B5563'}
             className="mt-4"
           >
             {val.type}
           </Typography>
           <Typography
-            variant="h6"
+            fontSize={'1em'}
             color={selected === index ? '#784791' : '#030712'}
             fontWeight={700}
             className="mt-4"
@@ -88,6 +89,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
               expanded={index === selectedCategory && expanded}
               defaultExpanded={index === 0}
               key={index}
+              sx={{ boxShadow: 'none' }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
