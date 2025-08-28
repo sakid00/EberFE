@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
+import dynamic from 'next/dynamic';
 import { loadSlim } from '@tsparticles/slim';
 import {
   Container,
@@ -10,23 +10,38 @@ import {
   OutMode,
 } from '@tsparticles/engine';
 
+// Dynamically import Particles with no SSR to prevent hydration issues
+const Particles = dynamic(() => import('@tsparticles/react'), {
+  ssr: false,
+});
+
 const ParticlesBackground = () => {
   const [init, setInit] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure we're on the client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // this should be run only once per application lifetime
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-      // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-      // starting from v2 you can add only the features you need reducing the bundle size
-      //await loadAll(engine);
-      //await loadFull(engine);
-      await loadSlim(engine);
-      //await loadBasic(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
+    if (isClient) {
+      import('@tsparticles/react').then(({ initParticlesEngine }) => {
+        initParticlesEngine(async (engine) => {
+          // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
+          // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
+          // starting from v2 you can add only the features you need reducing the bundle size
+          //await loadAll(engine);
+          //await loadFull(engine);
+          await loadSlim(engine);
+          //await loadBasic(engine);
+        }).then(() => {
+          setInit(true);
+        });
+      });
+    }
+  }, [isClient]);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {
     console.log(container);
@@ -43,27 +58,6 @@ const ParticlesBackground = () => {
         },
       },
       fpsLimit: 120,
-      // interactivity: {
-      //   events: {
-      //     onClick: {
-      //       enable: true,
-      //       mode: 'push',
-      //     },
-      //     onHover: {
-      //       enable: true,
-      //       mode: 'repulse',
-      //     },
-      //   },
-      //   modes: {
-      //     push: {
-      //       quantity: 4,
-      //     },
-      //     repulse: {
-      //       distance: 200,
-      //       duration: 0.4,
-      //     },
-      //   },
-      // },
       particles: {
         color: {
           value: '#000000',
@@ -106,17 +100,21 @@ const ParticlesBackground = () => {
     []
   );
 
-  if (init) {
-    return (
-      <Particles
-        id="tsparticles"
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
-    );
+  // Only render on client side and when initialized
+  if (!isClient || !init) {
+    return <></>;
   }
 
-  return <></>;
+  return (
+    <Particles
+      id="tsparticles"
+      particlesLoaded={particlesLoaded}
+      options={options}
+      style={{
+        zIndex: -1,
+      }}
+    />
+  );
 };
 
 export default ParticlesBackground;
