@@ -22,8 +22,8 @@ const FormBox = ({
         text1={text1}
         text2={text2}
         inline
-        text1Variant="h4"
-        text2Variant="h4"
+        fontSize="1.8em"
+        fontWeight={800}
       />
       <Typography sx={styles.descriptionText}>{description}</Typography>
       <Box sx={styles.formRow}>

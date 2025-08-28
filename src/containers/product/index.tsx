@@ -3,6 +3,7 @@ import ReqProductModal from '@/components/ReqProductModal';
 import { CustomizationHeader, ProductFilter, ProductTable } from './components';
 import { styles } from './style';
 import { ProductContainerProps } from './types';
+import { useRouter } from 'next/navigation';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({
   productTypes,
@@ -18,10 +19,14 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   handleChangeFilterByType,
   handleChangeApplication,
 }) => {
+  const router = useRouter();
+  const handleCustomProductClick = () => {
+    router.push('/product/submit');
+  };
   return (
     <>
       <Box sx={styles.mainContainer}>
-        <CustomizationHeader />
+        <CustomizationHeader onCustomProductClick={handleCustomProductClick} />
 
         <ProductFilter
           productTypes={productTypes}
