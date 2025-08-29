@@ -40,8 +40,6 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   list,
   text1,
   text2,
-  text1Variant,
-  text2Variant,
   inline,
   secondaryText,
   secondList,
@@ -123,15 +121,16 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text1={text1}
         text2={text2}
-        text1Variant={text1Variant ?? 'h4'}
-        text2Variant={text2Variant ?? 'h4'}
+        fontSize="1.8em"
+        fontWeight={800}
         inline={inline ?? false}
       />
       {secondaryText && (
         <DualColorText
           text1={''}
           text2={secondaryText ?? ''}
-          text2Variant="h4"
+          fontSize="1.8em"
+          fontWeight={800}
           inline
         />
       )}

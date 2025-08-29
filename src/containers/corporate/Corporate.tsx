@@ -18,10 +18,48 @@ const companyList: listType[] = [
   { name: 'Mega Prima Solvindo', type: 'Manufacturing Facility' },
 ];
 
+const infoboxList = [
+  {
+    title: 'Product Type',
+    value: 'Certified to Standard',
+  },
+  {
+    title: 'Certified to Standard',
+    value: 'Certified to Standard',
+  },
+
+  {
+    title: 'Capacity',
+    value: 'Capacity',
+  },
+  {
+    title: 'Capacity Storage Tank Raw Material',
+    value: 'Capacity Storage Tank Raw Material',
+  },
+
+  {
+    title: 'Solid R.M. – Finish Goods Whs Cap',
+    value: 'Solid R.M. – Finish Goods Whs Cap',
+  },
+];
+
 const CorporateContainer = () => {
   const [selectedCompany, setSelectedCompany] = useState<number>(0);
 
   const classes = useStyles();
+
+  const infoboxContainer = (title: string, value: string) => {
+    return (
+      <Box className="p-4 flex flex-col rounded-lg bg-[#F3F5F7] gap-1.5">
+        <Typography fontSize={'0.8em'} fontWeight={700} color="#030712">
+          {title}
+        </Typography>
+        <Typography fontSize={'0.8em'} fontWeight={400} color="#030712">
+          {value}
+        </Typography>
+      </Box>
+    );
+  };
 
   return (
     <Box className="flex">
@@ -40,16 +78,21 @@ const CorporateContainer = () => {
           alt={companyList[selectedCompany].name}
           className="object-cover rounded-lg"
         />
-        <Typography marginTop={3} color="#030712" variant="h4" fontWeight={800}>
+        <Typography
+          marginTop={3}
+          color="#030712"
+          fontSize={'2em'}
+          fontWeight={800}
+        >
           {companyList[selectedCompany].name}
         </Typography>
 
         <Box className="flex justify-between items-center">
           <Box className="mt-2">
-            <Typography color="#4B5563" variant="subtitle1">
+            <Typography color="#4B5563" fontSize={'1em'} fontWeight={400}>
               Address
             </Typography>
-            <Typography color="#030712" variant="h6">
+            <Typography color="#030712" fontSize={'1.2em'} fontWeight={700}>
               Eber Tower, 123 Business District Jakarta, Indonesia 12345
             </Typography>
           </Box>
@@ -66,89 +109,53 @@ const CorporateContainer = () => {
           </Button>
         </Box>
 
-        <Typography marginTop={4}>
+        <Typography
+          marginY={4}
+          color="#4B5563"
+          fontSize={'1em'}
+          fontWeight={400}
+        >
           First Production in 1982 with capacity 10.000 TPY, expanded to 20.000
           TPY in 1986 then final expansion capacity to 82.000 TPY.
         </Typography>
 
         <Grid container spacing={2} className="mt-6">
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Product Type
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Certified to Standard
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Capacity
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Capacity Storage Tank Raw Material
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Solid R.M. – Finish Goods Whs Cap
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={6}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Technology
-              </Typography>
-            </Box>
-          </Grid>
+          {infoboxList.map((item, index) => (
+            <Grid component={'span'} size={6} key={index}>
+              {infoboxContainer(item.title, item.value)}
+            </Grid>
+          ))}
         </Grid>
 
-        <Typography marginTop={4}>
+        <Typography
+          marginY={4}
+          color="#4B5563"
+          fontSize={'1em'}
+          fontWeight={400}
+        >
           PT Eternal Buana Chemicals Industry Plant is one of the biggest
           Specialty Chemical Resin Production facility in Indonesia, occupying
           area app. 16,2 Hectare, located in Tangerang – Banten Province.
         </Typography>
 
         <Grid container spacing={2} className="mt-6">
-          <Grid component={'span'} size={4}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Product Type
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={4}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Certified to Standard
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid component={'span'} size={4}>
-            <Box className="p-4 border border-gray-200 rounded-lg">
-              <Typography variant="h6" color="#030712">
-                Capacity
-              </Typography>
-            </Box>
-          </Grid>
+          {infoboxList.map((item, index) => (
+            <Grid component={'span'} size={4} key={index}>
+              {infoboxContainer(item.title, item.value)}
+            </Grid>
+          ))}
         </Grid>
 
-        <Box className="mt-4">
-          <Typography>Product Application</Typography>
-          <Typography>
+        <Box className="mt-5">
+          <Typography color="#030712" fontSize={'1.2em'} fontWeight={800}>
+            Product Application
+          </Typography>
+          <Typography
+            color="#4B5563"
+            fontSize={'1em'}
+            fontWeight={400}
+            marginTop={1}
+          >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
             aliquid excepturi placeat tempora non cum, quaerat voluptatem sint
             reprehenderit impedit nemo eveniet incidunt vero maiores harum. Non
