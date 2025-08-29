@@ -1,13 +1,10 @@
 import { Box, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import { styles, getInfoItemClassName } from './style';
+import { infoListType } from '@/containers/formSubmit';
 
 interface IInfoBoxProps {
-  infoList: {
-    logo: string;
-    title: string;
-    desc: string;
-  }[];
+  infoList: infoListType[];
   photo: StaticImageData;
   imageStyle?: React.CSSProperties;
 }

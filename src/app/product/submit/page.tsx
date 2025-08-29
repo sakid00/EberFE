@@ -1,21 +1,18 @@
 import Photo from '@public/photo/lab-person.png';
-import EmailIcon from '@public/icon/email_purple.svg';
-import PhoneIcon from '@public/icon/phone_purple.svg';
-import LocationIcon from '@public/icon/location_purple.svg';
-import SubmitProduct from '@/containers/submit-product';
-
-const infoList = [
-  { logo: EmailIcon, title: 'Email', desc: 'info@ebergroup.com' },
-  { logo: PhoneIcon, title: 'Phone', desc: '+62 21 1234 5678' },
-  {
-    logo: LocationIcon,
-    title: 'Address',
-    desc: 'Eber Tower, 123 Business District\n Jakarta, Indonesia 12345',
-  },
-];
+import FormSubmitContainer from '@/containers/formSubmit';
+import { styles } from './style';
 
 const SubmitApplicationPage = () => {
-  return <SubmitProduct list={infoList} photo={Photo} />;
+  return (
+    <FormSubmitContainer
+      title="Talk to Us!"
+      description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?"
+      text1={'Let’s Build Your\u00a0'}
+      text2="Custom Product"
+      photo={Photo}
+      imageStyle={styles.imageStyle}
+    />
+  );
 };
 
 export default SubmitApplicationPage;
