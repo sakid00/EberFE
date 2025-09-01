@@ -1,48 +1,102 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/dualColorText';
+import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
-import bgHeader from '@public/background/homepage_header_bg.png';
+import photo from '@public/photo/tangki-person.png';
+import headerAccessories from '@public/photo/eber-big.png';
+import { headerStyles } from './styles';
+import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import { ClientOnly } from '@/components/ClientOnly';
 
-export const HeaderSection = () => (
-  <>
-    <Image
-      src={bgHeader}
-      alt=""
-      style={{
-        position: 'absolute',
-        width: '100vw',
-        height: '80vh',
-        right: '10vw',
-        left: 0,
-        top: 0,
-        zIndex: -1,
-      }}
-    />
-    <Box id="home-header" className="items-center justify-center h-[70vh]">
-      <DualColorText
-        text1={'Our\u00a0'}
-        text2="Company"
-        text1Variant="h2"
-        text2Variant="h2"
-        inline
-        color="white"
+export const HeaderSection = () => {
+  return (
+    <ClientOnly
+      fallback={
+        <>
+          <Image
+            src={headerAccessories}
+            alt="header accessories"
+            style={headerStyles.headerAccessories('desktop')}
+          />
+          <Box id="home-header" sx={headerStyles.headerContent('desktop')}>
+            <DualColorText
+              text1={'Our\u00a0'}
+              text2="Company"
+              fontSize="4em"
+              fontWeight={800}
+              inline
+              color="white"
+            />
+            <Typography
+              fontSize="4em"
+              fontWeight={800}
+              marginTop="-3vh"
+              sx={headerStyles.backgroundText}
+            >
+              Background
+            </Typography>
+            <Typography
+              className="w-1/4"
+              style={headerStyles.description('desktop')}
+            >
+              Eber Group was incorporated in 2021 as a holding company of four
+              leading high-performance chemical manufacturing companies in
+              Indonesia.
+            </Typography>
+          </Box>
+        </>
+      }
+    >
+      <HeaderSectionContent />
+    </ClientOnly>
+  );
+};
+
+const HeaderSectionContent = () => {
+  const { type } = useDeviceType();
+
+  return (
+    <>
+      <Image
+        src={headerAccessories}
+        alt="header accessories"
+        style={headerStyles.headerAccessories(type)}
       />
-      <Typography
-        variant="h2"
-        fontWeight="bold"
-        sx={{
-          background:
-            'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-        }}
-      >
-        Background
-      </Typography>
-      <Typography className="w-1/4" style={{ marginTop: '20px' }}>
-        Eber Group was incorporated in 2021 as a holding company of four leading
-        high-performance chemical manufacturing companies in Indonesia.
-      </Typography>
-    </Box>
-  </>
-);
+      <Image
+        src={photo}
+        alt="header photo"
+        style={headerStyles.headerPhoto(type)}
+      />
+      <Box id="home-header" sx={headerStyles.headerContent(type)}>
+        <DualColorText
+          text1={'Our\u00a0'}
+          text2="Company"
+          fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
+          fontWeight={800}
+          inline
+          color="white"
+          sx={{
+            justifyContent: dynamicStylingValue(
+              type,
+              'center',
+              'start',
+              'start'
+            ) as 'center' | 'start',
+          }}
+        />
+        <Typography
+          fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
+          fontWeight={800}
+          marginTop={dynamicStylingValue(type, '-1vh', '-3vh', '-3vh')}
+          sx={headerStyles.backgroundText}
+        >
+          Background
+        </Typography>
+        <Typography style={headerStyles.description(type)}>
+          Eber Group was incorporated in 2021 as a holding company of four
+          leading high-performance chemical manufacturing companies in
+          Indonesia.
+        </Typography>
+      </Box>
+    </>
+  );
+};

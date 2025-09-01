@@ -20,7 +20,7 @@ export const ValueCard = ({ data, index }: ValueCardProps) => (
     <Image
       src={data.img}
       alt={`innovation-img-${index}`}
-      style={{ width: 30, height: 30 }}
+      style={{ width: 35, height: 35 }}
     />
     <Typography fontSize={'16px'} textAlign={'center'} fontWeight={'500'}>
       {data.title}

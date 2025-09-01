@@ -5,12 +5,17 @@ import { CORPORATE_DATA } from '../../containers/about-us/constants';
 interface CorporateCardProps {
   data: (typeof CORPORATE_DATA)[0];
   index: number;
+  isMobile?: boolean;
 }
 
-export const CorporateCard = ({ data, index }: CorporateCardProps) => (
+export const CorporateCard = ({
+  data,
+  index,
+  isMobile,
+}: CorporateCardProps) => (
   <Box
     id={`subsidiaries-${index}`}
-    className={`flex flex-col justify-center items-start bg-white w-[40%] h-[40%] p-5 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+    className={`flex flex-col justify-center ${isMobile ? 'items-center' : 'items-start'} bg-white ${isMobile ? 'w-[100%] h-[100%]' : 'w-[40%] h-[40%]'} p-5 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
   >
     <Image
       src={data.img}
