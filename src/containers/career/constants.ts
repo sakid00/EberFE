@@ -13,21 +13,20 @@ Key Responsibilities:
 • Optimize applications for maximum speed and scalability
 • Mentor junior developers and contribute to code reviews
 • Stay up-to-date with emerging technologies and industry best practices`,
-    req: `Required Qualifications:
-• Bachelor's degree in Computer Science or related field
-• 5+ years of experience in frontend development
-• Proficiency in React, TypeScript, and modern JavaScript
-• Experience with state management libraries (Redux, Zustand)
-• Strong understanding of HTML5, CSS3, and responsive design
-• Familiarity with version control systems (Git)
-• Experience with testing frameworks (Jest, React Testing Library)
-• Excellent problem-solving and communication skills
-
-Preferred Qualifications:
-• Experience with Next.js and server-side rendering
-• Knowledge of CSS-in-JS libraries (Material-UI, Styled Components)
-• Familiarity with CI/CD pipelines
-• Experience with performance optimization techniques`,
+    req: [
+      "Bachelor's degree in Computer Science or related field",
+      '5+ years of experience in frontend development',
+      'Proficiency in React, TypeScript, and modern JavaScript',
+      'Experience with state management libraries (Redux, Zustand)',
+      'Strong understanding of HTML5, CSS3, and responsive design',
+      'Familiarity with version control systems (Git)',
+      'Experience with testing frameworks (Jest, React Testing Library)',
+      'Excellent problem-solving and communication skills',
+      'Experience with Next.js and server-side rendering (Preferred)',
+      'Knowledge of CSS-in-JS libraries (Material-UI, Styled Components) (Preferred)',
+      'Familiarity with CI/CD pipelines (Preferred)',
+      'Experience with performance optimization techniques (Preferred)',
+    ],
   },
   {
     title: 'Backend Developer',
@@ -42,22 +41,21 @@ Key Responsibilities:
 • Ensure application security and data protection
 • Monitor and troubleshoot production issues
 • Collaborate with frontend teams to define API contracts`,
-    req: `Required Qualifications:
-• Bachelor's degree in Computer Science or related field
-• 3+ years of experience in backend development
-• Proficiency in Node.js, Python, or Java
-• Experience with relational databases (PostgreSQL, MySQL)
-• Understanding of RESTful API design principles
-• Knowledge of cloud platforms (AWS, GCP, Azure)
-• Experience with containerization (Docker)
-• Strong debugging and problem-solving skills
-
-Preferred Qualifications:
-• Experience with microservices architecture
-• Knowledge of NoSQL databases (MongoDB, Redis)
-• Familiarity with message queues (RabbitMQ, Apache Kafka)
-• Experience with GraphQL
-• Understanding of DevOps practices`,
+    req: [
+      "Bachelor's degree in Computer Science or related field",
+      '3+ years of experience in backend development',
+      'Proficiency in Node.js, Python, or Java',
+      'Experience with relational databases (PostgreSQL, MySQL)',
+      'Understanding of RESTful API design principles',
+      'Knowledge of cloud platforms (AWS, GCP, Azure)',
+      'Experience with containerization (Docker)',
+      'Strong debugging and problem-solving skills',
+      'Experience with microservices architecture (Preferred)',
+      'Knowledge of NoSQL databases (MongoDB, Redis) (Preferred)',
+      'Familiarity with message queues (RabbitMQ, Apache Kafka) (Preferred)',
+      'Experience with GraphQL (Preferred)',
+      'Understanding of DevOps practices (Preferred)',
+    ],
   },
   {
     title: 'DevOps Engineer',
@@ -72,21 +70,20 @@ Key Responsibilities:
 • Ensure system security and compliance
 • Optimize system performance and cost efficiency
 • Collaborate with development teams to improve workflows`,
-    req: `Required Qualifications:
-• Bachelor's degree in Computer Science or related field
-• 4+ years of experience in DevOps or system administration
-• Proficiency with cloud platforms (AWS, GCP, Azure)
-• Experience with containerization and orchestration (Docker, Kubernetes)
-• Knowledge of Infrastructure as Code (Terraform, CloudFormation)
-• Familiarity with CI/CD tools (Jenkins, GitLab CI, GitHub Actions)
-• Strong scripting skills (Bash, Python, PowerShell)
-• Experience with monitoring tools (Prometheus, Grafana, ELK Stack)
-
-Preferred Qualifications:
-• Certification in cloud platforms
-• Experience with service mesh technologies (Istio, Linkerd)
-• Knowledge of security best practices and compliance
-• Familiarity with database administration
-• Experience with configuration management tools (Ansible, Puppet)`,
+    req: [
+      "Bachelor's degree in Computer Science or related field",
+      '4+ years of experience in DevOps or system administration',
+      'Proficiency with cloud platforms (AWS, GCP, Azure)',
+      'Experience with containerization and orchestration (Docker, Kubernetes)',
+      'Knowledge of Infrastructure as Code (Terraform, CloudFormation)',
+      'Familiarity with CI/CD tools (Jenkins, GitLab CI, GitHub Actions)',
+      'Strong scripting skills (Bash, Python, PowerShell)',
+      'Experience with monitoring tools (Prometheus, Grafana, ELK Stack)',
+      'Certification in cloud platforms (Preferred)',
+      'Experience with service mesh technologies (Istio, Linkerd) (Preferred)',
+      'Knowledge of security best practices and compliance (Preferred)',
+      'Familiarity with database administration (Preferred)',
+      'Experience with configuration management tools (Ansible, Puppet) (Preferred)',
+    ],
   },
 ];

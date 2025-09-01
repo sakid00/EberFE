@@ -7,7 +7,7 @@ export interface ICareerList {
   title: string;
   status: string;
   desc: string;
-  req: string;
+  req: string[];
 }
 
 const CareersPage = () => {

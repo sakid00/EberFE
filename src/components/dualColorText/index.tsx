@@ -1,4 +1,10 @@
-import { Box, Typography, TypographyVariant } from '@mui/material';
+import {
+  Box,
+  SxProps,
+  Theme,
+  Typography,
+  TypographyVariant,
+} from '@mui/material';
 
 export interface IDualColorTextProps {
   text1: string;
@@ -9,6 +15,7 @@ export interface IDualColorTextProps {
   color?: string;
   fontWeight?: number;
   fontSize?: string;
+  sx?: SxProps<Theme>;
 }
 
 const DualColorText = ({
@@ -20,9 +27,10 @@ const DualColorText = ({
   color,
   fontWeight,
   fontSize,
+  sx,
 }: IDualColorTextProps) => {
   return (
-    <Box className={`${inline ? 'flex' : ''} mt-1`}>
+    <Box className={`${inline ? 'flex' : ''} mt-1`} sx={sx}>
       <Typography
         variant={text1Variant}
         fontWeight={fontWeight ?? 800}

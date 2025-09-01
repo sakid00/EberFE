@@ -17,11 +17,10 @@ const CareerContainer = ({ careerList, router }: ICareerContainer) => {
         <DualColorText
           text1={'Our\u00a0'}
           text2="Open"
-          text1Variant="h4"
-          text2Variant="h4"
+          fontSize={'2em'}
           inline
         />
-        <Typography variant="h4" sx={styles.rolesTitle}>
+        <Typography fontSize={'2em'} fontWeight={700} sx={styles.rolesTitle}>
           Roles
         </Typography>
         <Typography sx={styles.descriptionText}>
