@@ -2,7 +2,6 @@ import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
 import photo from '@public/photo/tangki-person.png';
-import headerAccessories from '@public/photo/eber-big.png';
 import { headerStyles } from './styles';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { ClientOnly } from '@/components/ClientOnly';
@@ -12,11 +11,6 @@ export const HeaderSection = () => {
     <ClientOnly
       fallback={
         <>
-          <Image
-            src={headerAccessories}
-            alt="header accessories"
-            style={headerStyles.headerAccessories('desktop')}
-          />
           <Box id="home-header" sx={headerStyles.headerContent('desktop')}>
             <DualColorText
               text1={'Our\u00a0'}
@@ -56,11 +50,6 @@ const HeaderSectionContent = () => {
 
   return (
     <>
-      <Image
-        src={headerAccessories}
-        alt="header accessories"
-        style={headerStyles.headerAccessories(type)}
-      />
       <Image
         src={photo}
         alt="header photo"

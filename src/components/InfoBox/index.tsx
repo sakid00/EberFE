@@ -2,14 +2,21 @@ import { Box, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import { styles, getInfoItemClassName } from './style';
 import { infoListType } from '@/containers/formSubmit';
+import { DeviceType } from '@/hooks';
 
 interface IInfoBoxProps {
   infoList: infoListType[];
   photo: StaticImageData;
   imageStyle?: React.CSSProperties;
+  type: DeviceType;
 }
 
-const InfoBox: React.FC<IInfoBoxProps> = ({ infoList, photo, imageStyle }) => {
+const InfoBox: React.FC<IInfoBoxProps> = ({
+  infoList,
+  photo,
+  imageStyle,
+  type,
+}) => {
   const infoListMap = infoList.map((val, index) => {
     return (
       <Box
@@ -27,7 +34,7 @@ const InfoBox: React.FC<IInfoBoxProps> = ({ infoList, photo, imageStyle }) => {
   });
 
   return (
-    <Box sx={styles.container}>
+    <Box sx={styles.container(type)}>
       <Image src={photo} style={imageStyle ?? styles.imageStyle} alt="image" />
       <Box sx={styles.infoCard}>{infoListMap}</Box>
     </Box>

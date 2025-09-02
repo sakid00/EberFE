@@ -1,12 +1,15 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
-  container: {
+  container: (type: DeviceType) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'end',
     alignItems: 'center',
     height: '100%',
     zIndex: 1,
-  },
+    marginTop: dynamicStylingValue(type, '5%', '0', '0'),
+  }),
 
   imageStyle: {
     width: '80%',

@@ -1,14 +1,17 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
-  mainContainer: {
+  mainContainer: (type: DeviceType) => ({
     display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     zIndex: 1,
     gap: '32px',
     alignItems: 'stretch',
-  },
+  }),
 
-  infoCard: {
+  infoCard: (type: DeviceType) => ({
     backgroundColor: 'white',
-    maxWidth: '25%',
+    maxWidth: dynamicStylingValue(type, '100%', '25%', '25%'),
     height: '10%',
     borderRadius: '12px',
     paddingY: '40px',
@@ -16,7 +19,7 @@ export const styles = {
     zIndex: 1,
     boxShadow:
       '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-  },
+  }),
 
   rolesTitle: {
     fontWeight: 700,

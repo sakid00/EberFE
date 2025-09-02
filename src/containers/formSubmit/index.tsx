@@ -1,3 +1,5 @@
+'use client';
+
 import FormBox from '@/components/FormBox';
 import InfoBox from '@/components/InfoBox';
 import { Box } from '@mui/material';
@@ -6,6 +8,7 @@ import { styles } from './style';
 import EmailIcon from '@public/icon/email_purple.svg';
 import PhoneIcon from '@public/icon/phone_purple.svg';
 import LocationIcon from '@public/icon/location_purple.svg';
+import { DeviceType } from '@/hooks';
 
 export type infoListType = {
   logo: string;
@@ -30,6 +33,7 @@ const FormSubmitContainer = ({
   text1,
   text2,
   imageStyle,
+  type,
 }: {
   photo: StaticImageData;
   title: string;
@@ -37,9 +41,10 @@ const FormSubmitContainer = ({
   text1: string;
   text2: string;
   imageStyle?: React.CSSProperties;
+  type: DeviceType;
 }) => {
   return (
-    <Box sx={styles.containerBox}>
+    <Box sx={styles.containerBox(type)}>
       <FormBox
         title={title}
         description={
@@ -48,12 +53,13 @@ const FormSubmitContainer = ({
         }
         text1={text1}
         text2={text2}
-        formBoxStyle={styles.formBoxStyle}
+        formBoxStyle={styles.formBoxStyle(type)}
       />
       <InfoBox
         infoList={infoList}
         photo={photo}
-        imageStyle={imageStyle ?? styles.imageStyle}
+        imageStyle={{ ...styles.imageStyle, ...imageStyle }}
+        type={type}
       />
     </Box>
   );

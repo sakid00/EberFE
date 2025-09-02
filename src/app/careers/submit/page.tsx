@@ -1,8 +1,22 @@
+'use client';
 import Photo from '@public/photo/field-person.png';
 import FormSubmitContainer from '@/containers/formSubmit';
 import { styles } from './style';
+import { useDeviceType } from '@/hooks';
+import { CSSProperties } from 'react';
 
 const SubmitApplicationPage = () => {
+  const { type } = useDeviceType();
+  const imageStyle =
+    type === 'mobile'
+      ? ({
+          left: '2vw',
+          top: '30vh',
+          width: '100vw',
+          height: '50vh',
+        } as CSSProperties)
+      : styles.imageStyle;
+
   return (
     <FormSubmitContainer
       title="Join Our Team"
@@ -10,7 +24,8 @@ const SubmitApplicationPage = () => {
       text1={"Let's Build,\u00a0"}
       text2="The Future Together"
       photo={Photo}
-      imageStyle={styles.imageStyle}
+      type={type}
+      imageStyle={imageStyle}
     />
   );
 };

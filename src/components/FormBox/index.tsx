@@ -1,6 +1,7 @@
 import DualColorText from '@/components/DualColorText';
 import { Box, Button, InputLabel, TextField, Typography } from '@mui/material';
 import { styles, classNames } from './style';
+import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 
 const FormBox = ({
   title,
@@ -15,6 +16,7 @@ const FormBox = ({
   text2: string;
   formBoxStyle?: React.CSSProperties;
 }) => {
+  const { type } = useDeviceType();
   return (
     <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
       <Typography sx={styles.getInTouchText}>{title}</Typography>
@@ -22,15 +24,20 @@ const FormBox = ({
         text1={text1}
         text2={text2}
         inline
-        fontSize="1.8em"
+        fontSize={dynamicStylingValue(type, '1em', '1.8em', '1.8em')}
         fontWeight={800}
       />
-      <Typography sx={styles.descriptionText}>{description}</Typography>
-      <Box sx={styles.formRow}>
-        <Box sx={styles.halfWidthBox}>
+      <Typography sx={styles.descriptionText(type)}>{description}</Typography>
+      <Box sx={styles.formRow(type)}>
+        <Box sx={styles.halfWidthBox(type)}>
           <InputLabel sx={styles.inputLabel}>First Name</InputLabel>
           <TextField
-            className={classNames.firstNameField}
+            className={dynamicStylingValue(
+              type,
+              classNames.lastNameField,
+              classNames.firstNameField,
+              classNames.firstNameField
+            )}
             placeholder="First Name"
             sx={styles.textField}
             InputProps={{
@@ -38,7 +45,7 @@ const FormBox = ({
             }}
           />
         </Box>
-        <Box sx={styles.halfWidthBox}>
+        <Box sx={styles.halfWidthBox(type)}>
           <InputLabel sx={styles.inputLabel}>Last Name</InputLabel>
           <TextField
             className={classNames.lastNameField}

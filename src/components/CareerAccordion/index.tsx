@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles, getAccordionMarginTop } from './style';
+import { useDeviceType } from '@/hooks';
 
 interface ICareerAccordion {
   list: ICareerList[];
@@ -15,6 +16,7 @@ interface ICareerAccordion {
 }
 
 const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
+  const { type } = useDeviceType();
   return list.map((val, index) => {
     return (
       <Accordion
@@ -25,11 +27,17 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
         }}
       >
         <AccordionSummary sx={styles.accordionSummary}>
-          <Box sx={styles.summaryContainer}>
-            <Box sx={styles.jobInfoContainer}>
-              <Typography sx={styles.openRolesText}>Open Roles</Typography>
-              <Typography sx={styles.jobTitleText}>{val.title}</Typography>
-              <Typography sx={styles.jobStatusText}>{val.status}</Typography>
+          <Box sx={styles.summaryContainer(type)}>
+            <Box sx={styles.jobInfoContainer(type)}>
+              <Typography sx={styles.openRolesText(type)}>
+                Open Roles
+              </Typography>
+              <Typography sx={styles.jobTitleText(type)}>
+                {val.title}
+              </Typography>
+              <Typography sx={styles.jobStatusText(type)}>
+                {val.status}
+              </Typography>
             </Box>
             <Box
               onClick={(e) => {
@@ -37,7 +45,7 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
                 router.push('/careers/submit');
               }}
               onFocus={(e) => e.stopPropagation()}
-              sx={styles.submitButton}
+              sx={styles.submitButton(type)}
               tabIndex={0}
               role="button"
               onKeyDown={(e) => {

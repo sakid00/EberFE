@@ -5,6 +5,6 @@ export const styles = {
     width: '45vw',
     height: '75vh',
     right: '0vw',
-    top: '18vh',
+    top: '20vh',
   },
 };

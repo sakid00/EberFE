@@ -26,16 +26,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </head>
       <body
-        className={`${font.className} ${font.variable} overflow-x-hidden overscroll-none`}
+        className={`${font.className} ${font.variable} overscroll-none`}
+        suppressHydrationWarning={true}
       >
         <ThemeWrapper>
-          <Header />
-          <Box className={`my-[10vh] px-[10vw]`}>
-            <ParticlesBackground />
-            {children}
-          </Box>
-          <Footer />
+          <div className="mobile-container max-w-full">
+            <Header />
+            <Box
+              className={`mb-[20vh] -mt-[15vh] px-[5vw] md:px-[10vw] overflow-x-hidden`}
+            >
+              <ParticlesBackground />
+              {children}
+            </Box>
+            <Footer />
+          </div>
         </ThemeWrapper>
       </body>
     </html>

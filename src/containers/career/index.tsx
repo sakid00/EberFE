@@ -4,6 +4,7 @@ import DualColorText from '@/components/DualColorText';
 import { Box, Typography } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles, constants } from './style';
+import { useDeviceType } from '@/hooks';
 
 interface ICareerContainer {
   careerList: ICareerList[];
@@ -11,9 +12,10 @@ interface ICareerContainer {
 }
 
 const CareerContainer = ({ careerList, router }: ICareerContainer) => {
+  const { type } = useDeviceType();
   return (
-    <Box sx={styles.mainContainer}>
-      <Box sx={styles.infoCard}>
+    <Box sx={styles.mainContainer(type)}>
+      <Box sx={styles.infoCard(type)}>
         <DualColorText
           text1={'Our\u00a0'}
           text2="Open"

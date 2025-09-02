@@ -1,3 +1,5 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
   accordion: {
     width: '100%',
@@ -40,49 +42,54 @@ export const styles = {
     paddingTop: 0,
   },
 
-  summaryContainer: {
+  summaryContainer: (type: DeviceType) => ({
     display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     width: '100%',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
+  }),
 
-  jobInfoContainer: {
+  jobInfoContainer: (type: DeviceType) => ({
     display: 'flex',
     flexDirection: 'column',
-  },
+    justifyContent: 'start',
+    width: dynamicStylingValue(type, '100%', '50%', '50%'),
+    marginBottom: dynamicStylingValue(type, '8%', '0', '0'),
+  }),
 
-  openRolesText: {
-    fontSize: '14px',
+  openRolesText: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.8em', '1em', '1em'),
     fontWeight: 500,
     color: '#4B5563',
-  },
+  }),
 
-  jobTitleText: {
-    fontSize: '26px',
+  jobTitleText: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '1em', '26px', '26px'),
     fontWeight: 800,
     color: '#030712',
     marginTop: '4%',
-  },
+  }),
 
-  jobStatusText: {
-    fontSize: '14px',
+  jobStatusText: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.8em', '1em', '1em'),
     fontWeight: 500,
     color: '#4B5563',
-    marginTop: '4%',
-  },
+    marginTop: dynamicStylingValue(type, '2%', '4%', '4%'),
+  }),
 
-  submitButton: {
+  submitButton: (type: DeviceType) => ({
     color: 'white',
+    width: dynamicStylingValue(type, '100%', '25%', '25%'),
     background:
       'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
     padding: '12px 24px',
-    borderRadius: '12px',
+    borderRadius: '50px',
     cursor: 'pointer',
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '14px',
+    fontSize: '0.8em',
     fontWeight: 500,
     textTransform: 'none',
     letterSpacing: '0.025em',
@@ -98,7 +105,7 @@ export const styles = {
     '&:active': {
       transform: 'translateY(0)',
     },
-  },
+  }),
 
   detailsContainer: {
     display: 'flex',

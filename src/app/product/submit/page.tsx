@@ -1,8 +1,22 @@
+'use client';
 import Photo from '@public/photo/lab-person.png';
 import FormSubmitContainer from '@/containers/formSubmit';
 import { styles } from './style';
+import { useDeviceType } from '@/hooks';
+import { CSSProperties } from 'react';
 
 const SubmitApplicationPage = () => {
+  const { type } = useDeviceType();
+  const imageStyle =
+    type === 'mobile'
+      ? ({
+          left: '0',
+          top: '20vh',
+          width: '100vw',
+          height: '60vh',
+        } as CSSProperties)
+      : styles.imageStyle;
+
   return (
     <FormSubmitContainer
       title="Talk to Us!"
@@ -10,7 +24,8 @@ const SubmitApplicationPage = () => {
       text1={'Let’s Build Your\u00a0'}
       text2="Custom Product"
       photo={Photo}
-      imageStyle={styles.imageStyle}
+      imageStyle={imageStyle}
+      type={type}
     />
   );
 };

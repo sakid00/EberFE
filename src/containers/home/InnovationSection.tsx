@@ -4,53 +4,53 @@ import Image from 'next/image';
 import tangki from '@public/photo/tangki.png';
 import { InnovationCard } from '../../components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
+import { innovationSectionStyles, utilityClasses } from './styles';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType } from '@/hooks';
 
-export const InnovationSection = () => (
-  <Box id="home-fifth-section" className="relative mt-40">
-    <Box className="absolute w-[70vw]" style={{ top: '-23%', left: '35%' }}>
-      <Image src={tangki} alt="tangki-image" />
-      <Box className="tangki-gradient-overlay" />
-    </Box>
-    <Box id="content-wrapper" className="flex flex-row">
-      <Box id="content-left-side" className="mt-20  w-[25%]">
-        <DualColorText
-          text1={'Driving\u00a0'}
-          text2="Innovation"
-          text1Variant="h4"
-          text2Variant="h4"
-          fontWeight={700}
-          color="#030712"
-          inline
-        />
-        <Typography
-          variant="h4"
-          fontWeight={700}
-          color="#030712"
-          sx={{ width: '23vw' }}
-        >
-          Through Technology
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          fontWeight={400}
-          color="#4B5563"
-          textAlign={'left'}
-          fontSize={'16px'}
-          sx={{ marginTop: 2 }}
-        >
-          {`At Eber Group, we&apos;re committed to pushing the boundaries of what&apos;s
+export const InnovationSection = () => {
+  const { type } = useDeviceType();
+  return (
+    <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
+      <Box sx={innovationSectionStyles.imageContainer}>
+        <Image src={tangki} alt="tangki-image" />
+        <Box className={utilityClasses.tangkiGradientOverlay} />
+      </Box>
+      <Box id="content-wrapper" sx={innovationSectionStyles.contentWrapper}>
+        <Box id="content-left-side" sx={innovationSectionStyles.contentLeft}>
+          <DualColorText
+            text1={'Driving\u00a0'}
+            text2="Innovation"
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontWeight={700}
+            color="#030712"
+            inline
+          />
+          <Typography
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontWeight={700}
+            sx={innovationSectionStyles.subtitle}
+          >
+            Through Technology
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={innovationSectionStyles.description}
+          >
+            {`At Eber Group, we&apos;re committed to pushing the boundaries of what&apos;s
           possible in the petrochemical industry. Our state-of-the-art
           research facilities and dedicated team of scientists and engineers
           work tirelessly to develop innovative solutions that address the
           evolving needs of our customers and the global market.`}
-        </Typography>
+          </Typography>
+        </Box>
+        <Box sx={innovationSectionStyles.spacer} />
       </Box>
-      <Box sx={{ width: '80%' }} />
+      <Box id="innovation-list" sx={innovationSectionStyles.cardsContainer}>
+        {INNOVATION_DATA.map((data, index) => (
+          <InnovationCard key={index} data={data} index={index} />
+        ))}
+      </Box>
     </Box>
-    <Box id="innovation-list" className="flex flex-row gap-3 mt-10">
-      {INNOVATION_DATA.map((data, index) => (
-        <InnovationCard key={index} data={data} index={index} />
-      ))}
-    </Box>
-  </Box>
-);
+  );
+};

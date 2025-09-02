@@ -1,3 +1,5 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
   formBox: {
     backgroundColor: 'white',
@@ -11,26 +13,27 @@ export const styles = {
   },
 
   getInTouchText: {
-    fontSize: '14px',
+    fontSize: '0.8em',
     fontWeight: 500,
     color: '#4B5563',
   },
 
-  descriptionText: {
-    fontSize: '14px',
+  descriptionText: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.8em', '1em', '1em'),
     fontWeight: 400,
     color: '#4B5563',
     marginTop: 1,
-  },
+  }),
 
-  formRow: {
+  formRow: (type: DeviceType) => ({
     display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     marginTop: '32px',
-  },
+  }),
 
-  halfWidthBox: {
-    width: '50%',
-  },
+  halfWidthBox: (type: DeviceType) => ({
+    width: dynamicStylingValue(type, '100%', '50%', '50%'),
+  }),
 
   fieldContainer: {
     marginTop: '20px',

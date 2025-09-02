@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import logo from '@public/eber_logo.png';
 import bgHeader from '@public/background/bg_header.png';
+import bgHeaderHomepage from '@public/background/homepage_header_bg.png';
 import {
   Box,
   Button,
@@ -10,11 +11,19 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  useTheme,
+  useMediaQuery,
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname, useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { headerStyles } from './style';
+import ImageBackground from '../ImageBackground';
+import { ClientOnly } from '../ClientOnly';
+import { useDeviceType } from '@/hooks';
+import headerAccessories from '@public/photo/eber-big-2.png';
 
 const navigationList = [
   { name: 'Home', navigation: '/' },
@@ -31,9 +40,18 @@ const langList = ['IDN', 'EN'];
 const Header = () => {
   const [langValue, setLangValue] = useState<string>('IDN');
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { type } = useDeviceType();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const handleChange = (event: SelectChangeEvent) => {
     setLangValue(event.target.value);
   };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   const router = useRouter();
   const pathName = usePathname();
 
@@ -44,6 +62,11 @@ const Header = () => {
     }, 300);
 
     return () => clearTimeout(timer);
+  }, [pathName]);
+
+  // Close mobile menu when navigating
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
   }, [pathName]);
 
   const navigationBar = navigationList.map((val, index) => {
@@ -74,12 +97,7 @@ const Header = () => {
           onClick={() => {
             router.push(val.navigation);
           }}
-          sx={{
-            textTransform: 'none',
-            color: isPathName ? 'white' : 'rgba(255, 255, 255, 0.5)',
-            fontSize: '1rem',
-            marginRight: 4,
-          }}
+          sx={headerStyles.navigationButton(isPathName)}
         >
           {val.name}
         </Button>
@@ -93,79 +111,242 @@ const Header = () => {
     </MenuItem>
   ));
 
+  // Get responsive logo dimensions
+  const getLogoDimensions = () => {
+    if (isMobile) {
+      return { width: '60%', height: 'auto' };
+    }
+    return { width: '80%', height: 'auto' };
+  };
+
   return (
-    <header>
-      {pathName !== '/' && pathName !== '/about-us' && (
-        <Image
-          src={bgHeader}
-          alt=""
-          style={{
-            position: 'absolute',
-            width: '100vw',
-            height: '30vh',
-            right: '10vw',
-            left: 0,
-            top: 0,
-            zIndex: 0,
-          }}
-        />
-      )}
-      <Box className="flex flex-row justify-around items-center mt-10 mb-10">
-        <motion.div
-          style={{ zIndex: 1 }}
-          initial={{ opacity: 0, y: -50 }}
-          animate={{
-            opacity: isAnimating ? 0 : 1,
-            y: isAnimating ? -30 : 0,
-            scale: isAnimating ? 0.9 : 1,
-          }}
-          transition={{
-            duration: 0.4,
-            ease: 'easeInOut',
-            delay: isAnimating ? 0 : 0.2,
-          }}
-        >
-          <Image src={logo} alt="" style={{ width: '8vw', height: '5vh' }} />
-        </motion.div>
-        <motion.div
-          className="flex flex-row"
-          animate={{
-            opacity: isAnimating ? 0.3 : 1,
-            y: isAnimating ? -10 : 0,
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-        >
-          {navigationBar}
-        </motion.div>
-        <motion.div
-          animate={{
-            opacity: isAnimating ? 0.5 : 1,
-            scale: isAnimating ? 0.95 : 1,
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-        >
-          <FormControl className="bg-white opacity-20 rounded-2xl w-20 h-10 items-center">
-            <Select
-              value={langValue}
-              onChange={handleChange}
-              className="w-20 h-10 border-0"
-            >
-              {langMenu}
-            </Select>
-          </FormControl>
-          <IconButton
-            sx={{
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              width: 40,
-              height: 40,
-              borderRadius: 20,
-              marginLeft: 1,
-            }}
+    <header style={headerStyles.header}>
+      <ClientOnly
+        fallback={
+          <ImageBackground
+            src={
+              pathName !== '/' && pathName !== '/about-us'
+                ? bgHeader
+                : bgHeaderHomepage
+            }
+            objectFit="fill"
+            alt=""
+            sx={headerStyles.backgroundImage(
+              type,
+              pathName === '/' || pathName === '/about-us'
+            )}
+            contentSx={headerStyles.backgroundImageContent}
           >
-            <SearchIcon sx={{ color: 'white' }} />
-          </IconButton>
-        </motion.div>
-      </Box>
+            {/* Main Header Container */}
+            <Box sx={headerStyles.container}>
+              {/* Logo */}
+              <motion.div
+                style={headerStyles.logoContainer}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{
+                  opacity: isAnimating ? 0 : 1,
+                  y: isAnimating ? -30 : 0,
+                  scale: isAnimating ? 0.9 : 1,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: 'easeInOut',
+                  delay: isAnimating ? 0 : 0.2,
+                }}
+              >
+                <Image
+                  src={logo}
+                  alt=""
+                  style={{ width: '80%', height: 'auto' }}
+                />
+              </motion.div>
+
+              {/* Desktop Navigation */}
+              <motion.div
+                className="desktop-navigation"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+                animate={{
+                  opacity: isAnimating ? 0.3 : 1,
+                  y: isAnimating ? -10 : 0,
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                {navigationBar}
+              </motion.div>
+
+              {/* Right Section - Language & Search (Desktop) */}
+              <motion.div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: 8,
+                  alignItems: 'center',
+                }}
+                animate={{
+                  opacity: isAnimating ? 0.5 : 1,
+                  scale: isAnimating ? 0.95 : 1,
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <FormControl sx={headerStyles.languageSelect}>
+                  <Select
+                    value={langValue}
+                    onChange={handleChange}
+                    sx={{ border: 0 }}
+                  >
+                    {langMenu}
+                  </Select>
+                </FormControl>
+                <IconButton sx={headerStyles.searchButton}>
+                  <SearchIcon sx={{ color: 'white' }} />
+                </IconButton>
+              </motion.div>
+            </Box>
+          </ImageBackground>
+        }
+      >
+        <ImageBackground
+          src={bgHeaderHomepage}
+          objectFit="fill"
+          alt=""
+          sx={headerStyles.backgroundImage(
+            type,
+            pathName === '/' || pathName === '/about-us'
+          )}
+          contentSx={headerStyles.backgroundImageContent}
+        >
+          <Image
+            src={headerAccessories}
+            alt="header accessories"
+            style={headerStyles.headerAccessories(
+              type,
+              pathName === '/' || pathName === '/about-us'
+            )}
+          />
+          {/* Main Header Container */}
+          <Box sx={headerStyles.container}>
+            {/* Logo */}
+            <motion.div
+              style={headerStyles.logoContainer}
+              initial={{ opacity: 0, y: -50 }}
+              animate={{
+                opacity: isAnimating ? 0 : 1,
+                y: isAnimating ? -30 : 0,
+                scale: isAnimating ? 0.9 : 1,
+              }}
+              transition={{
+                duration: 0.4,
+                ease: 'easeInOut',
+                delay: isAnimating ? 0 : 0.2,
+              }}
+            >
+              <Image src={logo} alt="" style={getLogoDimensions()} />
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <motion.div
+              className="desktop-navigation"
+              style={{
+                display: isMobile ? 'none' : 'flex',
+                flexDirection: 'row',
+              }}
+              animate={{
+                opacity: isAnimating ? 0.3 : 1,
+                y: isAnimating ? -10 : 0,
+              }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              {navigationBar}
+            </motion.div>
+
+            {/* Right Section - Language & Search (Desktop) */}
+            {!isMobile && (
+              <motion.div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  gap: 8,
+                  alignItems: 'center',
+                }}
+                animate={{
+                  opacity: isAnimating ? 0.5 : 1,
+                  scale: isAnimating ? 0.95 : 1,
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+              >
+                <FormControl sx={headerStyles.languageSelect}>
+                  <Select
+                    value={langValue}
+                    onChange={handleChange}
+                    sx={{ border: 0 }}
+                  >
+                    {langMenu}
+                  </Select>
+                </FormControl>
+                <IconButton sx={headerStyles.searchButton}>
+                  <SearchIcon sx={{ color: 'white' }} />
+                </IconButton>
+              </motion.div>
+            )}
+
+            {/* Mobile Menu Button */}
+            {isMobile && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  marginLeft: 'auto',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <IconButton
+                  onClick={toggleMobileMenu}
+                  sx={headerStyles.mobileMenuButton}
+                  aria-label="Toggle mobile menu"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </motion.div>
+            )}
+          </Box>
+        </ImageBackground>
+      </ClientOnly>
+
+      {/* Mobile Navigation Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            style={headerStyles.mobileNavigation}
+          >
+            <Box sx={headerStyles.mobileNavigationContent}>
+              {navigationBar}
+              <Box sx={headerStyles.mobileRightSection}>
+                <FormControl sx={headerStyles.languageSelect}>
+                  <Select
+                    value={langValue}
+                    onChange={handleChange}
+                    sx={{ border: 0 }}
+                  >
+                    {langMenu}
+                  </Select>
+                </FormControl>
+                <IconButton sx={headerStyles.searchButton}>
+                  <SearchIcon sx={{ color: 'white' }} />
+                </IconButton>
+              </Box>
+            </Box>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

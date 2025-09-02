@@ -1,15 +1,18 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
-  containerBox: {
+  containerBox: (type: DeviceType) => ({
     display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     alignItems: 'end',
     justifyContent: 'center',
-  },
-  formBoxStyle: {
-    marginRight: '2%',
+  }),
+  formBoxStyle: (type: DeviceType) => ({
+    marginRight: dynamicStylingValue(type, '0', '2%', '2%'),
     zIndex: 1000,
-    width: '50vw',
-    maxWidth: ' 80%',
-  },
+    width: dynamicStylingValue(type, '100vw', '50vw', '50vw'),
+    maxWidth: dynamicStylingValue(type, '100%', '80%', '80%'),
+  }),
   imageStyle: {
     zIndex: -1000,
     position: 'absolute' as const,
