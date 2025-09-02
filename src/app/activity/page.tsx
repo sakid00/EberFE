@@ -1,5 +1,5 @@
 'use client';
-import ActivityContainer from '@/containers/activity/Activity';
+import ActivityContainer from '@/containers/activity';
 
 const ActivityPage = () => {
   return <ActivityContainer />;

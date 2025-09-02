@@ -4,6 +4,8 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import calendar from '@public/icon/calendar.svg';
 import testImage from '@public/photo/header_corporate.png';
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useRouter } from 'next/navigation';
 
 const PDFViewer = dynamic(() => import('../PDFViewer'), {
   ssr: false,
@@ -16,6 +18,7 @@ interface ActivityCardProps {
   description?: string;
   hideDesc?: boolean;
   pdfUrl?: string;
+  type: DeviceType;
 }
 
 const ActivityCard = ({
@@ -25,13 +28,23 @@ const ActivityCard = ({
   description,
   hideDesc,
   pdfUrl = '/test.pdf',
+  type,
 }: ActivityCardProps) => {
   const [isPDFOpen, setIsPDFOpen] = useState(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (pdfUrl) {
+      setIsPDFOpen(true);
+    }
+    router.push(`/activity/1`);
+  };
+
   return (
     <>
       <Box
         className={`flex flex-col justify-start items-start p-2 gap-2 rounded-xl shadow-lg/20 cursor-pointer hover:shadow-xl transition-shadow`}
-        onClick={() => setIsPDFOpen(true)}
+        onClick={handleClick}
       >
         <Box className="relative w-full h-[220px] overflow-hidden rounded-lg">
           <Image
@@ -44,7 +57,7 @@ const ActivityCard = ({
         </Box>
         <Box className="flex flex-col gap-1 p-2">
           <Typography
-            fontSize={'1.5em'}
+            fontSize={dynamicStylingValue(type, '1em', '1.5em', '1.5em')}
             fontWeight={800}
             color="#030712"
             flexWrap={'wrap'}
@@ -60,14 +73,28 @@ const ActivityCard = ({
           </Typography>
           <Box className="flex flex-row gap-2 items-center">
             <Image src={calendar} alt="calender" width={15} height={15} />
-            <Typography fontSize={'0.875em'} fontWeight={400} color="#784791">
+            <Typography
+              fontSize={dynamicStylingValue(
+                type,
+                '0.8em',
+                '0.875em',
+                '0.875em'
+              )}
+              fontWeight={400}
+              color="#784791"
+            >
               {date ?? 'April 2, 2025'}
             </Typography>
           </Box>
 
           {!hideDesc && (
             <Typography
-              fontSize={'0.875em'}
+              fontSize={dynamicStylingValue(
+                type,
+                '0.7em',
+                '0.875em',
+                '0.875em'
+              )}
               fontWeight={400}
               color="#4B5563"
               sx={{

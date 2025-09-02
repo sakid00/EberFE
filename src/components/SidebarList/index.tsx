@@ -8,6 +8,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DualColorText, { IDualColorTextProps } from '../DualColorText';
 import { useState } from 'react';
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 
 export interface listType {
   type: string;
@@ -30,6 +31,7 @@ interface ISidebarListProps extends IDualColorTextProps {
   secondList?: listType[];
   /** Optional secondary text to display below the main title */
   secondaryText?: string;
+  type: DeviceType;
 }
 
 const SidebarList: React.FC<ISidebarListProps> = ({
@@ -44,29 +46,35 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   secondaryText,
   secondList,
   listCategory,
+  type,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(true);
 
   const renderListValues = (items: listType[]) => {
-    return items.map((val, index) => {
+    const listItems = items.map((val, index) => {
       return (
         <Box
           onClick={() => {
             setSelected(index);
           }}
           key={index}
-          className={`items-center ${selected === index ? 'bg-[#D6CBE3]' : 'bg-[#F3F5F7]'} p-4 ${selected === index ? 'border-[#784791]' : 'border-transparent'} border-2 rounded-xl mb-4`}
+          className={`items-center ${selected === index ? 'bg-[#D6CBE3]' : 'bg-[#F3F5F7]'} p-4 ${selected === index ? 'border-[#784791]' : 'border-transparent'} border-2 rounded-xl ${type === 'mobile' ? 'mr-4 flex-shrink-0' : 'mb-4'}`}
+          sx={{
+            minWidth: 'auto',
+          }}
         >
+          {type !== 'mobile' && (
+            <Typography
+              fontSize={'0.875em'}
+              fontWeight={400}
+              color={selected === index ? '#784791' : '#4B5563'}
+              className="mt-4"
+            >
+              {val.type}
+            </Typography>
+          )}
           <Typography
-            fontSize={'0.875em'}
-            fontWeight={400}
-            color={selected === index ? '#784791' : '#4B5563'}
-            className="mt-4"
-          >
-            {val.type}
-          </Typography>
-          <Typography
-            fontSize={'1em'}
+            fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
             color={selected === index ? '#784791' : '#030712'}
             fontWeight={700}
             className="mt-4"
@@ -76,6 +84,29 @@ const SidebarList: React.FC<ISidebarListProps> = ({
         </Box>
       );
     });
+
+    // On mobile, wrap in a horizontally scrollable container
+    if (type === 'mobile') {
+      return (
+        <Box
+          sx={{
+            display: 'flex',
+            overflowX: 'auto',
+            overflowY: 'hidden',
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+            scrollbarWidth: 'none', // Firefox
+            msOverflowStyle: 'none', // IE and Edge
+          }}
+        >
+          {listItems}
+        </Box>
+      );
+    }
+
+    // On tablet/desktop, return items normally (vertical layout)
+    return listItems;
   };
 
   const dualList = () => {
@@ -134,7 +165,13 @@ const SidebarList: React.FC<ISidebarListProps> = ({
           inline
         />
       )}
-      <Box className="mt-6">
+      <Box
+        className="mt-6"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         {listCategory && listCategory.length >= 2
           ? dualList()
           : renderListValues(list)}

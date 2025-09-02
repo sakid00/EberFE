@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SidebarList, { listType } from '@/components/SidebarList';
 import { Box, Typography } from '@mui/material';
 import ActivityCard from '@/components/Cards/ActivityCard';
-
+import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 const activityList = ['Sustainability', 'Newsroom'];
 const sustainabilityList: listType[] = [
   {
@@ -30,11 +30,12 @@ const newsroomList: listType[] = [
 ];
 
 const ActivityContainer = () => {
+  const { type } = useDeviceType();
   const [selectedCategory, setSelectedCategory] = useState<number>(0);
   const [selectedActivity, setSelectedActivity] = useState<number>(0);
 
   return (
-    <Box className="flex flex-row">
+    <Box className={`flex ${type !== 'mobile' ? 'flex-row' : 'flex-col'}`}>
       <SidebarList
         selected={selectedActivity}
         setSelected={setSelectedActivity}
@@ -45,15 +46,22 @@ const ActivityContainer = () => {
         secondList={newsroomList}
         text1={'Our\u00a0'}
         text2="Activity"
+        type={type}
       />
-      <Box className="flex-1 p-8 ml-4 bg-white rounded-xl z-100">
-        <Typography variant="h4" fontWeight={700} color="#030712">
+      <Box
+        className={`flex-1 p-8 ${type !== 'mobile' ? 'ml-4' : 'mt-4'} bg-white rounded-xl z-100 shadow-lg`}
+      >
+        <Typography
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+          fontWeight={700}
+          color="#030712"
+        >
           {selectedCategory === 0
             ? sustainabilityList[selectedActivity]?.name
             : newsroomList[selectedActivity]?.name}
         </Typography>
         <Typography
-          fontSize={'16px'}
+          fontSize={dynamicStylingValue(type, '0.8em', '16px', '16px')}
           fontWeight={400}
           color="#4B5563"
           marginTop={2}
@@ -63,14 +71,16 @@ const ActivityContainer = () => {
         </Typography>
 
         <Box
-          className="grid grid-rows-3 grid-cols-3 gap-4 mt-4"
+          className={`${type !== 'mobile' ? 'grid grid-rows-3 grid-cols-3 gap-4 mt-4' : 'flex flex-col gap-4 mt-4'}`}
           sx={{
             width: '100%',
             maxWidth: '1200px',
+            flexWrap: 'wrap',
           }}
         >
           <ActivityCard
             hideDesc={selectedActivity === 0 && selectedCategory === 1}
+            type={type}
           />
         </Box>
       </Box>

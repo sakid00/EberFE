@@ -1,165 +1,112 @@
 'use client';
-import SidebarList, { listType } from '@/components/SidebarList';
+import SidebarList from '@/components/SidebarList';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
 import HeaderImage from '@public/photo/header_corporate.png';
 import { Map } from '@mui/icons-material';
-import useStyles from './style';
 import dynamic from 'next/dynamic';
-
-const companyList: listType[] = [
-  {
-    name: 'PT Eternal Buana Chemical Industries',
-    type: 'Manufacturing Facility',
-  },
-  { name: 'PT Eterindo Nusa Graha', type: 'Manufacturing Facility' },
-  { name: 'Petrowidada', type: 'Manufacturing Facility' },
-  { name: 'Mega Prima Solvindo', type: 'Manufacturing Facility' },
-];
-
-const infoboxList = [
-  {
-    title: 'Product Type',
-    value: 'Certified to Standard',
-  },
-  {
-    title: 'Certified to Standard',
-    value: 'Certified to Standard',
-  },
-
-  {
-    title: 'Capacity',
-    value: 'Capacity',
-  },
-  {
-    title: 'Capacity Storage Tank Raw Material',
-    value: 'Capacity Storage Tank Raw Material',
-  },
-
-  {
-    title: 'Solid R.M. – Finish Goods Whs Cap',
-    value: 'Solid R.M. – Finish Goods Whs Cap',
-  },
-];
+import { styles, constants } from './style';
+import { useDeviceType } from '@/hooks';
 
 const CorporateContainer = () => {
   const [selectedCompany, setSelectedCompany] = useState<number>(0);
-
-  const classes = useStyles();
+  const { type } = useDeviceType();
 
   const infoboxContainer = (title: string, value: string) => {
     return (
-      <Box className="p-4 flex flex-col rounded-lg bg-[#F3F5F7] gap-1.5">
-        <Typography fontSize={'0.8em'} fontWeight={700} color="#030712">
-          {title}
-        </Typography>
-        <Typography fontSize={'0.8em'} fontWeight={400} color="#030712">
-          {value}
-        </Typography>
+      <Box sx={styles.infoBox}>
+        <Typography sx={styles.infoBoxTitle}>{title}</Typography>
+        <Typography sx={styles.infoBoxValue}>{value}</Typography>
       </Box>
     );
   };
 
   return (
-    <Box className="flex">
+    <Box sx={styles.mainContainer(type)}>
       <SidebarList
         selected={selectedCompany}
         setSelected={setSelectedCompany}
-        list={companyList}
+        list={constants.companyList}
         text1={'Our\u00a0'}
         text2="Key"
         secondaryText="Subsidiaries"
         inline
+        type={type}
       />
-      <Box className="flex-1 p-8 ml-4 bg-white rounded-xl z-100">
+      <Box sx={styles.contentContainer(type)}>
         <Image
           src={HeaderImage}
-          alt={companyList[selectedCompany].name}
-          className="object-cover rounded-lg"
+          alt={constants.companyList[selectedCompany].name}
+          style={styles.headerImageStyle}
         />
-        <Typography
-          marginTop={3}
-          color="#030712"
-          fontSize={'2em'}
-          fontWeight={800}
-        >
-          {companyList[selectedCompany].name}
+        <Typography marginTop={3} sx={styles.companyTitle(type)}>
+          {constants.companyList[selectedCompany].name}
         </Typography>
 
-        <Box className="flex justify-between items-center">
-          <Box className="mt-2">
-            <Typography color="#4B5563" fontSize={'1em'} fontWeight={400}>
-              Address
-            </Typography>
-            <Typography color="#030712" fontSize={'1.2em'} fontWeight={700}>
-              Eber Tower, 123 Business District Jakarta, Indonesia 12345
+        <Box sx={styles.addressContainer(type)}>
+          <Box sx={styles.addressTextContainer}>
+            <Typography sx={styles.addressLabel(type)}>Address</Typography>
+            <Typography sx={styles.addressValue(type)}>
+              {constants.address}
             </Typography>
           </Box>
           <Button
             variant={'contained'}
             disableElevation
-            startIcon={<Map />}
-            classes={{
-              root: classes.root,
-              contained: classes.contained,
-            }}
+            startIcon={<Map width={10} height={10} />}
+            sx={styles.mapsButton(type)}
           >
             Maps
           </Button>
         </Box>
 
-        <Typography
-          marginY={4}
-          color="#4B5563"
-          fontSize={'1em'}
-          fontWeight={400}
-        >
-          First Production in 1982 with capacity 10.000 TPY, expanded to 20.000
-          TPY in 1986 then final expansion capacity to 82.000 TPY.
+        <Typography marginY={4} sx={styles.descriptionText(type)}>
+          {constants.description1}
         </Typography>
 
-        <Grid container spacing={2} className="mt-6">
-          {infoboxList.map((item, index) => (
-            <Grid component={'span'} size={6} key={index}>
-              {infoboxContainer(item.title, item.value)}
-            </Grid>
-          ))}
-        </Grid>
+        {type !== 'mobile' ? (
+          <Grid container spacing={2} sx={styles.gridContainer}>
+            {constants.infoboxList.map((item, index) => (
+              <Grid component={'span'} size={6} key={index}>
+                {infoboxContainer(item.title, item.value)}
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {constants.infoboxList.map((item, index) => (
+              <Box key={index}>{infoboxContainer(item.title, item.value)}</Box>
+            ))}
+          </Box>
+        )}
 
-        <Typography
-          marginY={4}
-          color="#4B5563"
-          fontSize={'1em'}
-          fontWeight={400}
-        >
-          PT Eternal Buana Chemicals Industry Plant is one of the biggest
-          Specialty Chemical Resin Production facility in Indonesia, occupying
-          area app. 16,2 Hectare, located in Tangerang – Banten Province.
+        <Typography marginY={4} sx={styles.descriptionText(type)}>
+          {constants.description2}
         </Typography>
 
-        <Grid container spacing={2} className="mt-6">
-          {infoboxList.map((item, index) => (
-            <Grid component={'span'} size={4} key={index}>
-              {infoboxContainer(item.title, item.value)}
-            </Grid>
-          ))}
-        </Grid>
+        {type !== 'mobile' ? (
+          <Grid container spacing={2} sx={styles.gridContainer}>
+            {constants.infoboxList.map((item, index) => (
+              <Grid component={'span'} size={4} key={index}>
+                {infoboxContainer(item.title, item.value)}
+              </Grid>
+            ))}
+          </Grid>
+        ) : (
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            {constants.infoboxList.map((item, index) => (
+              <Box key={index}>{infoboxContainer(item.title, item.value)}</Box>
+            ))}
+          </Box>
+        )}
 
-        <Box className="mt-5">
-          <Typography color="#030712" fontSize={'1.2em'} fontWeight={800}>
+        <Box sx={styles.productApplicationContainer}>
+          <Typography sx={styles.productApplicationTitle(type)}>
             Product Application
           </Typography>
-          <Typography
-            color="#4B5563"
-            fontSize={'1em'}
-            fontWeight={400}
-            marginTop={1}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-            aliquid excepturi placeat tempora non cum, quaerat voluptatem sint
-            reprehenderit impedit nemo eveniet incidunt vero maiores harum. Non
-            obcaecati repellendus eos?
+          <Typography sx={styles.productApplicationText(type)} marginTop={1}>
+            {constants.productApplicationDescription}
           </Typography>
         </Box>
       </Box>
