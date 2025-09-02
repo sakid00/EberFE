@@ -17,12 +17,12 @@ export type infoListType = {
 };
 
 const infoList = [
-  { logo: EmailIcon, title: 'Email', desc: 'info@ebergroup.com' },
-  { logo: PhoneIcon, title: 'Phone', desc: '+62 21 1234 5678' },
+  { logo: EmailIcon, title: 'info_box.email', desc: 'info_box.email_desc' },
+  { logo: PhoneIcon, title: 'info_box.phone', desc: 'info_box.phone_desc' },
   {
     logo: LocationIcon,
-    title: 'Address',
-    desc: 'Eber Tower, 123 Business District\n Jakarta, Indonesia 12345',
+    title: 'info_box.address',
+    desc: 'info_box.address_desc',
   },
 ];
 

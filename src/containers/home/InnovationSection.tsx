@@ -6,10 +6,12 @@ import { InnovationCard } from '../../components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
 import { innovationSectionStyles, utilityClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const InnovationSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
+
   return (
     <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
       <Box sx={innovationSectionStyles.imageContainer}>
@@ -19,8 +21,8 @@ export const InnovationSection = () => {
       <Box id="content-wrapper" sx={innovationSectionStyles.contentWrapper}>
         <Box id="content-left-side" sx={innovationSectionStyles.contentLeft}>
           <DualColorText
-            text1={'Driving\u00a0'}
-            text2="Innovation"
+            text1={`${t('home.innovation_section_title.driving')}\u00a0`}
+            text2={t('home.innovation_section_title.innovation')}
             fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
             fontWeight={700}
             color="#030712"
@@ -31,17 +33,13 @@ export const InnovationSection = () => {
             fontWeight={700}
             sx={innovationSectionStyles.subtitle}
           >
-            Through Technology
+            {t('home.innovation_section_title.through_technology')}
           </Typography>
           <Typography
             variant="subtitle1"
             sx={innovationSectionStyles.description}
           >
-            {`At Eber Group, we&apos;re committed to pushing the boundaries of what&apos;s
-          possible in the petrochemical industry. Our state-of-the-art
-          research facilities and dedicated team of scientists and engineers
-          work tirelessly to develop innovative solutions that address the
-          evolving needs of our customers and the global market.`}
+            {t('home.innovation_section_desc')}
           </Typography>
         </Box>
         <Box sx={innovationSectionStyles.spacer} />

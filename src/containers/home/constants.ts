@@ -9,69 +9,69 @@ import transfromSVG from '@public/icon/transform.svg';
 
 export const SPECIALTY_DATA = [
   {
-    title: 'Advanced Materials',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    title: 'home.specialty_section_cards.1.title',
+    desc: 'home.specialty_section_cards.1.desc',
     img: advancedSVG,
   },
   {
-    title: 'Innovation Focus',
-    desc: 'Focused on sustainable chemical production and innovation.',
+    title: 'home.specialty_section_cards.2.title',
+    desc: 'home.specialty_section_cards.2.desc',
     img: focusSVG,
   },
   {
-    title: 'Sustainability',
-    desc: 'Specialized in solvent production and chemical solutions.',
+    title: 'home.specialty_section_cards.3.title',
+    desc: 'home.specialty_section_cards.3.desc',
     img: recycleSVG,
   },
   {
-    title: 'Expert Team',
-    desc: 'Leading producer of petrochemical products and solutions.',
+    title: 'home.specialty_section_cards.4.title',
+    desc: 'home.specialty_section_cards.4.desc',
     img: expertSVG,
   },
 ];
 
 export const SUBSIDIARIES_DATA = [
   {
-    title: 'PT Eternal Buana Chemical Industries',
+    title: 'home.subsidiaries_section_cards.1.title',
     location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    desc: 'home.subsidiaries_section_cards.1.desc',
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
+    title: 'home.subsidiaries_section_cards.2.title',
     location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    desc: 'home.subsidiaries_section_cards.2.desc',
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
+    title: 'home.subsidiaries_section_cards.3.title',
     location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    desc: 'home.subsidiaries_section_cards.3.desc',
   },
   {
-    title: 'PT Eternal Buana Chemical Industries',
+    title: 'home.subsidiaries_section_cards.4.title',
     location: 'Cikupa, Banten',
-    desc: 'Specializing in high-performance chemical manufacturing and processing.',
+    desc: 'home.subsidiaries_section_cards.4.desc',
   },
 ];
 
 export const INNOVATION_DATA = [
   {
-    title: 'Research & Development',
-    desc: 'Continuous investment in R&D to develop cutting-edge chemical solutions and materials.',
+    title: 'home.innovation_section_cards.1.title',
+    desc: 'home.innovation_section_cards.1.desc',
     img: rndSVG,
   },
   {
-    title: 'Digital Transformation',
-    desc: 'Leveraging advanced technologies to optimize our manufacturing processes and operations.',
+    title: 'home.innovation_section_cards.2.title',
+    desc: 'home.innovation_section_cards.2.desc',
     img: transfromSVG,
   },
   {
-    title: 'Sustainable Solutions',
-    desc: 'Developing eco-friendly products and processes to minimize environmental impact.',
+    title: 'home.innovation_section_cards.3.title',
+    desc: 'home.innovation_section_cards.3.desc',
     img: sustainSVG,
   },
   {
-    title: 'Collaborative Innovation',
-    desc: 'Partnering with industry leaders and research institutions to drive breakthrough innovations.',
+    title: 'home.innovation_section_cards.4.title',
+    desc: 'home.innovation_section_cards.4.desc',
     img: collabSVG,
   },
 ];

@@ -4,20 +4,11 @@ import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // HeaderSection Styles
 export const headerStyles: {
-  headerAccessories: (deviceType: DeviceType) => CSSProperties;
   headerPhoto: (deviceType: DeviceType) => CSSProperties;
   headerContent: (deviceType: DeviceType) => SxProps<Theme>;
   backgroundText: SxProps<Theme>;
   description: (deviceType: DeviceType) => CSSProperties;
 } = {
-  headerAccessories: (deviceType: DeviceType) => ({
-    position: 'absolute',
-    height: dynamicStylingValue(deviceType, '40vh', '80vh', '80vh'),
-    right: '10%',
-    left: 0,
-    top: 0,
-    zIndex: 1,
-  }),
   headerPhoto: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
     width: dynamicStylingValue(deviceType, '80vw', '50vw', '50vw'),
@@ -47,7 +38,7 @@ export const headerStyles: {
     paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
     paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
     width: dynamicStylingValue(deviceType, '100%', '25%', '25%'),
-    marginTop: '1vh',
+    marginTop: '4vh',
     fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'
@@ -157,7 +148,7 @@ export const corporateStyles: {
 } = {
   description: (deviceType: DeviceType) => ({
     width: dynamicStylingValue(deviceType, '100%', '80%', '80%'),
-    marginTop: '5%',
+    marginTop: '2%',
   }),
   cardsContainer: {
     marginTop: '40px',

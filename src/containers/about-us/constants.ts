@@ -20,61 +20,61 @@ export const CERTIFICATION_DATA = [slide1, slide2, slide3, slide4];
 
 export const CORPORATE_DATA = [
   {
-    title: 'Transparency',
-    desc: 'We maintain open communication with stakeholders and provide clear, accurate information about our operations & performance.',
+    title: 'about_us.corporate_section_cards.1.title',
+    desc: 'about_us.corporate_section_cards.1.desc',
     img: transparency,
   },
   {
-    title: 'Accountability',
-    desc: 'Our leadership team takes responsibility for decisions and actions, with clear reporting structures and performance metrics.',
+    title: 'about_us.corporate_section_cards.2.title',
+    desc: 'about_us.corporate_section_cards.2.desc',
     img: accountability,
   },
   {
-    title: 'Ethical Practices',
-    desc: 'We adhere to the highest ethical standards in all business dealings, with a comprehensive code of conduct guiding our actions.',
+    title: 'about_us.corporate_section_cards.3.title',
+    desc: 'about_us.corporate_section_cards.3.desc',
     img: ethical,
   },
 ];
 
 export const VALUES_DATA = [
   {
-    title: 'Social Responsibility',
+    title: 'about_us.value_section_cards.social_responsibility',
     img: responsibility,
   },
   {
-    title: 'Safety',
+    title: 'about_us.value_section_cards.safety',
     img: safety,
   },
   {
-    title: 'Innovation',
+    title: 'about_us.value_section_cards.innovation',
     img: innovation,
   },
   {
-    title: 'Ingenuity',
+    title: 'about_us.value_section_cards.ingenuity',
     img: ingenuity,
   },
   {
-    title: 'Trust',
+    title: 'about_us.value_section_cards.trust',
     img: trust,
   },
   {
-    title: 'Quality',
+    title: 'about_us.value_section_cards.quality',
     img: quality,
   },
   {
-    title: 'Creativity',
+    title: 'about_us.value_section_cards.creativity',
     img: creativity,
   },
   {
-    title: 'Centricity',
+    title: 'about_us.value_section_cards.centricity',
     img: centricity,
   },
   {
-    title: 'Growth',
+    title: 'about_us.value_section_cards.growth',
     img: growth,
   },
   {
-    title: 'Client',
+    title: 'about_us.value_section_cards.client',
     img: client,
   },
 ];

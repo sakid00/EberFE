@@ -1,0 +1,223 @@
+{
+  "navigation_bar": {
+    "home": "Home",
+    "about_us": "About Us",
+    "corporate": "Corporate",
+    "product": "Product",
+    "activity": "Activity",
+    "careers": "Careers",
+    "contact_us": "Contact Us"
+  },
+  "home": {
+    "title": {
+      "innovating": "Innovating",
+      "as": "as\u00a0",
+      "sustainable": "Sustainable",
+      "future": "Future"
+    },
+    "desc": "Established in 2021, Eber Group oversees four top-performing chemical manufacturing companies operating across Indonesia.",
+    "product_button": "Explore Our Product",
+    "custom_product_button": "Custom Product",
+    "floating_title": "High Performance Materials",
+    "floating_desc": "Powering innovation across multiple industries",
+    "specialty_section_title": {
+      "leader_in": "Leader in",
+      "high_performance": "High-Performance",
+      "specialty_materials": "Specialty Materials"
+    },
+    "specialty_section_desc": "Established in 2021, EBER Group oversees four top-performing chemical manufacturing companies operating across Indonesia, bringing together decades of expertise and innovation in the petrochemical industry.",
+    "specialty_section_cards": {
+      "1": {
+        "title": "Advanced Materials",
+        "desc": "Specializing in high-performance chemical manufacturing and processing."
+      },
+      "2": {
+        "title": "Innovation Focus",
+        "desc": "Focused on sustainable chemical production and innovation."
+      },
+      "3": {
+        "title": "Sustainability",
+        "desc": "Specialized in solvent production and chemical solutions."
+      },
+      "4": {
+        "title": "Expert Team",
+        "desc": "Leading producer of petrochemical products and solutions."
+      }
+    },
+    "custom_product_section_title": {
+      "make_it": "Make it Yours,",
+      "customize": "Customize Your Product",
+      "today": "Today!"
+    },
+    "custom_product_section_desc": "Eber Group's expertise in specialty materials is supported by a strong in-house R&D team, which enables the company to provide solutions for products and processes improvement in the infrastructure, construction, automotive, environmental and manufacturing industries.",
+    "subsidiaries_section_title": {
+      "eber_group": "Eber Group",
+      "subsidiaries": "Subsidiaries"
+    },
+    "subsidiaries_section_desc": "As an integrated chemical group, EBER Group oversees four leading manufacturing companies strategically located across Indonesia. Each subsidiary has its own specialization, collectively strengthening EBER Group’s position as a key player in the national petrochemical industry.",
+    "subsidiaries_section_cards": {
+      "1": {
+        "title": "PT Eternal Buana Chemical Industries",
+        "desc": "based in Cikupa, Banten, is a major producer of resins and specialty chemicals with a production capacity of 70,000 mtpa. Its product portfolio includes paper chemicals, alkyd acrylic amino resins, unsaturated polyester resins, and synthetic latex resins."
+      },
+      "2": {
+        "title": "PT Eterindo Nusa Graha",
+        "desc": "located in Gresik, East Java, operates with a capacity of 51,000 mtpa. The company focuses on plasticizers, resins, and specialty chemicals, serving a wide range of industries from paper and automotive to synthetic materials."
+      },
+      "3": {
+        "title": "PT Petrowidada",
+        "desc": "situated in Gresik, is a leading domestic producer of phthalic anhydride with a capacity of 70,000 mtpa. Its products are widely applied in resin and plastic manufacturing, supporting essential downstream industries."
+      },
+      "4": {
+        "title": "PT Mega Prima Solvindo",
+        "desc": "headquartered in Cilegon, Banten, specializes in the production of n-Butyl Acetate with a capacity of 20,000 mtpa. This chemical is extensively used in coatings, paints, and adhesive industries."
+      }
+    },
+    "innovation_section_title": {
+      "driving": "Driving",
+      "innovation": "Innovation",
+      "through_technology": "Through Technology"
+    },
+    "innovation_section_desc": "At Eber Group, we’re committed to pushing the boundaries of what’s possible in the petrochemical industry. Our state-of-the-art research facilities and dedicated team of scientists and engineers work tirelessly to develop innovative solutions that address the evolving needs of our customers and the global market.",
+    "innovation_section_cards": {
+      "1": {
+        "title": "Research & Development",
+        "desc": "Continuous investment in R&D to develop cutting-edge chemical solutions and materials."
+      },
+      "2": {
+        "title": "Digital Transformation",
+        "desc": "Leveraging advanced technologies to optimize our manufacturing processes and operations."
+      },
+      "3": {
+        "title": "Sustainable Solutions",
+        "desc": "Developing eco-friendly products and processes to minimize environmental impact."
+      },
+      "4": {
+        "title": "Collaborative Innovation",
+        "desc": "Partnering with industry leaders and research institutions to drive breakthrough innovations."
+      }
+    }
+  },
+  "about_us": {
+    "title": {
+      "our": "Our",
+      "company": "Company",
+      "background": "Background"
+    },
+    "desc": "Eber Group was incorporated in 2021 as a holding company of four leading high-performance chemical manufacturing companies in Indonesia.",
+    "certification_section_title": {
+      "our": "Our",
+      "certification": "Certification"
+    },
+    "certification_section_desc": "Eber Group oversees four top-performing chemical manufacturing companies operating across Indonesia",
+    "principle_section_title": {
+      "our_guiding": "Our Guiding",
+      "principle": "Principle &",
+      "future": "Future Goals"
+    },
+    "vision_title": "Vision",
+    "vision_desc": "To be the foremost regional petrochemical company for its performance, ESG, people, partnership and business sustainability.",
+    "mission_title": "Mission",
+    "mission_desc": "To develop and produce superior, reliable, environmental friendly product and provide the best solution for our customers and society in building a national industry advancement by making the best use of available resources and embracing a core set of company values.",
+    "corporate_section_title": {
+      "corporate": "Corporate",
+      "governance": "Governance"
+    },
+    "corporate_section_desc": "At Eber Group, we are committed to maintaining the highest standards of corporate governance, ensuring transparency, accountability, and ethical business practices across all our operations.",
+    "corporate_section_cards": {
+      "1": {
+        "title": "Transparency",
+        "desc": "We maintain open communication with stakeholders and provide clear, accurate information about our operations & performance."
+      },
+      "2": {
+        "title": "Accountability",
+        "desc": "Our leadership team takes responsibility for decisions and actions, with clear reporting structures and performance metrics."
+      },
+      "3": {
+        "title": "Ethical Practices",
+        "desc": "We adhere to the highest ethical standards in all business dealings, with a comprehensive code of conduct guiding our actions."
+      }
+    },
+    "value_section_title": {
+      "creating": "Creating Meaningful Impact Through",
+      "purpose_driven": "Purpose–Driven Values & a People–First Culture"
+    },
+    "value_section_cards": {
+      "social_responsibility": "Social Responsibility",
+      "safety": "Safety",
+      "innovation": "Innovation",
+      "ingenuity": "Ingenuity",
+      "trust": "Trust",
+      "quality": "Quality",
+      "creativity": "Creativity",
+      "centricity": "Value Centricity",
+      "growth": "Growth",
+      "client": "Client"
+    }
+  },
+  "footer": {
+    "desc": "Established in 2021, Eber Group oversees four top-performing chemical manufacturing companies operating across Indonesia, delivering high-performance specialty materials and chemical solutions.",
+    "contact_info_section_title": "Contact Information",
+    "contact_info_section_desc": "Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia",
+    "contact_info_section_email": "info@ebergroup.com",
+    "contact_info_section_phone": "+62-21 5020 2622",
+    "subsidiaries_section_title": "Our Subsidiaries",
+    "subsidiaries_section_desc_1": "PT Eternal Buana Chemical Industries",
+    "subsidiaries_section_desc_2": "PT Petrowidada",
+    "subsidiaries_section_desc_3": "PT Eterindo Nusa Graha",
+    "subsidiaries_section_desc_4": "PT Mega Prima Solvindo",
+    "copyright": "© 2025 Eber Group. All right reserved"
+  },
+  "careers": {
+    "title": {
+      "our": "Our\u00a0",
+      "open": "Open",
+      "roles": "Roles"
+    },
+    "desc": "We are always looking for passionate and talented individuals to join our team. Explore our open positions and be part of a company that drives innovation, sustainability, and growth.",
+    "contact_label": "Or Contact Us With",
+    "contact_email": "Hello@Eber.com",
+    "open_roles": "Open Roles",
+    "submit_application_button": "Submit Application",
+    "submit_application_title_small": "Join Our Team",
+    "submit_application_title": {
+      "let's": "Let's Build,\u00a0",
+      "the_future": "The Future Together"
+    },
+    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?"
+  },
+  "form_field": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone",
+    "cover_letter": "Cover Letter",
+    "message": "Message"
+  },
+  "info_box": {
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "email_desc": "info@ebergroup.com",
+    "phone_desc": "+62-21 5020 2622",
+    "address_desc": "Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia"
+  },
+  "contact_us": {
+    "submit_application_title_small": "Get in touch",
+    "submit_application_title": {
+      "let's": "Let's Chat,\u00a0",
+      "reach_out": "Reach Out to Us"
+    },
+    "submit_application_desc": "We value every opportunity to connect with you. Whether you have questions, need more information about our products and services, or wish to explore potential collaborations, our team is ready to assist you. Reach out to us and let’s build something meaningful together.",
+    "submit_application_button": "Submit"
+  },
+  "custom_product": {
+    "submit_application_title_small": "Talk to Us!",
+    "submit_application_title": {
+      "let's": "Let’s Build Your\u00a0",
+      "custom": "Custom Product"
+    },
+    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
+    "submit_application_button": "Submit"
+  }
+}

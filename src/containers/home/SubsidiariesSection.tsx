@@ -4,10 +4,12 @@ import { SubsidiaryCard } from '../../components/Cards/SubsidiaryCard';
 import { SUBSIDIARIES_DATA } from './constants';
 import { subsidiariesSectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const SubsidiariesSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
+
   return (
     <Box
       id="home-fourth-section"
@@ -19,8 +21,8 @@ export const SubsidiariesSection = () => {
         className={animationClasses.fadeIn}
       >
         <DualColorText
-          text1={'Our Key\u00a0'}
-          text2="Subsidiaries"
+          text1={`${t('home.subsidiaries_section_title.eber_group')}\u00a0`}
+          text2={t('home.subsidiaries_section_title.subsidiaries')}
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
           fontWeight={700}
           inline
@@ -32,8 +34,7 @@ export const SubsidiariesSection = () => {
         sx={subsidiariesSectionStyles.description}
         className={animationClasses.fadeIn}
       >
-        Eber Group oversees four top-performing chemical manufacturing companies
-        operating across Indonesia
+        {t('home.subsidiaries_section_desc')}
       </Typography>
       <Box sx={subsidiariesSectionStyles.cardsContainer}>
         {SUBSIDIARIES_DATA.map((data, index) => (

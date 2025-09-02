@@ -7,10 +7,11 @@ import siteBg from '@public/background/site-bg.png';
 import ImageBackground from '@/components/ImageBackground';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <Box
       id="about-us-fifth-section"
@@ -27,14 +28,14 @@ export const ValueSection = () => {
           color="#784791"
           sx={{ textAlign: 'center' }}
         >
-          {'Creating Meaningful Impact Through\u00a0'}
+          {`${t('about_us.value_section_title.creating')}\u00a0`}
           <Typography
             component={type === 'mobile' ? 'span' : 'div'}
             fontSize={'1em'}
             fontWeight={'800'}
             color="#784791"
           >
-            Purpose-Driven Values & a People-First Culture
+            {t('about_us.value_section_title.purpose_driven')}
           </Typography>
         </Typography>
       </Box>

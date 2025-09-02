@@ -58,8 +58,9 @@ export const headerSectionStyles = {
   } as SxProps<Theme>,
 
   description: {
-    width: '25%',
-    marginTop: '20px',
+    fontSize: '1em',
+    width: '40%',
+    marginTop: '2vh',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
@@ -113,9 +114,9 @@ export const specialtySectionStyles = {
 
   description: {
     width: '70%',
-    marginTop: '20px',
+    marginTop: '2vh',
     textAlign: 'center',
-    fontSize: '18px',
+    fontSize: '1em',
     color: COLORS.text.secondary,
   } as SxProps<Theme>,
 
@@ -158,8 +159,8 @@ export const customProductSectionStyles = {
   } as SxProps<Theme>,
 
   spacer: {
-    width: 600,
-    height: 509,
+    width: '40%',
+    height: '50%',
     display: 'flex',
     justifyContent: 'center',
   } as SxProps<Theme>,
@@ -219,10 +220,10 @@ export const subsidiariesSectionStyles = {
   } as SxProps<Theme>,
 
   description: {
-    width: '50%',
-    marginTop: '20px',
+    width: '80%',
+    marginTop: '2vh',
     textAlign: 'center',
-    fontSize: '18px',
+    fontSize: '1em',
     color: COLORS.text.secondary,
   } as SxProps<Theme>,
 

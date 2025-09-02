@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles, getAccordionMarginTop } from './style';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 interface ICareerAccordion {
   list: ICareerList[];
@@ -17,6 +17,7 @@ interface ICareerAccordion {
 
 const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return list.map((val, index) => {
     return (
       <Accordion
@@ -30,7 +31,7 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
           <Box sx={styles.summaryContainer(type)}>
             <Box sx={styles.jobInfoContainer(type)}>
               <Typography sx={styles.openRolesText(type)}>
-                Open Roles
+                {t('careers.open_roles')}
               </Typography>
               <Typography sx={styles.jobTitleText(type)}>
                 {val.title}
@@ -56,7 +57,7 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
                 }
               }}
             >
-              Submit Application
+              {t('careers.submit_application_button')}
             </Box>
           </Box>
         </AccordionSummary>

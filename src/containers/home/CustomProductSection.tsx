@@ -8,15 +8,17 @@ import {
   utilityClasses,
 } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const CustomProductSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
+
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
       <Box
         sx={customProductSectionStyles.imageContainer}
-        // className={animationClasses.slideLeft}
+        className={animationClasses.slideLeft}
       >
         <Image src={fieldPerson} alt="field-person" width={600} height={600} />
       </Box>
@@ -30,8 +32,8 @@ export const CustomProductSection = () => {
           className={animationClasses.slideRight}
         >
           <DualColorText
-            text1="Make it Yours,"
-            text2="Customize Your Product"
+            text1={t('home.custom_product_section_title.make_it')}
+            text2={t('home.custom_product_section_title.customize')}
             fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
             color="white"
             fontWeight={700}
@@ -41,17 +43,15 @@ export const CustomProductSection = () => {
             fontWeight={800}
             sx={customProductSectionStyles.title}
           >
-            Today!
+            {t('home.custom_product_section_title.today')}
           </Typography>
           <Typography sx={customProductSectionStyles.description}>
-            Eber Group&apos;s expertise in specialty materials is supported by a
-            strong in-house R&D team, which enables the company to provide
-            solutions for products and processes improvement in the
-            infrastructure, construction, automotive, environmental and
-            manufacturing industries.
+            {t('home.custom_product_section_desc')}
           </Typography>
 
-          <Button sx={customProductSectionStyles.button}>Custom Product</Button>
+          <Button sx={customProductSectionStyles.button}>
+            {t('home.custom_product_button')}
+          </Button>
         </Box>
       </Box>
     </Box>

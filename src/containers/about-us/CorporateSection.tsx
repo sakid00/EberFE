@@ -4,10 +4,11 @@ import { CorporateCard } from '../../components/Cards/CorporateCard';
 import { CORPORATE_DATA } from './constants';
 import { corporateStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const CorporateSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <Box
       id="home-fourth-section"
@@ -15,24 +16,21 @@ export const CorporateSection = () => {
     >
       <div className="animate-fade-in">
         <DualColorText
-          text1={'Corporate\u00a0'}
-          text2="Governance"
+          text1={`${t('about_us.corporate_section_title.corporate')}\u00a0`}
+          text2={t('about_us.corporate_section_title.governance')}
           fontSize={dynamicStylingValue(type, '1.5em', '3em', '3em')}
           fontWeight={700}
           inline
         />
       </div>
       <Typography
-        variant="body1"
         flexWrap={'wrap'}
         className=" text-[#4B5563] animate-fade-in"
         textAlign={'center'}
         fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
         style={corporateStyles.description(type)}
       >
-        At Eber Group, we are committed to maintaining the highest standards of
-        corporate governance, ensuring transparency, accountability, and ethical
-        business practices across all our operations.
+        {t('about_us.corporate_section_desc')}
       </Typography>
       {type === 'mobile' ? (
         <Box className="flex flex-col gap-2 mt-5">

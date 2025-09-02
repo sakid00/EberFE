@@ -25,8 +25,8 @@ export const headerStyles = {
     height: dynamicStylingValue(
       deviceType,
       '80vh',
-      isHomepage ? '70vh' : '50vh',
-      isHomepage ? '70vh' : '50vh'
+      isHomepage ? '80vh' : '50vh',
+      isHomepage ? '80vh' : '50vh'
     ),
     alignItems: 'start',
     overflow: 'hidden',

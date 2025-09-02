@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import { styles, getInfoItemClassName } from './style';
 import { infoListType } from '@/containers/formSubmit';
-import { DeviceType } from '@/hooks';
+import { DeviceType, useTranslation } from '@/hooks';
 
 interface IInfoBoxProps {
   infoList: infoListType[];
@@ -17,6 +17,7 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
   imageStyle,
   type,
 }) => {
+  const { t } = useTranslation();
   const infoListMap = infoList.map((val, index) => {
     return (
       <Box
@@ -26,8 +27,8 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
       >
         <Image src={val.logo} width={30} height={30} alt="" />
         <Box sx={styles.infoContent}>
-          <Typography sx={styles.infoTitle}>{val.title}</Typography>
-          <Typography sx={styles.infoDescription}>{val.desc}</Typography>
+          <Typography sx={styles.infoTitle}>{t(val.title)}</Typography>
+          <Typography sx={styles.infoDescription}>{t(val.desc)}</Typography>
         </Box>
       </Box>
     );

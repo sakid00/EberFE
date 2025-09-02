@@ -5,16 +5,19 @@ import photo from '@public/photo/tangki-person.png';
 import { headerStyles } from './styles';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { ClientOnly } from '@/components/ClientOnly';
+import { useTranslation } from '@/hooks';
 
 export const HeaderSection = () => {
+  const { t } = useTranslation();
+
   return (
     <ClientOnly
       fallback={
         <>
           <Box id="home-header" sx={headerStyles.headerContent('desktop')}>
             <DualColorText
-              text1={'Our\u00a0'}
-              text2="Company"
+              text1={`${t('about_us.title.our')}\u00a0`}
+              text2={t('about_us.title.company')}
               fontSize="4em"
               fontWeight={800}
               inline
@@ -26,15 +29,13 @@ export const HeaderSection = () => {
               marginTop="-3vh"
               sx={headerStyles.backgroundText}
             >
-              Background
+              {t('about_us.title.background')}
             </Typography>
             <Typography
               className="w-1/4"
               style={headerStyles.description('desktop')}
             >
-              Eber Group was incorporated in 2021 as a holding company of four
-              leading high-performance chemical manufacturing companies in
-              Indonesia.
+              {t('about_us.desc')}
             </Typography>
           </Box>
         </>
@@ -47,7 +48,7 @@ export const HeaderSection = () => {
 
 const HeaderSectionContent = () => {
   const { type } = useDeviceType();
-
+  const { t } = useTranslation();
   return (
     <>
       <Image
@@ -57,8 +58,8 @@ const HeaderSectionContent = () => {
       />
       <Box id="home-header" sx={headerStyles.headerContent(type)}>
         <DualColorText
-          text1={'Our\u00a0'}
-          text2="Company"
+          text1={`${t('about_us.title.our')}\u00a0`}
+          text2={t('about_us.title.company')}
           fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
           fontWeight={800}
           inline
@@ -78,12 +79,10 @@ const HeaderSectionContent = () => {
           marginTop={dynamicStylingValue(type, '-1vh', '-3vh', '-3vh')}
           sx={headerStyles.backgroundText}
         >
-          Background
+          {t('about_us.title.background')}
         </Typography>
         <Typography style={headerStyles.description(type)}>
-          Eber Group was incorporated in 2021 as a holding company of four
-          leading high-performance chemical manufacturing companies in
-          Indonesia.
+          {t('about_us.desc')}
         </Typography>
       </Box>
     </>

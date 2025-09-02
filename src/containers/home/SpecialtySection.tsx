@@ -4,10 +4,12 @@ import { SpecialtyCard } from '../../components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
 import { specialtySectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const SpecialtySection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
+
   return (
     <Box
       id="home-second-section"
@@ -19,8 +21,8 @@ export const SpecialtySection = () => {
         className={animationClasses.fadeIn}
       >
         <DualColorText
-          text1={'Leader in\u00a0'}
-          text2="High-Performance"
+          text1={`${t('home.specialty_section_title.leader_in')}\u00a0`}
+          text2={t('home.specialty_section_title.high_performance')}
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
           fontWeight={700}
           inline
@@ -30,7 +32,7 @@ export const SpecialtySection = () => {
           fontWeight={800}
           sx={specialtySectionStyles.title}
         >
-          Specialty Materials
+          {t('home.specialty_section_title.specialty_materials')}
         </Typography>
       </Box>
       <Typography
@@ -38,9 +40,7 @@ export const SpecialtySection = () => {
         sx={specialtySectionStyles.description}
         className={animationClasses.fadeIn}
       >
-        Established in 2021, Eber Group oversees four top-performing chemical
-        manufacturing companies operating across Indonesia, bringing together
-        decades of expertise and innovation in the petrochemical industry.
+        {t('home.specialty_section_desc')}
       </Typography>
       <Box id="specialty-list" sx={specialtySectionStyles.cardsContainer}>
         {SPECIALTY_DATA.map((data, index) => (

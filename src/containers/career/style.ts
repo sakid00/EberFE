@@ -57,12 +57,3 @@ export const styles = {
     flex: 1,
   },
 };
-
-export const constants = {
-  description: `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere
-  beatae, incidunt asperiores mollitia at hic quisquam accusamus
-  consequuntur sequi, repellendus similique nemo dicta pariatur quidem?
-  Vero unde impedit maiores minima?`,
-  contactLabel: 'Or Contact Us With',
-  contactEmail: 'Hello@Eber.com',
-};

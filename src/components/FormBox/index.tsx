@@ -2,6 +2,7 @@ import DualColorText from '@/components/DualColorText';
 import { Box, Button, InputLabel, TextField, Typography } from '@mui/material';
 import { styles, classNames } from './style';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import { useTranslation } from '@/hooks';
 
 const FormBox = ({
   title,
@@ -17,6 +18,7 @@ const FormBox = ({
   formBoxStyle?: React.CSSProperties;
 }) => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
       <Typography sx={styles.getInTouchText}>{title}</Typography>
@@ -30,7 +32,9 @@ const FormBox = ({
       <Typography sx={styles.descriptionText(type)}>{description}</Typography>
       <Box sx={styles.formRow(type)}>
         <Box sx={styles.halfWidthBox(type)}>
-          <InputLabel sx={styles.inputLabel}>First Name</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('form_field.first_name')}
+          </InputLabel>
           <TextField
             className={dynamicStylingValue(
               type,
@@ -38,7 +42,7 @@ const FormBox = ({
               classNames.firstNameField,
               classNames.firstNameField
             )}
-            placeholder="First Name"
+            placeholder={t('form_field.first_name')}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
@@ -46,10 +50,12 @@ const FormBox = ({
           />
         </Box>
         <Box sx={styles.halfWidthBox(type)}>
-          <InputLabel sx={styles.inputLabel}>Last Name</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('form_field.last_name')}
+          </InputLabel>
           <TextField
             className={classNames.lastNameField}
-            placeholder="Last Name"
+            placeholder={t('form_field.last_name')}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
@@ -58,10 +64,10 @@ const FormBox = ({
         </Box>
       </Box>
       <Box sx={styles.fieldContainer}>
-        <InputLabel sx={styles.inputLabel}>Email Address</InputLabel>
+        <InputLabel sx={styles.inputLabel}>{t('form_field.email')}</InputLabel>
         <TextField
           className={classNames.emailField}
-          placeholder="Email Address"
+          placeholder={t('form_field.email')}
           sx={styles.textField}
           InputProps={{
             sx: styles.textFieldInput,
@@ -69,19 +75,23 @@ const FormBox = ({
         />
       </Box>
       <Box sx={styles.fieldContainer}>
-        <InputLabel sx={styles.inputLabel}>Message</InputLabel>
+        <InputLabel sx={styles.inputLabel}>
+          {t('form_field.message')}
+        </InputLabel>
         <TextField
           className={classNames.messageField}
           multiline
           rows={7}
-          placeholder="Leave us message"
+          placeholder=""
           sx={styles.textField}
           InputProps={{
             sx: styles.textFieldInput,
           }}
         />
       </Box>
-      <Button sx={styles.submitButton}>Submit</Button>
+      <Button sx={styles.submitButton}>
+        {t('contact_us.submit_application_button')}
+      </Button>
     </Box>
   );
 };

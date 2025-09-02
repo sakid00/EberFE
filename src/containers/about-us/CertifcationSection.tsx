@@ -4,19 +4,21 @@ import { CertificationCard } from '../../components/Cards/CertificationCard';
 import { CERTIFICATION_DATA } from './constants';
 import { certificationStyles } from './styles';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import { useTranslation } from '@/hooks';
 
 export const CertificationSection = () => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <Box
       id="home-second-section"
-      className={`flex flex-col items-center justify-center animate-on-scroll ${type === 'mobile' ? 'mt-[15vh]' : 'mt-[30vh]'}`}
+      className={`flex flex-col items-center justify-center animate-on-scroll ${type === 'mobile' ? 'mt-[15vh]' : 'mt-[50vh]'}`}
     >
       <Box className="flex flex-col animate-fade-in justify-center">
         <DualColorText
-          text1={'Our\u00a0'}
-          text2="Certifications"
-          fontSize={dynamicStylingValue(type, '1.5em', '3em', '3em')}
+          text1={`${t('about_us.certification_section_title.our')}\u00a0`}
+          text2={t('about_us.certification_section_title.certification')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
           fontWeight={700}
           inline
         />
@@ -25,11 +27,10 @@ export const CertificationSection = () => {
         flexWrap={'wrap'}
         className=" text-[#4B5563] animate-fade-in"
         textAlign={'center'}
-        fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
+        fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
         style={certificationStyles.description(type)}
       >
-        Eber Group oversees four top-performing chemical manufacturing companies
-        operating across Indonesia
+        {t('about_us.certification_section_desc')}
       </Typography>
       {type === 'mobile' ? (
         <Box id="specialty-list" className="grid grid-cols-2 gap-2 p-4">

@@ -22,30 +22,43 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { headerStyles } from './style';
 import ImageBackground from '../ImageBackground';
 import { ClientOnly } from '../ClientOnly';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType, useTranslation } from '@/hooks';
 import headerAccessories from '@public/photo/eber-big-2.png';
 
 const navigationList = [
-  { name: 'Home', navigation: '/' },
-  { name: 'About Us', navigation: '/about-us' },
-  { name: 'Corporate', navigation: '/corporate' },
-  { name: 'Product', navigation: '/product' },
-  { name: 'Activity', navigation: '/activity' },
-  { name: 'Careers', navigation: '/careers' },
-  { name: 'Contact Us', navigation: '/contact-us' },
+  { name: 'navigation_bar.home', navigation: '/', key: 'home' },
+  { name: 'navigation_bar.about_us', navigation: '/about-us', key: 'aboutus' },
+  {
+    name: 'navigation_bar.corporate',
+    navigation: '/corporate',
+    key: 'corporate',
+  },
+  { name: 'navigation_bar.product', navigation: '/product', key: 'product' },
+  { name: 'navigation_bar.activity', navigation: '/activity', key: 'activity' },
+  { name: 'navigation_bar.careers', navigation: '/careers', key: 'careers' },
+  {
+    name: 'navigation_bar.contact_us',
+    navigation: '/contact-us',
+    key: 'contactus',
+  },
 ];
 
 const langList = ['IDN', 'EN'];
 
 const Header = () => {
-  const [langValue, setLangValue] = useState<string>('IDN');
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { type } = useDeviceType();
+  const { language, setLanguage, t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Map language to display value
+  const langValue = language === 'en' ? 'EN' : 'IDN';
+
   const handleChange = (event: SelectChangeEvent) => {
-    setLangValue(event.target.value);
+    const selectedLang = event.target.value === 'EN' ? 'en' : 'id';
+    setLanguage(selectedLang);
   };
 
   const toggleMobileMenu = () => {
@@ -71,11 +84,8 @@ const Header = () => {
 
   const navigationBar = navigationList.map((val, index) => {
     const isPathName =
-      pathName
-        .substring(1)
-        .replaceAll('-', '')
-        .includes(val.name.toLowerCase().replaceAll(' ', '')) ||
-      (pathName === '/' && val.name === 'Home');
+      pathName.substring(1).replaceAll('-', '').includes(val.key) ||
+      (pathName === '/' && val.key === 'home');
 
     return (
       <motion.div
@@ -99,7 +109,7 @@ const Header = () => {
           }}
           sx={headerStyles.navigationButton(isPathName)}
         >
-          {val.name}
+          {t(val.name)}
         </Button>
       </motion.div>
     );

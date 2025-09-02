@@ -1,0 +1,222 @@
+{
+  "navigation_bar": {
+    "home": "Beranda",
+    "about_us": "Tentang Kami",
+    "corporate": "Korporasi",
+    "product": "Produk",
+    "activity": "Aktivitas",
+    "careers": "Karir",
+    "contact_us": "Kontak Kami"
+  },
+  "home": {
+    "title": {
+      "innovating": "Inovasi untuk",
+      "as": "Masa",
+      "sustainable": "Depan",
+      "future": "Berkelanjutan"
+    },
+    "desc": "Sejak didirikan pada tahun 2021, Eber Group hadir sebagai pemimpin yang menaungi empat perusahaan manufaktur kimia terdepan di Indonesia. Dengan fokus pada kualitas, keberlanjutan, dan inovasi, kami berkomitmen menghadirkan solusi material yang mendukung pertumbuhan berbagai industri.",
+    "product_button": "Jelajahi Produk Kami",
+    "custom_product_button": "Produk Kustom",
+    "floating_title": "Material Berkinerja Tinggi",
+    "floating_desc": "Mendorong transformasi dan inovasi lintas sektor industri.",
+    "specialty_section_title": {
+      "leader_in": "Pemimpin dalam",
+      "high_performance": "Material Spesialis",
+      "specialty_materials": "Berperforma Unggul"
+    },
+    "specialty_section_desc": "Sejak tahun 2021, EBER Group menaungi empat perusahaan manufaktur kimia terdepan di Indonesia. Dengan pengalaman puluhan tahun serta komitmen terhadap inovasi, kami menghadirkan solusi material yang mendorong pertumbuhan berkelanjutan di industri petrokimia.",
+    "specialty_section_cards": {
+      "1": {
+        "title": "Material Canggih",
+        "desc": "Spesialis dalam manufaktur dan pemrosesan kimia berperforma unggul."
+      },
+      "2": {
+        "title": "Fokus Inovasi",
+        "desc": "Berorientasi pada produksi kimia berkelanjutan dan pengembangan inovasi."
+      },
+      "3": {
+        "title": "Keberlanjutan",
+        "desc": "Menyediakan solusi pelarut dan kimia yang ramah lingkungan."
+      },
+      "4": {
+        "title": "Tim Ahli",
+        "desc": "Produsen terpercaya produk dan solusi petrokimia dengan dukungan tenaga profesional berpengalaman."
+      }
+    },
+    "custom_product_section_title": {
+      "make_it": "Solusi Tepat,",
+      "customize": "Produk Kustom untuk",
+      "today": "Industri Anda!"
+    },
+    "custom_product_section_desc": "EBER Group menawarkan kustomisasi material berkinerja tinggi yang dirancang sesuai kebutuhan spesifik bisnis Anda. Dengan dukungan tim R&D internal yang andal, kami menghadirkan inovasi yang meningkatkan kualitas, efisiensi, dan keberlanjutan di berbagai sektor — mulai dari infrastruktur, konstruksi, otomotif, lingkungan, hingga manufaktur.",
+    "subsidiaries_section_title": {
+      "eber_group": "Entitas Anak",
+      "subsidiaries": "Perusahaan EBER Group"
+    },
+    "subsidiaries_section_desc": "Sebagai grup perusahaan kimia terintegrasi, EBER Group menaungi empat anak perusahaan manufaktur yang beroperasi di lokasi strategis Indonesia. Masing-masing memiliki spesialisasi berbeda yang saling melengkapi, sekaligus memperkuat posisi EBER Group sebagai pemimpin industri petrokimia nasional.",
+    "subsidiaries_section_cards": {
+      "1": {
+        "title": "PT Eternal Buana Chemical Industries",
+        "desc": "yang berlokasi di Cikupa, Banten, merupakan produsen resin dan bahan kimia spesial dengan kapasitas produksi hingga 70.000 mtpa. Perusahaan ini dikenal melalui lini produk seperti paper chemical, alkyd acrylic amino resin, unsaturated polyester resin, serta synthetics latex resin."
+      },
+      "2": {
+        "title": "PT Eterindo Nusa Graha",
+        "desc": "beroperasi di Gresik, Jawa Timur, dengan kapasitas produksi mencapai 51.000 mtpa. Fokus utamanya adalah plasticizers, resin, dan bahan kimia spesial, yang diaplikasikan pada berbagai sektor industri mulai dari kertas, otomotif, hingga material sintetis."
+      },
+      "3": {
+        "title": "PT Petrowidada",
+        "desc": "berlokasi di Gresik, merupakan produsen utama phthalic anhydride di Indonesia dengan kapasitas 70.000 mtpa. Produk ini menjadi komponen penting dalam berbagai aplikasi petrokimia, terutama untuk industri resin dan plastik."
+      },
+      "4": {
+        "title": "PT Mega Prima Solvindo",
+        "desc": "berpusat di Cilegon, Banten, memproduksi n-Butyl Acetate dengan kapasitas 20.000 mtpa. Sebagai salah satu bahan kimia penting, produk ini digunakan secara luas pada industri cat, pelapis, hingga adhesive."
+      }
+    },
+    "innovation_section_title": {
+      "driving": "Mendorong",
+      "innovation": "Inovasi",
+      "through_technology": "Lewat Teknologi"
+    },
+    "innovation_section_desc": "Di Eber Group, kami berkomitmen untuk terus melampaui batas dalam industri petrokimia. Dengan fasilitas riset terkini dan tim ilmuwan serta insinyur yang berdedikasi, kami menghadirkan solusi inovatif yang relevan dengan kebutuhan pelanggan sekaligus mengikuti dinamika pasar global.",
+    "innovation_section_cards": {
+      "1": {
+        "title": "Riset & Pengembangan",
+        "desc": "Investasi berkelanjutan untuk menciptakan material dan solusi kimia yang inovatif."
+      },
+      "2": {
+        "title": "Transformasi Digital",
+        "desc": "Mengoptimalkan proses produksi dan operasional melalui teknologi mutakhir."
+      },
+      "3": {
+        "title": "Solusi Berkelanjutan",
+        "desc": "Mengembangkan produk dan proses ramah lingkungan demi mengurangi dampak terhadap alam."
+      },
+      "4": {
+        "title": "Inovasi Kolaboratif",
+        "desc": "Bekerja sama dengan pemimpin industri dan lembaga riset untuk mendorong terobosan baru."
+      }
+    }
+  },
+  "about_us": {
+    "title": {
+      "our": "Profil",
+      "company": "Perusahaan",
+      "background": ""
+    },
+    "desc": "Eber Group berdiri pada tahun 2021 sebagai perusahaan holding yang menaungi empat produsen bahan kimia berkinerja tinggi terkemuka di Indonesia.",
+    "certification_section_title": {
+      "our": "Sertifikasi",
+      "certification": "Kami"
+    },
+    "certification_section_desc": "Eber Group membawahi empat perusahaan kimia terkemuka dengan kinerja unggul yang beroperasi di seluruh Indonesia.",
+    "principle_section_title": {
+      "our_guiding": "Prinsip & Tujuan",
+      "principle": "Masa Depan",
+      "future": "Kami"
+    },
+    "vision_title": "Visi",
+    "vision_desc": "Menjadi perusahaan petrokimia regional terdepan melalui kinerja unggul, penerapan ESG, pengembangan SDM, kemitraan strategis, dan keberlanjutan bisnis.",
+    "mission_title": "Misi",
+    "mission_desc": "Menghasilkan produk berkualitas tinggi, andal, dan ramah lingkungan serta memberikan solusi terbaik bagi pelanggan dan masyarakat. Kami berkomitmen mendorong kemajuan industri nasional dengan pemanfaatan optimal sumber daya serta menjunjung tinggi nilai-nilai inti perusahaan.",
+    "corporate_section_title": {
+      "corporate": "Tata Kelola",
+      "governance": "Perusahaan"
+    },
+    "corporate_section_desc": "Di Eber Group, kami berkomitmen untuk menerapkan standar tertinggi dalam tata kelola perusahaan dengan menjunjung tinggi transparansi, akuntabilitas, dan praktik bisnis yang beretika di seluruh lini operasional kami.",
+    "corporate_section_cards": {
+      "1": {
+        "title": "Transparansi",
+        "desc": "Kami menjaga komunikasi terbuka dengan para pemangku kepentingan serta memberikan informasi yang jelas dan akurat mengenai kinerja dan operasional perusahaan."
+      },
+      "2": {
+        "title": "Akuntabilitas",
+        "desc": "Tim manajemen kami bertanggung jawab penuh atas setiap keputusan dan tindakan, dengan struktur pelaporan yang jelas serta tolok ukur kinerja yang terukur."
+      },
+      "3": {
+        "title": "Etika Bisnis",
+        "desc": "Kami mematuhi standar etika tertinggi dalam setiap aktivitas bisnis, berlandaskan kode etik yang menjadi pedoman bagi seluruh tindakan kami."
+      }
+    },
+    "value_section_title": {
+      "creating": "Menciptakan Dampak Bermakna Melalui ",
+      "purpose_driven": "Nilai-Nilai Berorientasi Tujuan & Budaya yang Mengutamakan Manusia"
+    },
+    "value_section_cards": {
+      "social_responsibility": "Tanggung Jawab Sosial",
+      "safety": "Keselamatan",
+      "innovation": "Inovasi",
+      "ingenuity": "Kecerdasan",
+      "trust": "Kepercayaan",
+      "quality": "Kualitas",
+      "creativity": "Kreativitas",
+      "centricity": "Berorientasi Nilai",
+      "growth": "Pertumbuhan",
+      "client": "Klien"
+    }
+  },
+  "footer": {
+    "desc": "Didirikan pada tahun 2021, Eber Group membawahi empat perusahaan manufaktur kimia terkemuka yang beroperasi di seluruh Indonesia, menghadirkan material spesialti berkinerja tinggi dan solusi kimia yang inovatif.",
+    "contact_info_section_title": "Informasi Kontak",
+    "contact_info_section_desc": "Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia",
+    "contact_info_section_email": "info@ebergroup.com",
+    "contact_info_section_phone": "+62-21 5020 2622",
+    "subsidiaries_section_title": "Anak Perusahaan Kami",
+    "subsidiaries_section_desc_1": "PT Eternal Buana Chemical Industries",
+    "subsidiaries_section_desc_2": "PT Petrowidada",
+    "subsidiaries_section_desc_3": "PT Eterindo Nusa Graha",
+    "subsidiaries_section_desc_4": "PT Mega Prima Solvindo",
+    "copyright": "© 2025 Eber Group. Hak cipta dilindungi"
+  },
+  "careers": {
+    "title": {
+      "our_open": "Kesempatan",
+      "roles": "Karir"
+    },
+    "desc": "Kami selalu mencari individu yang berbakat dan berdedikasi untuk bergabung bersama tim kami. Temukan peluang karier yang tersedia dan jadilah bagian dari perusahaan yang mendorong inovasi, keberlanjutan, dan pertumbuhan.",
+    "contact_label": "Atau hubungi kami melalui:",
+    "contact_email": "Hello@Eber.com",
+    "open_roles": "Lowongan Tersedia",
+    "submit_application_button": "Kirim Lamaran",
+    "submit_application_title_small": "Bergabunglah Bersama Tim Kami",
+    "submit_application_title": {
+      "let's": "Mari Membangun",
+      "the_future": "Masa Depan Bersama"
+    },
+    "submit_application_desc": "Kami selalu mencari talenta terbaik untuk menjadi bagian dari perjalanan kami. Bergabunglah dengan Eber Group dan berkontribusi dalam menghadirkan inovasi, keberlanjutan, serta pertumbuhan bagi industri dan masyarakat."
+  },
+  "form_field": {
+    "first_name": "Nama Depan",
+    "last_name": "Nama Belakang",
+    "email": "Alamat Email",
+    "phone": "Nomor Telepon",
+    "cover_letter": "Surat Lamaran",
+    "message": "Pesan"
+  },
+  "info_box": {
+    "email": "Email",
+    "phone": "Nomor Telepon",
+    "address": "Alamat",
+    "email_desc": "info@ebergroup.com",
+    "phone_desc": "+62-21 5020 2622",
+    "address_desc": "Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia"
+  },
+  "contact_us": {
+    "submit_application_title_small": "Hubungi Kami",
+    "submit_application_title": {
+      "let's": "Mari Terhubung,\u00a0",
+      "reach_out": "Kami Siap Membantu"
+    },
+    "submit_application_desc": "Kami selalu terbuka untuk setiap pertanyaan, permintaan informasi, maupun peluang kerja sama. Tim kami siap memberikan dukungan dan solusi terbaik bagi Anda. Jangan ragu untuk menghubungi kami melalui formulir di bawah ini atau informasi kontak yang tersedia.",
+    "submit_application_button": "Kirim"
+  },
+  "custom_product": {
+    "submit_application_title_small": "Hubungi Kami!",
+    "submit_application_title": {
+      "let's": "Mari Membangun\u00a0",
+      "custom": "Produk Kustom"
+    },
+    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
+    "submit_application_button": "Kirim"
+  }
+}
