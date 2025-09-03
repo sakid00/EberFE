@@ -6,6 +6,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Box } from '@mui/material';
 import ParticlesBackground from '@/components/BackgroundParticles';
 import ThemeWrapper from '@/components/ThemeWrapper';
+import { TranslationProvider } from '@/contexts/TranslationContext';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -37,16 +38,18 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <ThemeWrapper>
-          <div className="mobile-container max-w-full">
-            <Header />
-            <Box
-              className={`mb-[20vh] -mt-[15vh] px-[5vw] md:px-[10vw] overflow-x-hidden`}
-            >
-              <ParticlesBackground />
-              {children}
-            </Box>
-            <Footer />
-          </div>
+          <TranslationProvider>
+            <div className="mobile-container max-w-full">
+              <Header />
+              <Box
+                className={`mb-[20vh] -mt-[15vh] px-[5vw] md:px-[10vw] overflow-x-hidden`}
+              >
+                <ParticlesBackground />
+                {children}
+              </Box>
+              <Footer />
+            </div>
+          </TranslationProvider>
         </ThemeWrapper>
       </body>
     </html>
