@@ -19,8 +19,11 @@ export interface ProductContainerProps {
   filterByApplication: string[];
   handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
   handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
-  openModal: boolean;
-  setOpenModal: (value: boolean) => void;
+  openReqModal: boolean;
+  setOpenReqModal: (value: boolean) => void;
+  openSentModal: boolean;
+  setOpenSentModal: (value: boolean) => void;
+  onTokenReceived?: () => void;
 }
 
 export interface CustomizationHeaderProps {
@@ -41,6 +44,7 @@ export interface ProductFilterProps {
 export interface ProductTableProps {
   cellTitles: string[];
   rows: IRowData[];
+  onRequestProductClick: () => void;
 }
 
 export interface FilterSelectProps {

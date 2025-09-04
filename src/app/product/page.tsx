@@ -3,7 +3,7 @@ import ProductContainer from '@/containers/product';
 import { Button, SelectChangeEvent } from '@mui/material';
 import emailIcon from '@public/icon/email-no-bg.svg';
 import Image from 'next/image';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 
 const productTypes = [
   'Solvent-Base',
@@ -34,7 +34,19 @@ const ProductsPage = () => {
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
   const [filterByApplication, setFilterByApplication] = useState<string[]>([]);
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openReqModal, setOpenReqModal] = useState<boolean>(false);
+  const [openSentModal, setOpenSentModal] = useState<boolean>(false);
+
+  // Check if user has valid token and show modal on first visit
+  useEffect(() => {
+    const userToken = localStorage.getItem('userToken');
+    const hasVisitedProduct = localStorage.getItem('hasVisitedProduct');
+
+    if (!userToken && !hasVisitedProduct) {
+      // First time visitor - show the registration modal
+      setOpenReqModal(true);
+    }
+  }, []);
 
   const createData = ({
     productCode,
@@ -44,6 +56,22 @@ const ProductsPage = () => {
     getMoreDetail,
   }: IrowData) => {
     return { productCode, application, perfFeature, typeOfProd, getMoreDetail };
+  };
+
+  const handleTokenReceived = () => {
+    // Token has been received, can be used for future enhancements
+    console.log('User token received successfully');
+  };
+
+  const handleRequestClick = () => {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken) {
+      // User has token, show success modal
+      setOpenSentModal(true);
+    } else {
+      // User doesn't have token, show registration modal
+      setOpenReqModal(true);
+    }
   };
 
   const rows = [
@@ -61,7 +89,7 @@ const ProductsPage = () => {
             fontWeight: 400,
             textTransform: 'none',
           }}
-          onClick={() => setOpenModal(true)}
+          onClick={handleRequestClick}
           startIcon={
             <Image src={emailIcon} width={16} height={16} alt="email" />
           }
@@ -106,8 +134,11 @@ const ProductsPage = () => {
       filterByApplication={filterByApplication}
       handleChangeFilterByType={handleChangeFilterByType}
       handleChangeApplication={handleChangeApplication}
-      openModal={openModal}
-      setOpenModal={setOpenModal}
+      openReqModal={openReqModal}
+      setOpenReqModal={setOpenReqModal}
+      openSentModal={openSentModal}
+      setOpenSentModal={setOpenSentModal}
+      onTokenReceived={handleTokenReceived}
     />
   );
 };

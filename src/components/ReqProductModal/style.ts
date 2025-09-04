@@ -1,34 +1,47 @@
 export const styles = {
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)', // For Safari support
+  },
+
   modalBox: {
-    position: 'absolute' as const,
     width: '40%',
-    top: '20%',
-    left: '30%',
+    maxWidth: '500px',
+    maxHeight: '90vh',
+    overflow: 'auto',
     padding: '20px',
     borderRadius: '12px',
     backgroundColor: 'white',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    outline: 'none',
+    '@media (max-width: 768px)': {
+      width: '90%',
+      maxWidth: '90%',
+    },
   },
 
   headerContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 
   headerText: {
-    fontSize: '1em',
+    fontSize: '0.8em',
     fontWeight: 500,
     color: '#4B5563',
   },
 
-  closeIcon: {
-    cursor: 'pointer',
-    color: '#4B5563',
-  },
-
-  descriptionText: {
-    fontSize: '0.8em',
-    fontWeight: 400,
+  titleText: {
+    fontSize: '1.8em',
+    fontWeight: 800,
     color: '#4B5563',
     marginTop: '8px',
   },
@@ -39,12 +52,13 @@ export const styles = {
     gap: '16px',
   },
 
-  halfWidthBox: {
-    width: '50%',
+  fullWidthBox: {
+    width: '100%',
+    marginTop: '2%',
   },
 
   fieldContainer: {
-    marginTop: '20px',
+    marginTop: '2%',
   },
 
   inputLabel: {

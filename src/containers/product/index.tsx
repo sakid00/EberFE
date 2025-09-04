@@ -4,6 +4,7 @@ import { CustomizationHeader, ProductFilter, ProductTable } from './components';
 import { styles } from './style';
 import { ProductContainerProps } from './types';
 import { useRouter } from 'next/navigation';
+import ReqProductSent from '@/components/ReqProductSent';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({
   productTypes,
@@ -14,10 +15,13 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   filterByType,
   setFilterByType,
   filterByApplication,
-  openModal,
-  setOpenModal,
+  openReqModal,
+  setOpenReqModal,
+  openSentModal,
+  setOpenSentModal,
   handleChangeFilterByType,
   handleChangeApplication,
+  onTokenReceived,
 }) => {
   const router = useRouter();
   const handleCustomProductClick = () => {
@@ -39,10 +43,22 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
           handleChangeApplication={handleChangeApplication}
         />
 
-        <ProductTable cellTitles={cellTitles} rows={rows} />
+        <ProductTable
+          cellTitles={cellTitles}
+          rows={rows}
+          onRequestProductClick={() => setOpenSentModal(true)}
+        />
       </Box>
 
-      <ReqProductModal openModal={openModal} setOpenModal={setOpenModal} />
+      <ReqProductModal
+        openModal={openReqModal}
+        setOpenModal={setOpenReqModal}
+        onSuccessfulSubmission={onTokenReceived}
+      />
+      <ReqProductSent
+        openModal={openSentModal}
+        setOpenModal={setOpenSentModal}
+      />
     </>
   );
 };
