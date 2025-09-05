@@ -4,10 +4,13 @@ import customIcon from '@public/icon/customize.svg';
 import DualColorText from '@/components/DualColorText';
 import { styles } from '../style';
 import { CustomizationHeaderProps } from '../types';
+import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
   onCustomProductClick,
 }) => {
+  const { type } = useDeviceType();
   return (
     <Box sx={styles.headerContainer}>
       <Box sx={styles.headerContent}>
@@ -18,18 +21,22 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
           text1="Make it Yours"
           text2="Customize Your Product"
           color="white"
-          fontSize="1.2em"
+          fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
           fontWeight={400}
           inline={false}
         />
       </Box>
-      <Button
-        size="small"
-        sx={styles.customProductButton}
-        onClick={onCustomProductClick}
-      >
-        Custom Product
-      </Button>
+      {type !== 'mobile' ? (
+        <Button
+          size="small"
+          sx={styles.customProductButton}
+          onClick={onCustomProductClick}
+        >
+          Custom Product
+        </Button>
+      ) : (
+        <ChevronRightIcon />
+      )}
     </Box>
   );
 };

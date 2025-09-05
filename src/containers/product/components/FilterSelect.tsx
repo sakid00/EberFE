@@ -11,6 +11,7 @@ import {
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { styles } from '../style';
 import { FilterSelectProps } from '../types';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 const FilterSelect: React.FC<FilterSelectProps> = ({
   id,
@@ -21,9 +22,10 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
   hasSelection,
   isApplication = false,
 }) => {
+  const { type } = useDeviceType();
   const selectStyle = isApplication
-    ? styles.getApplicationSelectStyle(hasSelection)
-    : styles.getSelectStyle(hasSelection);
+    ? styles.getApplicationSelectStyle(hasSelection, type)
+    : styles.getSelectStyle(hasSelection, type);
 
   return (
     <Select
@@ -36,7 +38,7 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
           disableUnderline
           startAdornment={
             <InputAdornment position="start">
-              <Typography>{placeholder}</Typography>
+              <Typography fontSize={'1em'}>{placeholder}</Typography>
             </InputAdornment>
           }
         />

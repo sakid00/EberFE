@@ -3,6 +3,7 @@ import { Search } from '@mui/icons-material';
 import { styles } from '../style';
 import { ProductFilterProps } from '../types';
 import FilterSelect from './FilterSelect';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   productTypes,
@@ -18,14 +19,15 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
     setIsSeeAllProduct(!isSeeAllProduct);
     setFilterByType([]);
   };
+  const { type } = useDeviceType();
 
   return (
-    <Box sx={styles.filterContainer}>
-      <Box sx={styles.filterButtonContainer}>
+    <Box sx={styles.filterContainer(type)}>
+      <Box sx={styles.filterButtonContainer(type)}>
         <Button
           size="small"
           variant="outlined"
-          sx={styles.getFilterButtonStyle(isSeeAllProduct)}
+          sx={styles.getFilterButtonStyle(isSeeAllProduct, type)}
           onClick={handleSeeAllToggle}
         >
           See All Product
@@ -54,7 +56,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
       <TextField
         id="search-product"
         placeholder="Search Product"
-        sx={styles.searchField}
+        sx={styles.searchField(type)}
         slotProps={{
           input: {
             startAdornment: <Search sx={styles.searchIcon} />,

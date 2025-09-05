@@ -1,3 +1,5 @@
+import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+
 export const styles = {
   // Main container
   mainContainer: {
@@ -51,8 +53,9 @@ export const styles = {
   },
 
   // Filter section styles
-  filterContainer: {
+  filterContainer: (type: DeviceType) => ({
     display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     backgroundColor: 'white',
     borderRadius: '16px',
     padding: '16px 20px',
@@ -63,37 +66,40 @@ export const styles = {
       '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     position: 'relative' as const,
     zIndex: 10,
-  },
+  }),
 
-  filterButtonContainer: {
+  filterButtonContainer: (type: DeviceType) => ({
     display: 'flex',
-    flexDirection: 'row' as const,
-    width: '70%',
-  },
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
+    width: dynamicStylingValue(type, '100%', '70%', '70%'),
+    marginBottom: dynamicStylingValue(type, '20px', '0px', '0px'),
+    gap: '20px',
+  }),
 
   // Filter button base style
-  getFilterButtonStyle: (isActive: boolean) => ({
+  getFilterButtonStyle: (isActive: boolean, type: DeviceType) => ({
+    display: 'flex',
     color: isActive ? '#784791' : '#4B5563',
     backgroundColor: isActive ? '#D6CBE3' : '#F3F5F7',
     borderColor: isActive ? '#784791' : '#4B5563',
     borderWidth: isActive ? 1 : 0,
     borderRadius: '20px',
     marginRight: '0.5vw',
-    width: '20%',
+    width: dynamicStylingValue(type, '100%', '20%', '20%'),
     textTransform: 'none' as const,
     fontSize: '0.875em',
     fontWeight: 500,
   }),
 
   // Select dropdown base style
-  getSelectStyle: (hasSelection: boolean) => ({
+  getSelectStyle: (hasSelection: boolean, type: DeviceType) => ({
     color: hasSelection ? '#784791' : '#4B5563',
     backgroundColor: hasSelection ? '#D6CBE3' : '#F3F5F7',
     borderColor: hasSelection ? '#784791' : '#4B5563',
     borderWidth: hasSelection ? 1 : 0,
     padding: '16px',
     borderRadius: '20px',
-    width: '40%',
+    width: dynamicStylingValue(type, '100%', '40%', '40%'),
     marginRight: '0.5vw',
     textTransform: 'none' as const,
     fontSize: '0.875em',
@@ -106,15 +112,14 @@ export const styles = {
     },
   }),
 
-  getApplicationSelectStyle: (hasSelection: boolean) => ({
+  getApplicationSelectStyle: (hasSelection: boolean, type: DeviceType) => ({
     color: hasSelection ? '#784791' : '#4B5563',
     backgroundColor: hasSelection ? '#D6CBE3' : '#F3F5F7',
     borderColor: hasSelection ? '#784791' : '#4B5563',
     borderWidth: hasSelection ? 1 : 0,
-    paddingY: 0,
-    paddingX: '16px',
+    padding: '16px',
     borderRadius: '20px',
-    width: '40%',
+    width: dynamicStylingValue(type, '100%', '40%', '40%'),
     marginRight: '0.5vw',
     textTransform: 'none' as const,
     fontSize: '0.875em',
@@ -149,7 +154,8 @@ export const styles = {
   },
 
   // Search field styles
-  searchField: {
+  searchField: (type: DeviceType) => ({
+    width: dynamicStylingValue(type, '100%', '40%', '40%'),
     borderRadius: '20px',
     '& .MuiOutlinedInput-root': {
       borderRadius: '20px',
@@ -163,7 +169,7 @@ export const styles = {
         borderWidth: 0,
       },
     },
-  },
+  }),
 
   searchInput: {
     backgroundColor: '#F3F5F7',
@@ -180,10 +186,31 @@ export const styles = {
     zIndex: 10,
     borderRadius: '20px',
     overflow: 'hidden',
+    // Enable horizontal scrolling on mobile
+    overflowX: 'auto',
+    // Ensure smooth scrolling
+    scrollBehavior: 'smooth',
+    // Add custom scrollbar styling for better UX
+    '&::-webkit-scrollbar': {
+      height: '8px',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: '#f1f1f1',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#c1c1c1',
+      borderRadius: '4px',
+      '&:hover': {
+        backgroundColor: '#a8a8a8',
+      },
+    },
   },
 
   table: {
     minWidth: 650,
+    // Ensure table doesn't shrink below minimum width
+    width: 'max-content',
   },
 
   tableHeaderRow: {
@@ -196,6 +223,9 @@ export const styles = {
     fontSize: '1.2em',
     padding: '32px',
     color: '#784791',
+    // Ensure minimum width for mobile readability
+    minWidth: '120px',
+    whiteSpace: 'nowrap' as const,
   },
 
   tableBodyRow: {
@@ -208,11 +238,17 @@ export const styles = {
     backgroundColor: '#F9FAFB',
     fontSize: '1em',
     fontWeight: 400,
+    // Ensure minimum width for mobile readability
+    minWidth: '120px',
+    whiteSpace: 'nowrap' as const,
   },
 
   tableDataCell: {
     fontSize: '1em',
     fontWeight: 400,
+    // Ensure minimum width for mobile readability
+    minWidth: '120px',
+    whiteSpace: 'nowrap' as const,
   },
 };
 
