@@ -125,7 +125,55 @@ export const styles = {
     fontWeight: 400,
     color: '#4B5563',
     lineHeight: 1.6,
-    whiteSpace: 'pre-line',
+    fontFamily: 'var(--font-plus-jakarta-sans)',
+    '& *': {
+      fontFamily: 'inherit',
+      margin: 0,
+      padding: 0,
+    },
+    '& p': {
+      marginBottom: '8px',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      lineHeight: 'inherit',
+      color: 'inherit',
+    },
+    '& ul, & ol': {
+      marginLeft: '16px',
+      marginBottom: '8px',
+      paddingLeft: '16px',
+    },
+    '& ul': {
+      listStyleType: 'disc',
+    },
+    '& ol': {
+      listStyleType: 'decimal',
+    },
+    '& li': {
+      marginBottom: '4px',
+      fontSize: 'inherit',
+      fontWeight: 'inherit',
+      lineHeight: 'inherit',
+      color: 'inherit',
+      display: 'list-item',
+    },
+    '& h1, & h2, & h3, & h4, & h5, & h6': {
+      fontWeight: 600,
+      marginBottom: '8px',
+      fontSize: 'inherit',
+      color: 'inherit',
+    },
+    '& strong, & b': {
+      fontWeight: 600,
+      color: 'inherit',
+    },
+    '& em, & i': {
+      fontStyle: 'italic',
+      color: 'inherit',
+    },
+    '& br': {
+      lineHeight: 'inherit',
+    },
   },
 };
 

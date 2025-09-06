@@ -7,6 +7,7 @@ import { Box } from '@mui/material';
 import ParticlesBackground from '@/components/BackgroundParticles';
 import ThemeWrapper from '@/components/ThemeWrapper';
 import { TranslationProvider } from '@/contexts/TranslationContext';
+import { DataProvider } from '@/contexts/DataProvider';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -39,16 +40,16 @@ export default function RootLayout({
       >
         <ThemeWrapper>
           <TranslationProvider>
-            <div className="mobile-container max-w-full">
-              <Header />
-              <Box
-                className={`mb-[20vh] -mt-[15vh] px-[5vw] md:px-[10vw] overflow-x-hidden`}
-              >
-                <ParticlesBackground />
-                {children}
-              </Box>
-              <Footer />
-            </div>
+            <DataProvider>
+              <div className="mobile-container max-w-full">
+                <Header />
+                <Box className={`px-[5vw] md:px-[10vw] mb-[10vh]`}>
+                  <ParticlesBackground />
+                  {children}
+                </Box>
+                <Footer />
+              </div>
+            </DataProvider>
           </TranslationProvider>
         </ThemeWrapper>
       </body>

@@ -64,27 +64,10 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
         <AccordionDetails sx={styles.accordionDetails}>
           <Box sx={styles.detailsContainer}>
             <Box>
-              <Typography sx={styles.sectionTitle}>Job Description:</Typography>
-              <Typography sx={styles.sectionContent}>{val.desc}</Typography>
-            </Box>
-            <Box>
-              <Typography sx={styles.sectionTitle}>Requirements:</Typography>
-              <Box component="ul" sx={{ margin: 0, paddingLeft: 2 }}>
-                {val.req.map((requirement, reqIndex) => (
-                  <Typography
-                    key={reqIndex}
-                    component="li"
-                    sx={{
-                      ...styles.sectionContent,
-                      listStyleType: 'disc',
-                      display: 'list-item',
-                      marginBottom: 0.5,
-                    }}
-                  >
-                    {requirement}
-                  </Typography>
-                ))}
-              </Box>
+              <Box
+                sx={styles.sectionContent}
+                dangerouslySetInnerHTML={{ __html: val.desc }}
+              />
             </Box>
           </Box>
         </AccordionDetails>
