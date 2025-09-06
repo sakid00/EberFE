@@ -6,6 +6,10 @@ import collabSVG from '@public/icon/collab.svg';
 import rndSVG from '@public/icon/rnd.svg';
 import sustainSVG from '@public/icon/sustain.svg';
 import transfromSVG from '@public/icon/transform.svg';
+import eternal from '@public/photo/eternal.png';
+import petrowidada from '@public/photo/petro.png';
+import eng from '@public/photo/eng.png';
+import mega from '@public/photo/mega.png';
 
 export const SPECIALTY_DATA = [
   {
@@ -35,21 +39,25 @@ export const SUBSIDIARIES_DATA = [
     title: 'home.subsidiaries_section_cards.1.title',
     location: 'Cikupa, Banten',
     desc: 'home.subsidiaries_section_cards.1.desc',
+    img: eternal,
   },
   {
     title: 'home.subsidiaries_section_cards.2.title',
     location: 'Cikupa, Banten',
     desc: 'home.subsidiaries_section_cards.2.desc',
+    img: eng,
   },
   {
     title: 'home.subsidiaries_section_cards.3.title',
     location: 'Cikupa, Banten',
     desc: 'home.subsidiaries_section_cards.3.desc',
+    img: petrowidada,
   },
   {
     title: 'home.subsidiaries_section_cards.4.title',
     location: 'Cikupa, Banten',
     desc: 'home.subsidiaries_section_cards.4.desc',
+    img: mega,
   },
 ];
 

@@ -1,3 +1,4 @@
+import { Language } from '@/contexts/TranslationContext';
 import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
@@ -53,16 +54,17 @@ export const headerSectionStyles = {
   } as SxProps<Theme>,
 
   title: {
-    marginTop: '-3vh',
+    marginTop: '-2vh',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
-  description: {
-    fontSize: '1em',
-    width: '40%',
-    marginTop: '2vh',
-    color: COLORS.text.white,
-  } as SxProps<Theme>,
+  description: (language: Language) =>
+    ({
+      fontSize: '0.95em',
+      width: language === 'en' ? '25%' : '32%',
+      marginTop: '2vh',
+      color: COLORS.text.white,
+    }) as SxProps<Theme>,
 
   buttonsWrapper: {
     display: 'flex',
@@ -112,18 +114,27 @@ export const specialtySectionStyles = {
     color: COLORS.text.primary,
   } as SxProps<Theme>,
 
-  description: {
-    width: '70%',
-    marginTop: '2vh',
-    textAlign: 'center',
-    fontSize: '1em',
-    color: COLORS.text.secondary,
-  } as SxProps<Theme>,
+  description: (type: DeviceType) =>
+    ({
+      width: dynamicStylingValue(type, '100%', '70%', '70%'),
+      marginTop: '2vh',
+      textAlign: 'center',
+      fontSize: dynamicStylingValue(type, '0.75em', '1em', '1em'),
+      color: COLORS.text.secondary,
+    }) as SxProps<Theme>,
 
   cardsContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 1.5,
+    marginTop: 5,
+  } as SxProps<Theme>,
+
+  cardsContainerMobile: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateRows: 'repeat(2, 1fr)',
+    gap: 1,
     marginTop: 5,
   } as SxProps<Theme>,
 };
@@ -137,12 +148,13 @@ export const customProductSectionStyles = {
     alignItems: 'center',
   } as SxProps<Theme>,
 
-  imageContainer: {
-    position: 'absolute',
-    top: '22%',
-    left: '-4%',
-    zIndex: 20,
-  } as SxProps<Theme>,
+  imageContainer: (type: DeviceType) =>
+    ({
+      position: 'absolute',
+      top: dynamicStylingValue(type, '3%', '20%', '20%'),
+      left: dynamicStylingValue(type, '4%', '-2%', '-2%'),
+      zIndex: 20,
+    }) as SxProps<Theme>,
 
   mainContainer: {
     position: 'relative',
@@ -165,38 +177,48 @@ export const customProductSectionStyles = {
     justifyContent: 'center',
   } as SxProps<Theme>,
 
-  contentContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '35%',
-  } as SxProps<Theme>,
+  contentContainer: (type: DeviceType) =>
+    ({
+      display: 'flex',
+      flexDirection: 'column',
+      maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
+      padding: dynamicStylingValue(type, '1em', '0px', '0px'),
+      borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
+      backgroundColor: dynamicStylingValue(
+        type,
+        'rgba(0, 0, 0, 0.2)',
+        'transparent',
+        'transparent'
+      ),
+    }) as SxProps<Theme>,
 
   title: {
-    fontSize: '1.875rem', // h3 equivalent
     fontWeight: 700,
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
-  description: {
-    color: COLORS.text.light,
-    fontSize: '16px',
-    fontWeight: 400,
-    marginTop: '20px',
-  } as SxProps<Theme>,
+  description: (type: DeviceType) =>
+    ({
+      color: COLORS.text.light,
+      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
+      fontWeight: 400,
+      marginTop: '20px',
+    }) as SxProps<Theme>,
 
-  button: {
-    color: COLORS.text.white,
-    background: COLORS.primary.gradient,
-    paddingY: 2,
-    paddingX: 1,
-    borderRadius: 10,
-    fontWeight: 600,
-    width: '35%',
-    height: '8%',
-    fontSize: '14px',
-    marginTop: 4,
-    textTransform: 'none',
-  } as SxProps<Theme>,
+  button: (type: DeviceType) =>
+    ({
+      color: COLORS.text.white,
+      background: COLORS.primary.gradient,
+      paddingY: 2,
+      paddingX: 1,
+      borderRadius: 10,
+      fontWeight: 600,
+      width: dynamicStylingValue(type, '100%', '35%', '35%'),
+      height: '8%',
+      fontSize: '14px',
+      marginTop: 2,
+      textTransform: 'none',
+    }) as SxProps<Theme>,
 };
 
 // Subsidiaries Section Styles
@@ -219,18 +241,26 @@ export const subsidiariesSectionStyles = {
     color: COLORS.text.primary,
   } as SxProps<Theme>,
 
-  description: {
-    width: '80%',
-    marginTop: '2vh',
-    textAlign: 'center',
-    fontSize: '1em',
-    color: COLORS.text.secondary,
-  } as SxProps<Theme>,
+  description: (type: DeviceType) =>
+    ({
+      width: dynamicStylingValue(type, '100%', '80%', '80%'),
+      marginTop: '2vh',
+      textAlign: 'center',
+      color: COLORS.text.secondary,
+    }) as SxProps<Theme>,
 
   cardsContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: 1.5,
+    marginTop: 5,
+  } as SxProps<Theme>,
+
+  cardsContainerMobile: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateRows: 'repeat(2, 1fr)',
+    gap: 1,
     marginTop: 5,
   } as SxProps<Theme>,
 };
@@ -239,25 +269,27 @@ export const subsidiariesSectionStyles = {
 export const innovationSectionStyles = {
   container: {
     position: 'relative',
-    marginTop: 20,
+    marginTop: '30%',
   } as SxProps<Theme>,
 
-  imageContainer: {
-    position: 'absolute',
-    width: '70vw',
-    top: '-23%',
-    left: '35%',
-  } as SxProps<Theme>,
+  imageContainer: (type: DeviceType) =>
+    ({
+      position: dynamicStylingValue(type, 'relative', 'absolute', 'absolute'),
+      width: dynamicStylingValue(type, '100%', '70vw', '70vw'),
+      top: '-40%',
+      left: dynamicStylingValue(type, '10%', '25%', '25%'),
+    }) as SxProps<Theme>,
 
   contentWrapper: {
     display: 'flex',
     flexDirection: 'row',
   } as SxProps<Theme>,
 
-  contentLeft: {
-    marginTop: 5,
-    width: '25%',
-  } as SxProps<Theme>,
+  contentLeft: (type: DeviceType) =>
+    ({
+      marginTop: 5,
+      width: dynamicStylingValue(type, '100%', '25%', '25%'),
+    }) as SxProps<Theme>,
 
   title: {
     fontSize: '2.25rem', // h4 equivalent
@@ -270,13 +302,14 @@ export const innovationSectionStyles = {
     width: '23vw',
   } as SxProps<Theme>,
 
-  description: {
-    fontSize: '16px',
-    fontWeight: 400,
-    color: COLORS.text.secondary,
-    textAlign: 'left',
-    marginTop: 2,
-  } as SxProps<Theme>,
+  description: (type: DeviceType) =>
+    ({
+      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
+      fontWeight: 400,
+      color: COLORS.text.secondary,
+      textAlign: dynamicStylingValue(type, 'center', 'left', 'left'),
+      marginTop: 2,
+    }) as SxProps<Theme>,
 
   spacer: {
     width: '80%',
@@ -287,6 +320,13 @@ export const innovationSectionStyles = {
     flexDirection: 'row',
     gap: 1.5,
     marginTop: 5,
+  } as SxProps<Theme>,
+
+  cardsContainerMobile: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridTemplateRows: 'repeat(2, 1fr)',
+    gap: 1,
   } as SxProps<Theme>,
 };
 

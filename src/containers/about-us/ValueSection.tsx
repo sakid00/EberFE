@@ -2,12 +2,14 @@ import { Box, Typography } from '@mui/material';
 import { ValueCard } from '../../components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
-import fieldPerson from '@public/photo/chem_person.png';
+import fieldPerson from '@public/photo/chem-person.png';
 import siteBg from '@public/background/site-bg.png';
 import ImageBackground from '@/components/ImageBackground';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
+import container from '@public/background/container2.png';
+import containerMobile from '@public/background/container2-mobile.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
@@ -40,21 +42,37 @@ export const ValueSection = () => {
         </Typography>
       </Box>
 
+      {type === 'mobile' && (
+        <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
+          <Image
+            src={fieldPerson}
+            alt="field-person"
+            width={800}
+            height={400}
+          />
+        </Box>
+      )}
+
       <ImageBackground
-        src={siteBg}
-        alt="Background with overlay"
-        showOverlay
-        overlayDirection="top"
-        overlayOpacity={1}
-        overlayColor="#ffffff"
-        sx={valueStyles.backgroundImage}
-        contentSx={valueStyles.contentContainer}
+        src={type === 'mobile' ? containerMobile : container}
+        alt="container"
+        objectFit="fill"
+        sx={{
+          width: '110%',
+          height: '100vh',
+          marginTop: dynamicStylingValue(type, '30vh', '0px', '0px'),
+        }}
+        contentSx={{
+          marginTop: dynamicStylingValue(type, '10%', '0px', '0px'),
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+        }}
       >
-        <Box
-          className="clip-custom-shape-2 w-[88vw] h-[90vh] relative flex justify-center items-center animate-on-scroll"
-          sx={valueStyles.mainShape}
-        >
-          <Box className="w-full " sx={valueStyles.fieldPersonContainer}>
+        {type !== 'mobile' && (
+          <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
             <Image
               src={fieldPerson}
               alt="field-person"
@@ -62,14 +80,17 @@ export const ValueSection = () => {
               height={400}
             />
           </Box>
-          <Box
-            className="relative grid grid-rows-2 grid-cols-5 gap-6 w-[70%] h-[50%] mt-[8%] z-100000"
-            sx={valueStyles.valuesGrid}
-          >
-            {VALUES_DATA.map((data, index) => (
-              <ValueCard key={index} data={data} index={index} />
-            ))}
-          </Box>
+        )}
+        <Box
+          sx={
+            type === 'mobile'
+              ? valueStyles.valuesGridMobile
+              : valueStyles.valuesGrid
+          }
+        >
+          {VALUES_DATA.map((data, index) => (
+            <ValueCard key={index} data={data} index={index} />
+          ))}
         </Box>
       </ImageBackground>
     </Box>

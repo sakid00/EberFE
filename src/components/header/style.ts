@@ -1,21 +1,47 @@
 import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
+// Style constants
+const COLORS = {
+  white: 'white',
+  whiteOpaque: 'rgba(255, 255, 255, 0.7)',
+  whiteBackground: 'rgba(255, 255, 255, 0.2)',
+  whiteBackgroundHover: 'rgba(255, 255, 255, 0.25)',
+  whiteBorder: 'rgba(255, 255, 255, 0.2)',
+  primaryBlue: 'rgba(63, 81, 181, 0.1)',
+  primaryBlueSelected: 'rgba(63, 81, 181, 0.2)',
+  primaryBlueHover: 'rgba(63, 81, 181, 0.3)',
+} as const;
+
+const BORDER_RADIUS = {
+  small: '4px',
+  medium: '8px',
+  large: '24px',
+  round: '50%',
+} as const;
+
+const ANIMATION = {
+  transition: 'all 0.3s ease-in-out',
+} as const;
+
 export const headerStyles = {
   header: {
     position: 'relative' as const,
   },
   headerAccessories: (deviceType: DeviceType, isHomepage: boolean) => ({
     position: 'absolute' as const,
+    width: '100%',
     height: dynamicStylingValue(
       deviceType,
-      '40vh',
+      '80vh',
       isHomepage ? '70vh' : '50vh',
-      isHomepage ? '70vh' : '50vh'
+      isHomepage ? '80vh' : '50vh'
     ),
+    bottom: 0,
     left: 0,
-    top: 0,
+    top: dynamicStylingValue(deviceType, '-25%', '-10%', '-10%'),
     zIndex: 0,
+    objectFit: 'contain' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,
@@ -26,7 +52,7 @@ export const headerStyles = {
       deviceType,
       '80vh',
       isHomepage ? '80vh' : '50vh',
-      isHomepage ? '80vh' : '50vh'
+      isHomepage ? '90vh' : '50vh'
     ),
     alignItems: 'start',
     overflow: 'hidden',
@@ -50,27 +76,29 @@ export const headerStyles = {
   logoContainer: {
     zIndex: 1,
   },
+  // Navigation styles
   navigationButton: (isPathName: boolean): SxProps<Theme> => ({
     textTransform: 'none',
-    color: isPathName ? 'white' : 'rgba(255, 255, 255, 0.7)',
+    color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: '500',
     fontSize: { xs: '1rem', md: '1rem' },
     marginRight: { xs: 0, md: 4 },
     marginBottom: { xs: 0.5, md: 0 },
     minWidth: { xs: '140px', md: 'auto' },
     padding: { xs: '12px 20px', md: '8px 16px' },
-    borderRadius: { xs: '8px', md: '4px' },
+    borderRadius: { xs: BORDER_RADIUS.medium, md: BORDER_RADIUS.small },
     backgroundColor: {
-      xs: isPathName ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+      xs: isPathName ? COLORS.whiteBackground : 'transparent',
       md: 'transparent',
     },
     border: {
-      xs: `1px solid ${isPathName ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)'}`,
+      xs: `1px solid ${isPathName ? 'rgba(255, 255, 255, 0.4)' : COLORS.whiteBorder}`,
       md: 'none',
     },
+    transition: ANIMATION.transition,
     '&:hover': {
       backgroundColor: {
-        xs: 'rgba(255, 255, 255, 0.25)',
+        xs: COLORS.whiteBackgroundHover,
         md: 'rgba(255, 255, 255, 0.1)',
       },
       border: {
@@ -79,52 +107,111 @@ export const headerStyles = {
       },
     },
   }),
+  // Mobile navigation styles
   mobileMenuButton: {
     display: { xs: 'block', md: 'none' },
-    color: 'white',
-    borderRadius: '8px',
+    color: COLORS.white,
+    borderRadius: BORDER_RADIUS.medium,
     padding: '10px',
-    zIndex: 10000000,
+    zIndex: 1000000,
+    transition: ANIMATION.transition,
   },
-  mobileNavigation: {
-    width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(10px)',
-    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-    display: 'block',
+  mobileBackdrop: {
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 999998,
   },
-  mobileNavigationContent: {
-    display: 'flex',
-    flexDirection: 'column' as const,
-    padding: '24px',
-    gap: '20px',
-    alignItems: 'center',
-    minHeight: '200px',
+  mobileSlideMenu: {
+    position: 'fixed' as const,
+    top: 0,
+    left: 0,
+    width: '320px',
+    height: '100vh',
+    backgroundColor: 'white',
+    zIndex: 999999,
+    boxShadow: '2px 0 10px rgba(0, 0, 0, 0.1)',
+    overflowY: 'auto' as const,
   },
-  mobileRightSection: {
+  mobileMenuHeader: {
     display: 'flex',
     flexDirection: 'row' as const,
-    gap: '20px',
     alignItems: 'center',
-    marginTop: '20px',
-    paddingTop: '20px',
-    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
-    width: '100%',
-    justifyContent: 'center',
-    paddingBottom: '8px',
+    justifyContent: 'space-between',
+    padding: '20px',
+    borderBottom: '1px solid #e0e0e0',
+    backgroundColor: 'white',
   },
+  mobileMenuLogoContainer: {
+    flex: 1,
+  },
+  mobileMenuLogo: {
+    width: '120px',
+    height: 'auto',
+  },
+  mobileMenuHeaderRight: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+    alignItems: 'center',
+    gap: '12px',
+  },
+  mobileMenuNavigation: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    padding: '20px 0',
+  },
+  mobileMenuNavigationButton: (isActive: boolean): SxProps<Theme> => ({
+    textTransform: 'none',
+    color: isActive ? '#1976d2' : '#333',
+    fontWeight: isActive ? '600' : '500',
+    fontSize: '1rem',
+    padding: '16px 24px',
+    marginBottom: '4px',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+    borderRadius: 0,
+    backgroundColor: isActive ? 'rgba(25, 118, 210, 0.08)' : 'transparent',
+    borderLeft: isActive ? '4px solid #1976d2' : '4px solid transparent',
+    transition: ANIMATION.transition,
+    '&:hover': {
+      backgroundColor: 'rgba(25, 118, 210, 0.04)',
+    },
+  }),
+  mobileMenuSearchButton: {
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    width: 36,
+    height: 36,
+    borderRadius: BORDER_RADIUS.round,
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+    transition: ANIMATION.transition,
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    },
+  },
+  // Language selector styles
   languageSelect: {
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    borderRadius: '16px',
-    width: { xs: '80px', md: '80px' },
-    height: { xs: '36px', md: '40px' },
-    border: '1px solid rgba(255, 255, 255, 0.3)',
+    backgroundColor: COLORS.whiteBackground,
+    borderRadius: BORDER_RADIUS.large,
+    width: { xs: '80px', md: '110px' },
+    height: { xs: '32px', md: '40px' },
+    transition: ANIMATION.transition,
     '& .MuiSelect-select': {
-      color: 'white',
+      color: COLORS.white,
       textAlign: 'center',
       fontSize: { xs: '0.75rem', md: '0.875rem' },
       fontWeight: '500',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: '6%',
+      paddingBottom: '6%',
+    },
+    '& .MuiSelect-icon': {
+      color: COLORS.white,
+      right: '8px',
     },
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none',
@@ -139,13 +226,180 @@ export const headerStyles = {
       backgroundColor: 'rgba(255, 255, 255, 0.35)',
       border: '1px solid rgba(255, 255, 255, 0.4)',
     },
+    // Mobile menu specific styles
+    '.mobile-menu &': {
+      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+      '& .MuiSelect-select': {
+        color: '#333',
+      },
+      '& .MuiSelect-icon': {
+        color: '#666',
+      },
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, 0.08)',
+        border: '1px solid rgba(0, 0, 0, 0.1)',
+      },
+    },
   },
+  mobileLanguageSelect: {
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    borderRadius: BORDER_RADIUS.large,
+    width: '80px',
+    height: '32px',
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+    transition: ANIMATION.transition,
+    position: 'relative',
+    zIndex: 1000000,
+    '& .MuiSelect-select': {
+      color: '#333',
+      textAlign: 'center',
+      fontSize: '0.75rem',
+      fontWeight: '500',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: '6%',
+      paddingBottom: '6%',
+      paddingRight: '24px !important',
+    },
+    '& .MuiSelect-icon': {
+      color: '#666',
+      right: '8px',
+    },
+    '& .MuiOutlinedInput-notchedOutline': {
+      border: 'none',
+    },
+    '&:hover .MuiOutlinedInput-notchedOutline': {
+      border: 'none',
+    },
+    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      border: 'none',
+    },
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
+      border: '1px solid rgba(0, 0, 0, 0.2)',
+    },
+    '&.Mui-focused': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    },
+  },
+  customMobileLanguageSelect: {
+    position: 'relative',
+    display: 'inline-block',
+    zIndex: 1000000,
+  },
+  customLanguageButton: {
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+    borderRadius: BORDER_RADIUS.large,
+    width: '80px',
+    height: '32px',
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    transition: ANIMATION.transition,
+    fontSize: '0.75rem',
+    fontWeight: '500',
+    color: '#333',
+    '&:hover': {
+      backgroundColor: 'rgba(0, 0, 0, 0.08)',
+      border: '1px solid rgba(0, 0, 0, 0.2)',
+    },
+    '&:active': {
+      backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    },
+  },
+  customLanguageOption: (isSelected: boolean) => ({
+    padding: '8px 12px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    cursor: 'pointer',
+    fontSize: '0.75rem',
+    fontWeight: '500',
+    color: isSelected ? '#1976d2' : '#333',
+    backgroundColor: isSelected ? 'rgba(25, 118, 210, 0.08)' : 'transparent',
+    transition: ANIMATION.transition,
+    '&:hover': {
+      backgroundColor: isSelected
+        ? 'rgba(25, 118, 210, 0.12)'
+        : 'rgba(0, 0, 0, 0.04)',
+    },
+    '&:active': {
+      backgroundColor: isSelected
+        ? 'rgba(25, 118, 210, 0.16)'
+        : 'rgba(0, 0, 0, 0.08)',
+    },
+  }),
+  customDropdownArrow: (isOpen: boolean) => ({
+    marginLeft: '4px',
+    fontSize: '12px',
+    transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+    transition: 'transform 0.2s ease',
+  }),
+  customDropdownContainer: {
+    position: 'absolute' as const,
+    top: '100%',
+    left: 0,
+    zIndex: 10000001,
+    backgroundColor: 'white',
+    borderRadius: '8px',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+    minWidth: '100px',
+    overflow: 'hidden',
+    marginTop: '4px',
+  },
+  languageSelectValue: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  flagImageStyle: {
+    marginLeft: '8px',
+  },
+  mobileMenuFlagImageStyle: {
+    marginLeft: '6px',
+  },
+  rightSectionContainer: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+    gap: 8,
+    alignItems: 'center',
+  },
+  mobileMenuButtonContainer: {
+    marginLeft: 'auto',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  languageMenuItem: {
+    transition: ANIMATION.transition,
+    '&:hover': {
+      backgroundColor: COLORS.primaryBlue,
+    },
+    '&.Mui-selected': {
+      backgroundColor: COLORS.primaryBlueSelected,
+      '&:hover': {
+        backgroundColor: COLORS.primaryBlueHover,
+      },
+    },
+  },
+  languageMenuItemContent: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  // Search button styles
   searchButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    backgroundColor: COLORS.whiteBackgroundHover,
     width: { xs: 36, md: 40 },
     height: { xs: 36, md: 40 },
-    borderRadius: '50%',
+    borderRadius: BORDER_RADIUS.round,
     border: '1px solid rgba(255, 255, 255, 0.3)',
+    transition: ANIMATION.transition,
     '&:hover': {
       backgroundColor: 'rgba(255, 255, 255, 0.35)',
       border: '1px solid rgba(255, 255, 255, 0.4)',

@@ -24,25 +24,32 @@ export const SpecialtySection = () => {
           text1={`${t('home.specialty_section_title.leader_in')}\u00a0`}
           text2={t('home.specialty_section_title.high_performance')}
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-          fontWeight={700}
+          fontWeight={800}
           inline
         />
         <Typography
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
           fontWeight={800}
           sx={specialtySectionStyles.title}
+          className={animationClasses.fadeIn}
         >
           {t('home.specialty_section_title.specialty_materials')}
         </Typography>
       </Box>
       <Typography
-        variant="body1"
-        sx={specialtySectionStyles.description}
+        sx={specialtySectionStyles.description(type)}
         className={animationClasses.fadeIn}
       >
         {t('home.specialty_section_desc')}
       </Typography>
-      <Box id="specialty-list" sx={specialtySectionStyles.cardsContainer}>
+      <Box
+        id="specialty-list"
+        sx={
+          type === 'mobile'
+            ? specialtySectionStyles.cardsContainerMobile
+            : specialtySectionStyles.cardsContainer
+        }
+      >
         {SPECIALTY_DATA.map((data, index) => (
           <SpecialtyCard key={index} data={data} index={index} />
         ))}

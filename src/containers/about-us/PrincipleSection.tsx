@@ -2,94 +2,100 @@ import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import fieldPerson from '@public/photo/field_person3.png';
 import { principleStyles } from './styles';
-import container from '@public/svg/container.svg';
-import { useTranslation } from '@/hooks';
+import container from '@public/background/container1.png';
+import containerMobile from '@public/background/container1-mobile.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '@/hooks';
+import ImageBackground from '@/components/ImageBackground';
 
 export const PrincipleSection = () => {
   const { t } = useTranslation();
+  const { type } = useDeviceType();
 
   return (
     <Box
       id="home-third-section"
-      className="relative justify-center items-center"
+      className="relative flex justify-center items-center mt-20"
     >
       <Box
-        className="w-full z-20 animate-slide-right"
-        sx={principleStyles.fieldPersonContainer}
+        // className="animate-slide-right"
+        sx={principleStyles.fieldPersonContainer(type)}
       >
-        <Image src={fieldPerson} alt="field-person" width={550} height={400} />
+        <Image
+          src={fieldPerson}
+          alt="field-person"
+          width={type === 'mobile' ? 300 : 600}
+          height={type === 'mobile' ? 300 : 400}
+        />
       </Box>
-      <Box
+      <ImageBackground
+        src={type === 'mobile' ? containerMobile : container}
+        alt="container"
+        objectFit="contain"
+        // className={animationClasses.slideRight}
         sx={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          '& svg': {
-            color: '#4ECDC4', // Target the SVG specifically
-          },
+          width: '100vw',
+          height: dynamicStylingValue(type, '90vh', '100vh', '100vh'),
+          marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
+        }}
+        contentSx={{
+          marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
         }}
       >
-        <Image src={container} alt="container" fill />
-      </Box>
-      <Box
-        className="clip-custom-shape relative w-[100vw] h-[85vh] flex flex-row gap-8 mt-40 animate-on-scroll"
-        sx={principleStyles.mainContainer}
-      >
-        <Box
-          className="w-full flex justify-center"
-          sx={principleStyles.spacerBox}
-        />
+        {type !== 'mobile' && (
+          <Box
+            className="w-full flex justify-center"
+            sx={principleStyles.spacerBox}
+          />
+        )}
         <Box
           className="flex flex-col justify-center animate-slide-right"
-          sx={principleStyles.contentContainer}
+          sx={principleStyles.contentContainer(type)}
         >
-          <Typography fontSize={'3em'} fontWeight={700}>
+          <Typography sx={principleStyles.backgroundTextWhite(type)}>
             {t('about_us.principle_section_title.our_guiding')}
           </Typography>
-          <Typography
-            fontSize={'3em'}
-            fontWeight={700}
-            sx={principleStyles.backgroundText}
-          >
+          <Typography sx={principleStyles.backgroundText(type)}>
             {t('about_us.principle_section_title.principle')}
           </Typography>
-          <Typography
-            fontSize={'3em'}
-            fontWeight={700}
-            sx={principleStyles.backgroundText}
-          >
+          <Typography sx={principleStyles.backgroundText(type)}>
             {t('about_us.principle_section_title.future')}
           </Typography>
           <Typography
-            fontSize={'1.5em'}
+            fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.5em')}
             fontWeight={700}
             sx={principleStyles.visionTitle}
           >
             {t('about_us.vision_title')}
           </Typography>
           <Typography
-            fontSize={'1em'}
+            fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
             fontWeight={400}
             sx={principleStyles.visionDescription}
           >
             {t('about_us.vision_desc')}
           </Typography>
           <Typography
-            fontSize={'1.5em'}
+            fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.5em')}
             fontWeight={700}
             sx={principleStyles.missionTitle}
           >
             {t('about_us.mission_title')}
           </Typography>
           <Typography
-            fontSize={'1em'}
+            fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
             fontWeight={400}
             sx={principleStyles.missionDescription}
           >
             {t('about_us.mission_desc')}
           </Typography>
         </Box>
-      </Box>
+      </ImageBackground>
     </Box>
   );
 };

@@ -24,19 +24,25 @@ export const SubsidiariesSection = () => {
           text1={`${t('home.subsidiaries_section_title.eber_group')}\u00a0`}
           text2={t('home.subsidiaries_section_title.subsidiaries')}
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-          fontWeight={700}
+          fontWeight={800}
           inline
         />
       </Box>
       <Typography
-        fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+        fontSize={dynamicStylingValue(type, '0.9em', '1em', '1em')}
         fontWeight={500}
-        sx={subsidiariesSectionStyles.description}
+        sx={subsidiariesSectionStyles.description(type)}
         className={animationClasses.fadeIn}
       >
         {t('home.subsidiaries_section_desc')}
       </Typography>
-      <Box sx={subsidiariesSectionStyles.cardsContainer}>
+      <Box
+        sx={
+          type === 'mobile'
+            ? subsidiariesSectionStyles.cardsContainerMobile
+            : subsidiariesSectionStyles.cardsContainer
+        }
+      >
         {SUBSIDIARIES_DATA.map((data, index) => (
           <SubsidiaryCard key={index} data={data} index={index} />
         ))}
