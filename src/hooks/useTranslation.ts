@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { TranslationContext } from '../contexts/TranslationContext';
+import { TranslationContext, Language } from '../contexts/TranslationContext';
 
 export const useTranslation = () => {
   const context = useContext(TranslationContext);
@@ -8,5 +8,8 @@ export const useTranslation = () => {
     throw new Error('useTranslation must be used within a TranslationProvider');
   }
 
-  return context;
+  return {
+    ...context,
+    getCurrentLanguage: (): Language => context.language,
+  };
 };
