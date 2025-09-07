@@ -26,6 +26,17 @@ export const styles = {
     gap: '6px',
   },
 
+  infoBox2: {
+    padding: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '8px',
+    backgroundColor: '#F3F5F7',
+    gap: '6px',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   companyTitle: (type: DeviceType) => ({
     color: '#030712',
     fontSize: dynamicStylingValue(type, '1.2em', '2em', '2em'),
@@ -56,6 +67,12 @@ export const styles = {
     fontWeight: 800,
   }),
 
+  titleContentText: (type: DeviceType) => ({
+    color: '#030712',
+    fontSize: dynamicStylingValue(type, '0.8em', '0.8em', '0.8em'),
+    fontWeight: 800,
+  }),
+
   productApplicationText: (type: DeviceType) => ({
     color: '#4B5563',
     fontSize: dynamicStylingValue(type, '0.8em', '1em', '1em'),
@@ -68,7 +85,20 @@ export const styles = {
     color: '#030712',
   },
 
+  infoBoxTitle2: {
+    fontSize: '1.5em',
+    fontWeight: 700,
+    color: '#784791',
+  },
+
   infoBoxValue: {
+    fontSize: '0.8em',
+    fontWeight: 400,
+    color: '#030712',
+  },
+
+  infoBoxValue2: {
+    textAlign: 'center',
     fontSize: '0.8em',
     fontWeight: 400,
     color: '#030712',
@@ -107,11 +137,46 @@ export const styles = {
   }),
 
   headerImageStyle: {
-    objectFit: 'cover' as const,
+    objectFit: 'contain' as const,
+    width: '100%',
     borderRadius: '8px',
+    height: '20%',
+  },
+
+  imageGridContainer: (type: DeviceType) => ({
+    display: 'grid',
+    gridTemplateColumns: dynamicStylingValue(
+      type,
+      '1fr', // mobile: 1 column
+      'repeat(2, 1fr)', // tablet: 2 columns
+      'repeat(4, 1fr)' // desktop: 4 columns
+    ),
+    gap: dynamicStylingValue(type, '16px', '20px', '24px'),
+    marginTop: '16px',
+  }),
+
+  imageCard: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '8px',
+  },
+
+  imageStyle: {
     width: '100%',
     height: 'auto',
+    objectFit: 'cover' as const,
+    borderRadius: '8px',
+    maxHeight: '150px',
   },
+
+  imageTitle: (type: DeviceType) => ({
+    width: '100%',
+    color: '#4B5563',
+    fontSize: dynamicStylingValue(type, '0.7em', '0.5em', '0.6em'),
+    fontWeight: 500,
+    textAlign: 'start',
+  }),
 };
 
 export const constants = {
