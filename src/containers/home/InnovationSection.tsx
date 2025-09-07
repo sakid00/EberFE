@@ -15,10 +15,7 @@ export const InnovationSection = () => {
   return (
     <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
       {type !== 'mobile' && (
-        <Box
-          sx={innovationSectionStyles.imageContainer(type)}
-          className={animationClasses.fadeIn}
-        >
+        <Box sx={innovationSectionStyles.imageContainer(type)}>
           <Image src={tangki} alt="tangki-image" />
         </Box>
       )}
@@ -74,10 +71,7 @@ export const InnovationSection = () => {
         {type !== 'mobile' && <Box sx={innovationSectionStyles.spacer} />}
       </Box>
       {type === 'mobile' && (
-        <Box
-          sx={innovationSectionStyles.imageContainer(type)}
-          // className={animationClasses.onScroll}
-        >
+        <Box sx={innovationSectionStyles.imageContainer(type)}>
           <Image src={tangki} alt="tangki-image" />
         </Box>
       )}

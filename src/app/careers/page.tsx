@@ -66,7 +66,13 @@ const CareersPage = () => {
     );
   }
 
-  return <CareerContainer careerList={careerList} router={router} />;
+  return (
+    <CareerContainer
+      careerList={careerList}
+      router={router}
+      isLoading={isLoading}
+    />
+  );
 };
 
 export default CareersPage;
