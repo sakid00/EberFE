@@ -7,17 +7,20 @@ import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
 import emptyIcon from '@public/icon/empty-career.svg';
 import Image from 'next/image';
-import useCareer from '@/hooks/useCareer';
 
 interface ICareerContainer {
   careerList: ICareerList[];
   router: AppRouterInstance;
+  isLoading: boolean;
 }
 
-const CareerContainer = ({ careerList, router }: ICareerContainer) => {
+const CareerContainer = ({
+  careerList,
+  router,
+  isLoading,
+}: ICareerContainer) => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
-  const { isLoading } = useCareer();
 
   const emptyListContainer = (
     <Box
