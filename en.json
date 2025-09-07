@@ -184,7 +184,9 @@
       "let's": "Let's Build,\u00a0",
       "the_future": "The Future Together"
     },
-    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?"
+    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
+    "empty_list_title": "No Job Openings Available",
+    "empty_list_desc": "Currently, there are no open positions. Please check back later or stay connected with us for future opportunities."
   },
   "form_field": {
     "first_name": "First Name",

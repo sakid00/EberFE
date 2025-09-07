@@ -183,7 +183,9 @@
       "let's": "Mari Membangun",
       "the_future": "Masa Depan Bersama"
     },
-    "submit_application_desc": "Kami selalu mencari talenta terbaik untuk menjadi bagian dari perjalanan kami. Bergabunglah dengan Eber Group dan berkontribusi dalam menghadirkan inovasi, keberlanjutan, serta pertumbuhan bagi industri dan masyarakat."
+    "submit_application_desc": "Kami selalu mencari talenta terbaik untuk menjadi bagian dari perjalanan kami. Bergabunglah dengan Eber Group dan berkontribusi dalam menghadirkan inovasi, keberlanjutan, serta pertumbuhan bagi industri dan masyarakat.",
+    "empty_list_title": "Belum Ada Lowongan Tersedia",
+    "empty_list_desc": "Saat ini belum ada posisi yang dibuka. Silakan periksa kembali di lain waktu atau tetap terhubung dengan kami untuk kesempatan berikutnya."
   },
   "form_field": {
     "first_name": "Nama Depan",
