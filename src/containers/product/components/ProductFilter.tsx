@@ -7,17 +7,28 @@ import { useDeviceType } from '@/hooks/useDeviceType';
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   productTypes,
+  productApplications,
   isSeeAllProduct,
   setIsSeeAllProduct,
   filterByType,
   setFilterByType,
   filterByApplication,
+  searchQuery,
+  setSearchQuery,
   handleChangeFilterByType,
   handleChangeApplication,
 }) => {
   const handleSeeAllToggle = () => {
     setIsSeeAllProduct(!isSeeAllProduct);
     setFilterByType([]);
+    setSearchQuery('');
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+    if (event.target.value.trim()) {
+      setIsSeeAllProduct(false);
+    }
   };
   const { type } = useDeviceType();
 
@@ -46,7 +57,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           id="application"
           value={filterByApplication}
           onChange={handleChangeApplication}
-          options={productTypes}
+          options={productApplications}
           placeholder="Application"
           hasSelection={filterByApplication.length > 0}
           isApplication={true}
@@ -55,7 +66,9 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
       <TextField
         id="search-product"
-        placeholder="Search Product"
+        placeholder="Search by application, product code, or feature"
+        value={searchQuery}
+        onChange={handleSearchChange}
         sx={styles.searchField(type)}
         slotProps={{
           input: {

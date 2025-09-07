@@ -18,15 +18,18 @@ const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
         <TableHead>
           <TableRow sx={styles.tableHeaderRow}>
             {cellTitles.map((title, index) => (
-              <TableCell align="center" key={index}>
+              <TableCell align="center" key={`${index}-${title}`}>
                 <Typography sx={styles.tableHeaderCell}>{title}</Typography>
               </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.productCode} sx={styles.tableBodyRow}>
+          {rows.map((row, index) => (
+            <TableRow
+              key={`${row.productCode}-${index}`}
+              sx={styles.tableBodyRow}
+            >
               <TableCell
                 component="th"
                 align="center"
@@ -38,7 +41,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
               <TableCell align="center" sx={styles.tableDataCell}>
                 {row.application}
               </TableCell>
-              <TableCell align="center" sx={styles.tableDataCell}>
+              <TableCell align="center" sx={styles.tableDataCellWrappable}>
                 {row.perfFeature}
               </TableCell>
               <TableCell align="center" sx={styles.tableDataCell}>

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import ReqProductSent from '@/components/ReqProductSent';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({
+  productApplications,
   productTypes,
   cellTitles,
   rows,
@@ -15,6 +16,8 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   filterByType,
   setFilterByType,
   filterByApplication,
+  searchQuery,
+  setSearchQuery,
   openReqModal,
   setOpenReqModal,
   openSentModal,
@@ -34,11 +37,14 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
 
         <ProductFilter
           productTypes={productTypes}
+          productApplications={productApplications}
           isSeeAllProduct={isSeeAllProduct}
           setIsSeeAllProduct={setIsSeeAllProduct}
           filterByType={filterByType}
           setFilterByType={setFilterByType}
           filterByApplication={filterByApplication}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
           handleChangeFilterByType={handleChangeFilterByType}
           handleChangeApplication={handleChangeApplication}
         />

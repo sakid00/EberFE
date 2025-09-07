@@ -7,9 +7,9 @@ export interface IRowData {
   typeOfProd: string;
   getMoreDetail: React.ReactNode;
 }
-
 export interface ProductContainerProps {
   productTypes: string[];
+  productApplications: string[];
   cellTitles: string[];
   rows: IRowData[];
   isSeeAllProduct: boolean;
@@ -17,6 +17,8 @@ export interface ProductContainerProps {
   filterByType: string[];
   setFilterByType: (value: string[]) => void;
   filterByApplication: string[];
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
   handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
   handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
   openReqModal: boolean;
@@ -32,11 +34,14 @@ export interface CustomizationHeaderProps {
 
 export interface ProductFilterProps {
   productTypes: string[];
+  productApplications: string[];
   isSeeAllProduct: boolean;
   setIsSeeAllProduct: (value: boolean) => void;
   filterByType: string[];
   setFilterByType: (value: string[]) => void;
   filterByApplication: string[];
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
   handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
   handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
 }

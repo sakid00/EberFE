@@ -238,7 +238,6 @@ export const styles = {
     backgroundColor: '#F9FAFB',
     fontSize: '1em',
     fontWeight: 400,
-    // Ensure minimum width for mobile readability
     minWidth: '120px',
     whiteSpace: 'nowrap' as const,
   },
@@ -246,9 +245,19 @@ export const styles = {
   tableDataCell: {
     fontSize: '1em',
     fontWeight: 400,
-    // Ensure minimum width for mobile readability
     minWidth: '120px',
     whiteSpace: 'nowrap' as const,
+  },
+
+  tableDataCellWrappable: {
+    fontSize: '1em',
+    fontWeight: 400,
+    minWidth: '120px',
+    whiteSpace: 'normal' as const,
+    wordWrap: 'break-word' as const,
+    maxWidth: '200px',
+    lineHeight: '1.4',
+    padding: '16px',
   },
 };
 
@@ -272,4 +281,6 @@ export const classNames = {
   tableHeaderCell: 'p-8 text-[#784791]',
   tableCodeCell: 'bg-[#F9FAFB] text-[1em] font-[400]',
   tableDataCell: 'text-[1em] font-[400]',
+  tableDataCellWrappable:
+    'text-[1em] font-[400] whitespace-normal break-words max-w-[200px] leading-[1.4] p-4',
 };
