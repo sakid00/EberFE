@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 type CareerType = 'fulltime' | 'parttime' | 'internship' | 'contract';
 
-interface CareerResponse {
+interface CareerResponseData {
   id: number;
   position: string;
   location: string;
@@ -48,18 +48,18 @@ const useCareer = () => {
         console.log('API Response:', response); // Debug log
 
         // Handle different possible API response structures
-        const careerData: CareerResponse[] = response.data.data.data;
+        const careerData: CareerResponseData[] = response.data?.data?.data;
 
         console.log('Career Data:', careerData); // Debug log
 
         // Transform API response to match our global state format
-        const transformedData: CareerData[] = careerData.map((career) => ({
+        const transformedData: CareerData[] = careerData?.map((career) => ({
           id: career.id,
           position: career.position,
           location: career.location,
           type: career.type,
-          description: career.description_en, // Use English description as HTML content
-          requirements: [], // API doesn't provide requirements, initialize as empty
+          description_en: career.description_en,
+          description_id: career.description_id,
         }));
 
         actions.fetchCareersSuccess(transformedData);

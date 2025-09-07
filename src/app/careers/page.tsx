@@ -4,6 +4,7 @@ import CareerContainer from '@/containers/career';
 import useCareer from '@/hooks/useCareer';
 import { useEffect, useMemo } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
+import { useTranslation } from '@/hooks';
 
 export interface ICareerList {
   title: string;
@@ -13,6 +14,7 @@ export interface ICareerList {
 
 const CareersPage = () => {
   const router = useRouter();
+  const { language } = useTranslation();
   const { getCareer, careers, isLoading } = useCareer();
 
   useEffect(() => {
@@ -22,14 +24,14 @@ const CareersPage = () => {
       pageSize: 10,
     }).catch((error) => {
       console.error('Failed to fetch careers:', error);
-      // Error is already handled in the hook, this is just for additional logging
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Transform global state careers to ICareerList format
   const careerList: ICareerList[] = useMemo(() => {
-    if (careers.length > 0) {
-      return careers.map((career) => ({
+    if (careers?.length > 0) {
+      return careers?.map((career) => ({
         title: career.position,
         status:
           career.type === 'fulltime'
@@ -37,14 +39,14 @@ const CareersPage = () => {
             : career.type === 'parttime'
               ? 'Part Time'
               : career.type.charAt(0).toUpperCase() + career.type.slice(1), // Transform types to display format
-        desc: career.description,
+        desc: language === 'en' ? career.description_en : career.description_id,
       }));
     }
     return [];
-  }, [careers]);
+  }, [careers, language]);
 
   // Loading state
-  if (isLoading && careers.length === 0) {
+  if (isLoading && careers?.length === 0) {
     return (
       <Box
         sx={{

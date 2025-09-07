@@ -7,6 +7,7 @@ import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
 import emptyIcon from '@public/icon/empty-career.svg';
 import Image from 'next/image';
+import useCareer from '@/hooks/useCareer';
 
 interface ICareerContainer {
   careerList: ICareerList[];
@@ -16,6 +17,7 @@ interface ICareerContainer {
 const CareerContainer = ({ careerList, router }: ICareerContainer) => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
+  const { isLoading } = useCareer();
 
   const emptyListContainer = (
     <Box
@@ -68,7 +70,7 @@ const CareerContainer = ({ careerList, router }: ICareerContainer) => {
         </Typography>
       </Box>
       <Box sx={styles.accordionContainer}>
-        {careerList.length > 0 ? (
+        {careerList?.length > 0 && !isLoading ? (
           <CareerAccordion list={careerList} router={router} />
         ) : (
           emptyListContainer
