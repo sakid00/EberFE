@@ -42,6 +42,72 @@ export interface ProductState {
   lastUpdated: Date | null;
 }
 
+// ===== COMPANY API TYPES =====
+export interface CompanyData {
+  id: number;
+  name: string;
+  address: string;
+  coordinate: string;
+  description_en: string;
+  description_id: string;
+  location: string;
+  main_image: string;
+  data: CompanyDetailData;
+}
+
+export interface CompanyDetailData {
+  title_1_en: string;
+  title_1_id: string;
+  title_2_en: string;
+  title_2_id: string;
+  title_3_en: string;
+  title_3_id: string;
+  description_1_en: string;
+  description_1_id: string;
+  description_2_en: string;
+  description_2_id: string;
+  description_3_en: string;
+  description_3_id: string;
+  box_1: { data: InfoBox1Data[] };
+  box_2: { data: InfoBox2Data[] };
+  images_1: ImagesData[];
+  images_2: ImagesData[];
+  images_3: ImagesData[];
+  p: ProductApplicationResponseData;
+}
+
+export interface InfoBox1Data {
+  data_en: string;
+  data_id: string;
+  name_en: string;
+  name_id: string;
+}
+
+export interface InfoBox2Data {
+  data: string;
+  name: string;
+}
+
+export interface ImagesData {
+  title: string;
+  url: string;
+}
+
+interface ProductApplicationResponseData {
+  title_en: string;
+  title_id: string;
+  description_en: string;
+  description_id: string;
+}
+
+export interface CompanyState {
+  companies: CompanyData[];
+  companyDetail: CompanyDetailData | null;
+  isLoading: boolean;
+  error: string | null;
+  lastUpdated: Date | null;
+}
+
 // ===== NEXT API TYPES (PLACEHOLDER) =====
 // TODO: Replace these with your actual API response structure
 export interface NextApiData {
@@ -62,6 +128,7 @@ export interface NextApiState {
 export interface GlobalState {
   career: CareerState;
   product: ProductState;
+  company: CompanyState;
   nextApi: NextApiState;
 }
 
@@ -81,6 +148,14 @@ type DataAction =
   | { type: 'PRODUCT_FILTERS_SUCCESS'; payload: ProductFilters }
   | { type: 'PRODUCT_CLEAR_ERROR' }
   | { type: 'PRODUCT_RESET' }
+
+  // Company Actions
+  | { type: 'COMPANY_FETCH_START' }
+  | { type: 'COMPANY_FETCH_SUCCESS'; payload: CompanyData[] }
+  | { type: 'COMPANY_DETAIL_FETCH_SUCCESS'; payload: CompanyDetailData }
+  | { type: 'COMPANY_FETCH_ERROR'; payload: string }
+  | { type: 'COMPANY_CLEAR_ERROR' }
+  | { type: 'COMPANY_RESET' }
 
   // Next API Actions (PLACEHOLDER)
   | { type: 'NEXT_API_FETCH_START' }
@@ -110,6 +185,14 @@ interface DataContextType {
     productFiltersSuccess: (filters: ProductFilters) => void;
     productClearError: () => void;
     productReset: () => void;
+
+    // Company Actions
+    companyFetchStart: () => void;
+    companyFetchSuccess: (companies: CompanyData[]) => void;
+    companyDetailFetchSuccess: (companyDetail: CompanyDetailData) => void;
+    companyFetchError: (error: string) => void;
+    companyClearError: () => void;
+    companyReset: () => void;
 
     // Next API Actions (PLACEHOLDER)
     nextApiFetchStart: () => void;
@@ -142,6 +225,14 @@ const initialProductState: ProductState = {
   lastUpdated: null,
 };
 
+const initialCompanyState: CompanyState = {
+  companies: [],
+  companyDetail: null,
+  isLoading: false,
+  error: null,
+  lastUpdated: null,
+};
+
 const initialNextApiState: NextApiState = {
   data: [],
   isLoading: false,
@@ -152,6 +243,7 @@ const initialNextApiState: NextApiState = {
 const initialState: GlobalState = {
   career: initialCareerState,
   product: initialProductState,
+  company: initialCompanyState,
   nextApi: initialNextApiState,
 };
 
@@ -265,6 +357,68 @@ function dataReducer(state: GlobalState, action: DataAction): GlobalState {
         product: initialProductState,
       };
 
+    // ===== COMPANY ACTIONS =====
+    case 'COMPANY_FETCH_START':
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          isLoading: true,
+          error: null,
+        },
+      };
+
+    case 'COMPANY_FETCH_SUCCESS':
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          companies: action.payload,
+          isLoading: false,
+          error: null,
+          lastUpdated: new Date(),
+        },
+      };
+
+    case 'COMPANY_DETAIL_FETCH_SUCCESS':
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          companyDetail: action.payload,
+          isLoading: false,
+          error: null,
+          lastUpdated: new Date(),
+        },
+      };
+
+    case 'COMPANY_FETCH_ERROR':
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          isLoading: false,
+          error: action.payload,
+          companies: [],
+          companyDetail: null,
+        },
+      };
+
+    case 'COMPANY_CLEAR_ERROR':
+      return {
+        ...state,
+        company: {
+          ...state.company,
+          error: null,
+        },
+      };
+
+    case 'COMPANY_RESET':
+      return {
+        ...state,
+        company: initialCompanyState,
+      };
+
     // ===== NEXT API ACTIONS (PLACEHOLDER) =====
     case 'NEXT_API_FETCH_START':
       return {
@@ -355,6 +509,20 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     productClearError: () => dispatch({ type: 'PRODUCT_CLEAR_ERROR' }),
     productReset: () => dispatch({ type: 'PRODUCT_RESET' }),
 
+    // Company Actions
+    companyFetchStart: () => dispatch({ type: 'COMPANY_FETCH_START' }),
+    companyFetchSuccess: (companies: CompanyData[]) =>
+      dispatch({ type: 'COMPANY_FETCH_SUCCESS', payload: companies }),
+    companyDetailFetchSuccess: (companyDetail: CompanyDetailData) =>
+      dispatch({
+        type: 'COMPANY_DETAIL_FETCH_SUCCESS',
+        payload: companyDetail,
+      }),
+    companyFetchError: (error: string) =>
+      dispatch({ type: 'COMPANY_FETCH_ERROR', payload: error }),
+    companyClearError: () => dispatch({ type: 'COMPANY_CLEAR_ERROR' }),
+    companyReset: () => dispatch({ type: 'COMPANY_RESET' }),
+
     // Next API Actions (PLACEHOLDER)
     nextApiFetchStart: () => dispatch({ type: 'NEXT_API_FETCH_START' }),
     nextApiFetchSuccess: (data: NextApiData[]) =>
@@ -418,6 +586,23 @@ export const useProductContext = () => {
       fetchFiltersSuccess: actions.productFiltersSuccess,
       clearError: actions.productClearError,
       resetState: actions.productReset,
+    },
+  };
+};
+
+// Specialized hook for company data
+export const useCompanyContext = () => {
+  const { state, actions } = useDataContext();
+
+  return {
+    state: state.company,
+    actions: {
+      fetchCompaniesStart: actions.companyFetchStart,
+      fetchCompaniesSuccess: actions.companyFetchSuccess,
+      fetchCompanyDetailSuccess: actions.companyDetailFetchSuccess,
+      fetchCompaniesError: actions.companyFetchError,
+      clearError: actions.companyClearError,
+      resetState: actions.companyReset,
     },
   };
 };
