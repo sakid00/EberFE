@@ -22,8 +22,7 @@ interface ProductRequest {
 const useProduct = () => {
   const { state, actions } = useProductContext();
   const api = useApi({
-    baseURL:
-      'https://return-participant-listings-icon.trycloudflare.com/api/v1',
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     defaultHeaders: {},
     timeout: 10000,
     retries: 3,

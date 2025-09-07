@@ -292,7 +292,7 @@ const CorporateContainer = () => {
             {currentCompanyDetail?.images_3?.map((item, index) => (
               <Box key={index} sx={styles.imageCard}>
                 <Image
-                  src={`https://return-participant-listings-icon.trycloudflare.com${item.url}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
                   alt={item.title}
                   width={200}
                   height={150}
