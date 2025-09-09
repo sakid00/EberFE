@@ -153,7 +153,8 @@
       "centricity": "Value Centricity",
       "growth": "Growth",
       "client": "Client"
-    }
+    },
+    "download_button": "Company Profile"
   },
   "footer": {
     "desc": "Established in 2021, Eber Group oversees four top-performing chemical manufacturing companies operating across Indonesia, delivering high-performance specialty materials and chemical solutions.",
@@ -221,5 +222,13 @@
     },
     "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
     "submit_application_button": "Submit"
+  },
+  "activity": {
+    "title": {
+      "Our": "Our",
+      "Activity": "Activity"
+    },
+    "empty_list_title": "No activity yet",
+    "empty_list_desc": "Stay tuned for exciting updates from EBER Group!"
   }
 }

@@ -153,7 +153,8 @@
       "centricity": "Berorientasi Nilai",
       "growth": "Pertumbuhan",
       "client": "Klien"
-    }
+    },
+    "download_button": "Profil Perusahaan"
   },
   "footer": {
     "desc": "Didirikan pada tahun 2021, Eber Group membawahi empat perusahaan manufaktur kimia terkemuka yang beroperasi di seluruh Indonesia, menghadirkan material spesialti berkinerja tinggi dan solusi kimia yang inovatif.",
@@ -220,5 +221,13 @@
     },
     "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
     "submit_application_button": "Kirim"
+  },
+  "activity": {
+    "title": {
+      "Our": "Aktivitas",
+      "Activity": "Kami"
+    },
+    "empty_list_title": "Belum Ada Aktivitas",
+    "empty_list_desc": "Tetap terhubung dengan kami untuk informasi terbaru!"
   }
 }
