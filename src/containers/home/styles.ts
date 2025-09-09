@@ -41,7 +41,7 @@ export const headerSectionStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '50vh',
+    height: '10vh',
   } as SxProps<Theme>,
 
   leftSide: {
@@ -58,20 +58,34 @@ export const headerSectionStyles = {
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
-  description: (language: Language) =>
+  description: (language: Language, type: DeviceType) =>
     ({
-      fontSize: '0.95em',
-      width: language === 'en' ? '25%' : '32%',
-      marginTop: '2vh',
-      color: COLORS.text.white,
+      fontSize: dynamicStylingValue(type, '0.8em', '0.95em', '0.95em'),
+      width: dynamicStylingValue(
+        type,
+        '100%',
+        language === 'en' ? '25%' : '32%',
+        language === 'en' ? '25%' : '32%'
+      ),
+      paddingX: dynamicStylingValue(type, '1em', '0px', '0px'),
+      color: dynamicStylingValue(
+        type,
+        COLORS.text.secondary,
+        COLORS.text.white,
+        COLORS.text.white
+      ),
+      textAlign: dynamicStylingValue(type, 'center', 'start', 'start'),
     }) as SxProps<Theme>,
 
-  buttonsWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: 2,
-    marginTop: 4,
-  } as SxProps<Theme>,
+  buttonsWrapper: (type: DeviceType) =>
+    ({
+      display: 'flex',
+      flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
+      paddingX: dynamicStylingValue(type, '1em', '0px', '0px'),
+      gap: 2,
+      marginTop: 4,
+      marginBottom: dynamicStylingValue(type, '10vh', '0px', '0px'),
+    }) as SxProps<Theme>,
 
   primaryButton: {
     color: COLORS.text.white,
@@ -82,16 +96,27 @@ export const headerSectionStyles = {
     textTransform: 'none',
   } as SxProps<Theme>,
 
-  secondaryButton: {
-    color: COLORS.text.white,
-    background: COLORS.background.transparent,
-    padding: 2,
-    borderRadius: 10,
-    fontWeight: 600,
-    borderColor: COLORS.border.purple,
-    borderWidth: 1,
-    textTransform: 'none',
-  } as SxProps<Theme>,
+  secondaryButton: (type: DeviceType) =>
+    ({
+      color: dynamicStylingValue(
+        type,
+        '#784791',
+        COLORS.text.white,
+        COLORS.text.white
+      ),
+      background: dynamicStylingValue(
+        type,
+        'white',
+        COLORS.background.transparent,
+        COLORS.background.transparent
+      ),
+      padding: 2,
+      borderRadius: 10,
+      fontWeight: 600,
+      borderColor: COLORS.border.purple,
+      borderWidth: 1,
+      textTransform: 'none',
+    }) as SxProps<Theme>,
 };
 
 // Specialty Section Styles
@@ -151,7 +176,7 @@ export const customProductSectionStyles = {
   imageContainer: (type: DeviceType) =>
     ({
       position: 'absolute',
-      top: dynamicStylingValue(type, '3%', '20%', '20%'),
+      top: dynamicStylingValue(type, '14%', '20%', '20%'),
       left: dynamicStylingValue(type, '4%', '-2%', '-2%'),
       zIndex: 20,
     }) as SxProps<Theme>,
@@ -182,6 +207,7 @@ export const customProductSectionStyles = {
       display: 'flex',
       flexDirection: 'column',
       maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
+      width: dynamicStylingValue(type, '100%', '35%', '35%'),
       padding: dynamicStylingValue(type, '1em', '0px', '0px'),
       borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
       backgroundColor: dynamicStylingValue(
@@ -190,6 +216,9 @@ export const customProductSectionStyles = {
         'transparent',
         'transparent'
       ),
+      overflow: 'hidden',
+      wordWrap: 'break-word',
+      boxSizing: 'border-box',
     }) as SxProps<Theme>,
 
   title: {
@@ -228,7 +257,7 @@ export const subsidiariesSectionStyles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: '20vh',
   } as SxProps<Theme>,
 
   titleContainer: {

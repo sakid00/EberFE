@@ -26,6 +26,12 @@ export interface ProductContainerProps {
   openSentModal: boolean;
   setOpenSentModal: (value: boolean) => void;
   onTokenReceived?: () => void;
+  // Pagination props
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+  onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }
 
 export interface CustomizationHeaderProps {
@@ -49,7 +55,7 @@ export interface ProductFilterProps {
 export interface ProductTableProps {
   cellTitles: string[];
   rows: IRowData[];
-  onRequestProductClick: () => void;
+  onRequestProductClick?: () => void;
 }
 
 export interface FilterSelectProps {

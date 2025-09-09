@@ -22,36 +22,48 @@ export const HeaderSection = () => {
         <Box
           sx={{
             position: 'absolute',
-            top: '20%',
-            left: '15%',
+            top: '12vh',
+            left: 0,
             right: 0,
-            bottom: 0,
-            zIndex: 1,
+            bottom: '50vh',
+            zIndex: 0,
+            justifyContent: 'center',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          <Typography
-            fontSize={'2.5em'}
-            fontWeight={800}
-            sx={headerSectionStyles.title}
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'start',
+            }}
           >
-            {t('home.title.innovating')}
-          </Typography>
-          <DualColorText
-            text1={`${t('home.title.as')}\u00a0`}
-            text2={t('home.title.sustainable')}
-            fontSize={'2.5em'}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerSectionStyles.title}
-          />
-          <Typography
-            fontSize={'2.5em'}
-            fontWeight={800}
-            sx={headerSectionStyles.title}
-          >
-            {t('home.title.future')}
-          </Typography>
+            <Typography
+              fontSize={'2.5em'}
+              fontWeight={800}
+              sx={headerSectionStyles.title}
+            >
+              {t('home.title.innovating')}
+            </Typography>
+            <DualColorText
+              text1={`${t('home.title.as')}\u00a0`}
+              text2={t('home.title.sustainable')}
+              fontSize={'2.5em'}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerSectionStyles.title}
+            />
+            <Typography
+              fontSize={'2.5em'}
+              fontWeight={800}
+              sx={headerSectionStyles.title}
+            >
+              {t('home.title.future')}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     );
@@ -100,10 +112,10 @@ export const HeaderSection = () => {
         >
           {t('home.title.future')}
         </Typography>
-        <Typography sx={headerSectionStyles.description(language)}>
+        <Typography sx={headerSectionStyles.description(language, type)}>
           {t('home.desc')}
         </Typography>
-        <Box id="buttons-wrapper" sx={headerSectionStyles.buttonsWrapper}>
+        <Box id="buttons-wrapper" sx={headerSectionStyles.buttonsWrapper(type)}>
           <Button
             size="small"
             sx={headerSectionStyles.primaryButton}
@@ -114,7 +126,7 @@ export const HeaderSection = () => {
           <Button
             size="small"
             variant="outlined"
-            sx={headerSectionStyles.secondaryButton}
+            sx={headerSectionStyles.secondaryButton(type)}
             onClick={() => handleNavigate('/product/submit')}
           >
             {t('home.custom_product_button')}

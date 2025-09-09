@@ -5,8 +5,9 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     zIndex: 1,
-    gap: '32px',
     alignItems: 'stretch',
+    gap: '1%',
+    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
   }),
 
   infoCard: (type: DeviceType) => ({
@@ -19,6 +20,7 @@ export const styles = {
     zIndex: 1,
     boxShadow:
       '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+    marginBottom: dynamicStylingValue(type, '2vh', '0px', '0px'),
   }),
 
   rolesTitle: {
@@ -50,6 +52,8 @@ export const styles = {
     fontWeight: 700,
     color: '#030712',
     marginTop: '4px',
+    wordBreak: 'break-all',
+    overflowWrap: 'break-word',
   },
 
   accordionContainer: {

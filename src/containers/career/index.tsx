@@ -52,6 +52,7 @@ const CareerContainer = ({
       </Typography>
     </Box>
   );
+
   return (
     <Box sx={styles.mainContainer(type)}>
       <Box sx={styles.infoCard(type)}>
@@ -60,8 +61,11 @@ const CareerContainer = ({
           text2={t('careers.title.open')}
           fontSize={'2em'}
           inline
+          sx={{
+            flexWrap: 'wrap',
+          }}
         />
-        <Typography fontSize={'2em'} fontWeight={700} sx={styles.rolesTitle}>
+        <Typography fontSize={'2em'} sx={styles.rolesTitle}>
           {t('careers.title.roles')}
         </Typography>
         <Typography sx={styles.descriptionText}>{t('careers.desc')}</Typography>

@@ -40,7 +40,7 @@ export const CustomProductSection = () => {
         sx={{
           width: '100vw',
           height: dynamicStylingValue(type, '90vh', '100vh', '100vh'),
-          marginTop: dynamicStylingValue(type, '25vh', '0px', '0px'),
+          marginTop: dynamicStylingValue(type, '40vh', '0px', '0px'),
         }}
         contentSx={{
           marginTop: dynamicStylingValue(type, '18%', '0px', '0px'),

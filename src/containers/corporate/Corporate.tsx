@@ -70,8 +70,6 @@ const CorporateContainer = () => {
   // Get current company data
   const currentCompany = companies?.[selectedCompany];
   const currentCompanyDetail = currentCompany?.data;
-  console.log('currentCompany', currentCompany);
-  console.log('currentCompanyDetail', currentCompanyDetail);
 
   // Show loading state
   if (isLoading && companies.length === 0) {
@@ -125,7 +123,7 @@ const CorporateContainer = () => {
         <Image
           src={
             currentCompany?.main_image
-              ? `https://return-participant-listings-icon.trycloudflare.com${currentCompany.main_image}`
+              ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
               : HeaderImage
           }
           alt={companyList[selectedCompany]?.name || 'Company'}
@@ -149,6 +147,11 @@ const CorporateContainer = () => {
             disableElevation
             startIcon={<Map width={10} height={10} />}
             sx={styles.mapsButton(type)}
+            onClick={() => {
+              if (currentCompany?.coordinate) {
+                window.open(currentCompany.coordinate, '_blank');
+              }
+            }}
           >
             Maps
           </Button>
@@ -220,7 +223,7 @@ const CorporateContainer = () => {
         </Box>
 
         <Box sx={styles.productApplicationContainer}>
-          <Typography sx={styles.titleContentText(type)}>
+          <Typography sx={styles.titleContentText}>
             {(language === 'en'
               ? currentCompanyDetail?.title_1_en
               : currentCompanyDetail?.title_1_id) ?? ''}
@@ -234,7 +237,7 @@ const CorporateContainer = () => {
             {currentCompanyDetail?.images_1?.map((item, index) => (
               <Box key={index} sx={styles.imageCard}>
                 <Image
-                  src={`https://return-participant-listings-icon.trycloudflare.com${item.url}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
                   alt={item.title}
                   width={200}
                   height={150}
@@ -249,7 +252,7 @@ const CorporateContainer = () => {
         </Box>
 
         <Box sx={styles.productApplicationContainer}>
-          <Typography sx={styles.titleContentText(type)}>
+          <Typography sx={styles.titleContentText}>
             {(language === 'en'
               ? currentCompanyDetail?.title_2_en
               : currentCompanyDetail?.title_2_id) ?? ''}
@@ -263,7 +266,7 @@ const CorporateContainer = () => {
             {currentCompanyDetail?.images_2?.map((item, index) => (
               <Box key={index} sx={styles.imageCard}>
                 <Image
-                  src={`https://return-participant-listings-icon.trycloudflare.com${item.url}`}
+                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
                   alt={item.title}
                   width={200}
                   height={150}
@@ -278,7 +281,7 @@ const CorporateContainer = () => {
         </Box>
 
         <Box sx={styles.productApplicationContainer}>
-          <Typography sx={styles.titleContentText(type)}>
+          <Typography sx={styles.title3ContentText}>
             {(language === 'en'
               ? currentCompanyDetail?.title_3_en
               : currentCompanyDetail?.title_3_id) ?? ''}

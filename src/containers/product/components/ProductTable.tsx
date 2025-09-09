@@ -10,16 +10,20 @@ import {
 } from '@mui/material';
 import { styles } from '../style';
 import { ProductTableProps } from '../types';
+import { useDeviceType } from '@/hooks';
 
 const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
+  const { type } = useDeviceType();
   return (
-    <TableContainer component={Paper} sx={styles.tableContainer}>
-      <Table sx={styles.table} size="small" aria-label="products table">
+    <TableContainer component={Paper} sx={styles.tableContainer(type)}>
+      <Table sx={styles.table(type)} size="small" aria-label="products table">
         <TableHead>
           <TableRow sx={styles.tableHeaderRow}>
             {cellTitles.map((title, index) => (
               <TableCell align="center" key={`${index}-${title}`}>
-                <Typography sx={styles.tableHeaderCell}>{title}</Typography>
+                <Typography sx={styles.tableHeaderCell(type)}>
+                  {title}
+                </Typography>
               </TableCell>
             ))}
           </TableRow>
@@ -34,17 +38,20 @@ const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
                 component="th"
                 align="center"
                 scope="row"
-                sx={styles.tableCodeCell}
+                sx={styles.tableCodeCell(type)}
               >
                 {row.productCode}
               </TableCell>
-              <TableCell align="center" sx={styles.tableDataCell}>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
                 {row.application}
               </TableCell>
-              <TableCell align="center" sx={styles.tableDataCellWrappable}>
+              <TableCell
+                align="center"
+                sx={styles.tableDataCellWrappable(type)}
+              >
                 {row.perfFeature}
               </TableCell>
-              <TableCell align="center" sx={styles.tableDataCell}>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
                 {row.typeOfProd}
               </TableCell>
               <TableCell align="center">{row.getMoreDetail}</TableCell>

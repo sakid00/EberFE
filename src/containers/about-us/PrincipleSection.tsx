@@ -69,6 +69,7 @@ export const PrincipleSection = () => {
           <Typography
             fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.5em')}
             fontWeight={700}
+            color="white"
             sx={principleStyles.visionTitle}
           >
             {t('about_us.vision_title')}
@@ -76,6 +77,7 @@ export const PrincipleSection = () => {
           <Typography
             fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
             fontWeight={400}
+            color="#D6CBE3"
             sx={principleStyles.visionDescription}
           >
             {t('about_us.vision_desc')}
@@ -83,6 +85,7 @@ export const PrincipleSection = () => {
           <Typography
             fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.5em')}
             fontWeight={700}
+            color="white"
             sx={principleStyles.missionTitle}
           >
             {t('about_us.mission_title')}
@@ -90,6 +93,7 @@ export const PrincipleSection = () => {
           <Typography
             fontSize={dynamicStylingValue(type, '0.8em', '1em', '1em')}
             fontWeight={400}
+            color="#D6CBE3"
             sx={principleStyles.missionDescription}
           >
             {t('about_us.mission_desc')}

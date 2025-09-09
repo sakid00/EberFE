@@ -2,9 +2,10 @@ import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 
 export const styles = {
   // Main container
-  mainContainer: {
+  mainContainer: (type: DeviceType) => ({
     marginX: '2vw',
-  },
+    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+  }),
 
   // Header section styles
   headerContainer: {
@@ -180,53 +181,64 @@ export const styles = {
   },
 
   // Table styles
-  tableContainer: {
+  tableContainer: (type: DeviceType) => ({
     marginTop: '16px',
     position: 'relative' as const,
     zIndex: 10,
     borderRadius: '20px',
     overflow: 'hidden',
-    // Enable horizontal scrolling on mobile
-    overflowX: 'auto',
+    // Enable horizontal scrolling only on mobile
+    overflowX: dynamicStylingValue(type, 'auto', 'visible', 'visible'),
     // Ensure smooth scrolling
     scrollBehavior: 'smooth',
-    // Add custom scrollbar styling for better UX
-    '&::-webkit-scrollbar': {
-      height: '8px',
-    },
-    '&::-webkit-scrollbar-track': {
-      backgroundColor: '#f1f1f1',
-      borderRadius: '4px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: '#c1c1c1',
-      borderRadius: '4px',
-      '&:hover': {
-        backgroundColor: '#a8a8a8',
+    // Add custom scrollbar styling for better UX (only on mobile)
+    ...(type === 'mobile' && {
+      '&::-webkit-scrollbar': {
+        height: '8px',
       },
-    },
-  },
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+        borderRadius: '4px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#c1c1c1',
+        borderRadius: '4px',
+        '&:hover': {
+          backgroundColor: '#a8a8a8',
+        },
+      },
+    }),
+  }),
 
-  table: {
-    minWidth: 650,
-    // Ensure table doesn't shrink below minimum width
-    width: 'max-content',
-  },
+  table: (type: DeviceType) => ({
+    // Only set minWidth on mobile to force horizontal scroll
+    minWidth: dynamicStylingValue(type, '650px', '100%', '100%'),
+    // On desktop/tablet, use full width and let content wrap
+    width: dynamicStylingValue(type, 'max-content', '100%', '100%'),
+    // Allow table to be responsive on larger screens
+    tableLayout: dynamicStylingValue(type, 'fixed', 'auto', 'auto'),
+  }),
 
   tableHeaderRow: {
     backgroundColor: '#F9FAFB',
     border: 0,
   },
 
-  tableHeaderCell: {
+  tableHeaderCell: (type: DeviceType) => ({
     fontWeight: 600,
     fontSize: '1.2em',
     padding: '32px',
     color: '#784791',
-    // Ensure minimum width for mobile readability
-    minWidth: '120px',
-    whiteSpace: 'nowrap' as const,
-  },
+    // Only set minWidth on mobile for horizontal scroll
+    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    // Allow text wrapping on desktop/tablet
+    whiteSpace: dynamicStylingValue(
+      type,
+      'nowrap' as const,
+      'normal' as const,
+      'normal' as const
+    ),
+  }),
 
   tableBodyRow: {
     '&:last-child td, &:last-child th': {
@@ -234,31 +246,47 @@ export const styles = {
     },
   },
 
-  tableCodeCell: {
+  tableCodeCell: (type: DeviceType) => ({
     backgroundColor: '#F9FAFB',
     fontSize: '1em',
     fontWeight: 400,
-    minWidth: '120px',
-    whiteSpace: 'nowrap' as const,
-  },
+    // Only set minWidth on mobile
+    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    // Allow text wrapping on desktop/tablet
+    whiteSpace: dynamicStylingValue(
+      type,
+      'nowrap' as const,
+      'normal' as const,
+      'normal' as const
+    ),
+  }),
 
-  tableDataCell: {
+  tableDataCell: (type: DeviceType) => ({
     fontSize: '1em',
     fontWeight: 400,
-    minWidth: '120px',
-    whiteSpace: 'nowrap' as const,
-  },
+    // Only set minWidth on mobile
+    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    // Allow text wrapping on desktop/tablet
+    whiteSpace: dynamicStylingValue(
+      type,
+      'nowrap' as const,
+      'normal' as const,
+      'normal' as const
+    ),
+  }),
 
-  tableDataCellWrappable: {
+  tableDataCellWrappable: (type: DeviceType) => ({
     fontSize: '1em',
     fontWeight: 400,
-    minWidth: '120px',
+    // Only set minWidth on mobile
+    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
     whiteSpace: 'normal' as const,
     wordWrap: 'break-word' as const,
-    maxWidth: '200px',
+    // Responsive maxWidth
+    maxWidth: dynamicStylingValue(type, '200px', 'none', 'none'),
     lineHeight: '1.4',
     padding: '16px',
-  },
+  }),
 };
 
 export const classNames = {

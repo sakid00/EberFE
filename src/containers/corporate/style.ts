@@ -5,6 +5,7 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     gap: dynamicStylingValue(type, '16px', '32px', '32px'),
+    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
   }),
 
   contentContainer: (type: DeviceType) => ({
@@ -67,11 +68,17 @@ export const styles = {
     fontWeight: 800,
   }),
 
-  titleContentText: (type: DeviceType) => ({
+  titleContentText: {
     color: '#030712',
-    fontSize: dynamicStylingValue(type, '0.8em', '0.8em', '0.8em'),
+    fontSize: '0.8em',
     fontWeight: 800,
-  }),
+  },
+
+  title3ContentText: {
+    color: '#030712',
+    fontSize: '1.2em',
+    fontWeight: 800,
+  },
 
   productApplicationText: (type: DeviceType) => ({
     color: '#4B5563',

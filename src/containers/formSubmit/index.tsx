@@ -1,5 +1,3 @@
-'use client';
-
 import FormBox from '@/components/FormBox';
 import InfoBox from '@/components/InfoBox';
 import { Box } from '@mui/material';

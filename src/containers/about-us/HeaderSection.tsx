@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
 import photo from '@public/photo/tangki-person.png';
@@ -49,6 +49,16 @@ export const HeaderSection = () => {
 const HeaderSectionContent = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/eber-compro.pdf';
+    link.download = 'eber-company-profile.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <Image
@@ -84,6 +94,28 @@ const HeaderSectionContent = () => {
         <Typography style={headerStyles.description(type)}>
           {t('about_us.desc')}
         </Typography>
+        {type !== 'mobile' && (
+          <Button
+            size="small"
+            onClick={handleDownload}
+            sx={{
+              color: 'white',
+              background:
+                'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+              padding: 2,
+              borderRadius: 10,
+              fontWeight: 600,
+              textTransform: 'none',
+              marginTop: '4vh',
+              '&:hover': {
+                background:
+                  'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+              },
+            }}
+          >
+            {t('about_us.download_button')}
+          </Button>
+        )}
       </Box>
     </>
   );

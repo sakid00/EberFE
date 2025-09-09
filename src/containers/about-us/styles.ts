@@ -38,6 +38,8 @@ export const headerStyles: {
     paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
     paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
     width: dynamicStylingValue(deviceType, '100%', '25%', '25%'),
+    color: 'white',
+    fontWeight: 500,
     marginTop: '4vh',
     fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
@@ -69,7 +71,6 @@ export const valueStyles: {
   backgroundImage: {
     width: '100vw',
     height: '100vh',
-    // marginBottom: '-10vh',
     marginTop: '10vh',
   },
   contentContainer: {
@@ -99,6 +100,7 @@ export const valueStyles: {
     zIndex: 100000,
   },
   valuesGridMobile: {
+    width: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: '10px',
     position: 'relative',

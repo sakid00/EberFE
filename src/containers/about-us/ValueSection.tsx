@@ -3,13 +3,13 @@ import { ValueCard } from '../../components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
 import fieldPerson from '@public/photo/chem-person.png';
-import siteBg from '@public/background/site-bg.png';
 import ImageBackground from '@/components/ImageBackground';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import container from '@public/background/container2.png';
 import containerMobile from '@public/background/container2-mobile.png';
+import site from '@public/background/site-bg.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
@@ -24,22 +24,42 @@ export const ValueSection = () => {
         className="flex flex-col items-center"
         sx={valueStyles.titleContainer}
       >
-        <Typography
-          fontSize={dynamicStylingValue(type, '1.5em', '3em', '3em')}
-          fontWeight={'500'}
-          color="#784791"
-          sx={{ textAlign: 'center' }}
-        >
-          {`${t('about_us.value_section_title.creating')}\u00a0`}
+        {type === 'mobile' ? (
           <Typography
-            component={type === 'mobile' ? 'span' : 'div'}
-            fontSize={'1em'}
-            fontWeight={'800'}
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontWeight={'500'}
             color="#784791"
+            sx={{ textAlign: 'center' }}
           >
-            {t('about_us.value_section_title.purpose_driven')}
+            {`${t('about_us.value_section_title.creating')}\u00a0`}
+            <Typography
+              component={type === 'mobile' ? 'span' : 'div'}
+              fontSize={'1em'}
+              fontWeight={'800'}
+              color="#784791"
+            >
+              {t('about_us.value_section_title.purpose_driven')}
+            </Typography>
           </Typography>
-        </Typography>
+        ) : (
+          <>
+            <Typography
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+              fontWeight={'500'}
+              color="#784791"
+              sx={{ textAlign: 'center' }}
+            >
+              {`${t('about_us.value_section_title.creating')}\u00a0`}
+            </Typography>
+            <Typography
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+              fontWeight={'800'}
+              color="#784791"
+            >
+              {t('about_us.value_section_title.purpose_driven')}
+            </Typography>
+          </>
+        )}
       </Box>
 
       {type === 'mobile' && (
@@ -59,7 +79,7 @@ export const ValueSection = () => {
         objectFit="fill"
         sx={{
           width: '110%',
-          height: '100vh',
+          height: '110vh',
           marginTop: dynamicStylingValue(type, '30vh', '0px', '0px'),
         }}
         contentSx={{
@@ -76,8 +96,11 @@ export const ValueSection = () => {
             <Image
               src={fieldPerson}
               alt="field-person"
-              width={800}
-              height={400}
+              style={{
+                objectFit: 'contain',
+                width: '65%',
+                height: '50%',
+              }}
             />
           </Box>
         )}
@@ -93,6 +116,22 @@ export const ValueSection = () => {
           ))}
         </Box>
       </ImageBackground>
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-20vh',
+          right: dynamicStylingValue(type, '-5vw', '-10vw', '-10vw'),
+          zIndex: -1,
+          width: '100vw',
+          height: '100%',
+        }}
+      >
+        <Image
+          src={site}
+          alt="site"
+          style={{ objectFit: 'fill', width: '100vw', height: '100%' }}
+        />
+      </Box>
     </Box>
   );
 };
