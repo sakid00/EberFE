@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import path from 'path';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
@@ -28,17 +29,30 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // Turbopack configuration for path aliases
+  turbopack: {
+    resolveAlias: {
+      '@': './src',
+      '@/components': './src/components',
+      '@/containers': './src/containers',
+      '@/contexts': './src/contexts',
+      '@/hooks': './src/hooks',
+      '@/public': './public',
+      '@/utils': './src/utils',
+      '@/lib': './src/lib',
+    },
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@': require('path').resolve(__dirname, 'src'),
-      '@/components': require('path').resolve(__dirname, 'src/components'),
-      '@/containers': require('path').resolve(__dirname, 'src/containers'),
-      '@/contexts': require('path').resolve(__dirname, 'src/contexts'),
-      '@/hooks': require('path').resolve(__dirname, 'src/hooks'),
-      '@/public': require('path').resolve(__dirname, 'public'),
-      '@/utils': require('path').resolve(__dirname, 'src/utils'),
-      '@/lib': require('path').resolve(__dirname, 'src/lib'),
+      '@': path.resolve(__dirname, 'src'),
+      '@/components': path.resolve(__dirname, 'src/components'),
+      '@/containers': path.resolve(__dirname, 'src/containers'),
+      '@/contexts': path.resolve(__dirname, 'src/contexts'),
+      '@/hooks': path.resolve(__dirname, 'src/hooks'),
+      '@/public': path.resolve(__dirname, 'public'),
+      '@/utils': path.resolve(__dirname, 'src/utils'),
+      '@/lib': path.resolve(__dirname, 'src/lib'),
     };
     config.resolve.fallback = {
       ...config.resolve.fallback,
