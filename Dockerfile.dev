@@ -1,16 +1,16 @@
-# Development Dockerfile
+# Development Dockerfile for EberFE
 FROM node:18-alpine
 
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies for better compatibility
 RUN apk add --no-cache libc6-compat
 
 # Copy package files
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package.json package-lock.json* ./
 
-# Install dependencies using npm (more reliable than yarn in Docker)
+# Install dependencies
 RUN npm install
 
 # Copy source code
@@ -18,6 +18,9 @@ COPY . .
 
 # Expose port
 EXPOSE 3000
+
+# Set environment
+ENV NODE_ENV=development
 
 # Start development server
 CMD ["npm", "run", "dev"]
