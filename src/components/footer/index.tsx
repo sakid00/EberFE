@@ -12,33 +12,33 @@ import { footerStyles } from './style';
 
 const contactInfoList = [
   {
-    logo: <LocationIcon />,
+    logo: <LocationIcon sx={{ color: 'white' }} />,
     desc: `Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia`,
   },
   {
-    logo: <EmailIcon />,
+    logo: <EmailIcon sx={{ color: 'white' }} />,
     desc: 'info@ebergroup.com',
   },
   {
-    logo: <PhoneIcon />,
+    logo: <PhoneIcon sx={{ color: 'white' }} />,
     desc: '+62-21 5020 2622',
   },
 ];
 const subsidiariesList = [
   {
-    logo: <BusinessIcon />,
+    logo: <BusinessIcon sx={{ color: 'white' }} />,
     name: 'PT Eternal Buana Chemical Industries',
   },
   {
-    logo: <BusinessIcon />,
+    logo: <BusinessIcon sx={{ color: 'white' }} />,
     name: 'PT Petrowidada',
   },
   {
-    logo: <BusinessIcon />,
+    logo: <BusinessIcon sx={{ color: 'white' }} />,
     name: 'PT Eterindo Nusa Graha',
   },
   {
-    logo: <BusinessIcon />,
+    logo: <BusinessIcon sx={{ color: 'white' }} />,
     name: 'PT Mega Prima Solvindo',
   },
 ];

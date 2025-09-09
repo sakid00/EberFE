@@ -187,7 +187,7 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
           sx={{
             width: '100%',
             height: '100%',
-            overflow: 'hidden',
+            overflow: 'visible',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -196,8 +196,8 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
           {isClient && pageImages.length > 0 && (
             <HTMLFlipBook
               width={600}
-              height={800}
-              size="stretch"
+              height={700}
+              size="fixed"
               minWidth={300}
               maxWidth={1000}
               minHeight={400}

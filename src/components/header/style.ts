@@ -30,18 +30,18 @@ export const headerStyles = {
   },
   headerAccessories: (deviceType: DeviceType, isHomepage: boolean) => ({
     position: 'absolute' as const,
+    display: 'block',
     width: '100%',
     height: dynamicStylingValue(
       deviceType,
-      '80vh',
-      isHomepage ? '70vh' : '50vh',
-      isHomepage ? '80vh' : '50vh'
+      '80%',
+      isHomepage ? '100%' : '60vh',
+      isHomepage ? '80vh' : '60vh'
     ),
-    bottom: 0,
-    left: 0,
-    top: dynamicStylingValue(deviceType, '-25%', '-10%', '-10%'),
+    right: 0,
+    top: '-30%',
     zIndex: 0,
-    objectFit: 'contain' as const,
+    objectFit: isHomepage ? ('contain' as const) : ('fill' as const),
   }),
   backgroundImage: (
     deviceType: DeviceType,
@@ -70,7 +70,7 @@ export const headerStyles = {
     alignItems: 'center',
     width: '100%',
     maxWidth: '100%',
-    padding: { xs: '0 1em', md: '0 3em' },
+    padding: '0 3em',
     overflow: 'hidden',
   },
   logoContainer: {
@@ -80,36 +80,24 @@ export const headerStyles = {
   navigationButton: (isPathName: boolean): SxProps<Theme> => ({
     textTransform: 'none',
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
-    fontWeight: '500',
-    fontSize: { xs: '1rem', md: '1rem' },
-    marginRight: { xs: 0, md: 4 },
-    marginBottom: { xs: 0.5, md: 0 },
-    minWidth: { xs: '140px', md: 'auto' },
-    padding: { xs: '12px 20px', md: '8px 16px' },
-    borderRadius: { xs: BORDER_RADIUS.medium, md: BORDER_RADIUS.small },
-    backgroundColor: {
-      xs: isPathName ? COLORS.whiteBackground : 'transparent',
-      md: 'transparent',
-    },
-    border: {
-      xs: `1px solid ${isPathName ? 'rgba(255, 255, 255, 0.4)' : COLORS.whiteBorder}`,
-      md: 'none',
-    },
+    fontWeight: isPathName ? '700' : '400',
+    fontSize: '1rem',
+    marginRight: 4,
+    marginBottom: 0,
+    minWidth: 'auto',
+    padding: '8px 16px',
+    borderRadius: BORDER_RADIUS.small,
+    backgroundColor: 'transparent',
+    border: 'none',
     transition: ANIMATION.transition,
     '&:hover': {
-      backgroundColor: {
-        xs: COLORS.whiteBackgroundHover,
-        md: 'rgba(255, 255, 255, 0.1)',
-      },
-      border: {
-        xs: `1px solid ${isPathName ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.3)'}`,
-        md: 'none',
-      },
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      border: 'none',
     },
   }),
   // Mobile navigation styles
   mobileMenuButton: {
-    display: { xs: 'block', md: 'none' },
+    display: 'block',
     color: COLORS.white,
     borderRadius: BORDER_RADIUS.medium,
     padding: '10px',
@@ -165,7 +153,7 @@ export const headerStyles = {
   },
   mobileMenuNavigationButton: (isActive: boolean): SxProps<Theme> => ({
     textTransform: 'none',
-    color: isActive ? '#1976d2' : '#333',
+    color: isActive ? '#784791' : '#333',
     fontWeight: isActive ? '600' : '500',
     fontSize: '1rem',
     padding: '16px 24px',
@@ -174,7 +162,7 @@ export const headerStyles = {
     justifyContent: 'flex-start',
     borderRadius: 0,
     backgroundColor: isActive ? 'rgba(25, 118, 210, 0.08)' : 'transparent',
-    borderLeft: isActive ? '4px solid #1976d2' : '4px solid transparent',
+    borderLeft: isActive ? '4px solid #784791' : '4px solid transparent',
     transition: ANIMATION.transition,
     '&:hover': {
       backgroundColor: 'rgba(25, 118, 210, 0.04)',
@@ -195,13 +183,13 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: { xs: '80px', md: '110px' },
-    height: { xs: '32px', md: '40px' },
+    width: '110px',
+    height: '40px',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
       textAlign: 'center',
-      fontSize: { xs: '0.75rem', md: '0.875rem' },
+      fontSize: '0.875rem',
       fontWeight: '500',
       display: 'flex',
       alignItems: 'center',
@@ -395,8 +383,8 @@ export const headerStyles = {
   // Search button styles
   searchButton: {
     backgroundColor: COLORS.whiteBackgroundHover,
-    width: { xs: 36, md: 40 },
-    height: { xs: 36, md: 40 },
+    width: 40,
+    height: 40,
     borderRadius: BORDER_RADIUS.round,
     border: '1px solid rgba(255, 255, 255, 0.3)',
     transition: ANIMATION.transition,

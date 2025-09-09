@@ -8,6 +8,7 @@ import {
 } from '@mui/material';
 import { styles, classNames } from './style';
 import { useState } from 'react';
+import useProduct from '@/hooks/useProduct';
 
 interface FormData {
   fullName: string;
@@ -28,6 +29,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
   setOpenModal,
   onSuccessfulSubmission,
 }) => {
+  const { accessProduct } = useProduct();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -70,18 +72,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
 
     if (!formData.phoneNumber.trim()) {
       newErrors.phoneNumber = 'Phone number is required';
+    } else if (!formData.phoneNumber.startsWith('+62')) {
+      newErrors.phoneNumber = 'Phone number must start with +62';
     }
 
     // Company name and city are now optional - no validation required
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
-
-  const generateToken = (): string => {
-    const timestamp = new Date().getTime();
-    const randomString = Math.random().toString(36).substring(2, 15);
-    return `eber_token_${timestamp}_${randomString}`;
   };
 
   const handleSubmit = async () => {
@@ -92,33 +90,35 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Generate and save token
-      const token = generateToken();
-      const userData = {
-        ...formData,
-        token,
-        submittedAt: new Date().toISOString(),
+      // Call the accessProduct API
+      const apiRequest = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phoneNumber,
+        company: formData.companyName,
+        city: formData.city,
       };
 
-      // Save to localStorage
-      localStorage.setItem('userToken', token);
-      localStorage.setItem('userData', JSON.stringify(userData));
-      localStorage.setItem('hasVisitedProduct', 'true');
+      const result = await accessProduct(apiRequest);
 
-      // Mark as submitted and close modal after successful submission
-      setHasSubmitted(true);
-      setOpenModal(false);
+      if (result.data.id && result.data.encodedData) {
+        localStorage.setItem('userToken', result.data.encodedData);
+        localStorage.setItem('hasVisitedProduct', 'true');
 
-      // Call the success callback if provided
-      if (onSuccessfulSubmission) {
-        onSuccessfulSubmission();
+        // Mark as submitted and close modal after successful submission
+        setHasSubmitted(true);
+        setOpenModal(false);
+
+        // Call the success callback if provided
+        if (onSuccessfulSubmission) {
+          onSuccessfulSubmission();
+        }
+      } else {
+        // Handle API error
+        console.error('API Error:', result.data.message);
       }
-
-      // Optional: Show success message or redirect
-      alert('Thank you! You now have access to our product information.');
     } catch (error) {
       console.error('Error submitting form:', error);
-      alert('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -202,11 +202,11 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           <InputLabel sx={styles.inputLabel}>Phone Number</InputLabel>
           <TextField
             className={classNames.emailField}
-            placeholder="Phone Number"
+            placeholder="+62xxxxxxxxxxx"
             value={formData.phoneNumber}
             onChange={handleInputChange('phoneNumber')}
             error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber}
+            helperText={errors.phoneNumber || 'Must start with +62'}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,

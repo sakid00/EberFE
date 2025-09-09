@@ -19,7 +19,7 @@ export const CorporateCard = ({
   return (
     <Box
       id={`subsidiaries-${index}`}
-      className={`flex flex-col justify-center ${isMobile ? 'items-center' : 'items-start'} bg-white ${isMobile ? 'w-[100%] h-[100%]' : 'w-[40%] h-[40%]'} p-5 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+      className={`flex flex-col justify-center ${isMobile ? 'items-center' : 'items-start'} bg-white ${isMobile ? 'w-[100%] h-[100%]' : 'w-[40%] h-min-[40vh]'} p-5 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
     >
       <Image
         src={data.img}

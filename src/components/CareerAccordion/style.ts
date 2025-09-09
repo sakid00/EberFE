@@ -109,8 +109,7 @@ export const styles = {
 
   detailsContainer: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
+    marginLeft: '1%',
   },
 
   sectionTitle: {
