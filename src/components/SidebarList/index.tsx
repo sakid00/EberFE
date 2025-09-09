@@ -6,7 +6,9 @@ import {
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DualColorText, { IDualColorTextProps } from '@/components/DualColorText';
+import DualColorText, {
+  IDualColorTextProps,
+} from '@/components/DualColorText/index';
 import { useState } from 'react';
 import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
 

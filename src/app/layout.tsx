@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Header from '@/components/header/index';
+import Footer from '@/components/footer/index';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import { Box } from '@mui/material';
-import ParticlesBackground from '@/components/BackgroundParticles';
+import ParticlesBackground from '@/components/BackgroundParticles/index';
 import ThemeWrapper from '@/components/ThemeWrapper';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import { DataProvider } from '@/contexts/DataProvider';

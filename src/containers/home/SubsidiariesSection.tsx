@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '@/components/DualColorText/index';
 import { SubsidiaryCard } from '@/components/Cards/SubsidiaryCard';
 import { SUBSIDIARIES_DATA } from './constants';
 import { subsidiariesSectionStyles, animationClasses } from './styles';

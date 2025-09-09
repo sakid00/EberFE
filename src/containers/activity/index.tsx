@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import SidebarList, { listType } from '@/components/SidebarList';
+import SidebarList, { listType } from '@/components/SidebarList/index';
 import { Box, Typography, CircularProgress, Alert } from '@mui/material';
 import ActivityCard from '@/components/Cards/ActivityCard';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';

@@ -1,5 +1,5 @@
 'use client';
-import SidebarList from '@/components/SidebarList';
+import SidebarList from '@/components/SidebarList/index';
 import {
   Box,
   Button,

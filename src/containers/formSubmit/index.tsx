@@ -1,5 +1,5 @@
-import FormBox from '@/components/FormBox';
-import InfoBox from '@/components/InfoBox';
+import FormBox from '@/components/FormBox/index';
+import InfoBox from '@/components/InfoBox/index';
 import { Box } from '@mui/material';
 import { StaticImageData } from 'next/image';
 import { styles } from './style';

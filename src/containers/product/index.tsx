@@ -1,10 +1,10 @@
 import { Box, Pagination, Stack, Typography } from '@mui/material';
-import ReqProductModal from '@/components/ReqProductModal';
+import ReqProductModal from '@/components/ReqProductModal/index';
 import { CustomizationHeader, ProductFilter, ProductTable } from './components';
 import { styles } from './style';
 import { ProductContainerProps } from './types';
 import { useRouter } from 'next/navigation';
-import ReqProductSent from '@/components/ReqProductSent';
+import ReqProductSent from '@/components/ReqProductSent/index';
 import { useDeviceType } from '@/hooks';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({

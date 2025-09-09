@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '@/components/DualColorText/index';
 import Image from 'next/image';
 import photo from '@/public/photo/tangki-person.png';
 import { headerStyles } from './styles';

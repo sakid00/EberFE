@@ -6,7 +6,7 @@ import container from '@/public/background/container1.png';
 import containerMobile from '@/public/background/container1-mobile.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
-import ImageBackground from '@/components/ImageBackground';
+import ImageBackground from '@/components/ImageBackground/index';
 
 export const PrincipleSection = () => {
   const { t } = useTranslation();

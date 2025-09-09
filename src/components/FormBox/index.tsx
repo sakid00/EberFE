@@ -1,4 +1,4 @@
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '@/components/DualColorText/index';
 import { Box, Button, InputLabel, TextField, Typography } from '@mui/material';
 import { styles, classNames } from './style';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';

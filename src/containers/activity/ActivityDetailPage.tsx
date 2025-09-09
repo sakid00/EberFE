@@ -2,7 +2,7 @@
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '@/components/DualColorText/index';
 import { useActivityState } from '@/contexts/DataProvider';
 import { useTranslation } from '@/hooks/useTranslation';
 

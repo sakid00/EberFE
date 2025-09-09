@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '@/components/DualColorText/index';
 import Image from 'next/image';
 import tangki from '@/public/photo/tangki.png';
 import { InnovationCard } from '@/components/Cards/InnovationCard';
