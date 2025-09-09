@@ -55,9 +55,14 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_IMAGE_ACTIVITY_BASE_URL}${currentActivity?.image}`}
           alt="activity-detail"
-          width={100}
-          height={100}
-          style={{ borderRadius: '20px', width: '100%', height: 'auto' }}
+          width={1000}
+          height={1000}
+          style={{
+            objectFit: 'fill',
+            borderRadius: '20px',
+            width: '100%',
+            height: 'auto',
+          }}
         />
         <Typography
           fontSize={dynamicStylingValue(type, '1em', '2em', '2em')}
