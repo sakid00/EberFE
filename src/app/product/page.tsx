@@ -31,13 +31,16 @@ export interface IrowData {
 
 const ProductsPage = () => {
   const { language } = useTranslation();
-  const { getProduct, products, filters, isLoading, error } = useProduct();
+  const { getProduct, products, filters, isLoading, error, requestProduct } =
+    useProduct();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
   const [filterByApplication, setFilterByApplication] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [openReqModal, setOpenReqModal] = useState<boolean>(false);
   const [openSentModal, setOpenSentModal] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [itemsPerPage] = useState<number>(10);
 
   // Dynamic filter data from API
   const productTypes =
@@ -115,19 +118,38 @@ const ProductsPage = () => {
     console.log('User token received successfully');
   };
 
-  const handleRequestClick = () => {
-    const userToken = localStorage.getItem('userToken');
-    if (userToken) {
-      // User has token, show success modal
-      setOpenSentModal(true);
-    } else {
-      // User doesn't have token, show registration modal
-      setOpenReqModal(true);
-    }
-  };
+  const handleRequestClick = useCallback(
+    (productCode: string) => {
+      const userToken = localStorage.getItem('userToken');
+      console.log('userToken', userToken);
+      if (userToken) {
+        // User has token, call requestProduct API
+        requestProduct(productCode).then((result) => {
+          if (result.success) {
+            // Show success modal
+            setOpenSentModal(true);
+          } else {
+            // Handle error - could show error message or redirect to registration
+            console.error('Product request failed:', result.error);
+            if (result.error?.includes('No email found')) {
+              // If no email found, show registration modal
+              setOpenReqModal(true);
+            } else {
+              // Other errors - show success modal anyway for now
+              setOpenSentModal(true);
+            }
+          }
+        });
+      } else {
+        // User doesn't have token, show registration modal
+        setOpenReqModal(true);
+      }
+    },
+    [setOpenSentModal, setOpenReqModal, requestProduct]
+  );
 
-  // Transform API data to table rows with search filtering
-  const rows = useMemo(() => {
+  // Transform API data to table rows with search filtering and pagination
+  const { paginatedRows, totalPages, totalItems } = useMemo(() => {
     if (products?.length > 0) {
       let filteredProducts = products;
 
@@ -151,7 +173,14 @@ const ProductsPage = () => {
         });
       }
 
-      return filteredProducts.map((product) =>
+      // Calculate pagination
+      const totalItems = filteredProducts.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
+
+      const paginatedRows = paginatedProducts.map((product) =>
         createData({
           productCode: product.code,
           application:
@@ -170,7 +199,7 @@ const ProductsPage = () => {
                 fontWeight: 400,
                 textTransform: 'none',
               }}
-              onClick={handleRequestClick}
+              onClick={() => handleRequestClick(product.code)}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
@@ -180,9 +209,11 @@ const ProductsPage = () => {
           ),
         })
       );
+
+      return { paginatedRows, totalPages, totalItems };
     }
     // Fallback static data
-    return [
+    const fallbackRows = [
       createData({
         productCode: 'Sample Product',
         application: 'Sample Application',
@@ -197,7 +228,7 @@ const ProductsPage = () => {
               fontWeight: 400,
               textTransform: 'none',
             }}
-            onClick={handleRequestClick}
+            onClick={() => handleRequestClick('Sample Product')}
             startIcon={
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
@@ -207,7 +238,20 @@ const ProductsPage = () => {
         ),
       }),
     ];
-  }, [products, language, searchQuery]);
+    return { paginatedRows: fallbackRows, totalPages: 1, totalItems: 1 };
+  }, [
+    products,
+    language,
+    searchQuery,
+    handleRequestClick,
+    currentPage,
+    itemsPerPage,
+  ]);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filterByType, filterByApplication, searchQuery]);
 
   const handleChangeFilterByType = (
     event: SelectChangeEvent<typeof filterByType>
@@ -229,6 +273,13 @@ const ProductsPage = () => {
         ? event.target.value.split(',')
         : event.target.value;
     setFilterByApplication(newFilterByApplication);
+  };
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number
+  ) => {
+    setCurrentPage(value);
   };
 
   // Loading state
@@ -261,7 +312,7 @@ const ProductsPage = () => {
       productTypes={productTypes}
       productApplications={productApplications}
       cellTitles={cellTitles}
-      rows={rows}
+      rows={paginatedRows}
       isSeeAllProduct={isSeeAllProduct}
       setIsSeeAllProduct={setIsSeeAllProduct}
       filterByType={filterByType}
@@ -276,6 +327,11 @@ const ProductsPage = () => {
       openSentModal={openSentModal}
       setOpenSentModal={setOpenSentModal}
       onTokenReceived={handleTokenReceived}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      totalItems={totalItems}
+      itemsPerPage={itemsPerPage}
+      onPageChange={handlePageChange}
     />
   );
 };

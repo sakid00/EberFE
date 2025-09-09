@@ -9,8 +9,8 @@ const ContactUsPage = () => {
   const { t } = useTranslation();
   const imageStyle =
     type === 'mobile'
-      ? ({ top: '30vh', width: '100vw', height: '50vh' } as CSSProperties)
-      : ({ top: '30vh' } as CSSProperties);
+      ? ({ top: '15vh', width: '100vw', height: '50vh' } as CSSProperties)
+      : ({ top: '15vh' } as CSSProperties);
 
   return (
     <FormSubmitContainer

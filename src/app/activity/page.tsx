@@ -1,4 +1,3 @@
-'use client';
 import ActivityContainer from '@/containers/activity';
 
 const ActivityPage = () => {
