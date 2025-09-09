@@ -15,7 +15,7 @@ export const CustomProductSection = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const handleCustomProductClick = () => {
-    router.push('/product');
+    router.push('/product/submit');
   };
 
   return (
