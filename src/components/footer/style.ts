@@ -3,11 +3,13 @@ import { dynamicStylingValue } from '../../hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
 export const footerStyles = {
-  container: {
-    backgroundImage: `url(/background/bg_footer.png)`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  } as SxProps<Theme>,
+  container: (type: DeviceType) =>
+    ({
+      backgroundImage: `url(/background/bg_footer.png)`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      paddingTop: dynamicStylingValue(type, '20vh', '10vh', '10vh'),
+    }) as SxProps<Theme>,
 
   headerSection: (deviceType: DeviceType) => ({
     display: 'flex',

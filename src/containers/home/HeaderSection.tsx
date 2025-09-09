@@ -3,8 +3,6 @@ import DualColorText from '@/components/dualColorText/index';
 import { headerSectionStyles } from './styles';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import photo from '@/public/photo/subtract.png';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 export const HeaderSection = () => {
@@ -71,23 +69,6 @@ export const HeaderSection = () => {
 
   return (
     <Box id="home-header" sx={headerSectionStyles.container}>
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '50%',
-          top: '21%',
-          left: '37%',
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-        }}
-      >
-        <Image
-          src={photo}
-          alt="header photo"
-          style={{ objectFit: 'contain' }}
-        />
-      </Box>
       <Box id="home-header-left-side" sx={headerSectionStyles.leftSide}>
         <Typography
           fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}

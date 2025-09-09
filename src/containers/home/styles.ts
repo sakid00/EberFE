@@ -171,14 +171,25 @@ export const customProductSectionStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    // Enable container queries for responsive positioning
+    containerType: 'inline-size',
+    containerName: 'custom-product-section',
   } as SxProps<Theme>,
 
-  imageContainer: (type: DeviceType) =>
+  imageContainerTransform: (type: DeviceType) =>
     ({
       position: 'absolute',
-      top: dynamicStylingValue(type, '14%', '20%', '20%'),
-      left: dynamicStylingValue(type, '4%', '-2%', '-2%'),
+      width: dynamicStylingValue(type, '100vw', '40vw', '40vw'),
+      top: dynamicStylingValue(type, '36%', '12%', '12%'),
+      left: dynamicStylingValue(type, '38%', '38%', '37%'),
+      transform: dynamicStylingValue(
+        type,
+        'translate(-40%, -58%)',
+        'translate(-70%, -50%)',
+        'translate(-78%, -10%)'
+      ),
       zIndex: 20,
+      willChange: 'transform',
     }) as SxProps<Theme>,
 
   mainContainer: {

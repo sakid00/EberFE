@@ -47,6 +47,7 @@ export const headerStyles = {
     deviceType: DeviceType,
     isHomepage: boolean
   ): SxProps<Theme> => ({
+    position: 'relative',
     width: '100%',
     height: dynamicStylingValue(
       deviceType,

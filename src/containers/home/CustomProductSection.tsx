@@ -20,29 +20,35 @@ export const CustomProductSection = () => {
 
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
-      <Box
-        sx={customProductSectionStyles.imageContainer(type)}
-        className={animationClasses.slideLeft}
-      >
-        <Image
-          src={fieldPerson}
-          alt="field-person"
-          width={type === 'mobile' ? 300 : 600}
-          height={type === 'mobile' ? 300 : 600}
-        />
-      </Box>
+      {type === 'mobile' && (
+        <Box
+          sx={customProductSectionStyles.imageContainerTransform(type)}
+          // className={animationClasses.slideLeft}
+        >
+          <Image
+            src={fieldPerson}
+            alt="field-person"
+            style={{
+              objectFit: 'fill', // Changed from 'fill' to 'contain' for better aspect ratio
+              width: '100vw',
+              height: 'auto', // Maintain aspect ratio
+            }}
+          />
+        </Box>
+      )}
 
       <ImageBackground
         src={type === 'mobile' ? containerMobile : container}
         alt="container"
-        objectFit="contain"
+        objectFit={'fill'}
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
-          height: dynamicStylingValue(type, '90vh', '100vh', '100vh'),
-          marginTop: dynamicStylingValue(type, '40vh', '0px', '0px'),
+          height: dynamicStylingValue(type, '90vh', '70vh', '70vh'),
+          marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
         }}
         contentSx={{
+          position: 'relative',
           marginTop: dynamicStylingValue(type, '18%', '0px', '0px'),
           display: 'flex',
           flexDirection: 'row',
@@ -51,6 +57,25 @@ export const CustomProductSection = () => {
           paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
         }}
       >
+        {type !== 'mobile' && (
+          <Box
+            sx={customProductSectionStyles.imageContainerTransform(type)}
+            className={animationClasses.fadeIn}
+          >
+            <Image
+              src={fieldPerson}
+              alt="field-person"
+              style={{
+                objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
+                width: 'clamp(35vw, 100vw, 100vw)', // Responsive width with min/max constraints
+                height: 'auto', // Maintain aspect ratio
+              }}
+              sizes={'(max-width: 768px) 35vw, (max-width: 1200px) 44vw, 50vw'}
+              priority={true} // Add priority for better loading
+            />
+          </Box>
+        )}
+
         {type !== 'mobile' && <Box sx={customProductSectionStyles.spacer} />}
         <Box
           sx={customProductSectionStyles.contentContainer(type)}

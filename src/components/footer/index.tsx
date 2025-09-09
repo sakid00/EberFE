@@ -10,6 +10,7 @@ import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
 import { footerStyles } from './style';
 import { LocationOn } from '@mui/icons-material';
 import bgFooter from '@/public/eber-footer.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 const contactInfoList = [
   {
@@ -68,15 +69,26 @@ const Footer = () => {
   return (
     <footer>
       <Box
-        sx={footerStyles.container}
-        className="justify-center align-center pt-[10vh] px-[10vw] pb-[2vh] z-100"
+        sx={footerStyles.container(type)}
+        className="justify-center align-center px-[10vw] pb-[2vh] z-100"
       >
         <Box className="flex flex-col relative">
-          <Box className="absolute -top-[50%] -right-[15%] bottom-0 z-10">
+          <Box
+            sx={{
+              position: 'absolute',
+              top: dynamicStylingValue(type, '-28%', '-50%', '-50%'),
+              right: '-15%',
+              bottom: 0,
+              zIndex: 10,
+            }}
+          >
             <Image
               src={bgFooter}
               alt="bg-footer"
-              style={{ width: '50vw', objectFit: 'contain' }}
+              style={{
+                width: dynamicStylingValue(type, '85vw', '50vw', '50vw'),
+                objectFit: 'contain',
+              }}
             />
           </Box>
           <Box sx={footerStyles.headerSection(type)}>

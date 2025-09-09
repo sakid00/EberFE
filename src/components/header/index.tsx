@@ -24,6 +24,7 @@ import { ClientOnly } from '../ClientOnly';
 import { useDeviceType, useTranslation } from '@/hooks';
 import headerAccessoriesMobile from '@/public/photo/eber-big-2-mobile.png';
 import headerAccessories from '@/public/photo/eber-big-2.png';
+import photo from '@/public/photo/subtract.png';
 
 // Constants
 const ANIMATION_DURATION = 300;
@@ -49,11 +50,15 @@ const NAVIGATION_ITEMS = [
 
 const LANGUAGE_OPTIONS = ['IDN', 'EN'] as const;
 
-const HOMEPAGE_PATHS = ['/', '/about-us'];
+const HOMEPAGE_PATHS = ['/'];
+const ABOUT_US_PATHS = ['/about-us'];
 
 // Helper functions
 const isHomePage = (pathname: string): boolean =>
   HOMEPAGE_PATHS.includes(pathname);
+
+const isAboutUsPage = (pathname: string): boolean =>
+  ABOUT_US_PATHS.includes(pathname);
 
 const isActiveNavigation = (pathname: string, navKey: string): boolean => {
   const cleanPath = pathname.substring(1).replaceAll('-', '');
@@ -261,6 +266,7 @@ const Header = () => {
   // Derived values
   const langValue = getLanguageDisplay(language);
   const isHomePagePath = isHomePage(pathName);
+  const isAboutUsPagePath = isAboutUsPage(pathName);
 
   // Event handlers
   const handleLanguageChange = (event: SelectChangeEvent) => {
@@ -348,7 +354,10 @@ const Header = () => {
             src={bgHeaderHomepage}
             alt=""
             objectFit="fill"
-            sx={headerStyles.backgroundImage(type, isHomePagePath)}
+            sx={headerStyles.backgroundImage(
+              type,
+              isHomePagePath || isAboutUsPagePath
+            )}
             contentSx={headerStyles.backgroundImageContent}
           >
             <Image
@@ -358,8 +367,31 @@ const Header = () => {
                   : headerAccessories
               }
               alt="header accessories"
-              style={headerStyles.headerAccessories(type, isHomePagePath)}
+              style={headerStyles.headerAccessories(
+                type,
+                isHomePagePath || isAboutUsPagePath
+              )}
             />
+
+            {isHomePagePath && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  width: '50%',
+                  top: '25%',
+                  left: '37%',
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 1,
+                }}
+              >
+                <Image
+                  src={photo}
+                  alt="header photo"
+                  style={{ objectFit: 'fill' }}
+                />
+              </Box>
+            )}
 
             {/* Main Header Container */}
             <Box sx={headerStyles.container}>
