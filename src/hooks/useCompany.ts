@@ -3,7 +3,8 @@ import { useCompanyContext, CompanyData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 
 interface CompanyResponseData {
-  address: string;
+  address_en: string;
+  address_id: string;
   coordinate: string;
   description_en: string;
   description_id: string;
@@ -103,7 +104,8 @@ const useCompany = () => {
         const transformedData: CompanyData[] = companyData?.map((company) => ({
           id: company.id,
           name: company.name,
-          address: company.address,
+          address_en: company.address_en,
+          address_id: company.address_id,
           coordinate: company.coordinate,
           description_en: company.description_en,
           description_id: company.description_id,

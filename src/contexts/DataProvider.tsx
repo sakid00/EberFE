@@ -46,7 +46,8 @@ export interface ProductState {
 export interface CompanyData {
   id: number;
   name: string;
-  address: string;
+  address_en: string;
+  address_id: string;
   coordinate: string;
   description_en: string;
   description_id: string;

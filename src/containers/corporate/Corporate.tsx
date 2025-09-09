@@ -139,7 +139,9 @@ const CorporateContainer = () => {
           <Box sx={styles.addressTextContainer}>
             <Typography sx={styles.addressLabel(type)}>Address</Typography>
             <Typography sx={styles.addressValue(type)}>
-              {currentCompany?.address || constants.address}
+              {language === 'en'
+                ? currentCompany?.address_en
+                : currentCompany?.address_id}
             </Typography>
           </Box>
           <Button
