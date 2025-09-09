@@ -33,6 +33,7 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <meta name="emotion-insertion-point" content="" />
       </head>
       <body
         className={`${font.className} ${font.variable} overscroll-none`}
@@ -43,7 +44,7 @@ export default function RootLayout({
             <DataProvider>
               <div className="mobile-container max-w-full">
                 <Header />
-                <Box className={`px-[5vw] md:px-[10vw] mb-[10vh]`}>
+                <Box className={`px-[5vw] md:px-[10vw] mb-[20vh]`}>
                   <ParticlesBackground />
                   {children}
                 </Box>
