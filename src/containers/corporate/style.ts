@@ -144,10 +144,10 @@ export const styles = {
   }),
 
   headerImageStyle: {
-    objectFit: 'contain' as const,
+    objectFit: 'fill' as const,
     width: '100%',
     borderRadius: '8px',
-    height: '20%',
+    height: '18%',
   },
 
   imageGridContainer: (type: DeviceType) => ({

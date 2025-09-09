@@ -127,8 +127,8 @@ const CorporateContainer = () => {
               : HeaderImage
           }
           alt={companyList[selectedCompany]?.name || 'Company'}
-          width={50}
-          height={50}
+          width={1000}
+          height={1000}
           style={styles.headerImageStyle}
         />
         <Typography marginTop={3} sx={styles.companyTitle(type)}>
