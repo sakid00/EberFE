@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText/index';
+import DualColorText from '@/components/dualColorText/index';
 import Image from 'next/image';
 import fieldPerson from '@/public/photo/field_person2.png';
 import { customProductSectionStyles, animationClasses } from './styles';

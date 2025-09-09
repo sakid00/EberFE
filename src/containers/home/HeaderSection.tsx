@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText/index';
+import DualColorText from '@/components/dualColorText/index';
 import { headerSectionStyles } from './styles';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';

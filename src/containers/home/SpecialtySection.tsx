@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText/index';
+import DualColorText from '@/components/dualColorText/index';
 import { SpecialtyCard } from '@/components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
 import {

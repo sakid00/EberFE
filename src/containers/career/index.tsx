@@ -1,6 +1,6 @@
 import { ICareerList } from '../../app/careers/page';
 import CareerAccordion from '@/components/CareerAccordion/index';
-import DualColorText from '@/components/DualColorText/index';
+import DualColorText from '@/components/dualColorText/index';
 import { Box, Typography } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles } from './style';
