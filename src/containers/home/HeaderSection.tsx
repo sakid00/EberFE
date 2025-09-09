@@ -1,9 +1,9 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '../../components/DualColorText';
+import DualColorText from '@/components/DualColorText';
 import { headerSectionStyles } from './styles';
-import { useDeviceType, useTranslation } from '../../hooks';
-import { dynamicStylingValue } from '../../hooks/useDeviceType';
-import photo from '../../../public/photo/subtract.png';
+import { useDeviceType, useTranslation } from '@/hooks';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import photo from '@/public/photo/subtract.png';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

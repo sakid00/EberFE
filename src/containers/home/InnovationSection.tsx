@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '../../components/DualColorText';
+import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
-import tangki from '../../../public/photo/tangki.png';
-import { InnovationCard } from '../../components/Cards/InnovationCard';
+import tangki from '@/public/photo/tangki.png';
+import { InnovationCard } from '@/components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
 import { animationClasses, innovationSectionStyles } from './styles';
-import { dynamicStylingValue } from '../../hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '@/hooks';
 
 export const InnovationSection = () => {
   const { type } = useDeviceType();

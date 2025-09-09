@@ -1,8 +1,8 @@
 'use client';
 import { Box, Divider, Typography } from '@mui/material';
-import { useDeviceType } from '../../hooks';
+import { useDeviceType } from '@/hooks';
 import Image from 'next/image';
-import logo from '../../../public/eber_logo.png';
+import logo from '@/public/eber_logo.png';
 import EmailIcon from '@mui/icons-material/EmailOutlined';
 import PhoneIcon from '@mui/icons-material/CallOutlined';
 import BusinessIcon from '@mui/icons-material/BusinessOutlined';

@@ -1,5 +1,5 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
-import DualColorText from '../DualColorText';
+import DualColorText from '@/components/DualColorText';
 import { Close } from '@mui/icons-material';
 import { styles } from './style';
 

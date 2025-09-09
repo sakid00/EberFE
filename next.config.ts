@@ -31,6 +31,14 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
+      '@': require('path').resolve(__dirname, 'src'),
+      '@/components': require('path').resolve(__dirname, 'src/components'),
+      '@/containers': require('path').resolve(__dirname, 'src/containers'),
+      '@/contexts': require('path').resolve(__dirname, 'src/contexts'),
+      '@/hooks': require('path').resolve(__dirname, 'src/hooks'),
+      '@/public': require('path').resolve(__dirname, 'public'),
+      '@/utils': require('path').resolve(__dirname, 'src/utils'),
+      '@/lib': require('path').resolve(__dirname, 'src/lib'),
     };
     config.resolve.fallback = {
       ...config.resolve.fallback,

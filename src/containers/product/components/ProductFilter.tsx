@@ -3,7 +3,7 @@ import { Search } from '@mui/icons-material';
 import { styles } from '../style';
 import { ProductFilterProps } from '../types';
 import FilterSelect from './FilterSelect';
-import { useDeviceType } from '../../../hooks/useDeviceType';
+import { useDeviceType } from '@/hooks/useDeviceType';
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   productTypes,

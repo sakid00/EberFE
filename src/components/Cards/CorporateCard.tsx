@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import { CORPORATE_DATA } from '../../containers/about-us/constants';
-import { useTranslation } from '../../hooks';
+import { CORPORATE_DATA } from '@/containers/about-us/constants';
+import { useTranslation } from '@/hooks';
 
 interface CorporateCardProps {
   data: (typeof CORPORATE_DATA)[0];

@@ -1,13 +1,13 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '../../components/DualColorText';
+import DualColorText from '@/components/DualColorText';
 import Image from 'next/image';
-import fieldPerson from '../../../public/photo/field_person2.png';
+import fieldPerson from '@/public/photo/field_person2.png';
 import { customProductSectionStyles, animationClasses } from './styles';
-import { dynamicStylingValue } from '../../hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '../../hooks';
-import ImageBackground from '../../components/ImageBackground';
-import container from '../../../public/background/container1.png';
-import containerMobile from '../../../public/background/container1-mobile.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '@/hooks';
+import ImageBackground from '@/components/ImageBackground';
+import container from '@/public/background/container1.png';
+import containerMobile from '@/public/background/container1-mobile.png';
 import { useRouter } from 'next/navigation';
 
 export const CustomProductSection = () => {

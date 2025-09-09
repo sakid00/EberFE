@@ -165,10 +165,10 @@ const ProductsPage = () => {
               : product.performanceFeature_id;
 
           return (
-            product.code.toLowerCase().includes(query) ||
-            application.toLowerCase().includes(query) ||
-            perfFeature.toLowerCase().includes(query) ||
-            product.type.toLowerCase().includes(query)
+            (product.code?.toLowerCase() || '').includes(query) ||
+            (application?.toLowerCase() || '').includes(query) ||
+            (perfFeature?.toLowerCase() || '').includes(query) ||
+            (product.type?.toLowerCase() || '').includes(query)
           );
         });
       }

@@ -1,15 +1,15 @@
 import { Box, Typography } from '@mui/material';
-import { ValueCard } from '../../components/Cards/ValueCard';
+import { ValueCard } from '@/components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
-import fieldPerson from '../../../public/photo/chem-person.png';
-import ImageBackground from '../../components/ImageBackground';
+import fieldPerson from '@/public/photo/chem-person.png';
+import ImageBackground from '@/components/ImageBackground';
 import { valueStyles } from './styles';
-import { dynamicStylingValue } from '../../hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '../../hooks';
-import container from '../../../public/background/container2.png';
-import containerMobile from '../../../public/background/container2-mobile.png';
-import site from '../../../public/background/site-bg.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '@/hooks';
+import container from '@/public/background/container2.png';
+import containerMobile from '@/public/background/container2-mobile.png';
+import site from '@/public/background/site-bg.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();

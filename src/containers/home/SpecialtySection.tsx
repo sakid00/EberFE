@@ -1,14 +1,14 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '../../components/DualColorText';
-import { SpecialtyCard } from '../../components/Cards/SpecialtyCard';
+import DualColorText from '@/components/DualColorText';
+import { SpecialtyCard } from '@/components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
 import {
   specialtySectionStyles,
   animationClasses,
   headerSectionStyles,
 } from './styles';
-import { dynamicStylingValue } from '../../hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '@/hooks';
 import { useRouter } from 'next/navigation';
 
 export const SpecialtySection = () => {

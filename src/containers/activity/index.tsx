@@ -1,13 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import SidebarList, { listType } from '../../components/SidebarList';
+import SidebarList, { listType } from '@/components/SidebarList';
 import { Box, Typography, CircularProgress, Alert } from '@mui/material';
-import ActivityCard from '../../components/Cards/ActivityCard';
-import { dynamicStylingValue, useDeviceType } from '../../hooks/useDeviceType';
-import useActivity from '../../hooks/useActivity';
-import emptyActivity from '../../../public/svg/empty-activity.svg';
+import ActivityCard from '@/components/Cards/ActivityCard';
+import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import useActivity from '@/hooks/useActivity';
+import emptyActivity from '@/public/svg/empty-activity.svg';
 import Image from 'next/image';
-import { useTranslation } from '../../hooks/useTranslation';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const activityList = ['Sustainability', 'Newsroom'];
 const sustainabilityList: listType[] = [

@@ -1,5 +1,5 @@
 'use client';
-import SidebarList from '../../components/SidebarList';
+import SidebarList from '@/components/SidebarList';
 import {
   Box,
   Button,
@@ -10,12 +10,12 @@ import {
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import HeaderImage from '../../../public/photo/header_corporate.png';
+import HeaderImage from '@/public/photo/header_corporate.png';
 import { Map } from '@mui/icons-material';
 import dynamic from 'next/dynamic';
 import { styles, constants } from './style';
-import { useDeviceType, useTranslation } from '../../hooks';
-import useCompany from '../../hooks/useCompany';
+import { useDeviceType, useTranslation } from '@/hooks';
+import useCompany from '@/hooks/useCompany';
 
 // Type for info box items that can come from either API or constants
 type InfoBoxItem = {

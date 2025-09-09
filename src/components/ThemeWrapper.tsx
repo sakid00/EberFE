@@ -4,7 +4,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { CacheProvider } from '@emotion/react';
 import { Plus_Jakarta_Sans } from 'next/font/google';
-import createEmotionCache from '../lib/createEmotionCache';
+import createEmotionCache from '@/lib/createEmotionCache';
 
 const font = Plus_Jakarta_Sans({
   subsets: ['latin'],
