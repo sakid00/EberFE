@@ -4,7 +4,7 @@ import { useState, useCallback, useRef } from 'react';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T | null;
   error: string | null;
   loading: boolean;
@@ -14,7 +14,7 @@ export interface ApiResponse<T = any> {
 export interface ApiOptions {
   method?: HttpMethod;
   headers?: Record<string, string>;
-  body?: any;
+  body?: unknown;
   timeout?: number;
   retries?: number;
   retryDelay?: number;
@@ -25,7 +25,7 @@ export interface ApiConfig extends ApiOptions {
   defaultHeaders?: Record<string, string>;
 }
 
-export interface UseApiReturn<T = any> {
+export interface UseApiReturn<T = unknown> {
   data: T | null;
   error: string | null;
   loading: boolean;
@@ -46,7 +46,7 @@ const defaultConfig: ApiConfig = {
   retryDelay: 1000,
 };
 
-export function useApi<T = any>(config: ApiConfig = {}): UseApiReturn<T> {
+export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -54,8 +54,6 @@ export function useApi<T = any>(config: ApiConfig = {}): UseApiReturn<T> {
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
-  const mergedConfig = { ...defaultConfig, ...config };
 
   const reset = useCallback(() => {
     setData(null);
@@ -77,6 +75,7 @@ export function useApi<T = any>(config: ApiConfig = {}): UseApiReturn<T> {
       // Reset previous state
       reset();
 
+      const mergedConfig = { ...defaultConfig, ...config };
       const finalOptions = { ...mergedConfig, ...options };
       const fullUrl = finalOptions.baseURL
         ? `${finalOptions.baseURL}${url}`
@@ -126,11 +125,13 @@ export function useApi<T = any>(config: ApiConfig = {}): UseApiReturn<T> {
           loading: false,
           status: response.status,
         };
-      } catch (err: any) {
+      } catch (err: unknown) {
         const errorMessage =
-          err.name === 'AbortError'
+          err instanceof Error && err.name === 'AbortError'
             ? 'Request was aborted'
-            : err.message || 'An error occurred';
+            : err instanceof Error
+              ? err.message
+              : 'An error occurred';
 
         setError(errorMessage);
         setLoading(false);
@@ -149,7 +150,7 @@ export function useApi<T = any>(config: ApiConfig = {}): UseApiReturn<T> {
         setLoading(false);
       }
     },
-    [mergedConfig, reset, status]
+    [config, reset, status]
   );
 
   return {

@@ -5,11 +5,15 @@ import idTranslations from '../../id.json';
 
 export type Language = 'en' | 'id';
 
+// Define a more flexible type for nested translation objects
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TranslationValue = string | Record<string, any>;
+
 interface TranslationContextType {
   language: Language;
   setLanguage: (language: Language) => void;
   t: (key: string) => string;
-  translations: any;
+  translations: Record<Language, Record<string, TranslationValue>>;
 }
 
 export const TranslationContext = createContext<
@@ -20,7 +24,7 @@ interface TranslationProviderProps {
   children: ReactNode;
 }
 
-const translations = {
+const translations: Record<Language, Record<string, TranslationValue>> = {
   en: enTranslations,
   id: idTranslations,
 };
@@ -46,6 +50,7 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({
   // Translation function that supports nested keys
   const t = (key: string): string => {
     const keys = key.split('.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let value: any = translations[language];
 
     for (const k of keys) {
@@ -72,7 +77,7 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({
     language,
     setLanguage,
     t,
-    translations: translations[language],
+    translations,
   };
 
   return (

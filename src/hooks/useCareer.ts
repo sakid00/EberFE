@@ -47,7 +47,10 @@ const useCareer = () => {
         console.log('API Response:', response); // Debug log
 
         // Handle different possible API response structures
-        const careerData: CareerResponseData[] = response.data?.data?.data;
+        const apiResponse = response.data as {
+          data?: { data?: CareerResponseData[] };
+        };
+        const careerData: CareerResponseData[] = apiResponse?.data?.data || [];
 
         console.log('Career Data:', careerData); // Debug log
 

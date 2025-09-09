@@ -93,7 +93,11 @@ const useCompany = () => {
         console.log('API Response:', response); // Debug log
 
         // Handle different possible API response structures
-        const companyData: CompanyResponseData[] = response.data?.data?.data;
+        const apiResponse = response.data as {
+          data?: { data?: CompanyResponseData[] };
+        };
+        const companyData: CompanyResponseData[] =
+          apiResponse?.data?.data || [];
 
         // Transform API response to match our global state format
         const transformedData: CompanyData[] = companyData?.map((company) => ({

@@ -19,6 +19,52 @@ interface ProductRequest {
   application?: string;
 }
 
+interface AccessProductRequest {
+  fullName: string;
+  email: string;
+  phone: string;
+  company: string;
+  city: string;
+}
+
+interface AccessProductResponse {
+  data: {
+    id: number;
+    encodedData?: string;
+    message?: string;
+  };
+}
+
+interface RequestProductRequest {
+  email: string;
+  product_code: string;
+}
+
+interface RequestProductResponse {
+  success: boolean;
+  message?: string;
+  error?: string;
+}
+
+// Helper function to decode token and extract email
+const decodeTokenAndGetEmail = (): string | null => {
+  try {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
+      return null;
+    }
+
+    // Decode base64 token
+    const decodedData = atob(token);
+    const userData = JSON.parse(decodedData);
+
+    return userData.email || null;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+};
+
 const useProduct = () => {
   const { state, actions } = useProductContext();
   const api = useApi({
@@ -56,12 +102,22 @@ const useProduct = () => {
         console.log('Products API Response:', response); // Debug log
 
         // Handle different possible API response structures
-        const productData: ProductResponseData[] = response.data?.data?.data;
+        const apiResponse = response.data as {
+          data?: {
+            data?: ProductResponseData[];
+            filter_feature?: {
+              types?: string[];
+              applications?: string[];
+            };
+          };
+        };
+        const productData: ProductResponseData[] =
+          apiResponse?.data?.data || [];
 
         console.log('Product Data:', productData); // Debug log
 
         // Extract filter data from response
-        const filterData = response.data?.data?.filter_feature;
+        const filterData = apiResponse?.data?.filter_feature;
         console.log('Filter Data:', filterData); // Debug log
 
         if (filterData) {
@@ -95,6 +151,89 @@ const useProduct = () => {
     [actions, api]
   );
 
+  const accessProduct = useCallback(
+    async (request: AccessProductRequest): Promise<AccessProductResponse> => {
+      try {
+        const response = await api.execute('/form-submissions/instant-access', {
+          method: 'POST',
+          body: request,
+        });
+
+        // Extract token from response - handle different possible response structures
+        const responseData = response?.data as AccessProductResponse;
+        const token = responseData?.data?.encodedData;
+
+        if (!token) {
+          throw new Error('No token received from API');
+        }
+
+        return {
+          data: {
+            id: responseData?.data?.id,
+            encodedData: token,
+            message: responseData.data.message,
+          },
+        };
+      } catch (error) {
+        console.error('Error requesting product access:', error);
+      }
+      return {
+        data: {
+          id: 0,
+          encodedData: '',
+          message: '',
+        },
+      };
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  const requestProduct = useCallback(
+    async (productCode: string): Promise<RequestProductResponse> => {
+      try {
+        // Get email from localStorage by decoding the token
+        const email = decodeTokenAndGetEmail();
+
+        if (!email) {
+          return {
+            success: false,
+            error: 'No email found. Please complete the access form first.',
+          };
+        }
+
+        const request: RequestProductRequest = {
+          email,
+          product_code: productCode,
+        };
+
+        const response = await api.execute(
+          '/form-submissions/send-product-email',
+          {
+            method: 'POST',
+            body: request,
+          }
+        );
+
+        const responseData = response.data as { message?: string };
+        return {
+          success: true,
+          message: responseData?.message || 'Product request sent successfully',
+        };
+      } catch (error) {
+        console.error('Error requesting product:', error);
+        return {
+          success: false,
+          error:
+            error instanceof Error
+              ? error.message
+              : 'Failed to request product',
+        };
+      }
+    },
+    [api]
+  );
+
   // Additional helper functions
   const clearError = useCallback(() => {
     actions.clearError();
@@ -109,6 +248,8 @@ const useProduct = () => {
     getProduct,
     clearError,
     resetProductState,
+    accessProduct,
+    requestProduct,
 
     // Global state
     products: state.products,
