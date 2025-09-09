@@ -3,11 +3,11 @@ import SidebarList from '../../components/SidebarList';
 import {
   Box,
   Button,
-  Grid,
   Typography,
   CircularProgress,
   Alert,
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import HeaderImage from '../../../public/photo/header_corporate.png';
