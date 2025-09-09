@@ -348,7 +348,7 @@ export const innovationSectionStyles = {
     display: 'flex',
     flexDirection: 'row',
     gap: 1.5,
-    marginTop: 5,
+    marginTop: '10%',
   } as SxProps<Theme>,
 
   cardsContainerMobile: {

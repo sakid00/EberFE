@@ -86,7 +86,7 @@ export const valueStyles: {
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    bottom: dynamicStylingValue(type, '52%', '5.5%', '5.5%'),
+    bottom: dynamicStylingValue(type, '52%', '12%', '12%'),
     left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
     zIndex: 1000,
   }),

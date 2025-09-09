@@ -9,6 +9,7 @@ import BusinessIcon from '@mui/icons-material/BusinessOutlined';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
 import { footerStyles } from './style';
 import { LocationOn } from '@mui/icons-material';
+import bgFooter from '@/public/eber-footer.png';
 
 const contactInfoList = [
   {
@@ -70,7 +71,14 @@ const Footer = () => {
         sx={footerStyles.container}
         className="justify-center align-center pt-[10vh] px-[10vw] pb-[2vh] z-100"
       >
-        <Box className="flex flex-col">
+        <Box className="flex flex-col relative">
+          <Box className="absolute -top-[50%] -right-[15%] bottom-0 z-10">
+            <Image
+              src={bgFooter}
+              alt="bg-footer"
+              style={{ width: '50vw', objectFit: 'contain' }}
+            />
+          </Box>
           <Box sx={footerStyles.headerSection(type)}>
             <Image src={logo} style={footerStyles.logo(type)} alt="logo" />
             <Box sx={footerStyles.dividerContainer}>

@@ -4,14 +4,13 @@ export const styles = {
   mainContainer: (type: DeviceType) => ({
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
-    gap: dynamicStylingValue(type, '16px', '32px', '32px'),
+    gap: dynamicStylingValue(type, '16px', '1%', '1%'),
     marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
   }),
 
   contentContainer: (type: DeviceType) => ({
     flex: 1,
     padding: dynamicStylingValue(type, '16px', '32px', '32px'),
-    marginLeft: dynamicStylingValue(type, '0px', '16px', '16px'),
     marginTop: dynamicStylingValue(type, '16px', '0px', '0px'),
     backgroundColor: 'white',
     borderRadius: '12px',

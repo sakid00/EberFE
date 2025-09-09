@@ -79,11 +79,11 @@ export const ValueSection = () => {
         objectFit="fill"
         sx={{
           width: '110%',
-          height: '110vh',
+          height: '100vh',
           marginTop: dynamicStylingValue(type, '30vh', '0px', '0px'),
         }}
         contentSx={{
-          marginTop: dynamicStylingValue(type, '10%', '0px', '0px'),
+          marginTop: dynamicStylingValue(type, '10%', '0px', '4%'),
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
@@ -98,8 +98,7 @@ export const ValueSection = () => {
               alt="field-person"
               style={{
                 objectFit: 'contain',
-                width: '65%',
-                height: '50%',
+                width: '60%',
               }}
             />
           </Box>

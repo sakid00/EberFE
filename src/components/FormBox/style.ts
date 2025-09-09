@@ -70,6 +70,7 @@ export const styles = {
     marginTop: 4,
     width: '100%',
     borderRadius: 5,
+    height: '3em',
     textTransform: 'none',
   },
 };

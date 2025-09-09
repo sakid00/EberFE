@@ -157,6 +157,9 @@ const SidebarList: React.FC<ISidebarListProps> = ({
         fontSize="1.8em"
         fontWeight={800}
         inline={inline ?? false}
+        sx={{
+          marginLeft: '5%',
+        }}
       />
       {secondaryText && (
         <DualColorText

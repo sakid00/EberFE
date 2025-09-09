@@ -85,6 +85,20 @@ export const styles = {
     fontSize: '12px',
   },
 
+  helperText: {
+    fontSize: '11px',
+    color: '#d32f2f',
+    marginTop: '4px',
+    marginLeft: '4px',
+  },
+
+  helperTextPhone: {
+    fontSize: '11px',
+    color: '#BCC2C9',
+    marginTop: '4px',
+    marginLeft: '4px',
+  },
+
   submitButton: {
     color: 'white',
     background:
@@ -101,10 +115,25 @@ export const styles = {
         'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
     },
   },
+  backHomeButton: {
+    color: '#030712',
+    background: 'transparent',
+    marginTop: 1,
+    width: '100%',
+    borderRadius: '20px',
+    fontSize: '0.8em',
+    fontWeight: 400,
+    textTransform: 'none' as const,
+    padding: '10px 20px',
+    '&:hover': {
+      background:
+        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+    },
+  },
 };
 
 export const classNames = {
-  firstNameField: 'w-[95%]',
+  firstNameField: 'w-full',
   lastNameField: 'w-full',
   emailField: 'w-full',
   messageField: 'w-[100%]',

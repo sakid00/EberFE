@@ -80,8 +80,8 @@ export const footerStyles = {
     backgroundColor: '#8F92A7',
     borderRadius: 10,
     height: 1,
-    width: '80%',
-    maxWidth: '80vw',
+    width: '100%',
+    maxWidth: '100vw',
   } as SxProps<Theme>,
 
   copyrightIcon: {

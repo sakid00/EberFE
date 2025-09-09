@@ -9,6 +9,7 @@ import {
 import { styles, classNames } from './style';
 import { useState } from 'react';
 import useProduct from '../../hooks/useProduct';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   fullName: string;
@@ -41,6 +42,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const router = useRouter();
 
   const handleInputChange =
     (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +82,10 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleHome = () => {
+    router.push('/');
   };
 
   const handleSubmit = async () => {
@@ -175,12 +181,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
             value={formData.fullName}
             onChange={handleInputChange('fullName')}
             error={!!errors.fullName}
-            helperText={errors.fullName}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          {errors.fullName && (
+            <Typography sx={styles.helperText}>{errors.fullName}</Typography>
+          )}
         </Box>
         <Box sx={styles.fullWidthBox}>
           <InputLabel sx={styles.inputLabel}>Email</InputLabel>
@@ -191,12 +199,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
             value={formData.email}
             onChange={handleInputChange('email')}
             error={!!errors.email}
-            helperText={errors.email}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          {errors.email && (
+            <Typography sx={styles.helperText}>{errors.email}</Typography>
+          )}
         </Box>
         <Box sx={styles.fieldContainer}>
           <InputLabel sx={styles.inputLabel}>Phone Number</InputLabel>
@@ -206,12 +216,16 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
             value={formData.phoneNumber}
             onChange={handleInputChange('phoneNumber')}
             error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber || 'Must start with +62'}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          <Typography
+            sx={errors.phoneNumber ? styles.helperText : styles.helperTextPhone}
+          >
+            {errors.phoneNumber || 'Must start with +62'}
+          </Typography>
         </Box>
         <Box sx={styles.fieldContainer}>
           <InputLabel sx={styles.inputLabel}>
@@ -223,12 +237,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
             value={formData.companyName}
             onChange={handleInputChange('companyName')}
             error={!!errors.companyName}
-            helperText={errors.companyName}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          {errors.companyName && (
+            <Typography sx={styles.helperText}>{errors.companyName}</Typography>
+          )}
         </Box>
         <Box sx={styles.fieldContainer}>
           <InputLabel sx={styles.inputLabel}>City (Optional)</InputLabel>
@@ -238,12 +254,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
             value={formData.city}
             onChange={handleInputChange('city')}
             error={!!errors.city}
-            helperText={errors.city}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          {errors.city && (
+            <Typography sx={styles.helperText}>{errors.city}</Typography>
+          )}
         </Box>
         <Typography fontSize={'0.8em'} color={'#4B5563'} marginTop={'1%'}>
           We&apos;ll never share your details with anyone else
@@ -254,6 +272,15 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Processing...' : 'Get Instant Access'}
+        </Button>
+        <Button
+          size="small"
+          variant="outlined"
+          sx={styles.backHomeButton}
+          onClick={handleHome}
+          disabled={isSubmitting}
+        >
+          Back to Home
         </Button>
       </Box>
     </Modal>

@@ -144,7 +144,7 @@ const ActivityContainer = () => {
         {/* Activities Grid */}
         {!isLoading && !error && (
           <Box
-            className={`${type !== 'mobile' ? 'grid grid-rows-3 grid-cols-3 gap-4 mt-4' : 'flex flex-col gap-4 mt-4'}`}
+            className={`${type !== 'mobile' && activities.length > 0 ? 'grid grid-rows-3 grid-cols-3 gap-4 mt-4' : 'flex flex-col gap-4 mt-4'}`}
             sx={{
               width: '100%',
               maxWidth: '1200px',
@@ -180,8 +180,9 @@ const ActivityContainer = () => {
                 flexDirection="column"
                 justifyContent="center"
                 alignItems="center"
-                minHeight="200px"
+                minHeight="10%"
                 gridColumn="1 / -1"
+                marginTop="15%"
                 gap={2}
               >
                 <Image

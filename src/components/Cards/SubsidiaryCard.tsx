@@ -24,7 +24,7 @@ export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
         alt={`subsidiary-img-${index}`}
         style={{
           width: '100%',
-          height: dynamicStylingValue(type, '20vh', '30vh', '30vh'),
+          height: dynamicStylingValue(type, '20vh', '25vh', '25vh'),
           borderRadius: '10px',
         }}
       />
