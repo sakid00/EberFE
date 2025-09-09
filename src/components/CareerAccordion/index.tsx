@@ -1,4 +1,4 @@
-import { ICareerList } from '@/app/careers/page';
+import { ICareerList } from '../../app/careers/page';
 import {
   Accordion,
   AccordionDetails,
@@ -8,8 +8,8 @@ import {
 } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles, getAccordionMarginTop } from './style';
-import { useDeviceType, useTranslation } from '@/hooks';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
 
 interface ICareerAccordion {
   list: ICareerList[];

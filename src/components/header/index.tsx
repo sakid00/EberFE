@@ -1,10 +1,10 @@
 'use client';
 import Image from 'next/image';
-import logo from '@public/eber_logo.png';
-import logoMobile from '@public/svg/eber-logo-color.svg';
-import bgHeaderHomepage from '@public/background/homepage_header_bg.png';
-import idFlag from '@public/svg/id.svg';
-import enFlag from '@public/svg/en.svg';
+import logo from '../../../public/eber_logo.png';
+import logoMobile from '../../../public/svg/eber-logo-color.svg';
+import bgHeaderHomepage from '../../../public/background/homepage_header_bg.png';
+import idFlag from '../../../public/svg/id.svg';
+import enFlag from '../../../public/svg/en.svg';
 import {
   Box,
   Button,
@@ -21,9 +21,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { headerStyles } from './style';
 import ImageBackground from '../ImageBackground';
 import { ClientOnly } from '../ClientOnly';
-import { useDeviceType, useTranslation } from '@/hooks';
-import headerAccessoriesMobile from '@public/photo/eber-big-2-mobile.png';
-import headerAccessories from '@public/photo/eber-big-2.png';
+import { useDeviceType, useTranslation } from '../../hooks';
+import headerAccessoriesMobile from '../../../public/photo/eber-big-2-mobile.png';
+import headerAccessories from '../../../public/photo/eber-big-2.png';
 
 // Constants
 const ANIMATION_DURATION = 300;

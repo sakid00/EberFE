@@ -1,5 +1,5 @@
 import { useApi } from './useApi';
-import { useActivityContext, ActivityData } from '@/contexts/DataProvider';
+import { useActivityContext, ActivityData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 
 interface ActivityResponseData {

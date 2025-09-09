@@ -1,7 +1,7 @@
 'use client';
-import Photo from '@public/photo/safety-person.png';
-import FormSubmitContainer from '@/containers/formSubmit';
-import { useDeviceType, useTranslation } from '@/hooks';
+import Photo from '../../../public/photo/safety-person.png';
+import FormSubmitContainer from '../../containers/formSubmit';
+import { useDeviceType, useTranslation } from '../../hooks';
 import { CSSProperties } from 'react';
 
 const ContactUsPage = () => {

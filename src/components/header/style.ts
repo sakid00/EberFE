@@ -1,4 +1,4 @@
-import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
 // Style constants

@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { SxProps, Theme } from '@mui/material';
-import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 
 // HeaderSection Styles
 export const headerStyles: {

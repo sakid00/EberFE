@@ -1,10 +1,10 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import CareerContainer from '@/containers/career';
-import useCareer from '@/hooks/useCareer';
+import CareerContainer from '../../containers/career';
+import useCareer from '../../hooks/useCareer';
 import { useEffect, useMemo } from 'react';
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useTranslation } from '@/hooks';
+import { useTranslation } from '../../hooks';
 
 export interface ICareerList {
   title: string;

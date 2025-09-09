@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '../../components/DualColorText';
 import { CorporateCard } from '../../components/Cards/CorporateCard';
 import { CORPORATE_DATA } from './constants';
 import { corporateStyles } from './styles';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '@/hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
 
 export const CorporateSection = () => {
   const { type } = useDeviceType();

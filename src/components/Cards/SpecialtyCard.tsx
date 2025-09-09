@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import { SPECIALTY_DATA } from '../../containers/home/constants';
-import { useDeviceType, useTranslation } from '@/hooks';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
 
 interface SpecialtyCardProps {
   data: (typeof SPECIALTY_DATA)[0];

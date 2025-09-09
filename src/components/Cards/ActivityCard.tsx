@@ -3,10 +3,10 @@ import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import calendar from '@public/icon/calendar.svg';
-import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import calendar from '../../../public/icon/calendar.svg';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { useRouter } from 'next/navigation';
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from '../../hooks/useTranslation';
 
 const PDFViewer = dynamic(() => import('../PDFViewer'), {
   ssr: false,

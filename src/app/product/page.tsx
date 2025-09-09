@@ -1,5 +1,5 @@
 'use client';
-import ProductContainer from '@/containers/product';
+import ProductContainer from '../../containers/product';
 import {
   Button,
   SelectChangeEvent,
@@ -7,11 +7,11 @@ import {
   Box,
   Typography,
 } from '@mui/material';
-import emailIcon from '@public/icon/email-no-bg.svg';
+import emailIcon from '../../../public/icon/email-no-bg.svg';
 import Image from 'next/image';
 import { ReactNode, useState, useEffect, useMemo, useCallback } from 'react';
-import useProduct from '@/hooks/useProduct';
-import { useTranslation } from '@/hooks';
+import useProduct from '../../hooks/useProduct';
+import { useTranslation } from '../../hooks';
 
 const cellTitles = [
   'Product Code',

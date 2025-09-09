@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import locationSVG from '@public/icon/location.svg';
+import locationSVG from '../../../public/icon/location.svg';
 import { SUBSIDIARIES_DATA } from '../../containers/home/constants';
-import { useDeviceType, useTranslation } from '@/hooks';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
 
 interface SubsidiaryCardProps {
   data: (typeof SUBSIDIARIES_DATA)[0];

@@ -1,8 +1,8 @@
 'use client';
-import Photo from '@public/photo/lab-person.png';
-import FormSubmitContainer from '@/containers/formSubmit';
+import Photo from '../../../../public/photo/lab-person.png';
+import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
-import { useDeviceType, useTranslation } from '@/hooks';
+import { useDeviceType, useTranslation } from '../../../hooks';
 import { CSSProperties } from 'react';
 
 const SubmitApplicationPage = () => {

@@ -1,10 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '../../components/DualColorText';
 import { CertificationCard } from '../../components/Cards/CertificationCard';
 import { CERTIFICATION_DATA } from './constants';
 import { certificationStyles } from './styles';
-import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
-import { useTranslation } from '@/hooks';
+import { dynamicStylingValue, useDeviceType } from '../../hooks/useDeviceType';
+import { useTranslation } from '../../hooks';
 
 export const CertificationSection = () => {
   const { type } = useDeviceType();

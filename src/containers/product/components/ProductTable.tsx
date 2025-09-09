@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import { styles } from '../style';
 import { ProductTableProps } from '../types';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType } from '../../../hooks';
 
 const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
   const { type } = useDeviceType();

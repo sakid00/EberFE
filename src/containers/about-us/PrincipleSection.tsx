@@ -1,12 +1,12 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import fieldPerson from '@public/photo/field_person3.png';
+import fieldPerson from '../../../public/photo/field_person3.png';
 import { principleStyles } from './styles';
-import container from '@public/background/container1.png';
-import containerMobile from '@public/background/container1-mobile.png';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '@/hooks';
-import ImageBackground from '@/components/ImageBackground';
+import container from '../../../public/background/container1.png';
+import containerMobile from '../../../public/background/container1-mobile.png';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
+import ImageBackground from '../../components/ImageBackground';
 
 export const PrincipleSection = () => {
   const { t } = useTranslation();

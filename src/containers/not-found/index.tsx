@@ -1,9 +1,9 @@
 'use client';
 import { Box, Typography, Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useDeviceType, useTranslation } from '@/hooks';
+import { useDeviceType, useTranslation } from '../../hooks';
 import Image from 'next/image';
-import notFound from '@public/svg/404.svg';
+import notFound from '../../../public/svg/404.svg';
 import { notFoundStyles } from './styles';
 
 export default function NotFound() {

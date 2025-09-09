@@ -1,11 +1,11 @@
-import { ICareerList } from '@/app/careers/page';
-import CareerAccordion from '@/components/CareerAccordion';
-import DualColorText from '@/components/DualColorText';
+import { ICareerList } from '../../app/careers/page';
+import CareerAccordion from '../../components/CareerAccordion';
+import DualColorText from '../../components/DualColorText';
 import { Box, Typography } from '@mui/material';
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { styles } from './style';
-import { useDeviceType, useTranslation } from '@/hooks';
-import emptyIcon from '@public/icon/empty-career.svg';
+import { useDeviceType, useTranslation } from '../../hooks';
+import emptyIcon from '../../../public/icon/empty-career.svg';
 import Image from 'next/image';
 
 interface ICareerContainer {

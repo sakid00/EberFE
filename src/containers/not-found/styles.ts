@@ -1,5 +1,5 @@
-import { DeviceType } from '@/hooks';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { DeviceType } from '../../hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
 export const notFoundStyles = {

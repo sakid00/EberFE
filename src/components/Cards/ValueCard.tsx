@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import { VALUES_DATA } from '../../containers/about-us/constants';
-import { useDeviceType, useTranslation } from '@/hooks';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
 
 interface ValueCardProps {
   data: (typeof VALUES_DATA)[0];

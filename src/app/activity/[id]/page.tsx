@@ -1,4 +1,4 @@
-import ActivityDetailContainer from '@/containers/activity/ActivityDetailPage';
+import ActivityDetailContainer from '../../../containers/activity/ActivityDetailPage';
 
 interface ActivityDetailPageProps {
   params: Promise<{

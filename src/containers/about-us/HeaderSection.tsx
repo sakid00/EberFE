@@ -1,11 +1,11 @@
 import { Box, Button, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '../../components/DualColorText';
 import Image from 'next/image';
-import photo from '@public/photo/tangki-person.png';
+import photo from '../../../public/photo/tangki-person.png';
 import { headerStyles } from './styles';
-import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
-import { ClientOnly } from '@/components/ClientOnly';
-import { useTranslation } from '@/hooks';
+import { dynamicStylingValue, useDeviceType } from '../../hooks/useDeviceType';
+import { ClientOnly } from '../../components/ClientOnly';
+import { useTranslation } from '../../hooks';
 
 export const HeaderSection = () => {
   const { t } = useTranslation();

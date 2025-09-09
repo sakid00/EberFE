@@ -1,4 +1,4 @@
-import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 
 export const styles = {
   // Main container

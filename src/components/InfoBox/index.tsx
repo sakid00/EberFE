@@ -1,8 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import Image, { StaticImageData } from 'next/image';
 import { styles, getInfoItemClassName } from './style';
-import { infoListType } from '@/containers/formSubmit';
-import { DeviceType, useTranslation } from '@/hooks';
+import { infoListType } from '../../containers/formSubmit';
+import { DeviceType, useTranslation } from '../../hooks';
 
 interface IInfoBoxProps {
   infoList: infoListType[];

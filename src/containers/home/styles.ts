@@ -1,5 +1,5 @@
-import { Language } from '@/contexts/TranslationContext';
-import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { Language } from '../../contexts/TranslationContext';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { SxProps, Theme } from '@mui/material';
 
 // Common color constants

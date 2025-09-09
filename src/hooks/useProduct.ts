@@ -1,5 +1,5 @@
 import { useApi } from './useApi';
-import { useProductContext, ProductData } from '@/contexts/DataProvider';
+import { useProductContext, ProductData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 
 interface ProductResponseData {

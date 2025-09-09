@@ -6,7 +6,7 @@ import {
   PrincipleSection,
   CorporateSection,
   ValueSection,
-} from '@/containers/about-us';
+} from '../../containers/about-us';
 
 const AboutUs = () => {
   useScrollAnimation();

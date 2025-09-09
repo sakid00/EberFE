@@ -1,12 +1,12 @@
-import FormBox from '@/components/FormBox';
-import InfoBox from '@/components/InfoBox';
+import FormBox from '../../components/FormBox';
+import InfoBox from '../../components/InfoBox';
 import { Box } from '@mui/material';
 import { StaticImageData } from 'next/image';
 import { styles } from './style';
-import EmailIcon from '@public/icon/email_purple.svg';
-import PhoneIcon from '@public/icon/phone_purple.svg';
-import LocationIcon from '@public/icon/location_purple.svg';
-import { DeviceType } from '@/hooks';
+import EmailIcon from '../../../public/icon/email_purple.svg';
+import PhoneIcon from '../../../public/icon/phone_purple.svg';
+import LocationIcon from '../../../public/icon/location_purple.svg';
+import { DeviceType } from '../../hooks';
 
 export type infoListType = {
   logo: string;

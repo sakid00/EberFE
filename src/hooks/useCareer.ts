@@ -1,5 +1,5 @@
 import { useApi } from './useApi';
-import { useCareerContext, CareerData } from '@/contexts/DataProvider';
+import { useCareerContext, CareerData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 
 type CareerType = 'fulltime' | 'parttime' | 'internship' | 'contract';

@@ -1,10 +1,10 @@
 import { Box, Typography } from '@mui/material';
-import DualColorText from '@/components/DualColorText';
+import DualColorText from '../../components/DualColorText';
 import { SubsidiaryCard } from '../../components/Cards/SubsidiaryCard';
 import { SUBSIDIARIES_DATA } from './constants';
 import { subsidiariesSectionStyles, animationClasses } from './styles';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { useDeviceType, useTranslation } from '@/hooks';
+import { dynamicStylingValue } from '../../hooks/useDeviceType';
+import { useDeviceType, useTranslation } from '../../hooks';
 
 export const SubsidiariesSection = () => {
   const { type } = useDeviceType();

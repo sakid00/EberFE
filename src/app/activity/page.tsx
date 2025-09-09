@@ -1,4 +1,4 @@
-import ActivityContainer from '@/containers/activity';
+import ActivityContainer from '../../containers/activity';
 
 const ActivityPage = () => {
   return <ActivityContainer />;

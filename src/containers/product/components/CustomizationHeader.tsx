@@ -1,10 +1,13 @@
 import { Box, Button } from '@mui/material';
 import Image from 'next/image';
-import customIcon from '@public/icon/customize.svg';
-import DualColorText from '@/components/DualColorText';
+import customIcon from '../../../../public/icon/customize.svg';
+import DualColorText from '../../../components/DualColorText';
 import { styles } from '../style';
 import { CustomizationHeaderProps } from '../types';
-import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
+import {
+  dynamicStylingValue,
+  useDeviceType,
+} from '../../../hooks/useDeviceType';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({

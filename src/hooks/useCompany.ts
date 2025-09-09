@@ -1,5 +1,5 @@
 import { useApi } from './useApi';
-import { useCompanyContext, CompanyData } from '@/contexts/DataProvider';
+import { useCompanyContext, CompanyData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 
 interface CompanyResponseData {

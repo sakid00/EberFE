@@ -1,4 +1,4 @@
-import CorporateContainer from '@/containers/corporate/Corporate';
+import CorporateContainer from '../../containers/corporate/Corporate';
 
 const CorporatePage = () => <CorporateContainer />;
 

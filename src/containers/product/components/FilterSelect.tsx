@@ -11,7 +11,7 @@ import {
 import { KeyboardArrowDown } from '@mui/icons-material';
 import { styles } from '../style';
 import { FilterSelectProps } from '../types';
-import { useDeviceType } from '@/hooks/useDeviceType';
+import { useDeviceType } from '../../../hooks/useDeviceType';
 
 const FilterSelect: React.FC<FilterSelectProps> = ({
   id,

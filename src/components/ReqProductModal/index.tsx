@@ -8,7 +8,7 @@ import {
 } from '@mui/material';
 import { styles, classNames } from './style';
 import { useState } from 'react';
-import useProduct from '@/hooks/useProduct';
+import useProduct from '../../hooks/useProduct';
 
 interface FormData {
   fullName: string;

@@ -1,15 +1,15 @@
-import advancedSVG from '@public/svg/advanced.svg';
-import expertSVG from '@public/svg/expert.svg';
-import focusSVG from '@public/svg/focus.svg';
-import recycleSVG from '@public/svg/recycle.svg';
-import collabSVG from '@public/icon/collab.svg';
-import rndSVG from '@public/icon/rnd.svg';
-import sustainSVG from '@public/icon/sustain.svg';
-import transfromSVG from '@public/icon/transform.svg';
-import eternal from '@public/photo/eternal.png';
-import petrowidada from '@public/photo/petro.png';
-import eng from '@public/photo/eng.png';
-import mega from '@public/photo/mega.png';
+import advancedSVG from '../../../public/svg/advanced.svg';
+import expertSVG from '../../../public/svg/expert.svg';
+import focusSVG from '../../../public/svg/focus.svg';
+import recycleSVG from '../../../public/svg/recycle.svg';
+import collabSVG from '../../../public/icon/collab.svg';
+import rndSVG from '../../../public/icon/rnd.svg';
+import sustainSVG from '../../../public/icon/sustain.svg';
+import transfromSVG from '../../../public/icon/transform.svg';
+import eternal from '../../../public/photo/eternal.png';
+import petrowidada from '../../../public/photo/petro.png';
+import eng from '../../../public/photo/eng.png';
+import mega from '../../../public/photo/mega.png';
 
 export const SPECIALTY_DATA = [
   {

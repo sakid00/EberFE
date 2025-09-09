@@ -1,6 +1,6 @@
 'use client';
 import { Box, Divider, Typography } from '@mui/material';
-import { useDeviceType } from '@/hooks';
+import { useDeviceType } from '../../hooks';
 import Image from 'next/image';
 import logo from '../../../public/eber_logo.png';
 import LocationIcon from '@mui/icons-material/LocationPin';

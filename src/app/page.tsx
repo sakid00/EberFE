@@ -6,7 +6,7 @@ import {
   SubsidiariesSection,
   InnovationSection,
   useScrollAnimation,
-} from '@/containers/home';
+} from '../containers/home';
 
 export default function Home() {
   useScrollAnimation();
