@@ -11,7 +11,7 @@ export const styles = {
       display: 'none',
     },
     '&.Mui-expanded': {
-      margin: 0,
+      margin: '16px 0 0 0',
     },
     '&.MuiAccordion-root': {
       '&:first-of-type': {

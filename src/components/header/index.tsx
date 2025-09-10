@@ -25,6 +25,8 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import headerAccessoriesMobile from '@/public/photo/eber-big-2-mobile.png';
 import headerAccessories from '@/public/photo/eber-big-2.png';
 import photo from '@/public/photo/subtract.png';
+import photoTank from '@/public/photo/tangki-person.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // Constants
 const ANIMATION_DURATION = 300;
@@ -367,29 +369,41 @@ const Header = () => {
                   : headerAccessories
               }
               alt="header accessories"
-              style={headerStyles.headerAccessories(
-                type,
-                isHomePagePath || isAboutUsPagePath
-              )}
+              style={headerStyles.headerAccessories(type)}
             />
 
             {isHomePagePath && (
               <Box
                 sx={{
                   position: 'absolute',
-                  width: '50%',
-                  top: '25%',
-                  left: '37%',
+                  width: dynamicStylingValue(type, '100%', '50%', '50%'),
+                  height: dynamicStylingValue(type, '50%', '80%', '80%'),
+                  top: dynamicStylingValue(type, '50%', '22%', '22%'),
+                  left: dynamicStylingValue(type, '0', '38%', '38%'),
                   right: 0,
                   bottom: 0,
                   zIndex: 1,
                 }}
               >
-                <Image
-                  src={photo}
-                  alt="header photo"
-                  style={{ objectFit: 'fill' }}
-                />
+                <Image src={photo} alt="header photo" fill />
+              </Box>
+            )}
+
+            {isAboutUsPagePath && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  width: dynamicStylingValue(type, '90%', '60%', '60%'),
+                  height: dynamicStylingValue(type, '50%', '100%', '100%'),
+                  aspectRatio: '1/1.1',
+                  top: dynamicStylingValue(type, '50%', '10%', '10%'),
+                  left: dynamicStylingValue(type, '10%', '40%', '40%'),
+                  right: 0,
+                  bottom: 0,
+                  zIndex: 1,
+                }}
+              >
+                <Image src={photoTank} alt="header photo" fill />
               </Box>
             )}
 

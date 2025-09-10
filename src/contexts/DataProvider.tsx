@@ -128,6 +128,12 @@ export interface ActivityState {
   isLoading: boolean;
   error: string | null;
   lastUpdated: Date | null;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+  } | null;
 }
 
 // ===== NEXT API TYPES (PLACEHOLDER) =====
@@ -182,7 +188,18 @@ type DataAction =
 
   // Activity Actions
   | { type: 'ACTIVITY_FETCH_START' }
-  | { type: 'ACTIVITY_FETCH_SUCCESS'; payload: ActivityData[] }
+  | {
+      type: 'ACTIVITY_FETCH_SUCCESS';
+      payload: {
+        activities: ActivityData[];
+        pagination: {
+          currentPage: number;
+          totalPages: number;
+          totalItems: number;
+          itemsPerPage: number;
+        };
+      };
+    }
   | { type: 'ACTIVITY_FETCH_ERROR'; payload: string }
   | { type: 'ACTIVITY_CLEAR_ERROR' }
   | { type: 'ACTIVITY_RESET' }
@@ -226,7 +243,15 @@ interface DataContextType {
 
     // Activity Actions
     activityFetchStart: () => void;
-    activityFetchSuccess: (activities: ActivityData[]) => void;
+    activityFetchSuccess: (
+      activities: ActivityData[],
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        itemsPerPage: number;
+      }
+    ) => void;
     activityFetchError: (error: string) => void;
     activityClearError: () => void;
     activityReset: () => void;
@@ -275,6 +300,7 @@ const initialActivityState: ActivityState = {
   isLoading: false,
   error: null,
   lastUpdated: null,
+  pagination: null,
 };
 
 const initialNextApiState: NextApiState = {
@@ -480,7 +506,8 @@ function dataReducer(state: GlobalState, action: DataAction): GlobalState {
         ...state,
         activity: {
           ...state.activity,
-          activities: action.payload,
+          activities: action.payload.activities,
+          pagination: action.payload.pagination,
           isLoading: false,
           error: null,
           lastUpdated: new Date(),
@@ -619,8 +646,19 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
     // Activity Actions
     activityFetchStart: () => dispatch({ type: 'ACTIVITY_FETCH_START' }),
-    activityFetchSuccess: (activities: ActivityData[]) =>
-      dispatch({ type: 'ACTIVITY_FETCH_SUCCESS', payload: activities }),
+    activityFetchSuccess: (
+      activities: ActivityData[],
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        itemsPerPage: number;
+      }
+    ) =>
+      dispatch({
+        type: 'ACTIVITY_FETCH_SUCCESS',
+        payload: { activities, pagination },
+      }),
     activityFetchError: (error: string) =>
       dispatch({ type: 'ACTIVITY_FETCH_ERROR', payload: error }),
     activityClearError: () => dispatch({ type: 'ACTIVITY_CLEAR_ERROR' }),

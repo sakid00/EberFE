@@ -7,6 +7,7 @@ import containerMobile from '@/public/background/container1-mobile.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import ImageBackground from '@/components/ImageBackground/index';
+import { animationClasses } from '../home/styles';
 
 export const PrincipleSection = () => {
   const { t } = useTranslation();
@@ -17,28 +18,24 @@ export const PrincipleSection = () => {
       id="home-third-section"
       className="relative flex justify-center items-center mt-20"
     >
-      <Box
-        // className="animate-slide-right"
-        sx={principleStyles.fieldPersonContainer(type)}
-      >
-        <Image
-          src={fieldPerson}
-          alt="field-person"
-          width={type === 'mobile' ? 300 : 600}
-          height={type === 'mobile' ? 300 : 400}
-        />
-      </Box>
+      {type === 'mobile' && (
+        <Box sx={principleStyles.fieldPersonContainer(type)}>
+          <Image src={fieldPerson} alt="field-person" fill />
+        </Box>
+      )}
+
       <ImageBackground
         src={type === 'mobile' ? containerMobile : container}
         alt="container"
-        objectFit="contain"
-        // className={animationClasses.slideRight}
+        objectFit="fill"
+        className={animationClasses.slideRight}
         sx={{
-          width: '100vw',
-          height: dynamicStylingValue(type, '90vh', '100vh', '100vh'),
+          width: '100%',
+          height: dynamicStylingValue(type, '90vh', '100vh', '80vh'),
           marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
         }}
         contentSx={{
+          position: 'relative',
           marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
           display: 'flex',
           flexDirection: 'row',
@@ -47,6 +44,12 @@ export const PrincipleSection = () => {
           paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
         }}
       >
+        {type !== 'mobile' && (
+          <Box sx={principleStyles.fieldPersonContainer(type)}>
+            <Image src={fieldPerson} alt="field-person" fill />
+          </Box>
+        )}
+
         {type !== 'mobile' && (
           <Box
             className="w-full flex justify-center"

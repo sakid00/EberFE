@@ -63,13 +63,8 @@ export const ValueSection = () => {
       </Box>
 
       {type === 'mobile' && (
-        <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
-          <Image
-            src={fieldPerson}
-            alt="field-person"
-            width={800}
-            height={400}
-          />
+        <Box sx={valueStyles.fieldPersonContainer(type)}>
+          <Image src={fieldPerson} alt="field-person" fill />
         </Box>
       )}
 
@@ -115,22 +110,21 @@ export const ValueSection = () => {
           ))}
         </Box>
       </ImageBackground>
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '-20vh',
-          right: dynamicStylingValue(type, '-5vw', '-10vw', '-10vw'),
-          zIndex: -1,
-          width: '100vw',
-          height: '100%',
-        }}
-      >
-        <Image
-          src={site}
-          alt="site"
-          style={{ objectFit: 'fill', width: '100vw', height: '100%' }}
-        />
-      </Box>
+
+      {type !== 'mobile' && (
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '-40vh',
+            right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
+            zIndex: -1,
+            width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
+            height: '100%',
+          }}
+        >
+          <Image src={site} alt="site" fill />
+        </Box>
+      )}
     </Box>
   );
 };

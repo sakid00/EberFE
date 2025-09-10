@@ -5,6 +5,7 @@ import Image from 'next/image';
 import DualColorText from '@/components/dualColorText/index';
 import { useActivityState } from '@/contexts/DataProvider';
 import { useTranslation } from '@/hooks/useTranslation';
+import ActivityCard from '@/components/Cards/ActivityCard';
 
 const ActivityDetailPage = ({ id }: { id: number }) => {
   const { type } = useDeviceType();
@@ -13,6 +14,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
 
   // Find the specific activity by ID from global state
   const currentActivity = activities.find((activity) => activity.id === id);
+
+  // Filter out the current activity from the activities list
+  const otherActivities = activities.filter((activity) => activity.id !== id);
 
   // Use appropriate language based on current language setting
   const displayTitle =
@@ -148,15 +152,25 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             fontWeight={800}
           />
           <Box
+            id="other-activities-container"
             className={`flex flex-col gap-4 mt-4`}
             sx={{
               width: '100%',
               flexWrap: 'wrap',
             }}
           >
-            {/* <ActivityCard type={type} />
-            <ActivityCard type={type} />
-            <ActivityCard type={type} /> */}
+            {otherActivities.slice(0, 3).map((activity) => (
+              <ActivityCard
+                key={activity.id}
+                id={activity.id}
+                image={activity.image}
+                title_en={activity.title_en}
+                title_id={activity.title_id}
+                date={activity.updatedAt ? formatDate(activity.updatedAt) : ''}
+                pdfUrl={activity.pdf}
+                type={type}
+              />
+            ))}
           </Box>
         </Box>
       )}

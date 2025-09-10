@@ -44,7 +44,7 @@ export const CustomProductSection = () => {
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
-          height: dynamicStylingValue(type, '90vh', '70vh', '70vh'),
+          height: dynamicStylingValue(type, '70vh', '70vh', '70vh'),
           marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
         }}
         contentSx={{
@@ -60,7 +60,7 @@ export const CustomProductSection = () => {
         {type !== 'mobile' && (
           <Box
             sx={customProductSectionStyles.imageContainerTransform(type)}
-            className={animationClasses.fadeIn}
+            className={animationClasses.scale}
           >
             <Image
               src={fieldPerson}

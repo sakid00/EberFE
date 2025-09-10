@@ -61,45 +61,44 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginTop: '24px',
-            padding: '16px',
-            gap: '16px',
-          }}
-        >
-          <Typography variant="body2" color="text.secondary">
-            Showing {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)}{' '}
-            to {Math.min(currentPage * itemsPerPage, totalItems)} of{' '}
-            {totalItems} products
-          </Typography>
+        <Box sx={styles.paginationContainer(type)}>
+          {/* Pagination Info - Hide on mobile, show on tablet and desktop */}
+          {type !== 'mobile' && (
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={styles.paginationInfo(type)}
+            >
+              Showing{' '}
+              {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)} to{' '}
+              {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}{' '}
+              products
+            </Typography>
+          )}
+
+          {/* Mobile pagination info - compact version */}
+          {type === 'mobile' && (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={styles.paginationInfoMobile}
+            >
+              {currentPage} of {totalPages}
+            </Typography>
+          )}
+
           <Stack spacing={2}>
             <Pagination
               count={totalPages}
               page={currentPage}
               onChange={onPageChange}
               color="primary"
-              size="large"
-              showFirstButton
-              showLastButton
-              sx={{
-                '& .MuiPaginationItem-root': {
-                  color: '#784791',
-                  '&.Mui-selected': {
-                    backgroundColor: '#D6CBE3',
-                    color: '#784791',
-                    '&:hover': {
-                      backgroundColor: '#C1B0D3',
-                    },
-                  },
-                  '&:hover': {
-                    backgroundColor: '#F3F5F7',
-                  },
-                },
-              }}
+              size={type === 'mobile' ? 'small' : 'large'}
+              showFirstButton={type !== 'mobile'}
+              showLastButton={type !== 'mobile'}
+              siblingCount={type === 'mobile' ? 1 : 2}
+              boundaryCount={type === 'mobile' ? 1 : 2}
+              sx={styles.pagination(type)}
             />
           </Stack>
         </Box>

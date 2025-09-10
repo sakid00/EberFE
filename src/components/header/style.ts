@@ -28,20 +28,15 @@ export const headerStyles = {
   header: {
     position: 'relative' as const,
   },
-  headerAccessories: (deviceType: DeviceType, isHomepage: boolean) => ({
+  headerAccessories: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
     display: 'block',
     width: '100%',
-    height: dynamicStylingValue(
-      deviceType,
-      '80%',
-      isHomepage ? '100%' : '60vh',
-      isHomepage ? '80vh' : '60vh'
-    ),
+    height: dynamicStylingValue(deviceType, '80%', '100%', '80vh'),
     right: 0,
     top: '-30%',
     zIndex: 0,
-    objectFit: isHomepage ? ('contain' as const) : ('fill' as const),
+    objectFit: 'contain' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,

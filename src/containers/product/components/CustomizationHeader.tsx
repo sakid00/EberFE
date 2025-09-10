@@ -12,7 +12,10 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
 }) => {
   const { type } = useDeviceType();
   return (
-    <Box sx={styles.headerContainer}>
+    <Box
+      sx={styles.headerContainer}
+      onClick={type === 'mobile' ? onCustomProductClick : undefined}
+    >
       <Box sx={styles.headerContent}>
         <Box sx={styles.iconContainer}>
           <Image src={customIcon} width={20} height={20} alt="Customize icon" />
@@ -35,7 +38,7 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
           Custom Product
         </Button>
       ) : (
-        <ChevronRightIcon />
+        <ChevronRightIcon sx={{ color: 'white' }} />
       )}
     </Box>
   );

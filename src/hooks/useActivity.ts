@@ -58,12 +58,25 @@ const useActivity = () => {
         const apiResponse = response.data as {
           data?: {
             data?: ActivityResponseData[];
+            pagination?: {
+              currentPage: number;
+              totalPages: number;
+              totalItems: number;
+              itemsPerPage: number;
+            };
           };
         };
         const activityData: ActivityResponseData[] =
           apiResponse?.data?.data || [];
+        const paginationData = apiResponse?.data?.pagination || {
+          currentPage: request.page,
+          totalPages: 1,
+          totalItems: activityData.length,
+          itemsPerPage: request.pageSize,
+        };
 
         console.log('Activity Data:', activityData); // Debug log
+        console.log('Pagination Data:', paginationData); // Debug log
 
         // Transform API response to match our global state format
         const transformedData: ActivityData[] = activityData?.map(
@@ -81,7 +94,7 @@ const useActivity = () => {
           })
         );
 
-        actions.fetchActivitiesSuccess(transformedData);
+        actions.fetchActivitiesSuccess(transformedData, paginationData);
         return transformedData;
       } catch (error) {
         const errorMessage =
@@ -113,6 +126,7 @@ const useActivity = () => {
     isLoading: state.isLoading,
     error: state.error,
     lastUpdated: state.lastUpdated,
+    pagination: state.pagination,
   };
 };
 

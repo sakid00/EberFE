@@ -12,7 +12,7 @@ const SubmitApplicationPage = () => {
     type === 'mobile'
       ? ({
           left: '0',
-          top: '20vh',
+          top: '18vh',
           width: '100vw',
           height: '60vh',
         } as CSSProperties)

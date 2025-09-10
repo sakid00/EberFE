@@ -120,18 +120,20 @@ const CorporateContainer = () => {
         type={type}
       />
       <Box sx={styles.contentContainer(type)}>
-        <Image
-          src={
-            currentCompany?.main_image
-              ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
-              : HeaderImage
-          }
-          alt={companyList[selectedCompany]?.name || 'Company'}
-          width={1000}
-          height={1000}
-          style={styles.headerImageStyle}
-        />
-        <Typography marginTop={3} sx={styles.companyTitle(type)}>
+        <Box sx={styles.headerImageStyle}>
+          <Image
+            src={
+              currentCompany?.main_image
+                ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
+                : HeaderImage
+            }
+            alt={companyList[selectedCompany]?.name || 'Company'}
+            width={1000}
+            height={1000}
+            style={{ objectFit: 'fill' }}
+          />
+        </Box>
+        <Typography sx={styles.companyTitle(type)}>
           {companyList[selectedCompany]?.name || 'Company Name'}
         </Typography>
 

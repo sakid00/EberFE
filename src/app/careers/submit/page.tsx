@@ -11,8 +11,8 @@ const SubmitApplicationPage = () => {
   const imageStyle =
     type === 'mobile'
       ? ({
-          left: '2vw',
-          top: '30vh',
+          left: '-5vw',
+          top: '20vh',
           width: '100vw',
           height: '50vh',
         } as CSSProperties)

@@ -18,7 +18,7 @@ export const styles = {
     alignItems: 'center',
     maxHeight: '10vh',
     position: 'relative' as const,
-    zIndex: 10,
+    zIndex: 100,
   },
 
   headerContent: {
@@ -286,6 +286,83 @@ export const styles = {
     maxWidth: dynamicStylingValue(type, '200px', 'none', 'none'),
     lineHeight: '1.4',
     padding: '16px',
+  }),
+
+  // Pagination styles
+  paginationContainer: (type: DeviceType) => ({
+    display: 'flex',
+    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '24px',
+    padding: dynamicStylingValue(type, '12px 8px', '16px', '16px'),
+    gap: dynamicStylingValue(type, '12px', '16px', '16px'),
+    width: '100%',
+    // Ensure proper spacing on mobile
+    marginX: dynamicStylingValue(type, '0', '0', '0'),
+  }),
+
+  paginationInfo: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.75rem', '0.875rem', '0.875rem'),
+    fontWeight: 400,
+    color: '#6B7280',
+    whiteSpace: 'nowrap' as const,
+    // Hide on mobile, show on tablet and desktop
+    display: dynamicStylingValue(type, 'none', 'block', 'block'),
+  }),
+
+  paginationInfoMobile: {
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    color: '#6B7280',
+    textAlign: 'center' as const,
+    marginBottom: '8px',
+  },
+
+  pagination: (type: DeviceType) => ({
+    '& .MuiPaginationItem-root': {
+      color: '#784791',
+      fontSize: dynamicStylingValue(type, '0.875rem', '1rem', '1rem'),
+      minWidth: dynamicStylingValue(type, '32px', '40px', '40px'),
+      height: dynamicStylingValue(type, '32px', '40px', '40px'),
+      margin: dynamicStylingValue(type, '0 2px', '0 4px', '0 4px'),
+      '&.Mui-selected': {
+        backgroundColor: '#D6CBE3',
+        color: '#784791',
+        fontWeight: 600,
+        '&:hover': {
+          backgroundColor: '#C1B0D3',
+        },
+      },
+      '&:hover': {
+        backgroundColor: '#F3F5F7',
+      },
+      // Better touch targets for mobile
+      ...(type === 'mobile' && {
+        minWidth: '36px',
+        height: '36px',
+        margin: '0 1px',
+      }),
+    },
+    '& .MuiPaginationItem-ellipsis': {
+      fontSize: dynamicStylingValue(type, '0.875rem', '1rem', '1rem'),
+      color: '#9CA3AF',
+    },
+    '& .MuiPaginationItem-previousNext': {
+      fontSize: dynamicStylingValue(type, '0.875rem', '1rem', '1rem'),
+      minWidth: dynamicStylingValue(type, '32px', '40px', '40px'),
+      height: dynamicStylingValue(type, '32px', '40px', '40px'),
+      ...(type === 'mobile' && {
+        minWidth: '36px',
+        height: '36px',
+      }),
+    },
+    // Responsive spacing
+    '& .MuiPagination-ul': {
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      gap: dynamicStylingValue(type, '4px', '8px', '8px'),
+    },
   }),
 };
 

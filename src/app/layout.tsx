@@ -44,7 +44,7 @@ export default function RootLayout({
             <DataProvider>
               <div className="mobile-container max-w-full">
                 <Header />
-                <Box className={`px-[5vw] md:px-[10vw] mb-[20vh]`}>
+                <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
                   <ParticlesBackground />
                   {children}
                 </Box>

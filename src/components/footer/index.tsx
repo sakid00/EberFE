@@ -3,50 +3,66 @@ import { Box, Divider, Typography } from '@mui/material';
 import { useDeviceType } from '@/hooks';
 import Image from 'next/image';
 import logo from '@/public/eber_logo.png';
-import EmailIcon from '@mui/icons-material/EmailOutlined';
-import PhoneIcon from '@mui/icons-material/CallOutlined';
-import BusinessIcon from '@mui/icons-material/BusinessOutlined';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
 import { footerStyles } from './style';
-import { LocationOn } from '@mui/icons-material';
+import locationIcon from '@/public/icon/footer-loc.svg';
+import emailIcon from '@/public/icon/footer-mail.svg';
+import phoneIcon from '@/public/icon/footer-phone.svg';
+import company1Icon from '@/public/icon/footer-company-1.svg';
+import company2Icon from '@/public/icon/footer-company-2.svg';
+import company3Icon from '@/public/icon/footer-company-3.svg';
+import company4Icon from '@/public/icon/footer-company-4.svg';
 import bgFooter from '@/public/eber-footer.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import site from '@/public/background/site-bg-mobile.png';
+import { usePathname } from 'next/navigation';
 
 const contactInfoList = [
   {
-    logo: <LocationOn sx={{ color: 'white' }} />,
+    logo: (
+      <Image
+        src={locationIcon}
+        alt="location"
+        width={20}
+        height={20}
+        style={{ alignSelf: 'start' }}
+      />
+    ),
     desc: `Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia`,
   },
   {
-    logo: <EmailIcon sx={{ color: 'white' }} />,
+    logo: <Image src={emailIcon} alt="email" width={20} height={20} />,
     desc: 'info@ebergroup.com',
   },
   {
-    logo: <PhoneIcon sx={{ color: 'white' }} />,
+    logo: <Image src={phoneIcon} alt="phone" width={20} height={20} />,
     desc: '+62-21 5020 2622',
   },
 ];
 const subsidiariesList = [
   {
-    logo: <BusinessIcon sx={{ color: 'white' }} />,
+    logo: <Image src={company1Icon} alt="company1" width={20} height={20} />,
     name: 'PT Eternal Buana Chemical Industries',
   },
   {
-    logo: <BusinessIcon sx={{ color: 'white' }} />,
+    logo: <Image src={company2Icon} alt="company2" width={20} height={20} />,
     name: 'PT Petrowidada',
   },
   {
-    logo: <BusinessIcon sx={{ color: 'white' }} />,
+    logo: <Image src={company3Icon} alt="company2" width={20} height={20} />,
     name: 'PT Eterindo Nusa Graha',
   },
   {
-    logo: <BusinessIcon sx={{ color: 'white' }} />,
+    logo: <Image src={company4Icon} alt="company3" width={20} height={20} />,
     name: 'PT Mega Prima Solvindo',
   },
 ];
 
 const Footer = () => {
   const { type } = useDeviceType();
+  const pathName = usePathname();
+  const ABOUT_US_PATHS = ['/about-us'];
+  const isAboutUsPage = ABOUT_US_PATHS.includes(pathName);
 
   const contactInfoListMap = contactInfoList.map((val, index) => {
     return (
@@ -67,7 +83,21 @@ const Footer = () => {
   });
 
   return (
-    <footer>
+    <footer style={{ position: 'relative' }}>
+      {type === 'mobile' && isAboutUsPage && (
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: ' 100%',
+            right: 0,
+            zIndex: -1,
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <Image src={site} alt="site" fill />
+        </Box>
+      )}
       <Box
         sx={footerStyles.container(type)}
         className="justify-center align-center px-[10vw] pb-[2vh] z-100"

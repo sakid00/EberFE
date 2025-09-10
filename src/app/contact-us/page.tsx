@@ -9,7 +9,7 @@ const ContactUsPage = () => {
   const { t } = useTranslation();
   const imageStyle =
     type === 'mobile'
-      ? ({ top: '15vh', width: '100vw', height: '50vh' } as CSSProperties)
+      ? ({ top: '20vh', width: 'max-content', height: '50vh' } as CSSProperties)
       : ({ top: '15vh' } as CSSProperties);
 
   return (

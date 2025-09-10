@@ -47,7 +47,7 @@ const ActivityCard = ({
   return (
     <>
       <Box
-        className={`flex flex-col justify-start items-start p-2 gap-2 rounded-xl shadow-lg/20 cursor-pointer hover:shadow-xl transition-shadow`}
+        className={`flex flex-col justify-start items-start p-2 gap-2 rounded-xl shadow-md/20 cursor-pointer hover:shadow-xl transition-shadow`}
         onClick={handleClick}
       >
         <Box className="relative w-full h-[220px] overflow-hidden rounded-lg">

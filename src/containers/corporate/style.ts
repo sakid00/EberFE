@@ -41,6 +41,7 @@ export const styles = {
     color: '#030712',
     fontSize: dynamicStylingValue(type, '1.2em', '2em', '2em'),
     fontWeight: 800,
+    marginTop: '5%',
   }),
 
   addressLabel: (type: DeviceType) => ({
@@ -143,10 +144,8 @@ export const styles = {
   }),
 
   headerImageStyle: {
-    objectFit: 'fill' as const,
     width: '100%',
     borderRadius: '8px',
-    height: '18%',
   },
 
   imageGridContainer: (type: DeviceType) => ({

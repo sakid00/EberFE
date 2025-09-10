@@ -43,22 +43,10 @@ const ProductsPage = () => {
   const [itemsPerPage] = useState<number>(10);
 
   // Dynamic filter data from API
-  const productTypes =
-    filters.types.length > 0
-      ? filters.types
-      : [
-          'Solvent-Base',
-          'Water-Base',
-          'Plasticizers',
-          'n-BAC',
-          'n-Butanol',
-          'Acetic Acid',
-        ];
+  const productTypes = filters.types.length > 0 ? filters.types : [];
 
   const productApplications =
-    filters.applications.length > 0
-      ? filters.applications
-      : ['Industrial', 'Chemical', 'Manufacturing', 'Processing'];
+    filters.applications.length > 0 ? filters.applications : [];
 
   // Fetch products from API with filters
   const fetchProducts = useCallback(() => {

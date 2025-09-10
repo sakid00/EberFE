@@ -1,7 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
-import Image from 'next/image';
-import photo from '@/public/photo/tangki-person.png';
 import { headerStyles } from './styles';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { ClientOnly } from '@/components/ClientOnly';
@@ -61,11 +59,11 @@ const HeaderSectionContent = () => {
 
   return (
     <>
-      <Image
+      {/* <Image
         src={photo}
         alt="header photo"
         style={headerStyles.headerPhoto(type)}
-      />
+      /> */}
       <Box id="home-header" sx={headerStyles.headerContent(type)}>
         <DualColorText
           text1={`${t('about_us.title.our')}\u00a0`}
