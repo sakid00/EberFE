@@ -34,6 +34,7 @@ interface ISidebarListProps extends IDualColorTextProps {
   /** Optional secondary text to display below the main title */
   secondaryText?: string;
   type: DeviceType;
+  fontSize?: string;
 }
 
 const SidebarList: React.FC<ISidebarListProps> = ({
@@ -49,6 +50,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   secondList,
   listCategory,
   type,
+  fontSize,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(true);
 
@@ -154,7 +156,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text1={text1}
         text2={text2}
-        fontSize="1.8em"
+        fontSize={fontSize ?? '1.8em'}
         fontWeight={800}
         inline={inline ?? false}
       />
@@ -162,7 +164,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
         <DualColorText
           text1={''}
           text2={secondaryText ?? ''}
-          fontSize="1.8em"
+          fontSize={fontSize ?? '1.8em'}
           fontWeight={800}
           inline
         />
