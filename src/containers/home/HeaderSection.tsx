@@ -34,8 +34,9 @@ export const HeaderSection = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
+              alignItems: 'start',
               justifyContent: 'start',
+              marginLeft: dynamicStylingValue(type, '10%', '0', '0'),
             }}
           >
             <Typography
