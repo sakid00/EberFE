@@ -32,7 +32,7 @@ const translations: Record<Language, Record<string, TranslationValue>> = {
 export const TranslationProvider: React.FC<TranslationProviderProps> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>('id'); // Default to Indonesian
+  const [language, setLanguage] = useState<Language>('en'); // Default to Indonesian
 
   // Load language from localStorage on component mount
   useEffect(() => {
