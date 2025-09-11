@@ -16,7 +16,7 @@ export const PrincipleSection = () => {
   return (
     <Box
       id="home-third-section"
-      className="relative flex justify-center items-center mt-20"
+      className="relative flex justify-center items-center mt-40"
     >
       {type === 'mobile' && (
         <Box sx={principleStyles.fieldPersonContainer(type)}>
