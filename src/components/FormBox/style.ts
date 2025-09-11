@@ -40,7 +40,7 @@ export const styles = {
   },
 
   inputLabel: {
-    marginBottom: 1,
+    marginY: 1,
     color: '#4B5563',
     fontSize: '12px',
     fontWeight: 400,

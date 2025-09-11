@@ -117,6 +117,7 @@ const ActivityContainer = () => {
         text1={`${t('activity.title.Our')}\u00a0`}
         text2={t('activity.title.Activity')}
         type={type}
+        sx={{ marginLeft: '5%' }}
       />
       <Box sx={styles.contentContainer(type)}>
         <Typography sx={styles.title(type)}>

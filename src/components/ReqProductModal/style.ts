@@ -40,7 +40,7 @@ export const styles = {
   },
 
   titleText: {
-    fontSize: '1.8em',
+    fontSize: '1.7em',
     fontWeight: 800,
     color: '#4B5563',
     marginTop: '8px',

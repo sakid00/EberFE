@@ -43,7 +43,7 @@ export const styles = {
     background:
       'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
     padding: '16px',
-    borderRadius: '8px',
+    borderRadius: '100px',
     textTransform: 'none' as const,
     fontSize: '0.875em',
     fontWeight: 700,
@@ -73,8 +73,9 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     width: dynamicStylingValue(type, '100%', '70%', '70%'),
-    marginBottom: dynamicStylingValue(type, '20px', '0px', '0px'),
-    gap: '20px',
+    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
+    gap: '1%',
+    marginRight: '1%',
   }),
 
   // Filter button base style
@@ -85,11 +86,11 @@ export const styles = {
     borderColor: isActive ? '#784791' : '#4B5563',
     borderWidth: isActive ? 1 : 0,
     borderRadius: '20px',
-    marginRight: '0.5vw',
     width: dynamicStylingValue(type, '100%', '20%', '20%'),
     textTransform: 'none' as const,
     fontSize: '0.875em',
     fontWeight: 500,
+    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
   }),
 
   // Select dropdown base style
@@ -101,10 +102,10 @@ export const styles = {
     padding: '16px',
     borderRadius: '20px',
     width: dynamicStylingValue(type, '100%', '40%', '40%'),
-    marginRight: '0.5vw',
     textTransform: 'none' as const,
     fontSize: '0.875em',
     fontWeight: 500,
+    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
     '& .MuiSelect-select': {
       padding: 0,
     },
@@ -121,7 +122,6 @@ export const styles = {
     padding: '16px',
     borderRadius: '20px',
     width: dynamicStylingValue(type, '100%', '40%', '40%'),
-    marginRight: '0.5vw',
     textTransform: 'none' as const,
     fontSize: '0.875em',
     fontWeight: 500,

@@ -16,7 +16,6 @@ import dynamic from 'next/dynamic';
 import { styles, constants } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
 import useCompany from '@/hooks/useCompany';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // Type for info box items that can come from either API or constants
 type InfoBoxItem = {
@@ -118,7 +117,6 @@ const CorporateContainer = () => {
         text2={t('home.subsidiaries_section_title.subsidiaries')}
         inline={false}
         type={type}
-        fontSize={dynamicStylingValue(type, '1.1em', '1.2em', '1.2em')}
       />
       <Box sx={styles.contentContainer(type)}>
         <Box sx={styles.headerImageStyle}>

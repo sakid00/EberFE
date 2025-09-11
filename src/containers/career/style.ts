@@ -15,8 +15,8 @@ export const styles = {
     maxWidth: dynamicStylingValue(type, '100%', '25%', '25%'),
     height: '10%',
     borderRadius: '12px',
-    paddingY: '40px',
-    paddingX: '20px',
+    paddingY: dynamicStylingValue(type, '4%', '1%', '1%'),
+    paddingX: dynamicStylingValue(type, '5%', '2%', '2%'),
     zIndex: 1,
     boxShadow:
       '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',

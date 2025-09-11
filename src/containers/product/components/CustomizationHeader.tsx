@@ -1,7 +1,6 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Image from 'next/image';
 import customIcon from '@/public/icon/customize.svg';
-import DualColorText from '@/components/dualColorText/index';
 import { styles } from '../style';
 import { CustomizationHeaderProps } from '../types';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
@@ -20,14 +19,22 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
         <Box sx={styles.iconContainer}>
           <Image src={customIcon} width={20} height={20} alt="Customize icon" />
         </Box>
-        <DualColorText
-          text1="Make it Yours"
-          text2="Customize Your Product"
-          color="white"
-          fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
-          fontWeight={400}
-          inline={false}
-        />
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Typography
+            fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
+            fontWeight={800}
+            color="white"
+          >
+            Make it Yours
+          </Typography>
+          <Typography
+            fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
+            fontWeight={800}
+            color="white"
+          >
+            Customize Your Product
+          </Typography>
+        </Box>
       </Box>
       {type !== 'mobile' ? (
         <Button

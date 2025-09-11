@@ -3,6 +3,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  SxProps,
   Typography,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -34,7 +35,7 @@ interface ISidebarListProps extends IDualColorTextProps {
   /** Optional secondary text to display below the main title */
   secondaryText?: string;
   type: DeviceType;
-  fontSize?: string;
+  sx?: SxProps;
 }
 
 const SidebarList: React.FC<ISidebarListProps> = ({
@@ -50,7 +51,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   secondList,
   listCategory,
   type,
-  fontSize,
+  sx,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(true);
 
@@ -115,7 +116,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
 
   const dualList = () => {
     return (
-      <Box>
+      <Box sx={{ marginTop: '-5%' }}>
         {listCategory?.map((val, index) => {
           return (
             <Accordion
@@ -156,15 +157,16 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text1={text1}
         text2={text2}
-        fontSize={fontSize ?? '1.8em'}
+        fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
         fontWeight={800}
         inline={inline ?? false}
+        sx={sx}
       />
       {secondaryText && (
         <DualColorText
           text1={''}
           text2={secondaryText ?? ''}
-          fontSize={fontSize ?? '1.8em'}
+          fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
           fontWeight={800}
           inline
         />

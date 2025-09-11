@@ -61,13 +61,13 @@ const CareerContainer = ({
         <DualColorText
           text1={t('careers.title.our')}
           text2={t('careers.title.open')}
-          fontSize={'2em'}
+          fontSize={'1.7em'}
           inline
           sx={{
             flexWrap: 'wrap',
           }}
         />
-        <Typography fontSize={'2em'} sx={styles.rolesTitle}>
+        <Typography fontSize={'1.7em'} sx={styles.rolesTitle}>
           {t('careers.title.roles')}
         </Typography>
         <Typography sx={styles.descriptionText}>{t('careers.desc')}</Typography>

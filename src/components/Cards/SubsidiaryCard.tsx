@@ -17,24 +17,29 @@ export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
   return (
     <Box
       id={`subsidiaries-${index}`}
-      className={`flex flex-col justify-start items-start bg-white ${type === 'mobile' ? 'w-[100%]' : 'w-[40%]'} h-auto p-3 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+      className={`flex flex-col justify-start items-start bg-white ${type === 'mobile' ? 'w-[100%]' : 'w-[40%]'} h-auto p-3 px-4 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
     >
-      <Image
-        src={data.img}
-        alt={`subsidiary-img-${index}`}
-        style={{
+      <Box
+        sx={{
+          position: 'relative',
           width: '100%',
-          height: dynamicStylingValue(type, '40%', '50%', '50%'),
+          height: '40%',
           borderRadius: '10px',
         }}
-      />
+      >
+        <Image
+          src={data.img}
+          alt={`subsidiary-img-${index}`}
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
       <Typography
         fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
         textAlign={'left'}
         fontWeight={'800'}
         color="#030712"
-        alignSelf={'justify'}
-        sx={{ height: '12%' }}
+        alignSelf={'flex-start'}
+        sx={{ marginBottom: '8%', height: '10%' }}
       >
         {t(data.title)}
       </Typography>

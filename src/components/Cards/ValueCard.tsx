@@ -34,7 +34,7 @@ export const ValueCard = ({ data, index }: ValueCardProps) => {
         }}
       />
       <Typography
-        fontSize={dynamicStylingValue(type, '0.5em', '16px', '16px')}
+        fontSize={dynamicStylingValue(type, '0.8em', '16px', '16px')}
         textAlign={'center'}
         fontWeight={'500'}
         color="white"

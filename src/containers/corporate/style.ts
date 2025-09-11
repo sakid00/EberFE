@@ -39,7 +39,7 @@ export const styles = {
 
   companyTitle: (type: DeviceType) => ({
     color: '#030712',
-    fontSize: dynamicStylingValue(type, '1.2em', '2em', '2em'),
+    fontSize: dynamicStylingValue(type, '1.2em', '1.8em', '1.8em'),
     fontWeight: 800,
     marginTop: '5%',
   }),

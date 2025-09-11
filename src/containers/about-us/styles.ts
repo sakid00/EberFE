@@ -40,7 +40,7 @@ export const headerStyles: {
     width: dynamicStylingValue(deviceType, '100%', '25%', '25%'),
     color: 'white',
     fontWeight: 500,
-    marginTop: '4vh',
+    marginTop: dynamicStylingValue(deviceType, '1vh', '4vh', '4vh'),
     fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'
@@ -86,9 +86,9 @@ export const valueStyles: {
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '100%', '55%', '100%'),
-    height: dynamicStylingValue(type, '30%', '75%', '75%'),
-    bottom: dynamicStylingValue(type, '51.5%', '34%', '34%'),
+    width: dynamicStylingValue(type, '100%', '60%', '58%'),
+    height: dynamicStylingValue(type, '30%', '90%', '90%'),
+    bottom: dynamicStylingValue(type, '53.5%', '17%', '17%'),
     left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
     zIndex: 1000,
   }),
@@ -134,7 +134,7 @@ export const principleStyles: {
     position: 'absolute',
     width: dynamicStylingValue(type, '85%', '55%', '55%'),
     height: dynamicStylingValue(type, '45%', '90%', '90%'),
-    top: dynamicStylingValue(type, '-6%', '9.5%', '9.5%'),
+    top: dynamicStylingValue(type, '-3%', '10%', '10%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
     zIndex: 20,
   }),

@@ -360,6 +360,7 @@ const Header = () => {
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
+            priority={true}
           >
             <Image
               src={
@@ -369,6 +370,7 @@ const Header = () => {
               }
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
+              priority={true}
             />
 
             {isHomePagePath && (
@@ -395,7 +397,7 @@ const Header = () => {
                     )}
                     fontWeight={800}
                   >
-                    High Performance Materials
+                    {t('home.modal.title')}
                   </Typography>
                   <Typography
                     color="white"
@@ -407,7 +409,7 @@ const Header = () => {
                     )}
                     fontWeight={500}
                   >
-                    Powering innovation across multiple industries
+                    {t('home.modal.desc')}
                   </Typography>
                 </Box>
                 <Box
@@ -415,14 +417,19 @@ const Header = () => {
                     position: 'absolute',
                     width: dynamicStylingValue(type, '100%', '50%', '50%'),
                     height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                    top: dynamicStylingValue(type, '50%', '22%', '22%'),
-                    left: dynamicStylingValue(type, '0', '38%', '38%'),
+                    top: dynamicStylingValue(type, '48%', '25%', '28%'),
+                    left: dynamicStylingValue(type, '2%', '38%', '38%'),
                     right: 0,
                     bottom: 0,
                     zIndex: 1,
                   }}
                 >
-                  <Image src={photo} alt="header photo" fill />
+                  <Image
+                    src={photo}
+                    alt="header-photo"
+                    width={1000}
+                    height={1000}
+                  />
                 </Box>
               </>
             )}
@@ -434,7 +441,7 @@ const Header = () => {
                   width: dynamicStylingValue(type, '90%', '60%', '60%'),
                   height: dynamicStylingValue(type, '50%', '100%', '100%'),
                   aspectRatio: '1/1.1',
-                  top: dynamicStylingValue(type, '50%', '10%', '10%'),
+                  top: dynamicStylingValue(type, '55%', '10%', '10%'),
                   left: dynamicStylingValue(type, '10%', '40%', '40%'),
                   right: 0,
                   bottom: 0,

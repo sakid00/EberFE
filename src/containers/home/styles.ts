@@ -181,7 +181,7 @@ export const customProductSectionStyles = {
       position: 'absolute',
       width: dynamicStylingValue(type, '100vw', '40vw', '40vw'),
       height: '40%',
-      top: dynamicStylingValue(type, '30%', '12%', '12%'),
+      top: dynamicStylingValue(type, '32.5%', '12%', '12%'),
       left: dynamicStylingValue(type, '38%', '38%', '37%'),
       transform: dynamicStylingValue(
         type,
