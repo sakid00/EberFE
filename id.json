@@ -248,7 +248,8 @@
       "product_code": "Kode Produk",
       "application": "Aplikasi",
       "performance_feature": "Fitur Kinerja",
-      "type_of_product": "Jenis Produk"
+      "type_of_product": "Jenis Produk",
+      "get_more_detail": "Dapatkan Detail"
     },
     "showing": "Menampilkan",
     "to": "ke",

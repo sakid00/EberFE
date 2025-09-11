@@ -249,7 +249,8 @@
       "product_code": "Product Code",
       "application": "Application",
       "performance_feature": "Performance Feature",
-      "type_of_product": "Type of Product"
+      "type_of_product": "Type of Product",
+      "get_more_detail": "Get More Detail"
     },
     "showing": "Showing",
     "to": "to",
