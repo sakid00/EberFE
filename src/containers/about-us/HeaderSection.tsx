@@ -59,11 +59,6 @@ const HeaderSectionContent = () => {
 
   return (
     <>
-      {/* <Image
-        src={photo}
-        alt="header photo"
-        style={headerStyles.headerPhoto(type)}
-      /> */}
       <Box id="home-header" sx={headerStyles.headerContent(type)}>
         <DualColorText
           text1={`${t('about_us.title.our')}\u00a0`}
