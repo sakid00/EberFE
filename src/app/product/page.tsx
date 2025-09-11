@@ -14,11 +14,11 @@ import useProduct from '../../hooks/useProduct';
 import { useTranslation } from '../../hooks';
 
 const cellTitles = [
-  'Product Code',
-  'Application',
-  'Performance Feature',
-  'Type of Product',
-  'Get More Detail',
+  'product.product_table.product_code',
+  'product.product_table.application',
+  'product.product_table.performance_feature',
+  'product.product_table.type_of_product',
+  'product.product_table.get_more_detail',
 ];
 
 export interface IrowData {
@@ -30,7 +30,7 @@ export interface IrowData {
 }
 
 const ProductsPage = () => {
-  const { language } = useTranslation();
+  const { language, t } = useTranslation();
   const { getProduct, products, filters, isLoading, error, requestProduct } =
     useProduct();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
@@ -192,7 +192,7 @@ const ProductsPage = () => {
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
             >
-              Request
+              {t('product.request_product')}
             </Button>
           ),
         })
@@ -221,7 +221,7 @@ const ProductsPage = () => {
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
           >
-            Request
+            {t('product.request_product')}
           </Button>
         ),
       }),

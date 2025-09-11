@@ -6,6 +6,7 @@ import { ProductContainerProps } from './types';
 import { useRouter } from 'next/navigation';
 import ReqProductSent from '@/components/ReqProductSent/index';
 import { useDeviceType } from '@/hooks';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({
   productApplications,
@@ -37,6 +38,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   const handleCustomProductClick = () => {
     router.push('/product/submit');
   };
+  const { t } = useTranslation();
   return (
     <>
       <Box sx={styles.mainContainer(type)}>
@@ -69,10 +71,11 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
               color="text.secondary"
               sx={styles.paginationInfo(type)}
             >
-              Showing{' '}
-              {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)} to{' '}
-              {Math.min(currentPage * itemsPerPage, totalItems)} of {totalItems}{' '}
-              products
+              {t('product.showing')}{' '}
+              {Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)}{' '}
+              {t('product.to')}{' '}
+              {Math.min(currentPage * itemsPerPage, totalItems)}{' '}
+              {t('product.of')} {totalItems} {t('product.products')}
             </Typography>
           )}
 

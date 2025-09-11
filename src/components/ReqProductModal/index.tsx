@@ -10,6 +10,7 @@ import { styles, classNames } from './style';
 import { useState } from 'react';
 import useProduct from '../../hooks/useProduct';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface FormData {
   fullName: string;
@@ -43,6 +44,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleInputChange =
     (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -156,12 +158,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     >
       <Box sx={styles.modalBox}>
         <Box sx={styles.headerContainer}>
-          <Typography sx={styles.headerText}>Curious to know more?</Typography>
+          <Typography sx={styles.headerText}>
+            {t('product.reqProductModal.curious_to_know_more')}
+          </Typography>
         </Box>
         <Typography sx={styles.titleText}>
           <span
             style={{ color: '#030712' }}
-          >{`Just share a few details and\u00a0`}</span>
+          >{`${t('product.reqProductModal.just_share_a_few_details')}\u00a0`}</span>
           <span
             style={{
               background:
@@ -170,14 +174,18 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
               WebkitTextFillColor: 'transparent',
             }}
           >
-            we’ll give you instant access to the information you need.
+            {t(
+              'product.reqProductModal.we_ll_give_you_instant_access_to_the_information_you_need'
+            )}
           </span>
         </Typography>
         <Box sx={styles.fullWidthBox}>
-          <InputLabel sx={styles.inputLabel}>Full Name</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('product.reqProductModal.full_name')}
+          </InputLabel>
           <TextField
             className={classNames.firstNameField}
-            placeholder="Full Name"
+            placeholder={t('product.reqProductModal.full_name')}
             value={formData.fullName}
             onChange={handleInputChange('fullName')}
             error={!!errors.fullName}
@@ -191,10 +199,12 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           )}
         </Box>
         <Box sx={styles.fullWidthBox}>
-          <InputLabel sx={styles.inputLabel}>Email</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('product.reqProductModal.email')}
+          </InputLabel>
           <TextField
             className={classNames.lastNameField}
-            placeholder="Email"
+            placeholder={t('product.reqProductModal.email')}
             type="email"
             value={formData.email}
             onChange={handleInputChange('email')}
@@ -209,7 +219,9 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           )}
         </Box>
         <Box sx={styles.fieldContainer}>
-          <InputLabel sx={styles.inputLabel}>Phone Number</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('product.reqProductModal.phone_number')}
+          </InputLabel>
           <TextField
             className={classNames.emailField}
             placeholder="+62xxxxxxxxxxx"
@@ -229,11 +241,12 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
         </Box>
         <Box sx={styles.fieldContainer}>
           <InputLabel sx={styles.inputLabel}>
-            Company Name (Optional)
+            {t('product.reqProductModal.company_name')} (
+            {t('product.reqProductModal.optional')})
           </InputLabel>
           <TextField
             className={classNames.emailField}
-            placeholder="Company Name"
+            placeholder={t('product.reqProductModal.company_name')}
             value={formData.companyName}
             onChange={handleInputChange('companyName')}
             error={!!errors.companyName}
@@ -247,10 +260,13 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           )}
         </Box>
         <Box sx={styles.fieldContainer}>
-          <InputLabel sx={styles.inputLabel}>City (Optional)</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('product.reqProductModal.city')} (
+            {t('product.reqProductModal.optional')})
+          </InputLabel>
           <TextField
             className={classNames.emailField}
-            placeholder="City"
+            placeholder={t('product.reqProductModal.city')}
             value={formData.city}
             onChange={handleInputChange('city')}
             error={!!errors.city}
@@ -264,14 +280,18 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           )}
         </Box>
         <Typography fontSize={'0.8em'} color={'#4B5563'} marginTop={'1%'}>
-          We&apos;ll never share your details with anyone else
+          {t(
+            `product.reqProductModal.we'll_never_share_your_email_with_anyone_else`
+          )}
         </Typography>
         <Button
           sx={styles.submitButton}
           onClick={handleSubmit}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Processing...' : 'Get Instant Access'}
+          {isSubmitting
+            ? 'Processing...'
+            : t('product.reqProductModal.get_instant_access')}
         </Button>
         <Button
           size="small"
@@ -280,7 +300,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           onClick={handleHome}
           disabled={isSubmitting}
         >
-          Back to Home
+          {t('product.reqProductModal.back_to_home')}
         </Button>
       </Box>
     </Modal>

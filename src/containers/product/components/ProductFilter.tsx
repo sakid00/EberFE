@@ -4,6 +4,7 @@ import { styles } from '../style';
 import { ProductFilterProps } from '../types';
 import FilterSelect from './FilterSelect';
 import { useDeviceType } from '@/hooks/useDeviceType';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
   productTypes,
@@ -18,6 +19,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
   handleChangeFilterByType,
   handleChangeApplication,
 }) => {
+  const { t } = useTranslation();
   const handleSeeAllToggle = () => {
     setIsSeeAllProduct(!isSeeAllProduct);
     setFilterByType([]);
@@ -41,7 +43,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           sx={styles.getFilterButtonStyle(isSeeAllProduct, type)}
           onClick={handleSeeAllToggle}
         >
-          See All Product
+          {t('product.see_all_product')}
         </Button>
 
         <FilterSelect
@@ -49,7 +51,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           value={filterByType}
           onChange={handleChangeFilterByType}
           options={productTypes}
-          placeholder="Type of product"
+          placeholder={t('product.type_of_product')}
           hasSelection={filterByType.length > 0}
         />
 
@@ -58,7 +60,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
           value={filterByApplication}
           onChange={handleChangeApplication}
           options={productApplications}
-          placeholder="Application"
+          placeholder={t('product.application')}
           hasSelection={filterByApplication.length > 0}
           isApplication={true}
         />
@@ -66,7 +68,7 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
 
       <TextField
         id="search-product"
-        placeholder="Search by application, product code, or feature"
+        placeholder={t('product.search_by_application_product_code_or_feature')}
         value={searchQuery}
         onChange={handleSearchChange}
         sx={styles.searchField(type)}

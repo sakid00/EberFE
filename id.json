@@ -233,5 +233,46 @@
     },
     "empty_list_title": "Belum Ada Aktivitas",
     "empty_list_desc": "Tetap terhubung dengan kami untuk informasi terbaru!"
+  },
+  "product": {
+    "type_of_product": "Jenis Produk",
+    "application": "Aplikasi",
+    "search_by_application_product_code_or_feature": "Cari berdasarkan aplikasi, kode produk, atau fitur",
+    "see_all_product": "Lihat Semua Produk",
+    "selected": "Terpilih",
+    "request_product": "Request",
+    "custom_product": "Produk Kustom",
+    "make_it_yours": "Solusi Tepat,",
+    "customize_your_product": "Produk Kustommu",
+    "product_table": {
+      "product_code": "Kode Produk",
+      "application": "Aplikasi",
+      "performance_feature": "Fitur Kinerja",
+      "type_of_product": "Jenis Produk"
+    },
+    "showing": "Menampilkan",
+    "to": "ke",
+    "of": "dari",
+    "products": "produk",
+    "reqProductModal": {
+      "curious_to_know_more": "Penasaran ingin tahu lebih banyak?",
+      "just_share_a_few_details": "Lengkapi informasi berikut",
+      "we_ll_give_you_instant_access_to_the_information_you_need": ", kami akan langsung memberikanmu akses ke informasi yang anda butuhkan.",
+      "full_name": "Nama Lengkap",
+      "email": "Email",
+      "phone_number": "Nomor Telepon",
+      "company_name": "Nama Perusahaan",
+      "city": "Kota",
+      "optional": "Opsional",
+      "we'll_never_share_your_email_with_anyone_else": "Kami tidak akan pernah membagikan detail Anda dengan siapa pun.",
+      "get_instant_access": "Dapatkan Akses Instan",
+      "back_to_home": "Kembali ke Beranda"
+    },
+    "reqProductSentModal": {
+      "request": "Permohonan",
+      "sent": "Terkirim!",
+      "desc": "Terima kasih! Permohonan Anda telah berhasil terkirim. Tim kami akan segera menghubungi Anda dengan informasi lebih lanjut.",
+      "got_it": "Mengerti"
+    }
   }
 }

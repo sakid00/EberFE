@@ -11,9 +11,11 @@ import {
 import { styles } from '../style';
 import { ProductTableProps } from '../types';
 import { useDeviceType } from '@/hooks';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <TableContainer component={Paper} sx={styles.tableContainer(type)}>
       <Table sx={styles.table(type)} size="small" aria-label="products table">
@@ -22,7 +24,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
             {cellTitles.map((title, index) => (
               <TableCell align="center" key={`${index}-${title}`}>
                 <Typography sx={styles.tableHeaderCell(type)}>
-                  {title}
+                  {t(title)}
                 </Typography>
               </TableCell>
             ))}

@@ -234,5 +234,46 @@
     },
     "empty_list_title": "No activity yet",
     "empty_list_desc": "Stay tuned for exciting updates from EBER Group!"
+  },
+  "product": {
+    "type_of_product": "Type of product",
+    "application": "Application",
+    "search_by_application_product_code_or_feature": "Search by application, product code, or feature",
+    "see_all_product": "See All Product",
+    "selected": "Selected",
+    "request_product": "Request",
+    "custom_product": "Custom Product",
+    "make_it_yours": "Make it Yours",
+    "customize_your_product": "Customize Your Product",
+    "product_table": {
+      "product_code": "Product Code",
+      "application": "Application",
+      "performance_feature": "Performance Feature",
+      "type_of_product": "Type of Product"
+    },
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "products": "products",
+    "reqProductModal": {
+      "curious_to_know_more": "Curious to know more?",
+      "just_share_a_few_details": "Just share a few details and",
+      "we_ll_give_you_instant_access_to_the_information_you_need": "we’ll give you instant access to the information you need.",
+      "full_name": "Full Name",
+      "email": "Email",
+      "phone_number": "Phone Number",
+      "company_name": "Company Name",
+      "city": "City",
+      "optional": "Optional",
+      "we'll_never_share_your_email_with_anyone_else": "We’ll never share your details with anyone else.",
+      "get_instant_access": "Get Instant Access",
+      "back_to_home": "Back to Home"
+    },
+    "reqProductSentModal": {
+      "request": "Request",
+      "sent": "Sent!",
+      "desc": "Thank you! Your request has been sent successfully. Our Eber team will contact you soon with more information.",
+      "got_it": "Got It"
+    }
   }
 }

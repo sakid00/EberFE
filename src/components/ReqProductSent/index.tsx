@@ -2,6 +2,7 @@ import { Box, Button, Modal, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import { Close } from '@mui/icons-material';
 import { styles } from './style';
+import { useTranslation } from '@/hooks/useTranslation';
 
 /**
  * ReqProductSent Modal Component
@@ -21,6 +22,7 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
   openModal,
   setOpenModal,
 }) => {
+  const { t } = useTranslation();
   const handleClose = () => {
     setOpenModal(false);
   };
@@ -37,8 +39,8 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
       <Box sx={styles.modalBox}>
         <Box sx={styles.headerContainer}>
           <DualColorText
-            text1={`Request\u00a0`}
-            text2="Sent!"
+            text1={`${t('product.reqProductSentModal.request')}\u00a0`}
+            text2={t('product.reqProductSentModal.sent')}
             fontSize="2em"
             fontWeight={800}
             inline
@@ -48,12 +50,11 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
         </Box>
 
         <Typography sx={styles.messageText}>
-          Thank you! Your request has been sent successfully. Our Eber team will
-          contact you soon with more information.
+          {t('product.reqProductSentModal.desc')}
         </Typography>
 
         <Button sx={styles.confirmButton} onClick={handleClose}>
-          Got it!
+          {t('product.reqProductSentModal.got_it')}
         </Button>
       </Box>
     </Modal>

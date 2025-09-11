@@ -5,11 +5,13 @@ import { styles } from '../style';
 import { CustomizationHeaderProps } from '../types';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
   onCustomProductClick,
 }) => {
   const { type } = useDeviceType();
+  const { t } = useTranslation();
   return (
     <Box
       sx={styles.headerContainer}
@@ -25,14 +27,14 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
             fontWeight={800}
             color="white"
           >
-            Make it Yours
+            {t('product.make_it_yours')}
           </Typography>
           <Typography
             fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
             fontWeight={800}
             color="white"
           >
-            Customize Your Product
+            {t('product.customize_your_product')}
           </Typography>
         </Box>
       </Box>
@@ -42,7 +44,7 @@ const CustomizationHeader: React.FC<CustomizationHeaderProps> = ({
           sx={styles.customProductButton}
           onClick={onCustomProductClick}
         >
-          Custom Product
+          {t('product.custom_product')}
         </Button>
       ) : (
         <ChevronRightIcon sx={{ color: 'white' }} />
