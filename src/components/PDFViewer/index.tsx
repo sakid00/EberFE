@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Box, IconButton, Modal } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from 'next/image';
+import { useDeviceType } from '../../hooks/useDeviceType';
 
 // Dynamically import react-pdf components to avoid SSR issues
 const Document = dynamic(
@@ -45,6 +46,7 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const bookRef = useRef<HTMLElement | null>(null);
+  const { type } = useDeviceType();
 
   useEffect(() => {
     setIsClient(true);
@@ -196,7 +198,7 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
           {isClient && pageImages.length > 0 && (
             <HTMLFlipBook
               width={600}
-              height={700}
+              height={type === 'mobile' ? 450 : 700}
               size="fixed"
               minWidth={300}
               maxWidth={1000}

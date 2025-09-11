@@ -171,7 +171,7 @@ const ActivityContainer = () => {
                 />
               ))
             ) : (
-              <Box sx={styles.emptyState(type)}>
+              <Box sx={styles.emptyState}>
                 <Image
                   src={emptyActivity}
                   alt="empty-activity"

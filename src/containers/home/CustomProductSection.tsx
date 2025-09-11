@@ -21,19 +21,8 @@ export const CustomProductSection = () => {
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
       {type === 'mobile' && (
-        <Box
-          sx={customProductSectionStyles.imageContainerTransform(type)}
-          // className={animationClasses.slideLeft}
-        >
-          <Image
-            src={fieldPerson}
-            alt="field-person"
-            style={{
-              objectFit: 'fill', // Changed from 'fill' to 'contain' for better aspect ratio
-              width: '100vw',
-              height: 'auto', // Maintain aspect ratio
-            }}
-          />
+        <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
+          <Image src={fieldPerson} alt="field-person" fill />
         </Box>
       )}
 
@@ -44,7 +33,7 @@ export const CustomProductSection = () => {
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
-          height: dynamicStylingValue(type, '70vh', '70vh', '70vh'),
+          height: dynamicStylingValue(type, '90vh', '70vh', '70vh'),
           marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
         }}
         contentSx={{
@@ -58,10 +47,7 @@ export const CustomProductSection = () => {
         }}
       >
         {type !== 'mobile' && (
-          <Box
-            sx={customProductSectionStyles.imageContainerTransform(type)}
-            className={animationClasses.scale}
-          >
+          <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
             <Image
               src={fieldPerson}
               alt="field-person"

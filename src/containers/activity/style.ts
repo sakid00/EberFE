@@ -58,7 +58,7 @@ export const styles = {
   }),
 
   // Empty state
-  emptyState: (type: DeviceType) => ({
+  emptyState: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -67,7 +67,7 @@ export const styles = {
     gridColumn: '1 / -1',
     marginTop: '15%',
     gap: '16px',
-  }),
+  },
 
   emptyImage: (type: DeviceType) => ({
     width: dynamicStylingValue(type, '50%', '25%', '25%'),
