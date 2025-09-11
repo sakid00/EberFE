@@ -13,6 +13,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -272,13 +273,11 @@ const Header = () => {
 
   // Event handlers
   const handleLanguageChange = (event: SelectChangeEvent) => {
-    console.log('Language change triggered:', event.target.value);
     const selectedLang = getLanguageCode(event.target.value);
     setLanguage(selectedLang);
   };
 
   const toggleMobileMenu = () => {
-    console.log('Toggle mobile menu clicked. Current state:', isMobileMenuOpen);
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -373,20 +372,59 @@ const Header = () => {
             />
 
             {isHomePagePath && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  width: dynamicStylingValue(type, '100%', '50%', '50%'),
-                  height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                  top: dynamicStylingValue(type, '50%', '22%', '22%'),
-                  left: dynamicStylingValue(type, '0', '38%', '38%'),
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 1,
-                }}
-              >
-                <Image src={photo} alt="header photo" fill />
-              </Box>
+              <>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    width: dynamicStylingValue(type, '35%', '20%', '20%'),
+                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                    padding: dynamicStylingValue(type, '2%', '1%', '1%'),
+                    borderRadius: '10px',
+                    top: dynamicStylingValue(type, '48%', '30%', '30%'),
+                    left: dynamicStylingValue(type, '53%', '70%', '70%'),
+                    borderBottomRightRadius: '100px',
+                  }}
+                >
+                  <Typography
+                    color="white"
+                    fontSize={dynamicStylingValue(
+                      type,
+                      '0.5em',
+                      '0.9em',
+                      '0.9em'
+                    )}
+                    fontWeight={800}
+                  >
+                    High Performance Materials
+                  </Typography>
+                  <Typography
+                    color="white"
+                    fontSize={dynamicStylingValue(
+                      type,
+                      '0.5em',
+                      '0.9em',
+                      '0.9em'
+                    )}
+                    fontWeight={500}
+                  >
+                    Powering innovation across multiple industries
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    width: dynamicStylingValue(type, '100%', '50%', '50%'),
+                    height: dynamicStylingValue(type, '50%', '80%', '80%'),
+                    top: dynamicStylingValue(type, '50%', '22%', '22%'),
+                    left: dynamicStylingValue(type, '0', '38%', '38%'),
+                    right: 0,
+                    bottom: 0,
+                    zIndex: 1,
+                  }}
+                >
+                  <Image src={photo} alt="header photo" fill />
+                </Box>
+              </>
             )}
 
             {isAboutUsPagePath && (
