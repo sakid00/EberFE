@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import logo from '@/public/eber_logo.png';
 import logoMobile from '@/public/svg/eber-logo-color.svg';
-import bgHeaderHomepage from '@/public/background/homepage_header_bg.png';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import idFlag from '@/public/svg/id.svg';
 import enFlag from '@/public/svg/en.svg';
 import {
@@ -365,7 +365,7 @@ const Header = () => {
       <header style={headerStyles.header}>
         <ClientOnly fallback={<div>Loading header...</div>}>
           <ProgressiveBackgroundImage
-            src={bgHeaderHomepage}
+            src={getBackgroundImage('homepageHeaderBg')}
             alt="header background"
             objectFit="fill"
             sx={headerStyles.backgroundImage(

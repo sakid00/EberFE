@@ -1,0 +1,55 @@
+<svg width="5088" height="2656" viewBox="0 0 5088 2656" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main container gradient -->
+    <linearGradient id="containerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8fafc;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#e2e8f0;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#cbd5e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a0aec0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Container border highlight -->
+    <linearGradient id="borderHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#e2e8f0;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#cbd5e0;stop-opacity:0.6" />
+    </linearGradient>
+    
+    <!-- Side shadow -->
+    <linearGradient id="sideShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a0aec0;stop-opacity:0.3" />
+      <stop offset="10%" style="stop-color:#cbd5e0;stop-opacity:0.1" />
+      <stop offset="90%" style="stop-color:#cbd5e0;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#a0aec0;stop-opacity:0.3" />
+    </linearGradient>
+    
+    <!-- Container texture pattern -->
+    <pattern id="containerTexture" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
+      <rect width="200" height="200" fill="#f8fafc" opacity="0.5"/>
+      <line x1="0" y1="50" x2="200" y2="50" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="100" x2="200" y2="100" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="150" x2="200" y2="150" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+      <line x1="50" y1="0" x2="50" y2="200" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+      <line x1="100" y1="0" x2="100" y2="200" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+      <line x1="150" y1="0" x2="150" y2="200" stroke="#e2e8f0" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- Main container background -->
+  <rect width="100%" height="100%" fill="url(#containerGradient)"/>
+  
+  <!-- Container texture -->
+  <rect width="100%" height="100%" fill="url(#containerTexture)"/>
+  
+  <!-- Container sides simulation -->
+  <polygon points="0,0 400,300 400,2356 0,2656" fill="url(#borderHighlight)"/>
+  <polygon points="5088,0 4688,300 4688,2356 5088,2656" fill="url(#sideShadow)"/>
+  
+  <!-- Container top/bottom edges -->
+  <rect x="0" y="0" width="100%" height="50" fill="#ffffff" opacity="0.4"/>
+  <rect x="0" y="2606" width="100%" height="50" fill="#a0aec0" opacity="0.4"/>
+  
+  <!-- Subtle container details -->
+  <rect x="300" y="200" width="4488" height="2256" fill="none" stroke="#cbd5e0" stroke-width="2" opacity="0.3"/>
+  <rect x="320" y="220" width="4448" height="2216" fill="none" stroke="#e2e8f0" stroke-width="1" opacity="0.4"/>
+</svg>

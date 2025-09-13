@@ -6,8 +6,7 @@ import { customProductSectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import ProgressiveBackgroundImage from '@/components/ProgressiveBackgroundImage/index';
-import container from '@/public/background/container1.png';
-import containerMobile from '@/public/background/container1-mobile.png';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { useRouter } from 'next/navigation';
 
 export const CustomProductSection = () => {
@@ -34,7 +33,7 @@ export const CustomProductSection = () => {
       )}
 
       <ProgressiveBackgroundImage
-        src={type === 'mobile' ? containerMobile : container}
+        src={type === 'mobile' ? getBackgroundImage('container1Mobile') : getBackgroundImage('container1')}
         alt="container background"
         objectFit={'fill'}
         priority={true}
