@@ -1,3 +1,6 @@
+export { useAssetLoading } from './useAssetLoading';
+export { useDevAssetLoading } from './useDevAssetLoading';
+
 // Main API hook
 export { useApi } from './useApi';
 export type {

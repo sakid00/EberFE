@@ -234,6 +234,7 @@ const ProductsPage = () => {
     handleRequestClick,
     currentPage,
     itemsPerPage,
+    t,
   ]);
 
   // Reset to first page when filters change

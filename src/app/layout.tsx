@@ -8,6 +8,7 @@ import ParticlesBackground from '@/components/BackgroundParticles/index';
 import ThemeWrapper from '@/components/ThemeWrapper';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import { DataProvider } from '@/contexts/DataProvider';
+import LoadingWrapper from '@/components/LoadingWrapper';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -34,22 +35,439 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <meta name="emotion-insertion-point" content="" />
+        
+        {/* Resource hints for better loading performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* Prevent white flash by setting body background immediately */
+            body {
+              background: linear-gradient(135deg, #4a5568 0%, #2d3748 50%, #6b46c1 100%) !important;
+              margin: 0;
+              padding: 0;
+            }
+            
+            /* Prevent loading screen from affecting scroll position */
+            body:has(#initial-loading) {
+              overflow: hidden;
+            }
+            
+            /* Immediate loading screen - shows before JavaScript loads */
+            #initial-loading {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100vw;
+              height: 100vh;
+              background: linear-gradient(135deg, #4a5568 0%, #2d3748 50%, #6b46c1 100%);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              z-index: 9999;
+              font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+              overflow: hidden;
+            }
+            
+            /* Industrial grid background - matching React */
+            .initial-bg-grid {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+              background-size: 50px 50px;
+              animation: initialGridMove 20s linear infinite;
+              z-index: 1;
+            }
+            
+            @keyframes initialGridMove {
+              0% { transform: translate(0, 0); }
+              100% { transform: translate(50px, 50px); }
+            }
+            
+            /* Geometric shapes - matching React */
+            .initial-bg-shapes {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 2;
+            }
+            
+            .initial-shape {
+              position: absolute;
+              background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            }
+            
+            .initial-shape-1 {
+              width: 200px;
+              height: 200px;
+              top: 10%;
+              left: -50px;
+              transform: rotate(45deg);
+              animation: initialIndustrialFloat 8s ease-in-out infinite;
+            }
+            
+            .initial-shape-2 {
+              width: 150px;
+              height: 150px;
+              top: 70%;
+              right: -30px;
+              transform: rotate(-30deg);
+              animation: initialIndustrialFloat 10s ease-in-out infinite reverse;
+            }
+            
+            .initial-shape-3 {
+              width: 100px;
+              height: 100px;
+              bottom: 20%;
+              left: 20%;
+              transform: rotate(15deg);
+              animation: initialIndustrialFloat 12s ease-in-out infinite;
+              animation-delay: 2s;
+            }
+            
+            @keyframes initialIndustrialFloat {
+              0%, 100% {
+                transform: rotate(45deg) translateY(0px);
+                opacity: 0.1;
+              }
+              50% {
+                transform: rotate(45deg) translateY(-15px);
+                opacity: 0.2;
+              }
+            }
+            
+            /* Accent line - matching React */
+            .initial-accent-line {
+              position: absolute;
+              top: 30%;
+              right: 0;
+              width: 40%;
+              height: 3px;
+              background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+              animation: initialAccentPulse 3s ease-in-out infinite;
+              z-index: 3;
+            }
+            
+            @keyframes initialAccentPulse {
+              0%, 100% { opacity: 0.3; transform: scaleX(1); }
+              50% { opacity: 0.8; transform: scaleX(1.1); }
+            }
+            
+            /* Logo styling - matching React */
+            .initial-logo {
+              font-size: 4rem;
+              font-weight: 900;
+              background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #ffffff 100%);
+              -webkit-background-clip: text;
+              background-clip: text;
+              -webkit-text-fill-color: transparent;
+              text-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
+              letter-spacing: 4px;
+              margin: 0;
+              line-height: 1;
+              animation: initialGlow 3s ease-in-out infinite alternate;
+            }
+            
+            .initial-logo-underline {
+              width: 60px;
+              height: 3px;
+              background: linear-gradient(90deg, #f59e0b, #fbbf24);
+              margin: 8px auto 0;
+              border-radius: 2px;
+              box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+              animation: initialUnderlineGlow 2s ease-in-out infinite alternate;
+            }
+            
+            .initial-tagline {
+              font-size: 1.2rem;
+              font-weight: 400;
+              color: rgba(255, 255, 255, 0.9);
+              letter-spacing: 2px;
+              text-transform: uppercase;
+              margin: 0 0 0.5rem 0;
+              animation: initialTaglineReveal 2s ease-out;
+            }
+            
+            .initial-subtitle {
+              font-size: 0.95rem;
+              font-weight: 300;
+              color: rgba(255, 255, 255, 0.7);
+              letter-spacing: 1px;
+              margin: 0 0 2rem 0;
+            }
+            
+            /* Industrial gear animation - matching React */
+            .initial-gear-container {
+              position: relative;
+              width: 120px;
+              height: 120px;
+              margin: 0 auto;
+            }
+            
+            .initial-gear {
+              position: absolute;
+              border: 3px solid;
+              border-radius: 50%;
+              border-color: rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3) rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3);
+            }
+            
+            .initial-gear::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              border-radius: 50%;
+              background: radial-gradient(circle, rgba(245, 158, 11, 0.2), transparent);
+            }
+            
+            .initial-gear-large {
+              width: 60px;
+              height: 60px;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              animation: initialGearRotate 4s linear infinite;
+            }
+            
+            .initial-gear-large::before {
+              width: 40px;
+              height: 40px;
+            }
+            
+            .initial-gear-medium {
+              width: 35px;
+              height: 35px;
+              top: 20%;
+              right: 10%;
+              animation: initialGearRotateReverse 3s linear infinite;
+            }
+            
+            .initial-gear-medium::before {
+              width: 25px;
+              height: 25px;
+            }
+            
+            .initial-gear-small {
+              width: 25px;
+              height: 25px;
+              bottom: 15%;
+              left: 15%;
+              animation: initialGearRotate 2.5s linear infinite;
+            }
+            
+            .initial-gear-small::before {
+              width: 18px;
+              height: 18px;
+            }
+            
+            @keyframes initialGearRotate {
+              from { transform: translate(-50%, -50%) rotate(0deg); }
+              to { transform: translate(-50%, -50%) rotate(360deg); }
+            }
+            
+            @keyframes initialGearRotateReverse {
+              from { transform: rotate(0deg); }
+              to { transform: rotate(-360deg); }
+            }
+            
+            /* Progress section - matching React */
+            .initial-progress-section {
+              width: 85%;
+              max-width: 450px;
+              margin: 0 auto;
+            }
+            
+            .initial-progress-bar {
+              position: relative;
+              height: 6px;
+              border-radius: 3px;
+              background-color: rgba(255, 255, 255, 0.15);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              margin-bottom: 1rem;
+              overflow: hidden;
+            }
+            
+            .initial-progress-fill {
+              height: 100%;
+              width: 0%;
+              border-radius: 3px;
+              background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 50%, #fcd34d 100%);
+              box-shadow: 0 0 20px rgba(245, 158, 11, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+              animation: initialProgressFill 2s ease-out forwards;
+            }
+            
+            .initial-progress-indicator {
+              position: absolute;
+              left: 0%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, #fbbf24, #f59e0b);
+              box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+              animation: initialIndicatorMove 2s ease-out forwards, initialIndicatorPulse 1.5s ease-in-out infinite;
+            }
+            
+            .initial-progress-text {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+            
+            .initial-progress-text span:first-child {
+              font-size: 0.9rem;
+              font-weight: 500;
+              color: rgba(255, 255, 255, 0.8);
+              letter-spacing: 1px;
+              text-transform: uppercase;
+            }
+            
+            .initial-progress-text span:last-child {
+              font-size: 1rem;
+              font-weight: 700;
+              color: #fbbf24;
+              letter-spacing: 1px;
+            }
+            
+            @keyframes initialProgressFill {
+              from { width: 0%; }
+              to { width: 30%; }
+            }
+            
+            @keyframes initialIndicatorMove {
+              from { left: 0%; }
+              to { left: 30%; }
+            }
+            
+            @keyframes initialIndicatorPulse {
+              0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+              }
+              50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 0 25px rgba(245, 158, 11, 1);
+              }
+            }
+            
+            @keyframes initialGlow {
+              from { text-shadow: 0 8px 32px rgba(245, 158, 11, 0.3); }
+              to { text-shadow: 0 8px 40px rgba(245, 158, 11, 0.6), 0 0 50px rgba(251, 191, 36, 0.4); }
+            }
+            
+            @keyframes initialUnderlineGlow {
+              from {
+                box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+              }
+              to {
+                box-shadow: 0 0 25px rgba(245, 158, 11, 0.8), 0 0 35px rgba(251, 191, 36, 0.4);
+              }
+            }
+            
+            @keyframes initialTaglineReveal {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+                letter-spacing: 4px;
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+                letter-spacing: 2px;
+              }
+            }
+            
+            /* Hide when React takes over */
+            .react-loaded #initial-loading {
+              display: none;
+            }
+            
+            /* Mobile responsiveness - matching React */
+            @media (max-width: 768px) {
+              .initial-logo { font-size: 3.5rem; }
+              .initial-tagline { font-size: 1rem; }
+              .initial-subtitle { font-size: 0.85rem; }
+              .initial-shape-1 { width: 150px; height: 150px; }
+              .initial-shape-2 { width: 120px; height: 120px; }
+              .initial-shape-3 { width: 80px; height: 80px; }
+              .initial-gear-container { width: 100px; height: 100px; }
+              .initial-gear-large { width: 50px; height: 50px; }
+              .initial-gear-medium { width: 30px; height: 30px; }
+              .initial-gear-small { width: 20px; height: 20px; }
+              .initial-accent-line { width: 60%; height: 2px; }
+            }
+          `
+        }} />
       </head>
       <body
         className={`${font.className} ${font.variable} overscroll-none`}
         suppressHydrationWarning={true}
       >
+        {/* Immediate loading screen - shows before React hydration */}
+        <div id="initial-loading">
+          {/* Industrial Background Elements - matching React version */}
+          <div className="initial-bg-grid"></div>
+          <div className="initial-bg-shapes">
+            <div className="initial-shape initial-shape-1"></div>
+            <div className="initial-shape initial-shape-2"></div>
+            <div className="initial-shape initial-shape-3"></div>
+          </div>
+          <div className="initial-accent-line"></div>
+          
+          <div style={{ textAlign: 'center', zIndex: 10, position: 'relative' }}>
+            {/* Logo section matching React version */}
+            <div style={{ marginBottom: '2.5rem' }}>
+              <h1 className="initial-logo">EBER</h1>
+              <div className="initial-logo-underline"></div>
+            </div>
+            
+            <h2 className="initial-tagline">INNOVATING AS SUSTAINABLE FUTURE</h2>
+            <p className="initial-subtitle">High Performance Materials</p>
+            
+            {/* Industrial gear animation matching React version */}
+            <div className="initial-gear-container" style={{ marginBottom: '2rem' }}>
+              <div className="initial-gear initial-gear-large"></div>
+              <div className="initial-gear initial-gear-medium"></div>
+              <div className="initial-gear initial-gear-small"></div>
+            </div>
+            
+            {/* Progress section matching React version */}
+            <div className="initial-progress-section">
+              <div className="initial-progress-bar">
+                <div className="initial-progress-fill"></div>
+                <div className="initial-progress-indicator"></div>
+              </div>
+              <div className="initial-progress-text">
+                <span>LOADING SYSTEM</span>
+                <span>0%</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <ThemeWrapper>
           <TranslationProvider>
             <DataProvider>
-              <div className="mobile-container max-w-full">
-                <Header />
-                <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
-                  <ParticlesBackground />
-                  {children}
-                </Box>
-                <Footer />
-              </div>
+              <LoadingWrapper>
+                <div className="mobile-container max-w-full">
+                  <Header />
+                  <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
+                    <ParticlesBackground />
+                    {children}
+                  </Box>
+                  <Footer />
+                </div>
+              </LoadingWrapper>
             </DataProvider>
           </TranslationProvider>
         </ThemeWrapper>
