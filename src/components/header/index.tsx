@@ -20,7 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { headerStyles } from './style';
-import ImageBackground from '../ImageBackground';
+import ProgressiveBackgroundImage from '../ProgressiveBackgroundImage';
 import { ClientOnly } from '../ClientOnly';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
@@ -364,9 +364,9 @@ const Header = () => {
     <>
       <header style={headerStyles.header}>
         <ClientOnly fallback={<div>Loading header...</div>}>
-          <ImageBackground
+          <ProgressiveBackgroundImage
             src={bgHeaderHomepage}
-            alt=""
+            alt="header background"
             objectFit="fill"
             sx={headerStyles.backgroundImage(
               type,
@@ -374,6 +374,8 @@ const Header = () => {
             )}
             contentSx={headerStyles.backgroundImageContent}
             priority={true}
+            quality={70}
+            placeholderColor="#4a5568"
           >
             <Image
               src={
@@ -514,7 +516,7 @@ const Header = () => {
                 </motion.div>
               )}
             </Box>
-          </ImageBackground>
+          </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>
 

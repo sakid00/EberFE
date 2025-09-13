@@ -39,6 +39,9 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "eslint-config-prettier": "^10.1.5",
+    "imagemin": "^9.0.1",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
     "prettier": "^3.5.3",
     "tailwindcss": "^4",
     "typescript": "^5"

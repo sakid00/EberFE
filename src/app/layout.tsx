@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import '../styles/loading-screen.css';
+import '../styles/background-fallbacks.css';
 import Header from '@/components/header/index';
 import Footer from '@/components/footer/index';
 import { Plus_Jakarta_Sans } from 'next/font/google';
@@ -61,7 +62,8 @@ export default function RootLayout({
               <div className="initial-progress-fill"></div>
             </div>
             
-            <p className="initial-text">Loading... <span className="initial-progress-percentage">0%</span></p>
+            <p className="initial-text">Loading images... <span className="initial-progress-percentage">0%</span></p>
+            <p className="initial-subtext">Large background images may take a moment</p>
           </div>
         </div>
         <ThemeWrapper>

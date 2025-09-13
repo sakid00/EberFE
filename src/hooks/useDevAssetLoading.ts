@@ -29,17 +29,38 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
     const images = Array.from(document.images);
     
     // Filter for images that are actually in the viewport or critical
+    // Prioritize background images which are usually large and slow to load
     const criticalImages = images.filter(img => {
       const rect = img.getBoundingClientRect();
       const isInViewport = rect.top < window.innerHeight + 500; // Include some buffer
+      const isBackgroundImage = img.src.includes('homepage_header_bg') ||
+                              img.src.includes('site-bg') ||
+                              img.src.includes('bg-footer') ||
+                              img.src.includes('bg_footer') ||
+                              img.src.includes('container1') ||
+                              img.src.includes('container2');
       const isCritical = img.hasAttribute('priority') || 
                         img.src.includes('field_person') ||
-                        img.src.includes('container') ||
-                        img.closest('[data-critical]');
+                        img.closest('[data-critical]') ||
+                        isBackgroundImage;
       return isInViewport || isCritical;
     });
 
-    console.log(`📸 Waiting for ${criticalImages.length} critical images...`);
+    // Sort to prioritize background images first
+    criticalImages.sort((a, b) => {
+      const aIsBackground = a.src.includes('homepage_header_bg') || a.src.includes('site-bg') || a.src.includes('container');
+      const bIsBackground = b.src.includes('homepage_header_bg') || b.src.includes('site-bg') || b.src.includes('container');
+      if (aIsBackground && !bIsBackground) return -1;
+      if (!aIsBackground && bIsBackground) return 1;
+      return 0;
+    });
+
+    console.log(`📸 Waiting for ${criticalImages.length} critical images (background images first)...`);
+    criticalImages.forEach((img, idx) => {
+      const filename = img.src.split('/').pop();
+      const isBackground = img.src.includes('homepage_header_bg') || img.src.includes('site-bg') || img.src.includes('container');
+      console.log(`${idx + 1}. ${filename} ${isBackground ? '(🎨 Background)' : '(📷 Regular)'}`);
+    });
 
     const imagePromises = criticalImages.map((img, index) => {
       if (img.complete && img.naturalWidth > 0) {
@@ -65,13 +86,16 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
         img.addEventListener('load', onLoad);
         img.addEventListener('error', onError);
 
-        // Timeout fallback
+        // Extended timeout for background images (they're larger)
+        const isBackgroundImage = img.src.includes('homepage_header_bg') || img.src.includes('site-bg') || img.src.includes('container');
+        const timeout = isBackgroundImage ? 6000 : 3000; // 6s for backgrounds, 3s for others
+        
         setTimeout(() => {
-          console.warn(`⏰ Image ${index + 1} timeout:`, img.src.split('/').pop());
+          console.warn(`⏰ Image ${index + 1} timeout (${timeout/1000}s):`, img.src.split('/').pop());
           img.removeEventListener('load', onLoad);
           img.removeEventListener('error', onError);
           resolve();
-        }, 3000);
+        }, timeout);
       });
     });
 

@@ -5,7 +5,7 @@ import fieldPerson from '@/public/photo/field_person2.png';
 import { customProductSectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
-import ImageBackground from '@/components/ImageBackground/index';
+import ProgressiveBackgroundImage from '@/components/ProgressiveBackgroundImage/index';
 import container from '@/public/background/container1.png';
 import containerMobile from '@/public/background/container1-mobile.png';
 import { useRouter } from 'next/navigation';
@@ -33,11 +33,13 @@ export const CustomProductSection = () => {
         </Box>
       )}
 
-      <ImageBackground
+      <ProgressiveBackgroundImage
         src={type === 'mobile' ? containerMobile : container}
-        alt="container"
+        alt="container background"
         objectFit={'fill'}
         priority={true}
+        quality={75}
+        placeholderColor="#cbd5e0"
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
@@ -102,7 +104,7 @@ export const CustomProductSection = () => {
             {t('home.custom_product_button')}
           </Button>
         </Box>
-      </ImageBackground>
+      </ProgressiveBackgroundImage>
     </Box>
   );
 };
