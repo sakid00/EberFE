@@ -17,12 +17,13 @@ import {
 } from '@mui/material';
 import { useEffect, useState, useRef } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { headerStyles } from './style';
 import ImageBackground from '../ImageBackground';
 import { ClientOnly } from '../ClientOnly';
 import { useDeviceType, useTranslation } from '@/hooks';
+import { useNavigation } from '@/contexts/NavigationContext';
 import headerAccessoriesMobile from '@/public/photo/eber-big-2-mobile.png';
 import headerAccessories from '@/public/photo/eber-big-2.png';
 import photo from '@/public/photo/subtract.png';
@@ -30,8 +31,8 @@ import photoTank from '@/public/photo/tangki-person.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // Constants
-const ANIMATION_DURATION = 300;
-const ANIMATION_STAGGER_DELAY = 0.1;
+const ANIMATION_DURATION = 50; // Sangat cepat
+const ANIMATION_STAGGER_DELAY = 0.01; // Hampir instan
 
 const NAVIGATION_ITEMS = [
   { name: 'navigation_bar.home', navigation: '/', key: 'home' },
@@ -79,6 +80,7 @@ const shouldShowDesktopNavigation = (isMobile: boolean): boolean => !isMobile;
 // Subcomponents
 interface NavigationBarProps {
   isAnimating: boolean;
+  hasAnimated: boolean;
   pathName: string;
   onNavigate: (path: string) => void;
   t: (key: string) => string;
@@ -86,6 +88,7 @@ interface NavigationBarProps {
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
   isAnimating,
+  hasAnimated,
   pathName,
   onNavigate,
   t,
@@ -105,9 +108,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
               scale: isAnimating ? 0.95 : 1,
             }}
             transition={{
-              duration: 0.3,
+              duration: hasAnimated ? 0 : 0.3, // No animation after first load
               ease: 'easeInOut',
-              delay: isAnimating ? 0 : index * ANIMATION_STAGGER_DELAY,
+              delay: hasAnimated ? 0 : index * ANIMATION_STAGGER_DELAY,
             }}
           >
             <Button
@@ -261,9 +264,11 @@ const MobileLanguageSelector: React.FC<LanguageSelectorProps> = ({
 const Header = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false); // Track if we've already animated once
   const { type, isMobile, isTablet } = useDeviceType();
   const { language, setLanguage, t } = useTranslation();
-  const router = useRouter();
+  const { navigateTo } = useNavigation();
+  // const router = useRouter(); // Currently unused
   const pathName = usePathname();
 
   // Derived values
@@ -281,22 +286,30 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Effects
+  // Effects - Optimized animation timing
   useEffect(() => {
-    setIsAnimating(true);
-    const timer = setTimeout(() => {
-      setIsAnimating(false);
-    }, ANIMATION_DURATION);
-
-    return () => clearTimeout(timer);
-  }, [pathName]);
+    if (!hasAnimated) {
+      // First load - full animation
+      setIsAnimating(true);
+      const timer = setTimeout(() => {
+        setIsAnimating(false);
+        setHasAnimated(true);
+      }, ANIMATION_DURATION);
+      return () => clearTimeout(timer);
+    } else {
+      // Subsequent navigations - skip animation entirely
+      setIsAnimating(false); // No animation for fast navigation
+      // No timer to clear since we skip animation
+    }
+  }, [pathName, hasAnimated]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathName]);
 
   const handleNavigate = (path: string) => {
-    router.push(path);
+    // Use fast navigation context instead of direct router.push
+    navigateTo(path);
   };
 
   // Get responsive logo dimensions based on device type
@@ -472,6 +485,7 @@ const Header = () => {
                 >
                   <NavigationBar
                     isAnimating={isAnimating}
+                    hasAnimated={hasAnimated}
                     pathName={pathName}
                     onNavigate={handleNavigate}
                     t={t}

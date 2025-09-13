@@ -9,7 +9,9 @@ import ParticlesBackground from '@/components/BackgroundParticles/index';
 import ThemeWrapper from '@/components/ThemeWrapper';
 import { TranslationProvider } from '@/contexts/TranslationContext';
 import { DataProvider } from '@/contexts/DataProvider';
+import { NavigationProvider } from '@/contexts/NavigationContext';
 import LoadingWrapper from '@/components/LoadingWrapper';
+import { PrefetchWrapper } from '@/components/PrefetchWrapper';
 
 export const metadata: Metadata = {
   title: 'Eber Group',
@@ -44,60 +46,38 @@ export default function RootLayout({
       <body className={`${font.className} ${font.variable} overscroll-none`}>
         {/* Immediate loading screen - shows before React hydration */}
         <div id="initial-loading">
-          {/* Industrial Background Elements - matching React version */}
-          <div className="initial-bg-grid"></div>
-          <div className="initial-bg-shapes">
-            <div className="initial-shape initial-shape-1"></div>
-            <div className="initial-shape initial-shape-2"></div>
-            <div className="initial-shape initial-shape-3"></div>
-          </div>
-          <div className="initial-accent-line"></div>
-          
-          <div style={{ textAlign: 'center', zIndex: 10, position: 'relative' }}>
-            {/* Logo section matching React version */}
-            <div style={{ marginBottom: '2.5rem' }}>
-              <h1 className="initial-logo">EBER</h1>
-              <div className="initial-logo-underline"></div>
+          <div style={{ textAlign: 'center' }}>
+            {/* Simple Logo */}
+            <h1 className="initial-logo">EBER</h1>
+            <p className="initial-tagline">Excellence in Every Detail</p>
+            
+            {/* Simple Progress Bar */}
+            <div className="initial-progress-bar">
+              <div className="initial-progress-fill"></div>
             </div>
             
-            <h2 className="initial-tagline">INNOVATING AS SUSTAINABLE FUTURE</h2>
-            <p className="initial-subtitle">High Performance Materials</p>
-            
-            {/* Industrial gear animation matching React version */}
-            <div className="initial-gear-container" style={{ marginBottom: '2rem' }}>
-              <div className="initial-gear initial-gear-large"></div>
-              <div className="initial-gear initial-gear-medium"></div>
-              <div className="initial-gear initial-gear-small"></div>
-            </div>
-            
-            {/* Progress section matching React version */}
-            <div className="initial-progress-section">
-              <div className="initial-progress-bar">
-                <div className="initial-progress-fill"></div>
-                <div className="initial-progress-indicator"></div>
-              </div>
-              <div className="initial-progress-text">
-                <span>LOADING SYSTEM</span>
-                <span>0%</span>
-              </div>
-            </div>
+            <p className="initial-text">Loading... <span className="initial-progress-percentage">0%</span></p>
           </div>
         </div>
         <ThemeWrapper>
-          <TranslationProvider>
-            <DataProvider>
+          <NavigationProvider>
+            <TranslationProvider>
+              <DataProvider>
               <LoadingWrapper>
-                <div className="mobile-container max-w-full">
-                  <Header />
-                  <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
-                    <ParticlesBackground />
-                    {children}
-                  </Box>
-                  <Footer />
-                </div>
+                <PrefetchWrapper>
+                  <div className="mobile-container max-w-full">
+                    <Header />
+                    <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
+                      <ParticlesBackground />
+                      {children}
+                    </Box>
+                    <Footer />
+                  </div>
+                </PrefetchWrapper>
               </LoadingWrapper>
-            </DataProvider>
-          </TranslationProvider>
+              </DataProvider>
+            </TranslationProvider>
+          </NavigationProvider>
         </ThemeWrapper>
       </body>
     </html>

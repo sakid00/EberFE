@@ -3,6 +3,15 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  // Performance optimizations
+  reactStrictMode: false, // Disable for faster dev
+  poweredByHeader: false,
+  compress: true,
+  
+  // Experimental features for better performance
+  experimental: {
+    scrollRestoration: true,
+  },
   images: {
     remotePatterns: [
       ...(process.env.NEXT_PUBLIC_IMAGE_BASE_URL

@@ -1,7 +1,6 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage';
-// Temporarily using fast dev loading - switch back to useAssetLoading for production
 import { useDevAssetLoading as useAssetLoading } from '@/hooks/useDevAssetLoading';
 
 interface LoadingWrapperProps {
@@ -9,7 +8,23 @@ interface LoadingWrapperProps {
 }
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
-  const { isLoading, progress, isComplete } = useAssetLoading();
+  const [hasLoaded, setHasLoaded] = useState(false);
+  
+  // Always call the hook (Rules of Hooks)
+  const assetLoading = useAssetLoading();
+  
+  // Only show loading on first mount
+  const isLoading = !hasLoaded ? assetLoading.isLoading : false;
+  const progress = !hasLoaded ? assetLoading.progress : 100;
+  const isComplete = !hasLoaded ? assetLoading.isComplete : true;
+
+  // Mark as loaded after first load completes
+  useEffect(() => {
+    if (!isLoading && !hasLoaded) {
+      setHasLoaded(true);
+      console.log('✅ First load complete, navigation will be instant now');
+    }
+  }, [isLoading, hasLoaded]);
 
   useEffect(() => {
     // Mark that React has loaded and hide the initial CSS loading screen
@@ -35,28 +50,24 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     document.body.style.overflow = 'unset';
   }, []);
 
-  // Additional effect to handle loading completion
-  useEffect(() => {
-    if (!isLoading) {
-      // Scroll to top when loading is complete
-      setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      }, 100);
-    }
-  }, [isLoading]);
+  // Show loading screen only on first load
+  const shouldShowLoadingScreen = isLoading && !hasLoaded;
 
   return (
     <>
-      {isLoading && (
+      {/* Full loading screen only for first load */}
+      {shouldShowLoadingScreen && (
         <div className={isComplete ? 'loading-page-exit' : ''}>
           <LoadingPage progress={progress} />
         </div>
       )}
+      
+      {/* Direct render without transitions for fast navigation */}
       <div
         style={{
-          opacity: isLoading ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out',
-          pointerEvents: isLoading ? 'none' : 'auto',
+          opacity: shouldShowLoadingScreen ? 0 : 1,
+          transition: shouldShowLoadingScreen ? 'opacity 0.5s ease-in-out' : 'none',
+          pointerEvents: shouldShowLoadingScreen ? 'none' : 'auto',
         }}
       >
         {children}

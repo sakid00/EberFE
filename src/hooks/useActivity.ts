@@ -106,6 +106,164 @@ const useActivity = () => {
     [actions, api]
   );
 
+  const getActivityById = useCallback(
+    async (id: number): Promise<ActivityData | null> => {
+      try {
+        // Check if activity already exists in state
+        const existingActivity = state.activities.find(activity => activity.id === id);
+        if (existingActivity) {
+          console.log('Activity found in state:', existingActivity);
+          return existingActivity;
+        }
+
+        actions.fetchActivitiesStart();
+        
+        const finalUrl = `/articles/${id}`;
+        console.log('Activity Detail API URL:', finalUrl);
+
+        const response = await api.execute(finalUrl, {
+          method: 'GET',
+        });
+
+        console.log('Activity Detail API Response:', response);
+        console.log('Response structure analysis:');
+        console.log('- response.data:', response.data);
+        console.log('- typeof response.data:', typeof response.data);
+        console.log('- response.data keys:', response.data ? Object.keys(response.data) : 'N/A');
+
+        // Handle different possible API response structures
+        let activityData: ActivityResponseData | undefined;
+        
+        if (response.data) {
+          const responseData = response.data as Record<string, unknown>;
+          
+          // Helper function to validate if object has ActivityResponseData structure
+          const isActivityData = (obj: any): boolean => {
+            return obj && 
+                   typeof obj === 'object' && 
+                   typeof obj.id === 'number' &&
+                   typeof obj.title_en === 'string' &&
+                   typeof obj.title_id === 'string';
+          };
+          
+          // Try different possible response structures
+          if (responseData.data && typeof responseData.data === 'object') {
+            // Check if it's nested like { data: { data: ActivityResponseData } }
+            const nestedData = responseData.data as Record<string, unknown>;
+            if (nestedData.data && isActivityData(nestedData.data)) {
+              activityData = nestedData.data as unknown as ActivityResponseData;
+              console.log('Using double-nested data structure');
+            } else if (isActivityData(responseData.data)) {
+              // Structure: { data: ActivityResponseData }
+              activityData = responseData.data as unknown as ActivityResponseData;
+              console.log('Using single-nested data structure');
+            }
+          } else if (isActivityData(responseData)) {
+            // Structure: ActivityResponseData (direct activity data at root)
+            activityData = responseData as unknown as ActivityResponseData;
+            console.log('Using direct data structure');
+          }
+          
+          // Additional fallback - try to find any object with activity-like properties
+          if (!activityData) {
+            console.log('Trying fallback parsing...');
+            const checkAllProperties = (obj: any): boolean => {
+              if (!obj || typeof obj !== 'object') return false;
+              // Look for any object that has at least id and title properties
+              return ('id' in obj && 'title_en' in obj) || ('id' in obj && 'title_id' in obj);
+            };
+            
+            // Check direct properties
+            if (checkAllProperties(responseData)) {
+              activityData = responseData as unknown as ActivityResponseData;
+              console.log('Using fallback direct parsing');
+            } else {
+              // Check nested properties
+              for (const [key, value] of Object.entries(responseData)) {
+                if (checkAllProperties(value)) {
+                  activityData = value as unknown as ActivityResponseData;
+                  console.log(`Using fallback nested parsing from key: ${key}`);
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        console.log('Parsed activityData:', activityData);
+        
+        if (!activityData || (typeof activityData === 'object' && Object.keys(activityData).length === 0)) {
+          console.error('Activity data is empty or null:', activityData);
+          console.error('Full response:', JSON.stringify(response, null, 2));
+          
+          // Check if activity already exists in our state as fallback
+          const stateActivity = state.activities.find(activity => activity.id === id);
+          if (stateActivity) {
+            console.log('Found activity in state as fallback:', stateActivity);
+            return stateActivity;
+          }
+          
+          throw new Error(`Activity with ID ${id} not found or is empty`);
+        }
+        
+        // Validate that we have essential activity properties
+        if (!activityData.id) {
+          console.error('Activity data missing ID field:', activityData);
+          
+          // Check if activity exists in state as fallback
+          const stateActivity = state.activities.find(activity => activity.id === id);
+          if (stateActivity) {
+            console.log('Found activity in state as fallback (missing ID):', stateActivity);
+            return stateActivity;
+          }
+          
+          throw new Error(`Activity with ID ${id} has invalid data structure`);
+        }
+
+        // Transform API response to match our global state format
+        const transformedData: ActivityData = {
+          id: activityData.id,
+          author: activityData.author,
+          title_en: activityData.title_en,
+          title_id: activityData.title_id,
+          body_en: activityData.body_en,
+          body_id: activityData.body_id,
+          group: activityData.group,
+          image: activityData.image,
+          pdf: activityData.pdf,
+          updatedAt: activityData.updatedAt,
+        };
+
+        // Add the single activity to the existing activities array
+        const updatedActivities = [...state.activities];
+        const existingIndex = updatedActivities.findIndex(activity => activity.id === id);
+        if (existingIndex >= 0) {
+          updatedActivities[existingIndex] = transformedData;
+        } else {
+          updatedActivities.push(transformedData);
+        }
+
+        actions.fetchActivitiesSuccess(updatedActivities, state.pagination || {
+          currentPage: 1,
+          totalPages: 1,
+          totalItems: updatedActivities.length,
+          itemsPerPage: 20,
+        });
+        
+        return transformedData;
+      } catch (error) {
+        console.error(`Error fetching activity ${id}:`, error);
+        
+        const errorMessage =
+          error instanceof Error ? error.message : 'Failed to fetch activity';
+        actions.fetchActivitiesError(errorMessage);
+        throw error;
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [actions, api]
+  );
+
   // Additional helper functions
   const clearError = useCallback(() => {
     actions.clearError();
@@ -118,6 +276,7 @@ const useActivity = () => {
   return {
     // API methods
     getActivities,
+    getActivityById,
     clearError,
     resetActivityState,
 

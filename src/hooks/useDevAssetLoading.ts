@@ -37,15 +37,15 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
               document.documentElement.scrollTop = 0;
               document.body.scrollTop = 0;
               setIsLoading(false);
-            }, 200);
+            }, 50);
           }, 200);
           
           return;
         }
         setProgress(currentProgress);
-      }, 150); // Update every 150ms
+      }, 80); // Update every 80ms
       
-      // Force finish after 1.5 seconds max
+      // Force finish after 0.8 seconds max
       timeoutId = setTimeout(() => {
         clearInterval(progressInterval);
         setProgress(100);
@@ -56,8 +56,8 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
           document.documentElement.scrollTop = 0;
           document.body.scrollTop = 0;
           setIsLoading(false);
-        }, 200);
-      }, 1500);
+        }, 100);
+      }, 800);
     };
 
     simulateLoading();
