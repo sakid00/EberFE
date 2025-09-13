@@ -138,12 +138,16 @@ const useActivity = () => {
           const responseData = response.data as Record<string, unknown>;
           
           // Helper function to validate if object has ActivityResponseData structure
-          const isActivityData = (obj: any): boolean => {
-            return obj && 
+          const isActivityData = (obj: unknown): obj is ActivityResponseData => {
+            return obj !== null &&
+                   obj !== undefined &&
                    typeof obj === 'object' && 
-                   typeof obj.id === 'number' &&
-                   typeof obj.title_en === 'string' &&
-                   typeof obj.title_id === 'string';
+                   'id' in obj &&
+                   'title_en' in obj &&
+                   'title_id' in obj &&
+                   typeof (obj as ActivityResponseData).id === 'number' &&
+                   typeof (obj as ActivityResponseData).title_en === 'string' &&
+                   typeof (obj as ActivityResponseData).title_id === 'string';
           };
           
           // Try different possible response structures
@@ -167,7 +171,7 @@ const useActivity = () => {
           // Additional fallback - try to find any object with activity-like properties
           if (!activityData) {
             console.log('Trying fallback parsing...');
-            const checkAllProperties = (obj: any): boolean => {
+            const checkAllProperties = (obj: unknown): obj is Partial<ActivityResponseData> => {
               if (!obj || typeof obj !== 'object') return false;
               // Look for any object that has at least id and title properties
               return ('id' in obj && 'title_en' in obj) || ('id' in obj && 'title_id' in obj);

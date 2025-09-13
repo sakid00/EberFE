@@ -100,6 +100,7 @@ export const ImageBackground: React.FC<ImageBackgroundProps> = ({
           }}
           priority={priority}
           quality={quality}
+          sizes="100vw"
         />
       </Box>
 

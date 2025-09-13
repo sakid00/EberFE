@@ -23,6 +23,12 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     if (!isLoading && !hasLoaded) {
       setHasLoaded(true);
       console.log('✅ First load complete, navigation will be instant now');
+      
+      // Update the initial loading screen percentage one final time
+      const progressElement = document.querySelector('.initial-progress-percentage');
+      if (progressElement) {
+        progressElement.textContent = '100%';
+      }
     }
   }, [isLoading, hasLoaded]);
 
@@ -30,17 +36,34 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     // Mark that React has loaded and hide the initial CSS loading screen
     document.documentElement.classList.add('react-loaded');
     
-    // Clean up the initial loading element after React takes over
-    const initialLoading = document.getElementById('initial-loading');
-    if (initialLoading) {
-      // Add a small fade out effect
-      initialLoading.style.transition = 'opacity 0.3s ease-out';
-      initialLoading.style.opacity = '0';
-      setTimeout(() => {
-        if (initialLoading.parentNode) {
-          initialLoading.parentNode.removeChild(initialLoading);
-        }
-      }, 300);
+    // Update progress indicator
+    const updateProgress = () => {
+      const progressElement = document.querySelector('.initial-progress-percentage');
+      if (progressElement) {
+        progressElement.textContent = `${Math.round(progress)}%`;
+      }
+      
+      const progressFill = document.querySelector('.initial-progress-fill');
+      if (progressFill) {
+        (progressFill as HTMLElement).style.width = `${progress}%`;
+      }
+    };
+    
+    updateProgress();
+    
+    // Clean up the initial loading element after React takes over and loading completes
+    if (!isLoading) {
+      const initialLoading = document.getElementById('initial-loading');
+      if (initialLoading) {
+        // Add a small fade out effect
+        initialLoading.style.transition = 'opacity 0.5s ease-out';
+        initialLoading.style.opacity = '0';
+        setTimeout(() => {
+          if (initialLoading.parentNode) {
+            initialLoading.parentNode.removeChild(initialLoading);
+          }
+        }, 500);
+      }
     }
 
     // Ensure page starts at the top
@@ -48,7 +71,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     
     // Also reset any potential scroll lock
     document.body.style.overflow = 'unset';
-  }, []);
+  }, [progress, isLoading]);
 
   // Show loading screen only on first load
   const shouldShowLoadingScreen = isLoading && !hasLoaded;

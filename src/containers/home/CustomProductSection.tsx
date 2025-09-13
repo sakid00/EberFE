@@ -20,9 +20,16 @@ export const CustomProductSection = () => {
 
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
-      {type === 'mobile' && (
-        <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
-          <Image src={fieldPerson} alt="field-person" fill />
+        {type === 'mobile' && (
+        <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
+          <Image 
+            src={fieldPerson} 
+            alt="field-person" 
+            fill 
+            priority={true}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: 'contain' }}
+          />
         </Box>
       )}
 
@@ -30,6 +37,7 @@ export const CustomProductSection = () => {
         src={type === 'mobile' ? containerMobile : container}
         alt="container"
         objectFit={'fill'}
+        priority={true}
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
@@ -47,10 +55,12 @@ export const CustomProductSection = () => {
         }}
       >
         {type !== 'mobile' && (
-          <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
+          <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
             <Image
               src={fieldPerson}
               alt="field-person"
+              width={800}
+              height={600}
               style={{
                 objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
                 width: 'clamp(35vw, 100vw, 100vw)', // Responsive width with min/max constraints

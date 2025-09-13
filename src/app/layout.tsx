@@ -42,6 +42,11 @@ export default function RootLayout({
         {/* Resource hints for better loading performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload critical assets */}
+        <link rel="preload" as="image" href="/photo/field_person2.png" />
+        <link rel="preload" as="image" href="/background/container1.png" media="(min-width: 769px)" />
+        <link rel="preload" as="image" href="/background/container1-mobile.png" media="(max-width: 768px)" />
       </head>
       <body className={`${font.className} ${font.variable} overscroll-none`}>
         {/* Immediate loading screen - shows before React hydration */}
