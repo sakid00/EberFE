@@ -11,8 +11,8 @@ interface LoadingWrapperProps {
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   const [isLoadingVisible, setIsLoadingVisible] = useState(true); // Show loading initially
   
-  // Use actual loading with modern design
-  const { isLoading, progress, isComplete } = useAssetLoading();
+  // Use actual loading with modern design - only need progress for display
+  const { progress } = useAssetLoading();
   
   // Show beautiful loading screen for 2.5 seconds then fade out
   useEffect(() => {
