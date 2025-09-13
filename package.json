@@ -17,7 +17,6 @@
     "@mui/icons-material": "^6.1.6",
     "@mui/material": "^6.1.6",
     "@mui/system": "^6.1.6",
-    "@next/font": "^14.2.15",
     "@react-pdf/renderer": "^4.3.0",
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",

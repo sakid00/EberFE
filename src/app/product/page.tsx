@@ -3,7 +3,6 @@ import ProductContainer from '../../containers/product';
 import {
   Button,
   SelectChangeEvent,
-  CircularProgress,
   Box,
   Typography,
 } from '@mui/material';
@@ -12,6 +11,8 @@ import Image from 'next/image';
 import { ReactNode, useState, useEffect, useMemo, useCallback } from 'react';
 import useProduct from '../../hooks/useProduct';
 import { useTranslation } from '../../hooks';
+import { useDeviceType } from '../../hooks/useDeviceType';
+import { TableSkeleton } from '@/components/Skeleton';
 
 const cellTitles = [
   'product.product_table.product_code',
@@ -31,6 +32,7 @@ export interface IrowData {
 
 const ProductsPage = () => {
   const { language, t } = useTranslation();
+  const { type } = useDeviceType();
   const { getProduct, products, filters, isLoading, error, requestProduct } =
     useProduct();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
@@ -271,23 +273,19 @@ const ProductsPage = () => {
     setCurrentPage(value);
   };
 
-  // Loading state
+  // Loading state with skeleton
   if (isLoading && products?.length === 0) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
-          gap: 2,
-        }}
-      >
-        <CircularProgress size={40} />
-        <Typography variant="body1" color="text.secondary">
-          Loading products...
+      <Box sx={{ padding: 2 }}>
+        <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
+          {t('product.title')}
         </Typography>
+        <TableSkeleton 
+          rows={10} 
+          columns={5} 
+          type={type} 
+          showHeader={true} 
+        />
       </Box>
     );
   }

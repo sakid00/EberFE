@@ -3,8 +3,10 @@ import { useRouter } from 'next/navigation';
 import CareerContainer from '../../containers/career';
 import useCareer from '../../hooks/useCareer';
 import { useEffect, useMemo } from 'react';
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from '../../hooks';
+import { useDeviceType } from '../../hooks/useDeviceType';
+import { ListSkeleton } from '@/components/Skeleton';
 
 export interface ICareerList {
   title: string;
@@ -14,7 +16,8 @@ export interface ICareerList {
 
 const CareersPage = () => {
   const router = useRouter();
-  const { language } = useTranslation();
+  const { language, t } = useTranslation();
+  const { type } = useDeviceType();
   const { getCareer, careers, isLoading } = useCareer();
 
   useEffect(() => {
@@ -45,23 +48,17 @@ const CareersPage = () => {
     return [];
   }, [careers, language]);
 
-  // Loading state
+  // Loading state with skeleton
   if (isLoading && careers?.length === 0) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '50vh',
-          gap: 2,
-        }}
-      >
-        <CircularProgress size={40} />
-        <Typography variant="body1" color="text.secondary">
-          Loading career opportunities...
+      <Box sx={{ padding: 2 }}>
+        <Typography variant="h4" sx={{ marginBottom: 1, fontWeight: 700 }}>
+          {t('career.title')}
         </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ marginBottom: 3 }}>
+          {t('career.subtitle')}
+        </Typography>
+        <ListSkeleton count={6} type={type} showBadge={true} />
       </Box>
     );
   }

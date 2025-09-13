@@ -15,5 +15,10 @@ export default function createEmotionCache() {
     insertionPoint = emotionInsertionPoint ?? undefined;
   }
 
-  return createCache({ key: 'mui-style', insertionPoint });
+  return createCache({ 
+    key: 'mui-style', 
+    insertionPoint,
+    // Ensure consistent style ordering between server and client
+    prepend: true,
+  });
 }

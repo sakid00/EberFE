@@ -2,7 +2,7 @@
 
 import { ThemeProvider, createTheme } from '@mui/material';
 import { CssBaseline } from '@mui/material';
-import { CacheProvider } from '@emotion/react';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import { Plus_Jakarta_Sans } from 'next/font/google';
 import createEmotionCache from '@/lib/createEmotionCache';
 
@@ -18,6 +18,14 @@ const theme = createTheme({
   typography: {
     fontFamily: font.style.fontFamily,
   },
+  // Disable ripple effect globally to prevent hydration mismatches
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+  },
 });
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -25,13 +33,17 @@ const clientSideEmotionCache = createEmotionCache();
 
 interface ThemeWrapperProps {
   children: React.ReactNode;
+  emotionCache?: EmotionCache;
 }
 
-const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
+const ThemeWrapper = ({ 
+  children, 
+  emotionCache = clientSideEmotionCache 
+}: ThemeWrapperProps) => {
   return (
-    <CacheProvider value={clientSideEmotionCache}>
+    <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         {children}
       </ThemeProvider>
     </CacheProvider>

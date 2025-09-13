@@ -4,7 +4,6 @@ import SidebarList, { listType } from '@/components/SidebarList/index';
 import {
   Box,
   Typography,
-  CircularProgress,
   Alert,
   Pagination,
   Stack,
@@ -15,6 +14,7 @@ import useActivity from '@/hooks/useActivity';
 import emptyActivity from '@/public/svg/empty-activity.svg';
 import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
+import { CardSkeleton } from '@/components/Skeleton';
 import { styles } from './style';
 
 const activityList = ['Sustainability', 'Newsroom'];
@@ -138,11 +138,9 @@ const ActivityContainer = () => {
           </Alert>
         )}
 
-        {/* Loading State */}
+        {/* Loading State with Skeleton */}
         {isLoading && (
-          <Box sx={styles.loadingContainer}>
-            <CircularProgress />
-          </Box>
+          <CardSkeleton count={9} type={type} height={350} />
         )}
 
         {/* Activities Grid */}
