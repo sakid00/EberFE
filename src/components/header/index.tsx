@@ -22,12 +22,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { headerStyles } from './style';
 import ProgressiveBackgroundImage from '../ProgressiveBackgroundImage';
 import { ClientOnly } from '../ClientOnly';
+import { HeaderLoadingScreen } from '../ModernLoadingScreen';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
-import headerAccessoriesMobile from '@/public/photo/eber-big-2-mobile.png';
-import headerAccessories from '@/public/photo/eber-big-2.png';
-import photo from '@/public/photo/subtract.png';
-import photoTank from '@/public/photo/tangki-person.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // Constants
@@ -363,7 +361,7 @@ const Header = () => {
   return (
     <>
       <header style={headerStyles.header}>
-        <ClientOnly fallback={<div>Loading header...</div>}>
+        <ClientOnly fallback={<HeaderLoadingScreen />}>
           <ProgressiveBackgroundImage
             src={getBackgroundImage('homepageHeaderBg')}
             alt="header background"
@@ -380,8 +378,8 @@ const Header = () => {
             <Image
               src={
                 isMobile && !isTablet
-                  ? headerAccessoriesMobile
-                  : headerAccessories
+                  ? getPhoto('eberBig2Mobile')
+                  : getPhoto('eberBig2')
               }
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
@@ -440,7 +438,7 @@ const Header = () => {
                   }}
                 >
                   <Image
-                    src={photo}
+                    src={getPhoto('subtract')}
                     alt="header-photo"
                     width={1000}
                     height={1000}
@@ -463,7 +461,7 @@ const Header = () => {
                   zIndex: 1,
                 }}
               >
-                <Image src={photoTank} alt="header photo" fill />
+                <Image src={getPhoto('tankiPerson')} alt="header photo" fill />
               </Box>
             )}
 

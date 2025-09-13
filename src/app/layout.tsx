@@ -45,14 +45,14 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* Preload critical assets - Optimized WebP backgrounds (98% smaller) */}
-        <link rel="preload" as="image" href="/photo/field_person2.png" />
+        <link rel="preload" as="image" href="/photo/optimized/field_person2_optimized.webp" />
         <link rel="preload" as="image" href="/background/optimized/homepage_header_bg_optimized.webp" />
         <link rel="preload" as="image" href="/background/optimized/container1_optimized.webp" media="(min-width: 769px)" />
         <link rel="preload" as="image" href="/background/optimized/container1_mobile_optimized.webp" media="(max-width: 768px)" />
       </head>
       <body className={`${font.className} ${font.variable} overscroll-none`}>
-        {/* Immediate loading screen - shows before React hydration */}
-        <div id="initial-loading">
+        {/* Immediate loading screen - disabled for instant loading */}
+        <div id="initial-loading" style={{ display: 'none' }}>
           <div style={{ textAlign: 'center' }}>
             {/* Simple Logo */}
             <h1 className="initial-logo">EBER</h1>
@@ -64,7 +64,7 @@ export default function RootLayout({
             </div>
             
             <p className="initial-text">Loading images... <span className="initial-progress-percentage">0%</span></p>
-            <p className="initial-subtext">Large background images may take a moment</p>
+            <p className="initial-subtext">Optimized images loading instantly</p>
           </div>
         </div>
         <ThemeWrapper>

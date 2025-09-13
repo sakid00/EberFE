@@ -5,92 +5,71 @@ import { useDevAssetLoading as useAssetLoading } from '@/hooks/useDevAssetLoadin
 
 interface LoadingWrapperProps {
   children: React.ReactNode;
+  useModernLoading?: boolean; // Option to use modern loading instead
 }
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [isLoadingVisible, setIsLoadingVisible] = useState(true); // Show loading initially
   
-  // Always call the hook (Rules of Hooks)
-  const assetLoading = useAssetLoading();
+  // Use actual loading with modern design
+  const { isLoading, progress, isComplete } = useAssetLoading();
   
-  // Only show loading on first mount
-  const isLoading = !hasLoaded ? assetLoading.isLoading : false;
-  const progress = !hasLoaded ? assetLoading.progress : 100;
-  const isComplete = !hasLoaded ? assetLoading.isComplete : true;
-
-  // Mark as loaded after first load completes
+  // Show beautiful loading screen for 2.5 seconds then fade out
   useEffect(() => {
-    if (!isLoading && !hasLoaded) {
-      setHasLoaded(true);
-      console.log('✅ First load complete, navigation will be instant now');
-      
-      // Update the initial loading screen percentage one final time
-      const progressElement = document.querySelector('.initial-progress-percentage');
-      if (progressElement) {
-        progressElement.textContent = '100%';
-      }
-    }
-  }, [isLoading, hasLoaded]);
+    const loadingTimer = setTimeout(() => {
+      setIsLoadingVisible(false);
+      console.log('✨ Modern loading screen completed!');
+    }, 2500); // 2.5 seconds of beautiful loading
+    
+    return () => clearTimeout(loadingTimer);
+  }, []); // Run once on mount
 
+  // Clean up initial CSS loading and ensure scroll position
   useEffect(() => {
-    // Mark that React has loaded and hide the initial CSS loading screen
+    // Mark that React has loaded
     document.documentElement.classList.add('react-loaded');
     
-    // Update progress indicator
-    const updateProgress = () => {
-      const progressElement = document.querySelector('.initial-progress-percentage');
-      if (progressElement) {
-        progressElement.textContent = `${Math.round(progress)}%`;
-      }
-      
-      const progressFill = document.querySelector('.initial-progress-fill');
-      if (progressFill) {
-        (progressFill as HTMLElement).style.width = `${progress}%`;
-      }
-    };
-    
-    updateProgress();
-    
-    // Clean up the initial loading element after React takes over and loading completes
-    if (!isLoading) {
-      const initialLoading = document.getElementById('initial-loading');
-      if (initialLoading) {
-        // Add a small fade out effect
-        initialLoading.style.transition = 'opacity 0.5s ease-out';
-        initialLoading.style.opacity = '0';
-        setTimeout(() => {
-          if (initialLoading.parentNode) {
-            initialLoading.parentNode.removeChild(initialLoading);
-          }
-        }, 500);
-      }
+    // Clean up the initial loading element
+    const initialLoading = document.getElementById('initial-loading');
+    if (initialLoading) {
+      initialLoading.style.transition = 'opacity 0.5s ease-out';
+      initialLoading.style.opacity = '0';
+      setTimeout(() => {
+        if (initialLoading.parentNode) {
+          initialLoading.parentNode.removeChild(initialLoading);
+        }
+      }, 500);
     }
 
     // Ensure page starts at the top
     window.scrollTo(0, 0);
-    
-    // Also reset any potential scroll lock
     document.body.style.overflow = 'unset';
-  }, [progress, isLoading]);
-
-  // Show loading screen only on first load
-  const shouldShowLoadingScreen = isLoading && !hasLoaded;
+  }, []);
 
   return (
     <>
-      {/* Full loading screen only for first load */}
-      {shouldShowLoadingScreen && (
-        <div className={isComplete ? 'loading-page-exit' : ''}>
-          <LoadingPage progress={progress} />
+      {/* Modern loading screen */}
+      {isLoadingVisible && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            transition: 'opacity 0.5s ease-out',
+          }}
+        >
+          <LoadingPage progress={Math.min(progress, 100)} />
         </div>
       )}
       
-      {/* Direct render without transitions for fast navigation */}
+      {/* Main content */}
       <div
         style={{
-          opacity: shouldShowLoadingScreen ? 0 : 1,
-          transition: shouldShowLoadingScreen ? 'opacity 0.5s ease-in-out' : 'none',
-          pointerEvents: shouldShowLoadingScreen ? 'none' : 'auto',
+          opacity: isLoadingVisible ? 0 : 1,
+          transition: isLoadingVisible ? 'none' : 'opacity 0.5s ease-in',
         }}
       >
         {children}

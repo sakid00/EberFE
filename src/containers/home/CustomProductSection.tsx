@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import Image from 'next/image';
-import fieldPerson from '@/public/photo/field_person2.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { customProductSectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
@@ -22,7 +22,7 @@ export const CustomProductSection = () => {
         {type === 'mobile' && (
         <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
           <Image 
-            src={fieldPerson} 
+            src={getPhoto('fieldPerson2')} 
             alt="field-person" 
             fill 
             priority={true}
@@ -58,7 +58,7 @@ export const CustomProductSection = () => {
         {type !== 'mobile' && (
           <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
             <Image
-              src={fieldPerson}
+              src={getPhoto('fieldPerson2')}
               alt="field-person"
               width={800}
               height={600}
