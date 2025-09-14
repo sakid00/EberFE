@@ -27,6 +27,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   handleChangeFilterByType,
   handleChangeApplication,
   onTokenReceived,
+  onShowSentModal,
   currentPage,
   totalPages,
   totalItems,
@@ -111,6 +112,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
         openModal={openReqModal}
         setOpenModal={setOpenReqModal}
         onSuccessfulSubmission={onTokenReceived}
+        onShowSentModal={onShowSentModal}
       />
       <ReqProductSent
         openModal={openSentModal}

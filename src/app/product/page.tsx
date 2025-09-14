@@ -1,11 +1,6 @@
 'use client';
 import ProductContainer from '../../containers/product';
-import {
-  Button,
-  SelectChangeEvent,
-  Box,
-  Typography,
-} from '@mui/material';
+import { Button, SelectChangeEvent, Box, Typography } from '@mui/material';
 import emailIcon from '../../../public/icon/email-no-bg.svg';
 import Image from 'next/image';
 import { ReactNode, useState, useEffect, useMemo, useCallback } from 'react';
@@ -13,6 +8,9 @@ import useProduct from '../../hooks/useProduct';
 import { useTranslation } from '../../hooks';
 import { useDeviceType } from '../../hooks/useDeviceType';
 import { TableSkeleton } from '@/components/Skeleton';
+import { useSearchParams } from 'next/navigation';
+import ReqProductSent from '@/components/ReqProductSent/index';
+import ReqProductModal from '@/components/ReqProductModal/index';
 
 const cellTitles = [
   'product.product_table.product_code',
@@ -33,8 +31,8 @@ export interface IrowData {
 const ProductsPage = () => {
   const { language, t } = useTranslation();
   const { type } = useDeviceType();
-  const { getProduct, products, filters, isLoading, error, requestProduct } =
-    useProduct();
+  const { getProduct, products, filters, isLoading, error } = useProduct();
+  const searchParams = useSearchParams();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
   const [filterByApplication, setFilterByApplication] = useState<string[]>([]);
@@ -43,6 +41,8 @@ const ProductsPage = () => {
   const [openSentModal, setOpenSentModal] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(10);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
 
   // Dynamic filter data from API
   const productTypes = filters.types.length > 0 ? filters.types : [];
@@ -82,16 +82,36 @@ const ProductsPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterByApplication, filterByType]);
 
-  // Check if user has valid token and show modal on first visit
+  // Check access parameter from URL
   useEffect(() => {
-    const userToken = localStorage.getItem('userToken');
-    const hasVisitedProduct = localStorage.getItem('hasVisitedProduct');
+    const accessParam = searchParams.get('access');
 
-    if (!userToken && !hasVisitedProduct) {
-      // First time visitor - show the registration modal
-      setOpenReqModal(true);
+    if (accessParam) {
+      // User has access parameter, save it to localStorage and allow access
+      localStorage.setItem('productAccessToken', accessParam);
+      setHasAccess(true);
+    } else {
+      // No access parameter, check if user has access token in localStorage
+      const savedAccessToken = localStorage.getItem('productAccessToken');
+      if (savedAccessToken) {
+        // User has saved access token, allow access to product page
+        setHasAccess(true);
+      } else {
+        // No access token, check if user has already submitted form
+        const hasSubmittedForm = localStorage.getItem(
+          'hasSubmittedProductForm'
+        );
+        if (hasSubmittedForm) {
+          // User has already submitted form, show ReqProductSent modal
+          setFormSubmitted(true);
+          setOpenSentModal(true);
+        } else {
+          // First time user, show ReqProductModal
+          setOpenReqModal(true);
+        }
+      }
     }
-  }, []);
+  }, [searchParams]);
 
   const createData = ({
     productCode,
@@ -106,37 +126,13 @@ const ProductsPage = () => {
   const handleTokenReceived = () => {
     // Token has been received, can be used for future enhancements
     console.log('User token received successfully');
+    setFormSubmitted(true);
   };
 
-  const handleRequestClick = useCallback(
-    (productCode: string) => {
-      const userToken = localStorage.getItem('userToken');
-      console.log('userToken', userToken);
-      if (userToken) {
-        // User has token, call requestProduct API
-        requestProduct(productCode).then((result) => {
-          if (result.success) {
-            // Show success modal
-            setOpenSentModal(true);
-          } else {
-            // Handle error - could show error message or redirect to registration
-            console.error('Product request failed:', result.error);
-            if (result.error?.includes('No email found')) {
-              // If no email found, show registration modal
-              setOpenReqModal(true);
-            } else {
-              // Other errors - show success modal anyway for now
-              setOpenSentModal(true);
-            }
-          }
-        });
-      } else {
-        // User doesn't have token, show registration modal
-        setOpenReqModal(true);
-      }
-    },
-    [setOpenSentModal, setOpenReqModal, requestProduct]
-  );
+  const handleRequestClick = useCallback(() => {
+    // Show ReqProductSent modal when user clicks request product button
+    setOpenSentModal(true);
+  }, [setOpenSentModal]);
 
   // Transform API data to table rows with search filtering and pagination
   const { paginatedRows, totalPages, totalItems } = useMemo(() => {
@@ -189,7 +185,7 @@ const ProductsPage = () => {
                 fontWeight: 400,
                 textTransform: 'none',
               }}
-              onClick={() => handleRequestClick(product.code)}
+              onClick={handleRequestClick}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
@@ -218,7 +214,7 @@ const ProductsPage = () => {
               fontWeight: 400,
               textTransform: 'none',
             }}
-            onClick={() => handleRequestClick('Sample Product')}
+            onClick={handleRequestClick}
             startIcon={
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
@@ -280,12 +276,7 @@ const ProductsPage = () => {
         <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
           {t('product.title')}
         </Typography>
-        <TableSkeleton 
-          rows={10} 
-          columns={5} 
-          type={type} 
-          showHeader={true} 
-        />
+        <TableSkeleton rows={10} columns={5} type={type} showHeader={true} />
       </Box>
     );
   }
@@ -294,32 +285,63 @@ const ProductsPage = () => {
     console.warn('Product API error:', error);
   }
 
+  // If user doesn't have access, show appropriate modal
+  if (!hasAccess) {
+    if (formSubmitted) {
+      // Show ReqProductSent modal after form submission
+      return (
+        <ReqProductSent
+          openModal={openSentModal}
+          setOpenModal={setOpenSentModal}
+        />
+      );
+    } else {
+      // Show ReqProductModal for first time users
+      return (
+        <ReqProductModal
+          openModal={openReqModal}
+          setOpenModal={setOpenReqModal}
+          onSuccessfulSubmission={handleTokenReceived}
+          onShowSentModal={() => setOpenSentModal(true)}
+        />
+      );
+    }
+  }
+
   return (
-    <ProductContainer
-      productTypes={productTypes}
-      productApplications={productApplications}
-      cellTitles={cellTitles}
-      rows={paginatedRows}
-      isSeeAllProduct={isSeeAllProduct}
-      setIsSeeAllProduct={setIsSeeAllProduct}
-      filterByType={filterByType}
-      setFilterByType={setFilterByType}
-      filterByApplication={filterByApplication}
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      handleChangeFilterByType={handleChangeFilterByType}
-      handleChangeApplication={handleChangeApplication}
-      openReqModal={openReqModal}
-      setOpenReqModal={setOpenReqModal}
-      openSentModal={openSentModal}
-      setOpenSentModal={setOpenSentModal}
-      onTokenReceived={handleTokenReceived}
-      currentPage={currentPage}
-      totalPages={totalPages}
-      totalItems={totalItems}
-      itemsPerPage={itemsPerPage}
-      onPageChange={handlePageChange}
-    />
+    <>
+      <ProductContainer
+        productTypes={productTypes}
+        productApplications={productApplications}
+        cellTitles={cellTitles}
+        rows={paginatedRows}
+        isSeeAllProduct={isSeeAllProduct}
+        setIsSeeAllProduct={setIsSeeAllProduct}
+        filterByType={filterByType}
+        setFilterByType={setFilterByType}
+        filterByApplication={filterByApplication}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        handleChangeFilterByType={handleChangeFilterByType}
+        handleChangeApplication={handleChangeApplication}
+        openReqModal={openReqModal}
+        setOpenReqModal={setOpenReqModal}
+        openSentModal={openSentModal}
+        setOpenSentModal={setOpenSentModal}
+        onTokenReceived={handleTokenReceived}
+        onShowSentModal={() => setOpenSentModal(true)}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
+      <ReqProductSent
+      hasAccess={hasAccess}
+        openModal={openSentModal}
+        setOpenModal={setOpenSentModal}
+      />
+    </>
   );
 };
 export default ProductsPage;

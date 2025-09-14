@@ -270,6 +270,9 @@
       "back_to_home": "Kembali ke Beranda"
     },
     "reqProductSentModal": {
+      "access": "Akses",
+      "request_sent": "Berhasil dikirim!",
+      "desc_access": "Terima kasih! Permohonan Anda telah berhasil terkirim. Silakan periksa email Anda secara rutin untuk menerima akses ke daftar produk.",
       "request": "Permohonan",
       "sent": "Terkirim!",
       "desc": "Terima kasih! Permohonan Anda telah berhasil terkirim. Tim kami akan segera menghubungi Anda dengan informasi lebih lanjut.",

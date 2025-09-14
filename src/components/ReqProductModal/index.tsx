@@ -8,7 +8,6 @@ import {
 } from '@mui/material';
 import { styles, classNames } from './style';
 import { useState } from 'react';
-import useProduct from '../../hooks/useProduct';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -24,14 +23,15 @@ interface ReqProductModalProps {
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
   onSuccessfulSubmission?: () => void;
+  onShowSentModal?: () => void;
 }
 
 const ReqProductModal: React.FC<ReqProductModalProps> = ({
   openModal,
   setOpenModal,
   onSuccessfulSubmission,
+  onShowSentModal,
 }) => {
-  const { accessProduct } = useProduct();
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -98,32 +98,21 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     setIsSubmitting(true);
 
     try {
-      // Call the accessProduct API
-      const apiRequest = {
-        fullName: formData.fullName,
-        email: formData.email,
-        phone: formData.phoneNumber,
-        company: formData.companyName,
-        city: formData.city,
-      };
+      // Mark form as submitted in localStorage
+      localStorage.setItem('hasSubmittedProductForm', 'true');
 
-      const result = await accessProduct(apiRequest);
+      // Mark as submitted and close modal after successful submission
+      setHasSubmitted(true);
+      setOpenModal(false);
 
-      if (result.data.id && result.data.encodedData) {
-        localStorage.setItem('userToken', result.data.encodedData);
-        localStorage.setItem('hasVisitedProduct', 'true');
+      // Show ReqProductSent modal after form submission
+      if (onShowSentModal) {
+        onShowSentModal();
+      }
 
-        // Mark as submitted and close modal after successful submission
-        setHasSubmitted(true);
-        setOpenModal(false);
-
-        // Call the success callback if provided
-        if (onSuccessfulSubmission) {
-          onSuccessfulSubmission();
-        }
-      } else {
-        // Handle API error
-        console.error('API Error:', result.data.message);
+      // Call the success callback if provided
+      if (onSuccessfulSubmission) {
+        onSuccessfulSubmission();
       }
     } catch (error) {
       console.error('Error submitting form:', error);

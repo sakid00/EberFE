@@ -271,9 +271,12 @@
       "back_to_home": "Back to Home"
     },
     "reqProductSentModal": {
+      "access": "Access",
+      "request_sent": "Request Sent!",
+      "desc_access": "Thank you! Your access request has been submitted. Please check your email regularly to receive access to the product list.",
       "request": "Request",
       "sent": "Sent!",
-      "desc": "Thank you! Your request has been sent successfully. Our Eber team will contact you soon with more information.",
+      "desc": "Thank you! Your request has been sent successfully. Our EBER team will contact you soon with more information.",
       "got_it": "Got It"
     }
   }
