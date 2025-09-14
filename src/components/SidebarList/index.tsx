@@ -36,6 +36,7 @@ interface ISidebarListProps extends IDualColorTextProps {
   secondaryText?: string;
   type: DeviceType;
   sx?: SxProps;
+  fontSize?: string;
 }
 
 const SidebarList: React.FC<ISidebarListProps> = ({
@@ -52,6 +53,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   listCategory,
   type,
   sx,
+  fontSize,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(true);
 
@@ -157,7 +159,9 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text1={text1}
         text2={text2}
-        fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
+        fontSize={
+          fontSize ?? dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')
+        }
         fontWeight={800}
         inline={inline ?? false}
         sx={sx}

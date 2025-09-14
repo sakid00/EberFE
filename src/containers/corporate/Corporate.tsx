@@ -1,10 +1,6 @@
 'use client';
 import SidebarList from '@/components/SidebarList/index';
-import {
-  Box,
-  Button,
-  Typography,
-} from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
@@ -15,6 +11,7 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import useCompany from '@/hooks/useCompany';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { CorporateSkeleton } from '@/components/Skeleton';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 // Type for info box items that can come from either API or constants
 type InfoBoxItem = {
@@ -44,7 +41,7 @@ const CorporateContainer = () => {
           console.log('📊 Using existing company data');
           return;
         }
-        
+
         console.log('🔄 Fetching company data...');
         await getCompany({ page: 1, pageSize: 10 });
         console.log('✅ Company data loaded');
@@ -56,7 +53,7 @@ const CorporateContainer = () => {
     fetchCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+
   // Complete navigation once component is mounted and data is ready
   useEffect(() => {
     if (!isLoading) {
@@ -108,7 +105,7 @@ const CorporateContainer = () => {
       </Box>
     );
   }
-  
+
   // If no data after loading, show empty state instead of skeleton
   if (!isLoading && companies.length === 0) {
     console.log('📭 No company data available');
@@ -136,6 +133,12 @@ const CorporateContainer = () => {
         text1={t('home.subsidiaries_section_title.eber_group')}
         text2={t('home.subsidiaries_section_title.subsidiaries')}
         inline={false}
+        fontSize={dynamicStylingValue(
+          type,
+          '1.5em',
+          language === 'en' ? '1.7em' : '1.4em',
+          language === 'en' ? '1.7em' : '1.4em'
+        )}
         type={type}
       />
       <Box sx={styles.contentContainer(type)}>
@@ -186,8 +189,8 @@ const CorporateContainer = () => {
           </Typography>
         )}
 
-        {currentCompanyDetail?.box_1?.data?.length > 0 && (
-          type !== 'mobile' ? (
+        {currentCompanyDetail?.box_1?.data?.length > 0 &&
+          (type !== 'mobile' ? (
             <Grid container spacing={2} sx={styles.gridContainer}>
               {currentCompanyDetail.box_1.data.map(
                 (item: InfoBoxItem, index) => (
@@ -211,8 +214,7 @@ const CorporateContainer = () => {
                 </Box>
               ))}
             </Box>
-          )
-        )}
+          ))}
 
         {currentCompanyDetail?.description_2_en && (
           <Typography marginY={4} sx={styles.descriptionText(type)}>
@@ -220,8 +222,8 @@ const CorporateContainer = () => {
           </Typography>
         )}
 
-        {currentCompanyDetail?.box_2?.data?.length > 0 && (
-          type !== 'mobile' ? (
+        {currentCompanyDetail?.box_2?.data?.length > 0 &&
+          (type !== 'mobile' ? (
             <Grid container spacing={2} sx={styles.gridContainer}>
               {currentCompanyDetail.box_2.data.map((item, index) => (
                 <Grid component={'span'} size={4} key={index}>
@@ -237,8 +239,7 @@ const CorporateContainer = () => {
                 </Box>
               ))}
             </Box>
-          )
-        )}
+          ))}
 
         {currentCompanyDetail?.p && (
           <Box sx={styles.productApplicationContainer}>
