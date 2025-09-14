@@ -3,7 +3,14 @@ import ProductContainer from '../../containers/product';
 import { Button, SelectChangeEvent, Box, Typography } from '@mui/material';
 import emailIcon from '../../../public/icon/email-no-bg.svg';
 import Image from 'next/image';
-import { ReactNode, useState, useEffect, useMemo, useCallback } from 'react';
+import {
+  ReactNode,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  Suspense,
+} from 'react';
 import useProduct from '../../hooks/useProduct';
 import { useTranslation } from '../../hooks';
 import { useDeviceType } from '../../hooks/useDeviceType';
@@ -28,7 +35,8 @@ export interface IrowData {
   getMoreDetail: ReactNode;
 }
 
-const ProductsPage = () => {
+// Component that uses useSearchParams - needs to be wrapped in Suspense
+const ProductsPageContent = () => {
   const { language, t } = useTranslation();
   const { type } = useDeviceType();
   const { getProduct, products, filters, isLoading, error } = useProduct();
@@ -344,4 +352,25 @@ const ProductsPage = () => {
     </>
   );
 };
+
+// Main component with Suspense boundary
+const ProductsPage = () => {
+  const { type } = useDeviceType();
+
+  return (
+    <Suspense
+      fallback={
+        <Box sx={{ padding: 2 }}>
+          <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
+            Loading...
+          </Typography>
+          <TableSkeleton rows={10} columns={5} type={type} showHeader={true} />
+        </Box>
+      }
+    >
+      <ProductsPageContent />
+    </Suspense>
+  );
+};
+
 export default ProductsPage;
