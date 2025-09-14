@@ -133,8 +133,8 @@ export const principleStyles: {
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
     width: dynamicStylingValue(type, '85%', '55%', '55%'),
-    height: dynamicStylingValue(type, '45%', '90%', '90%'),
-    top: dynamicStylingValue(type, '-3%', '10%', '10%'),
+    height: dynamicStylingValue(type, '38%', '90%', '90%'),
+    top: dynamicStylingValue(type, '4%', '10%', '10%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
     zIndex: 20,
   }),

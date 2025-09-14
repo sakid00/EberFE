@@ -382,7 +382,7 @@ const Header = () => {
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
                     padding: dynamicStylingValue(type, '2%', '1%', '1%'),
                     borderRadius: '10px',
-                    top: dynamicStylingValue(type, '48%', '30%', '30%'),
+                    top: dynamicStylingValue(type, '58%', '30%', '30%'),
                     left: dynamicStylingValue(type, '53%', '70%', '70%'),
                     borderBottomRightRadius: '100px',
                   }}
@@ -417,7 +417,7 @@ const Header = () => {
                     position: 'absolute',
                     width: dynamicStylingValue(type, '100%', '50%', '50%'),
                     height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                    top: dynamicStylingValue(type, '48%', '25%', '28%'),
+                    top: dynamicStylingValue(type, '58%', '25%', '28%'),
                     left: dynamicStylingValue(type, '2%', '38%', '38%'),
                     right: 0,
                     bottom: 0,
@@ -439,7 +439,7 @@ const Header = () => {
                 sx={{
                   position: 'absolute',
                   width: dynamicStylingValue(type, '90%', '60%', '60%'),
-                  height: dynamicStylingValue(type, '50%', '100%', '100%'),
+                  height: dynamicStylingValue(type, '48%', '100%', '100%'),
                   aspectRatio: '1/1.1',
                   top: dynamicStylingValue(type, '55%', '10%', '10%'),
                   left: dynamicStylingValue(type, '10%', '40%', '40%'),

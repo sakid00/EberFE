@@ -31,7 +31,7 @@ export const PrincipleSection = () => {
         className={animationClasses.slideRight}
         sx={{
           width: '100%',
-          height: dynamicStylingValue(type, '90vh', '100vh', '80vh'),
+          height: dynamicStylingValue(type, '80vh', '100vh', '80vh'),
           marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
         }}
         contentSx={{

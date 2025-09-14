@@ -24,7 +24,7 @@ export const styles = {
   },
 
   accordionSummary: {
-    padding: '4%',
+    padding: '10%',
     minHeight: 'auto',
     '&.Mui-expanded': {
       minHeight: 'auto',

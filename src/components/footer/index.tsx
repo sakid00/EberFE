@@ -131,7 +131,7 @@ const Footer = () => {
               />
               <Typography sx={footerStyles.descriptionText(type)}>
                 {
-                  'Established in 2021, Eber Group oversees four\n top-performing chemical manufacturing companies operating across\n Indonesia, delivering high-performance specialty materials and chemical\n solutions.'
+                  'Established in 2021, EBER Group oversees four\n top-performing chemical manufacturing companies operating across\n Indonesia, delivering high-performance specialty materials and chemical\n solutions.'
                 }
               </Typography>
             </Box>
@@ -158,7 +158,7 @@ const Footer = () => {
           <Box className="flex justify-center items-center">
             <CopyrightIcon sx={footerStyles.copyrightIcon} />
             <Typography sx={footerStyles.copyrightText}>
-              2025 Eber Group. All right reserved
+              2025 EBER Group. All right reserved
             </Typography>
           </Box>
         </Box>

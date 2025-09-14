@@ -174,6 +174,7 @@ export const styles = {
 
   searchInput: {
     backgroundColor: '#F3F5F7',
+    fontSize: '0.875em',
   },
 
   searchIcon: {

@@ -33,7 +33,7 @@ export const CustomProductSection = () => {
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
-          height: dynamicStylingValue(type, '90vh', '70vh', '70vh'),
+          height: dynamicStylingValue(type, '80vh', '70vh', '70vh'),
           marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
         }}
         contentSx={{
