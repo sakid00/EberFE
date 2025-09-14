@@ -337,7 +337,7 @@ const ProductsPage = () => {
         onPageChange={handlePageChange}
       />
       <ReqProductSent
-      hasAccess={hasAccess}
+        hasAccess={hasAccess}
         openModal={openSentModal}
         setOpenModal={setOpenSentModal}
       />
