@@ -23,8 +23,8 @@ export const styles = {
     },
   },
 
-  accordionSummary: {
-    padding: '10%',
+  accordionSummary: (type: DeviceType) => ({
+    padding: dynamicStylingValue(type, '10%', '4%', '4%'),
     minHeight: 'auto',
     '&.Mui-expanded': {
       minHeight: 'auto',
@@ -35,7 +35,7 @@ export const styles = {
         margin: 0,
       },
     },
-  },
+  }),
 
   accordionDetails: {
     padding: '0 24px 24px 24px',

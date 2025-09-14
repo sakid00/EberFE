@@ -28,7 +28,7 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
           marginTop: getAccordionMarginTop(index),
         }}
       >
-        <AccordionSummary sx={styles.accordionSummary}>
+        <AccordionSummary sx={styles.accordionSummary(type)}>
           <Box sx={styles.summaryContainer(type)}>
             <Box sx={styles.jobInfoContainer(type)}>
               <Typography sx={styles.openRolesText(type)}>
