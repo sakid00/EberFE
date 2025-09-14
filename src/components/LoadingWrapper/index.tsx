@@ -1,62 +1,75 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage';
-// Temporarily using fast dev loading - switch back to useAssetLoading for production
 import { useDevAssetLoading as useAssetLoading } from '@/hooks/useDevAssetLoading';
 
 interface LoadingWrapperProps {
   children: React.ReactNode;
+  useModernLoading?: boolean; // Option to use modern loading instead
 }
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
-  const { isLoading, progress, isComplete } = useAssetLoading();
-
+  const [isLoadingVisible, setIsLoadingVisible] = useState(true); // Show loading initially
+  
+  // Use actual loading with modern design - only need progress for display
+  const { progress } = useAssetLoading();
+  
+  // Show beautiful loading screen for 2.5 seconds then fade out
   useEffect(() => {
-    // Mark that React has loaded and hide the initial CSS loading screen
+    const loadingTimer = setTimeout(() => {
+      setIsLoadingVisible(false);
+      console.log('✨ Modern loading screen completed!');
+    }, 2500); // 2.5 seconds of beautiful loading
+    
+    return () => clearTimeout(loadingTimer);
+  }, []); // Run once on mount
+
+  // Clean up initial CSS loading and ensure scroll position
+  useEffect(() => {
+    // Mark that React has loaded
     document.documentElement.classList.add('react-loaded');
     
-    // Clean up the initial loading element after React takes over
+    // Clean up the initial loading element
     const initialLoading = document.getElementById('initial-loading');
     if (initialLoading) {
-      // Add a small fade out effect
-      initialLoading.style.transition = 'opacity 0.3s ease-out';
+      initialLoading.style.transition = 'opacity 0.5s ease-out';
       initialLoading.style.opacity = '0';
       setTimeout(() => {
         if (initialLoading.parentNode) {
           initialLoading.parentNode.removeChild(initialLoading);
         }
-      }, 300);
+      }, 500);
     }
 
     // Ensure page starts at the top
     window.scrollTo(0, 0);
-    
-    // Also reset any potential scroll lock
     document.body.style.overflow = 'unset';
   }, []);
 
-  // Additional effect to handle loading completion
-  useEffect(() => {
-    if (!isLoading) {
-      // Scroll to top when loading is complete
-      setTimeout(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      }, 100);
-    }
-  }, [isLoading]);
-
   return (
     <>
-      {isLoading && (
-        <div className={isComplete ? 'loading-page-exit' : ''}>
-          <LoadingPage progress={progress} />
+      {/* Modern loading screen */}
+      {isLoadingVisible && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            transition: 'opacity 0.5s ease-out',
+          }}
+        >
+          <LoadingPage progress={Math.min(progress, 100)} />
         </div>
       )}
+      
+      {/* Main content */}
       <div
         style={{
-          opacity: isLoading ? 0 : 1,
-          transition: 'opacity 0.5s ease-in-out',
-          pointerEvents: isLoading ? 'none' : 'auto',
+          opacity: isLoadingVisible ? 0 : 1,
+          transition: isLoadingVisible ? 'none' : 'opacity 0.5s ease-in',
         }}
       >
         {children}

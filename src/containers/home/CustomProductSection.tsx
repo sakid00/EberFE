@@ -1,13 +1,12 @@
 import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import Image from 'next/image';
-import fieldPerson from '@/public/photo/field_person2.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { customProductSectionStyles, animationClasses } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
-import ImageBackground from '@/components/ImageBackground/index';
-import container from '@/public/background/container1.png';
-import containerMobile from '@/public/background/container1-mobile.png';
+import ProgressiveBackgroundImage from '@/components/ProgressiveBackgroundImage/index';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { useRouter } from 'next/navigation';
 
 export const CustomProductSection = () => {
@@ -20,16 +19,26 @@ export const CustomProductSection = () => {
 
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
-      {type === 'mobile' && (
-        <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
-          <Image src={fieldPerson} alt="field-person" fill />
+        {type === 'mobile' && (
+        <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
+          <Image 
+            src={getPhoto('fieldPerson2')} 
+            alt="field-person" 
+            fill 
+            priority={true}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            style={{ objectFit: 'contain' }}
+          />
         </Box>
       )}
 
-      <ImageBackground
-        src={type === 'mobile' ? containerMobile : container}
-        alt="container"
+      <ProgressiveBackgroundImage
+        src={type === 'mobile' ? getBackgroundImage('container1Mobile') : getBackgroundImage('container1')}
+        alt="container background"
         objectFit={'fill'}
+        priority={true}
+        quality={75}
+        placeholderColor="#cbd5e0"
         className={animationClasses.slideRight}
         sx={{
           width: '100vw',
@@ -47,10 +56,12 @@ export const CustomProductSection = () => {
         }}
       >
         {type !== 'mobile' && (
-          <Box sx={customProductSectionStyles.imageContainerTransform(type)}>
+          <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
             <Image
-              src={fieldPerson}
+              src={getPhoto('fieldPerson2')}
               alt="field-person"
+              width={800}
+              height={600}
               style={{
                 objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
                 width: 'clamp(35vw, 100vw, 100vw)', // Responsive width with min/max constraints
@@ -92,7 +103,7 @@ export const CustomProductSection = () => {
             {t('home.custom_product_button')}
           </Button>
         </Box>
-      </ImageBackground>
+      </ProgressiveBackgroundImage>
     </Box>
   );
 };

@@ -72,17 +72,25 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
 
   const execute = useCallback(
     async (url: string, options: ApiOptions = {}): Promise<ApiResponse<T>> => {
-      // Reset previous state
-      reset();
+      // Reset previous state without calling reset() to avoid dependency issues
+      setData(null);
+      setError(null);
+      setLoading(true);
+      setStatus(null);
+
+      // Cancel any existing request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
 
       const mergedConfig = { ...defaultConfig, ...config };
       const finalOptions = { ...mergedConfig, ...options };
       const fullUrl = finalOptions.baseURL
         ? `${finalOptions.baseURL}${url}`
         : url;
-
-      setLoading(true);
-      setError(null);
 
       // Create abort controller for this request
       abortControllerRef.current = new AbortController();
@@ -118,6 +126,7 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
 
         const responseData = await response.json();
         setData(responseData);
+        setLoading(false);
 
         return {
           data: responseData,
@@ -140,7 +149,7 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
           data: null,
           error: errorMessage,
           loading: false,
-          status: status,
+          status: null,
         };
       } finally {
         if (timeoutRef.current) {
@@ -150,7 +159,7 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
         setLoading(false);
       }
     },
-    [config, reset, status]
+    [config]
   );
 
   return {

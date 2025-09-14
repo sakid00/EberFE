@@ -3,7 +3,24 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  // Performance optimizations
+  reactStrictMode: false, // Disable for faster dev
+  poweredByHeader: false,
+  compress: true,
+  
+  // Experimental features for better performance
+  experimental: {
+    scrollRestoration: true,
+  },
   images: {
+    // Image optimization for large background images
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024],
+    // SVG support and security
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    
     remotePatterns: [
       ...(process.env.NEXT_PUBLIC_IMAGE_BASE_URL
         ? [

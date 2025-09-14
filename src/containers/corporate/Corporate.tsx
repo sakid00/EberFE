@@ -10,10 +10,10 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import HeaderImage from '@/public/photo/header_corporate.png';
 import { Map } from '@mui/icons-material';
-import dynamic from 'next/dynamic';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
 import useCompany from '@/hooks/useCompany';
+import { useNavigation } from '@/contexts/NavigationContext';
 import { CorporateSkeleton } from '@/components/Skeleton';
 
 // Type for info box items that can come from either API or constants
@@ -32,21 +32,38 @@ const CorporateContainer = () => {
   const [selectedCompany, setSelectedCompany] = useState<number>(0);
   const { t, language } = useTranslation();
   const { type } = useDeviceType();
+  const { setNavigationComplete } = useNavigation();
   const { companies, isLoading, getCompany } = useCompany();
 
-  // Fetch companies on component mount
+  // Fetch companies on component mount with optimized loading
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
+        // Check if we already have data to avoid loading state
+        if (companies.length > 0) {
+          console.log('📊 Using existing company data');
+          return;
+        }
+        
+        console.log('🔄 Fetching company data...');
         await getCompany({ page: 1, pageSize: 10 });
+        console.log('✅ Company data loaded');
       } catch (error) {
-        console.error('Failed to fetch companies:', error);
+        console.error('❌ Failed to fetch companies:', error);
       }
     };
 
     fetchCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  // Complete navigation once component is mounted and data is ready
+  useEffect(() => {
+    if (!isLoading) {
+      // Navigation is complete when data loading is done
+      setNavigationComplete();
+    }
+  }, [isLoading, setNavigationComplete]);
 
   const infoboxContainer = (title: string, value: string) => {
     return (
@@ -70,10 +87,10 @@ const CorporateContainer = () => {
   const currentCompany = companies?.[selectedCompany];
   const currentCompanyDetail = currentCompany?.data;
 
-  // Show skeleton loading state when:
-  // 1. Currently loading and no data
-  // 2. No API data available (prevent dummy data transition)
-  if (isLoading || companies.length === 0) {
+  // Show skeleton loading state only when actually loading AND no data
+  // More aggressive: only show skeleton on first load with no cache
+  if (isLoading && companies.length === 0) {
+    console.log('⏳ Showing corporate skeleton loading...');
     return (
       <Box sx={styles.mainContainer(type)}>
         <SidebarList
@@ -87,6 +104,18 @@ const CorporateContainer = () => {
         />
         <Box sx={styles.contentContainer(type)}>
           <CorporateSkeleton type={type} />
+        </Box>
+      </Box>
+    );
+  }
+  
+  // If no data after loading, show empty state instead of skeleton
+  if (!isLoading && companies.length === 0) {
+    console.log('📭 No company data available');
+    return (
+      <Box sx={styles.mainContainer(type)}>
+        <Box sx={styles.contentContainer(type)}>
+          <Typography>No company data available</Typography>
         </Box>
       </Box>
     );
@@ -329,6 +358,5 @@ const CorporateContainer = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(CorporateContainer), {
-  ssr: false,
-});
+// Remove dynamic import for faster loading
+export default CorporateContainer;

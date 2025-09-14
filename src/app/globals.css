@@ -76,6 +76,11 @@ img {
   }
 }
 
+/* Navigation optimization - minimal CSS to avoid layout issues */
+.navigation-transition {
+  transition: opacity 0.15s ease-out;
+}
+
 /* Additional font utilities for Tailwind */
 .font-plus-jakarta {
   font-family: var(--font-plus-jakarta-sans);

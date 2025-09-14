@@ -1,6 +1,7 @@
 import { useApi } from './useApi';
 import { useCompanyContext, CompanyData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
+import { useNavigationCache } from './useNavigationCache';
 
 interface CompanyResponseData {
   address_en: string;
@@ -67,6 +68,7 @@ interface CompanyRequest {
 
 const useCompany = () => {
   const { state, actions } = useCompanyContext();
+  const cache = useNavigationCache<CompanyData[]>('companies');
   const api = useApi({
     baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     defaultHeaders: {},
@@ -77,6 +79,23 @@ const useCompany = () => {
   const getCompany = useCallback(
     async (request: CompanyRequest) => {
       try {
+        const cacheKey = `${request.page}_${request.pageSize}`;
+        
+        // Check cache first
+        const cachedData = cache.get(cacheKey);
+        if (cachedData && cachedData.length > 0) {
+          console.log('Using cached company data');
+          actions.fetchCompaniesSuccess(cachedData);
+          return cachedData;
+        }
+
+        // If global state has data, use it and cache it
+        if (state.companies.length > 0 && !state.isLoading) {
+          console.log('Using existing company data from state');
+          cache.set(cacheKey, state.companies);
+          return state.companies;
+        }
+
         actions.fetchCompaniesStart();
 
         const queryParams = new URLSearchParams({
@@ -115,6 +134,8 @@ const useCompany = () => {
         }));
 
         actions.fetchCompaniesSuccess(transformedData);
+        // Cache the data
+        cache.set(cacheKey, transformedData);
         return transformedData;
       } catch (error) {
         const errorMessage =
@@ -123,7 +144,7 @@ const useCompany = () => {
         throw error;
       }
     },
-    [actions, api]
+    [actions, api, cache, state.companies, state.isLoading]
   );
 
   // Additional helper functions

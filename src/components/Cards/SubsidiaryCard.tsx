@@ -23,14 +23,17 @@ export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
         sx={{
           position: 'relative',
           width: '100%',
-          height: '40%',
+          height: '200px',
           borderRadius: '10px',
+          overflow: 'hidden',
         }}
       >
         <Image
           src={data.img}
           alt={`subsidiary-img-${index}`}
+          fill
           style={{ objectFit: 'contain' }}
+          sizes="(max-width: 768px) 100vw, 40vw"
         />
       </Box>
       <Typography

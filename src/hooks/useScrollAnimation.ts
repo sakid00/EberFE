@@ -16,14 +16,17 @@ export const useScrollAnimation = () => {
       });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll(
-      '.animate-on-scroll, .animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-scale, .animate-stagger'
-    );
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+      const animatedElements = document.querySelectorAll(
+        '.animate-on-scroll, .animate-fade-in, .animate-slide-left, .animate-slide-right, .animate-scale, .animate-stagger'
+      );
 
-    animatedElements.forEach((el) => observer.observe(el));
+      animatedElements.forEach((el) => observer.observe(el));
+    }, 500); // Wait 500ms after loading
 
     return () => {
-      animatedElements.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
     };
   }, []);
 };

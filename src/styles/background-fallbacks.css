@@ -1,0 +1,97 @@
+/* Background Image Fallback Styles */
+
+/* Header background fallback - matches the overall tone of homepage_header_bg.png */
+.header-bg-fallback {
+  background: linear-gradient(135deg, 
+    #2a3b4d 0%,    /* Dark blue-grey at top */
+    #3e5062 25%,   /* Lighter blue-grey */
+    #526074 50%,   /* Mid blue-grey */
+    #4a556b 75%,   /* Slightly darker */
+    #394856 100%   /* Dark at bottom */
+  );
+}
+
+/* Container background fallback - matches container images */
+.container-bg-fallback {
+  background: linear-gradient(145deg,
+    #f8fafc 0%,    /* Light grey at top */
+    #e2e8f0 30%,   /* Slightly darker */
+    #cbd5e0 60%,   /* Medium grey */
+    #a0aec0 100%   /* Darker at bottom */
+  );
+}
+
+/* Site background fallback */
+.site-bg-fallback {
+  background: linear-gradient(180deg,
+    #ffffff 0%,    /* White at top */
+    #f7fafc 50%,   /* Very light grey */
+    #edf2f7 100%   /* Light grey at bottom */
+  );
+}
+
+/* Footer background fallback */
+.footer-bg-fallback {
+  background: linear-gradient(160deg,
+    #2d3748 0%,    /* Dark grey */
+    #4a5568 50%,   /* Medium grey */
+    #718096 100%   /* Lighter grey */
+  );
+}
+
+/* Loading shimmer animation for backgrounds */
+.bg-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Background image loading states */
+.bg-loading {
+  opacity: 0.8;
+  filter: blur(1px);
+  transition: all 0.6s ease-in-out;
+}
+
+.bg-loaded {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Pulse animation for loading backgrounds */
+.bg-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
