@@ -10,6 +10,7 @@ import { styles, classNames } from './style';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
+import useProduct from '@/hooks/useProduct';
 
 interface FormData {
   fullName: string;
@@ -39,6 +40,8 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     companyName: '',
     city: '',
   });
+
+  const { applyInstantAccess } = useProduct();
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -90,11 +93,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     router.push('/');
   };
 
-  const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleSuccess = () => {
     setIsSubmitting(true);
 
     try {
@@ -119,6 +118,23 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    applyInstantAccess({
+      formData: {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phoneNumber,
+        company: formData.companyName,
+        city: formData.city,
+      },
+      onSuccess: handleSuccess,
+    });
   };
 
   const handleClose = () => {

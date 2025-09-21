@@ -19,6 +19,19 @@ interface ProductRequest {
   application?: string;
 }
 
+interface FormDataRequest {
+  fullName: string;
+  email: string;
+  phone: string;
+  company?: string;
+  city?: string;
+}
+
+interface IFormData {
+  formData: FormDataRequest;
+  onSuccess: () => void;
+}
+
 const useProduct = () => {
   const { state, actions } = useProductContext();
   const api = useApi({
@@ -105,6 +118,35 @@ const useProduct = () => {
     [actions, api]
   );
 
+  const applyInstantAccess = useCallback(
+    async (props: IFormData) => {
+      try {
+        const response = await api.execute('/form-submissions/instant-access', {
+          method: 'POST',
+          body: {
+            fullName: props.formData.fullName,
+            email: props.formData.email,
+            phone: props.formData.phone,
+            company: props.formData.company,
+            city: props.formData.city,
+          },
+        });
+
+        if (response.status === 201) {
+          props.onSuccess();
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : 'Failed to apply instant access';
+        actions.fetchProductsError(errorMessage);
+        throw error;
+      }
+    },
+    [api, actions]
+  );
+
   // Additional helper functions
   const clearError = useCallback(() => {
     actions.clearError();
@@ -119,6 +161,7 @@ const useProduct = () => {
     getProduct,
     clearError,
     resetProductState,
+    applyInstantAccess,
 
     // Global state
     products: state.products,
