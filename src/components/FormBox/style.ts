@@ -73,6 +73,37 @@ export const styles = {
     height: '3em',
     textTransform: 'none',
   },
+
+  fileUploadContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+  },
+
+  fileUploadButton: {
+    borderColor: '#E5E7EB',
+    color: '#6B7280',
+    backgroundColor: '#F9FAFB',
+    textTransform: 'none',
+    borderRadius: '8px',
+    padding: '12px 16px',
+    '&:hover': {
+      borderColor: '#D1D5DB',
+      backgroundColor: '#F3F4F6',
+    },
+  },
+
+  uploadSuccessText: {
+    fontSize: '12px',
+    color: '#10B981',
+    fontWeight: 500,
+  },
+
+  errorText: {
+    fontSize: '12px',
+    color: '#EF4444',
+    fontWeight: 400,
+  },
 };
 
 export const classNames = {

@@ -4,12 +4,24 @@ import { styles, classNames } from './style';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { useTranslation } from '@/hooks';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import useCareer from '@/hooks/useCareer';
 
 interface FormData {
   firstName: string;
   lastName: string;
   email: string;
   message: string;
+  cvFile?: File | null;
+  cvFileUrl?: string;
+}
+
+interface FormErrors {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  message?: string;
+  cvFile?: string;
 }
 
 const FormBox = ({
@@ -27,16 +39,22 @@ const FormBox = ({
 }) => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
+  const pathname = usePathname();
+  const { uploadCVFile } = useCareer();
+  const isCareerPage = pathname?.includes('/careers/submit');
 
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
     email: '',
     message: '',
+    cvFile: null,
+    cvFileUrl: '',
   });
 
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploadingCV, setIsUploadingCV] = useState(false);
 
   const handleInputChange =
     (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,16 +63,77 @@ const FormBox = ({
         [field]: event.target.value,
       }));
       // Clear error when user starts typing
-      if (errors[field]) {
+      if (errors[field as keyof FormErrors]) {
         setErrors((prev) => ({
           ...prev,
-          [field]: '',
+          [field as keyof FormErrors]: '',
         }));
       }
     };
 
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      setErrors((prev) => ({
+        ...prev,
+        cvFile: 'Please upload a PDF or Word document',
+      }));
+      return;
+    }
+
+    // Validate file size (5MB limit)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      setErrors((prev) => ({
+        ...prev,
+        cvFile: 'File size must be less than 5MB',
+      }));
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      cvFile: file,
+    }));
+
+    // Clear any previous errors
+    if (errors.cvFile) {
+      setErrors((prev) => ({
+        ...prev,
+        cvFile: '',
+      }));
+    }
+
+    // Upload the file immediately
+    setIsUploadingCV(true);
+    try {
+      const fileUrl = await uploadCVFile(file);
+      setFormData((prev) => ({
+        ...prev,
+        cvFileUrl: fileUrl,
+      }));
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        cvFile: error instanceof Error ? error.message : 'Failed to upload CV',
+      }));
+    } finally {
+      setIsUploadingCV(false);
+    }
+  };
+
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: FormErrors = {};
 
     if (!formData.firstName.trim()) {
       newErrors.firstName = 'First name is required';
@@ -72,6 +151,11 @@ const FormBox = ({
 
     // Message is optional - no validation required
 
+    // CV file validation for career page
+    if (isCareerPage && !formData.cvFile) {
+      newErrors.cvFile = 'CV file is required for job applications';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -88,13 +172,19 @@ const FormBox = ({
       const subject = encodeURIComponent(
         `Contact Form Submission from ${formData.firstName} ${formData.lastName}`
       );
-      const body = encodeURIComponent(
+      let bodyContent =
         `Name: ${formData.firstName} ${formData.lastName}\n` +
-          `Email: ${formData.email}\n` +
-          `Message:\n${formData.message || 'No message provided'}`
-      );
+        `Email: ${formData.email}\n` +
+        `Message:\n${formData.message || 'No message provided'}`;
 
-      const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
+      // Add CV link if available
+      if (formData.cvFileUrl) {
+        bodyContent += `\n\nCV Document: ${formData.cvFileUrl}`;
+      }
+
+      const body = encodeURIComponent(bodyContent);
+
+      const mailtoLink = `mailto:info@ebergroup.com?subject=${subject}&body=${body}`;
 
       // Open mailto link
       window.location.href = mailtoLink;
@@ -105,6 +195,8 @@ const FormBox = ({
         lastName: '',
         email: '',
         message: '',
+        cvFile: null,
+        cvFileUrl: '',
       });
     } catch (error) {
       console.error('Error creating mailto link:', error);
@@ -197,10 +289,46 @@ const FormBox = ({
           }}
         />
       </Box>
+      {isCareerPage && (
+        <Box sx={styles.fieldContainer}>
+          <InputLabel sx={styles.inputLabel}>Upload CV *</InputLabel>
+          <Box sx={styles.fileUploadContainer}>
+            <input
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+              id="cv-upload"
+            />
+            <label htmlFor="cv-upload">
+              <Button
+                component="span"
+                variant="outlined"
+                disabled={isUploadingCV}
+                sx={styles.fileUploadButton}
+              >
+                {isUploadingCV
+                  ? 'Uploading...'
+                  : formData.cvFile
+                    ? `Selected: ${formData.cvFile.name}`
+                    : 'Choose CV File'}
+              </Button>
+            </label>
+            {formData.cvFileUrl && (
+              <Typography sx={styles.uploadSuccessText}>
+                ✓ CV uploaded successfully
+              </Typography>
+            )}
+            {errors.cvFile && (
+              <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
+            )}
+          </Box>
+        </Box>
+      )}
       <Button
         sx={styles.submitButton}
         onClick={handleSubmit}
-        disabled={isSubmitting}
+        disabled={isSubmitting || (isCareerPage && isUploadingCV)}
       >
         {isSubmitting
           ? 'Submitting...'

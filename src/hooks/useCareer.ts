@@ -18,6 +18,19 @@ interface CareerRequest {
   pageSize: number;
 }
 
+interface uploadCVFileResponseData {
+  data: {
+    downloadUrl: string;
+    extension: string;
+    filename: string;
+    mimetype: string;
+    originalname: string;
+    size: number;
+    uploadedAt: string;
+    url: string;
+  };
+}
+
 const useCareer = () => {
   const { state, actions } = useCareerContext();
   const api = useApi({
@@ -85,9 +98,44 @@ const useCareer = () => {
     actions.resetState();
   }, [actions]);
 
+  const uploadCVFile = useCallback(
+    async (file: File): Promise<string> => {
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        const response = await api.execute('/upload/file', {
+          method: 'POST',
+          body: formData,
+          // Remove headers completely to let browser set proper Content-Type with boundary
+        });
+
+        // Extract the file URL from the response
+        const responseData = response?.data as uploadCVFileResponseData;
+
+        // Try multiple possible response structures
+        const fileUrl = responseData?.data?.downloadUrl;
+
+        if (!fileUrl) {
+          console.error('No file URL found in response:', responseData);
+          throw new Error('File upload response does not contain a valid URL');
+        }
+
+        return fileUrl;
+      } catch (error) {
+        console.error('Upload error:', error);
+        const errorMessage =
+          error instanceof Error ? error.message : 'Failed to upload CV file';
+        throw new Error(errorMessage);
+      }
+    },
+    [api]
+  );
+
   return {
     // API methods
     getCareer,
+    uploadCVFile,
     clearError,
     resetCareerState,
 

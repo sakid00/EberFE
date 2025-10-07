@@ -105,16 +105,29 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
       }
 
       try {
+        // Prepare headers - don't set Content-Type for FormData
+        const headers = {
+          ...finalOptions.defaultHeaders,
+          ...finalOptions.headers,
+        };
+
+        // Prepare body - handle FormData specially
+        let body: BodyInit | undefined;
+        if (finalOptions.method !== 'GET' && finalOptions.method !== 'HEAD') {
+          if (options.body instanceof FormData) {
+            // For FormData, use it directly and remove Content-Type header
+            body = options.body;
+            delete headers['Content-Type'];
+          } else if (options.body !== undefined) {
+            // For other data, stringify as JSON
+            body = JSON.stringify(options.body);
+          }
+        }
+
         const response = await fetch(fullUrl, {
           method: finalOptions.method,
-          headers: {
-            ...finalOptions.defaultHeaders,
-            ...finalOptions.headers,
-          },
-          body:
-            finalOptions.method !== 'GET' && finalOptions.method !== 'HEAD'
-              ? JSON.stringify(options.body)
-              : undefined,
+          headers,
+          body,
           signal: abortControllerRef.current.signal,
         });
 
