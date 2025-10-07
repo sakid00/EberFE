@@ -77,16 +77,12 @@ const FormBox = ({
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Validate file type
-    const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    ];
+    // Validate file type - only PDF allowed
+    const allowedTypes = ['application/pdf'];
     if (!allowedTypes.includes(file.type)) {
       setErrors((prev) => ({
         ...prev,
-        cvFile: 'Please upload a PDF or Word document',
+        cvFile: 'Please upload a PDF file only',
       }));
       return;
     }
@@ -295,7 +291,7 @@ const FormBox = ({
           <Box sx={styles.fileUploadContainer}>
             <input
               type="file"
-              accept=".pdf,.doc,.docx"
+              accept=".pdf"
               onChange={handleFileChange}
               style={{ display: 'none' }}
               id="cv-upload"
@@ -322,6 +318,9 @@ const FormBox = ({
             {errors.cvFile && (
               <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
             )}
+            <Typography sx={styles.disclaimerText}>
+              * Please upload a PDF file only. Maximum file size: 5MB
+            </Typography>
           </Box>
         </Box>
       )}

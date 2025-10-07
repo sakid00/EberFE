@@ -104,6 +104,14 @@ export const styles = {
     color: '#EF4444',
     fontWeight: 400,
   },
+
+  disclaimerText: {
+    fontSize: '11px',
+    color: '#6B7280',
+    fontWeight: 400,
+    fontStyle: 'italic',
+    marginTop: '4px',
+  },
 };
 
 export const classNames = {
