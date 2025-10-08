@@ -2,11 +2,11 @@
   "navigation_bar": {
     "home": "Beranda",
     "about_us": "Tentang Kami",
-    "corporate": "Korporasi",
+    "corporate": "Tata Kelola",
     "product": "Produk",
-    "activity": "Aktivitas",
-    "careers": "Karir",
-    "contact_us": "Kontak Kami"
+    "activity": "Kegiatan",
+    "careers": "Karier",
+    "contact_us": "Hubungi Kami"
   },
   "home": {
     "title": {
@@ -16,10 +16,10 @@
       "future": "Berkelanjutan"
     },
     "modal": {
-      "title": "Material Berkualitas Tinggi",
-      "desc": "Mendorong inovasi di berbagai industri"
+      "title": "Material Berkinerja Tinggi",
+      "desc": "Mendorong transformasi dan inovasi di berbagai sektor industri."
     },
-    "desc": "Sejak didirikan pada tahun 2021, EBER Group hadir sebagai pemimpin yang menaungi empat perusahaan manufaktur kimia terdepan di Indonesia. Dengan fokus pada kualitas, keberlanjutan, dan inovasi, kami berkomitmen menghadirkan solusi material yang mendukung pertumbuhan berbagai industri.",
+    "desc": "Didirikan pada tahun 2021, EBER Group hadir sebagai organisasi terkemuka yang menaungi empat perusahaan manufaktur kimia terbaik di Indonesia. Dengan fokus pada kualitas, keberlanjutan, dan inovasi, kami berkomitmen menghadirkan solusi material yang mendukung pertumbuhan berbagai industri.",
     "product_button": "Jelajahi Produk Kami",
     "custom_product_button": "Produk Kustom",
     "floating_title": "Material Berkinerja Tinggi",
@@ -29,7 +29,7 @@
       "high_performance": "Material Spesialis",
       "specialty_materials": "Berperforma Unggul"
     },
-    "specialty_section_desc": "Sejak tahun 2021, EBER Group menaungi empat perusahaan manufaktur kimia terdepan di Indonesia. Dengan pengalaman puluhan tahun serta komitmen terhadap inovasi, kami menghadirkan solusi material yang mendorong pertumbuhan berkelanjutan di industri petrokimia.",
+    "specialty_section_desc": "Sejak tahun 2021, EBER Group menaungi empat perusahaan manufaktur kimia terkemuka di Indonesia. Didukung oleh pengalaman puluhan tahun dan komitmen terhadap inovasi, kami menyediakan solusi material yang mendorong pertumbuhan berkelanjutan di industri petrokimia.",
     "specialty_section_cards": {
       "1": {
         "title": "Material Canggih",
@@ -53,7 +53,7 @@
       "customize": "Produk Kustom untuk",
       "today": "Industri Anda!"
     },
-    "custom_product_section_desc": "EBER Group menawarkan kustomisasi material berkinerja tinggi yang dirancang sesuai kebutuhan spesifik bisnis Anda. Dengan dukungan tim R&D internal yang andal, kami menghadirkan inovasi yang meningkatkan kualitas, efisiensi, dan keberlanjutan di berbagai sektor — mulai dari infrastruktur, konstruksi, otomotif, lingkungan, hingga manufaktur.",
+    "custom_product_section_desc": "EBER Group menawarkan material berkinerja tinggi yang disesuaikan dengan kebutuhan spesifik bisnis Anda. Dengan dukungan tim R&D internal yang andal, kami menghadirkan inovasi yang meningkatkan kualitas, efisiensi, dan keberlanjutan di berbagai sektor — mulai dari infrastruktur, konstruksi, otomotif, lingkungan, hingga manufaktur.",
     "subsidiaries_section_title": {
       "eber_group": "Entitas Anak",
       "subsidiaries": "Perusahaan EBER Group"
@@ -62,19 +62,19 @@
     "subsidiaries_section_cards": {
       "1": {
         "title": "PT Eternal Buana Chemical Industries",
-        "desc": "yang berlokasi di Cikupa, Banten, merupakan produsen resin dan bahan kimia spesial dengan kapasitas produksi hingga 70.000 mtpa. Perusahaan ini dikenal melalui lini produk seperti paper chemical, alkyd acrylic amino resin, unsaturated polyester resin, serta synthetics latex resin."
+        "desc": "berlokasi di Cikupa, Banten, merupakan produsen resin dan bahan kimia spesial dengan kapasitas produksi hingga 70.000 MT per tahun. Lini produknya meliputi bahan kimia kertas, alkyd acrylic amino resin, unsaturated polyester resin, dan synthetic latex resin."
       },
       "2": {
         "title": "PT Eterindo Nusa Graha",
-        "desc": "beroperasi di Gresik, Jawa Timur, dengan kapasitas produksi mencapai 51.000 mtpa. Fokus utamanya adalah plasticizers, resin, dan bahan kimia spesial, yang diaplikasikan pada berbagai sektor industri mulai dari kertas, otomotif, hingga material sintetis."
+        "desc": "berlokasi di Gresik, Jawa Timur, memiliki kapasitas produksi 51.000 MT per tahun dan berfokus pada plasticizer, resin, serta bahan kimia spesial yang digunakan di berbagai industri seperti kertas, otomotif, dan material sintetis."
       },
       "3": {
         "title": "PT Petrowidada",
-        "desc": "berlokasi di Gresik, merupakan produsen utama phthalic anhydride di Indonesia dengan kapasitas 70.000 mtpa. Produk ini menjadi komponen penting dalam berbagai aplikasi petrokimia, terutama untuk industri resin dan plastik."
+        "desc": "berlokasi di Gresik, merupakan produsen domestik utama phthalic anhydride dengan kapasitas 70.000 MT per tahun. Produk ini menjadi komponen penting dalam berbagai aplikasi petrokimia, terutama untuk industri resin dan plastik.berlokasi di Gresik, merupakan produsen domestik utama phthalic anhydride dengan kapasitas 70.000 MT per tahun. Produk ini menjadi komponen penting dalam berbagai aplikasi petrokimia, terutama untuk industri resin dan plastik."
       },
       "4": {
         "title": "PT Mega Prima Solvindo",
-        "desc": "berpusat di Cilegon, Banten, memproduksi n-Butyl Acetate dengan kapasitas 20.000 mtpa. Sebagai salah satu bahan kimia penting, produk ini digunakan secara luas pada industri cat, pelapis, hingga adhesive."
+        "desc": "berpusat di Cilegon, Banten, memproduksi n-Butyl Acetate dengan kapasitas 20.000 MT per tahun. Bahan kimia ini digunakan secara luas dalam industri cat, pelapis, dan perekat."
       }
     },
     "innovation_section_title": {
@@ -82,7 +82,7 @@
       "innovation": "Inovasi",
       "through_technology": "Lewat Teknologi"
     },
-    "innovation_section_desc": "Di EBER Group, kami berkomitmen untuk terus melampaui batas dalam industri petrokimia. Dengan fasilitas riset terkini dan tim ilmuwan serta insinyur yang berdedikasi, kami menghadirkan solusi inovatif yang relevan dengan kebutuhan pelanggan sekaligus mengikuti dinamika pasar global.",
+    "innovation_section_desc": "Di Eber Group, kami berkomitmen untuk terus melampaui batas dalam industri petrokimia. Dengan fasilitas riset terkini dan tim ilmuwan serta insinyur yang berdedikasi, kami menghadirkan solusi inovatif yang relevan dengan kebutuhan pelanggan sekaligus mengikuti dinamika pasar global.",
     "innovation_section_cards": {
       "1": {
         "title": "Riset & Pengembangan",
@@ -120,9 +120,9 @@
       "future": "Kami"
     },
     "vision_title": "Visi",
-    "vision_desc": "Menjadi perusahaan petrokimia regional terdepan melalui kinerja unggul, penerapan ESG, pengembangan SDM, kemitraan strategis, dan keberlanjutan bisnis.",
+    "vision_desc": "Menjadi perusahaan petrokimia yang terdepan dan terbaik di regional dalam hal kinerja, ESG, manusia, kemitraan dan keberlanjutan usahanya",
     "mission_title": "Misi",
-    "mission_desc": "Menghasilkan produk berkualitas tinggi, andal, dan ramah lingkungan serta memberikan solusi terbaik bagi pelanggan dan masyarakat. Kami berkomitmen mendorong kemajuan industri nasional dengan pemanfaatan optimal sumber daya serta menjunjung tinggi nilai-nilai inti perusahaan.",
+    "mission_desc": "Menciptakan dan menghasilkan produk unggulan, handal, ramah lingkungan dan solusi terbaik bagi pelanggan dan masyarakat dalam membangun serta mengembangkan industri nasional dengan secara maksimal menggunakan seluruh sumber daya yang tersedia dan menganut serta menjalankan nilai-nilai perusahaan.",
     "corporate_section_title": {
       "corporate": "Tata Kelola",
       "governance": "Perusahaan"

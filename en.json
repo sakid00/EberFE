@@ -17,7 +17,7 @@
     },
     "modal": {
       "title": "High Performance Materials",
-      "desc": "Powering innovation across multiple industries"
+      "desc": "Driving transformation and innovation across industrial sectors."
     },
     "desc": "Established in 2021, EBER Group oversees four top-performing chemical manufacturing companies operating across Indonesia.",
     "product_button": "Explore Our Product",
@@ -29,7 +29,7 @@
       "high_performance": "High-Performance",
       "specialty_materials": "Specialty Materials"
     },
-    "specialty_section_desc": "Established in 2021, EBER Group oversees four top-performing chemical manufacturing companies operating across Indonesia, bringing together decades of expertise and innovation in the petrochemical industry.",
+    "specialty_section_desc": "Since 2021, EBER Group has overseen four of Indonesia’s leading chemical manufacturing companies. Backed by decades of experience and a commitment to innovation, we deliver material solutions that promote sustainable growth in the petrochemical industry.",
     "specialty_section_cards": {
       "1": {
         "title": "Advanced Materials",
@@ -41,11 +41,11 @@
       },
       "3": {
         "title": "Sustainability",
-        "desc": "Specialized in solvent production and chemical solutions."
+        "desc": "Providing environmentally friendly solvent and chemical solutions"
       },
       "4": {
         "title": "Expert Team",
-        "desc": "Leading producer of petrochemical products and solutions."
+        "desc": "A trusted producer of petrochemical products and solutions, supported by a team of experienced professionals."
       }
     },
     "custom_product_section_title": {
@@ -53,7 +53,7 @@
       "customize": "Customize Your Product",
       "today": "Today!"
     },
-    "custom_product_section_desc": "EBER Group's expertise in specialty materials is supported by a strong in-house R&D team, which enables the company to provide solutions for products and processes improvement in the infrastructure, construction, automotive, environmental and manufacturing industries.",
+    "custom_product_section_desc": "EBER Group’s expertise in specialty materials is supported by a strong in-house R&D team, enabling us to provide innovative solutions that improve products and processes in the infrastructure, construction, automotive, environmental, and manufacturing sectors.",
     "subsidiaries_section_title": {
       "eber_group": "EBER Group",
       "subsidiaries": "Subsidiaries"
@@ -62,19 +62,19 @@
     "subsidiaries_section_cards": {
       "1": {
         "title": "PT Eternal Buana Chemical Industries",
-        "desc": "based in Cikupa, Banten, is a major producer of resins and specialty chemicals with a production capacity of 70,000 mtpa. Its product portfolio includes paper chemicals, alkyd acrylic amino resins, unsaturated polyester resins, and synthetic latex resins."
+        "desc": "based in Cikupa, Banten, is a producer of resins and specialty chemicals with a production capacity of up to 70,000 MT per year. Its product lines include paper chemicals, alkyd acrylic amino resins, unsaturated polyester resins, and synthetic latex resins."
       },
       "2": {
         "title": "PT Eterindo Nusa Graha",
-        "desc": "located in Gresik, East Java, operates with a capacity of 51,000 mtpa. The company focuses on plasticizers, resins, and specialty chemicals, serving a wide range of industries from paper and automotive to synthetic materials."
+        "desc": "located in Gresik, East Java, has a production capacity of 51,000 MT per year. The company focuses on plasticizers, resins, and specialty chemicals applied across various industries, including paper, automotive, and synthetic materials."
       },
       "3": {
         "title": "PT Petrowidada",
-        "desc": "situated in Gresik, is a leading domestic producer of phthalic anhydride with a capacity of 70,000 mtpa. Its products are widely applied in resin and plastic manufacturing, supporting essential downstream industries."
+        "desc": "based in Gresik, is a leading domestic producer of phthalic anhydride with a production capacity of 70,000 MT per year. This product serves as an essential component in various petrochemical applications, particularly for the resin and plastics industries."
       },
       "4": {
         "title": "PT Mega Prima Solvindo",
-        "desc": "headquartered in Cilegon, Banten, specializes in the production of n-Butyl Acetate with a capacity of 20,000 mtpa. This chemical is extensively used in coatings, paints, and adhesive industries."
+        "desc": "headquartered in Cilegon, Banten, produces n-Butyl Acetate with a capacity of 20,000 MT per year. As a key chemical, this product is widely used in the coatings, paint, and adhesive industries."
       }
     },
     "innovation_section_title": {
@@ -82,15 +82,15 @@
       "innovation": "Innovation",
       "through_technology": "Through Technology"
     },
-    "innovation_section_desc": "At EBER Group, we’re committed to pushing the boundaries of what’s possible in the petrochemical industry. Our state-of-the-art research facilities and dedicated team of scientists and engineers work tirelessly to develop innovative solutions that address the evolving needs of our customers and the global market.",
+    "innovation_section_desc": "At EBER Group, we are committed to continuously pushing the boundaries of the petrochemical industry. With state-of-the-art research facilities and a dedicated team of scientists and engineers, we develop innovative solutions that address customer needs while staying aligned with global market dynamics.",
     "innovation_section_cards": {
       "1": {
         "title": "Research & Development",
-        "desc": "Continuous investment in R&D to develop cutting-edge chemical solutions and materials."
+        "desc": "Continuous investment in R&D to create advanced materials and innovative chemical solutions."
       },
       "2": {
         "title": "Digital Transformation",
-        "desc": "Leveraging advanced technologies to optimize our manufacturing processes and operations."
+        "desc": "Optimizing production and operations through cutting-edge technology."
       },
       "3": {
         "title": "Sustainable Solutions",
