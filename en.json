@@ -11,7 +11,7 @@
   "home": {
     "title": {
       "innovating": "Innovating",
-      "as": "as\u00a0",
+      "as": "for a\u00a0",
       "sustainable": "Sustainable",
       "future": "Future"
     },
@@ -19,7 +19,7 @@
       "title": "High Performance Materials",
       "desc": "Driving transformation and innovation across industrial sectors."
     },
-    "desc": "Established in 2021, EBER Group oversees four top-performing chemical manufacturing companies operating across Indonesia.",
+    "desc": "Established in 2021, EBER Group serves as a leading organization overseeing four top-performing chemical manufacturing companies in Indonesia. With a focus on quality, sustainability, and innovation, we are committed to delivering material solutions that support the growth of various industries.",
     "product_button": "Explore Our Product",
     "custom_product_button": "Custom Product",
     "floating_title": "High Performance Materials",
@@ -62,18 +62,22 @@
     "subsidiaries_section_cards": {
       "1": {
         "title": "PT Eternal Buana Chemical Industries",
+        "location": "Cikupa, Banten",
         "desc": "based in Cikupa, Banten, is a producer of resins and specialty chemicals with a production capacity of up to 70,000 MT per year. Its product lines include paper chemicals, alkyd acrylic amino resins, unsaturated polyester resins, and synthetic latex resins."
       },
       "2": {
         "title": "PT Eterindo Nusa Graha",
+        "location": "Gresik, East Java",
         "desc": "located in Gresik, East Java, has a production capacity of 51,000 MT per year. The company focuses on plasticizers, resins, and specialty chemicals applied across various industries, including paper, automotive, and synthetic materials."
       },
       "3": {
         "title": "PT Petrowidada",
+        "location": "Gresik, East Java",
         "desc": "based in Gresik, is a leading domestic producer of phthalic anhydride with a production capacity of 70,000 MT per year. This product serves as an essential component in various petrochemical applications, particularly for the resin and plastics industries."
       },
       "4": {
         "title": "PT Mega Prima Solvindo",
+        "location": "Cilegon, Banten",
         "desc": "headquartered in Cilegon, Banten, produces n-Butyl Acetate with a capacity of 20,000 MT per year. As a key chemical, this product is widely used in the coatings, paint, and adhesive industries."
       }
     },

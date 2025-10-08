@@ -218,7 +218,7 @@ export const constants = {
     },
   ],
 
-  address: 'Eber Tower, 123 Business District Jakarta, Indonesia 12345',
+  address: 'EBER Tower, 123 Business District Jakarta, Indonesia 12345',
 
   description1:
     'First Production in 1982 with capacity 10.000 TPY, expanded to 20.000 TPY in 1986 then final expansion capacity to 82.000 TPY.',

@@ -34,25 +34,25 @@ export const SPECIALTY_DATA = [
 export const SUBSIDIARIES_DATA = [
   {
     title: 'home.subsidiaries_section_cards.1.title',
-    location: 'Cikupa, Banten',
+    location: 'home.subsidiaries_section_cards.1.location',
     desc: 'home.subsidiaries_section_cards.1.desc',
     img: getPhoto('eternal'),
   },
   {
     title: 'home.subsidiaries_section_cards.2.title',
-    location: 'Cikupa, Banten',
+    location: 'home.subsidiaries_section_cards.2.location',
     desc: 'home.subsidiaries_section_cards.2.desc',
     img: getPhoto('eng'),
   },
   {
     title: 'home.subsidiaries_section_cards.3.title',
-    location: 'Cikupa, Banten',
+    location: 'home.subsidiaries_section_cards.3.location',
     desc: 'home.subsidiaries_section_cards.3.desc',
     img: getPhoto('petro'),
   },
   {
     title: 'home.subsidiaries_section_cards.4.title',
-    location: 'Cikupa, Banten',
+    location: 'home.subsidiaries_section_cards.4.location',
     desc: 'home.subsidiaries_section_cards.4.desc',
     img: getPhoto('mega'),
   },

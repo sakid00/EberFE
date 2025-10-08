@@ -1,13 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import SidebarList, { listType } from '@/components/SidebarList/index';
-import {
-  Box,
-  Typography,
-  Alert,
-  Pagination,
-  Stack,
-} from '@mui/material';
+import { Box, Typography, Alert, Pagination, Stack } from '@mui/material';
 import ActivityCard from '@/components/Cards/ActivityCard';
 import { useDeviceType } from '@/hooks/useDeviceType';
 import useActivity from '@/hooks/useActivity';
@@ -35,7 +29,7 @@ const sustainabilityList: listType[] = [
 const newsroomList: listType[] = [
   {
     type: 'Newsroom',
-    name: 'Eber Magazine',
+    name: 'EBER Magazine',
   },
   {
     type: 'Newsroom',
@@ -128,7 +122,7 @@ const ActivityContainer = () => {
         <Typography sx={styles.subtitle(type)}>
           {selectedCategory === 0
             ? 'Explore our sustainability initiatives and community engagement programs that make a positive impact on society and the environment.'
-            : 'Stay updated with the latest news, company events, and publications from Eber Group.'}
+            : 'Stay updated with the latest news, company events, and publications from EBER Group.'}
         </Typography>
 
         {/* Error State */}
@@ -139,9 +133,7 @@ const ActivityContainer = () => {
         )}
 
         {/* Loading State with Skeleton */}
-        {isLoading && (
-          <CardSkeleton count={9} type={type} height={350} />
-        )}
+        {isLoading && <CardSkeleton count={9} type={type} height={350} />}
 
         {/* Activities Grid */}
         {!isLoading && !error && (

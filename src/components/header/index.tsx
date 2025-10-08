@@ -337,7 +337,7 @@ const Header = () => {
         delay: isAnimating ? 0 : 0.2,
       }}
     >
-      <Image src={logo} alt="Eber Logo" style={getLogoDimensions()} />
+      <Image src={logo} alt="EBER Logo" style={getLogoDimensions()} />
     </motion.div>
   );
 
@@ -547,7 +547,7 @@ const Header = () => {
               <Box sx={headerStyles.mobileMenuLogoContainer}>
                 <Image
                   src={type === 'mobile' ? logoMobile : logo}
-                  alt="Eber-Logo"
+                  alt="EBER-Logo"
                   style={headerStyles.mobileMenuLogo}
                 />
               </Box>
