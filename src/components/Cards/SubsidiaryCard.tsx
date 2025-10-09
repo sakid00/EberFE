@@ -49,7 +49,7 @@ export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
       <Box className="flex flex-row gap-2">
         <Image src={locationSVG} alt="location-icon" />
         <Typography color="#784791" fontSize={'0.8em'} fontWeight={400}>
-          {data.location}
+          {t(data.location)}
         </Typography>
       </Box>
       <Typography
