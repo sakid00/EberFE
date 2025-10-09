@@ -29,7 +29,7 @@ const sustainabilityList: listType[] = [
 const newsroomList: listType[] = [
   {
     type: 'Newsroom',
-    name: 'EBER Magazine',
+    name: 'Eber Magazine',
   },
   {
     type: 'Newsroom',
