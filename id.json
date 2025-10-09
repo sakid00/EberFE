@@ -175,8 +175,9 @@
   },
   "careers": {
     "title": {
-      "our_open": "Kesempatan",
-      "roles": "Karir"
+      "our": "Kesempatan",
+      "open": "",
+      "roles": "Karier"
     },
     "desc": "Kami selalu mencari individu yang berbakat dan berdedikasi untuk bergabung bersama tim kami. Temukan peluang karier yang tersedia dan jadilah bagian dari perusahaan yang mendorong inovasi, keberlanjutan, dan pertumbuhan.",
     "contact_label": "Atau hubungi kami melalui:",

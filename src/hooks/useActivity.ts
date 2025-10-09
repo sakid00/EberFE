@@ -40,9 +40,15 @@ const useActivity = () => {
           pageSize: request.pageSize.toString(),
         });
 
+        console.log('Request group:', request.group === 'EBER Magazine');
+
         // Add optional query parameters with proper encoding
         if (request.group) {
-          queryParams.set('group', request.group);
+          if (request.group === 'EBER Magazine') {
+            queryParams.set('group', 'Eber Magazine');
+          } else {
+            queryParams.set('group', request.group);
+          }
         }
 
         const finalUrl = `/articles?${queryParams.toString()}`;
@@ -110,14 +116,16 @@ const useActivity = () => {
     async (id: number): Promise<ActivityData | null> => {
       try {
         // Check if activity already exists in state
-        const existingActivity = state.activities.find(activity => activity.id === id);
+        const existingActivity = state.activities.find(
+          (activity) => activity.id === id
+        );
         if (existingActivity) {
           console.log('Activity found in state:', existingActivity);
           return existingActivity;
         }
 
         actions.fetchActivitiesStart();
-        
+
         const finalUrl = `/articles/${id}`;
         console.log('Activity Detail API URL:', finalUrl);
 
@@ -129,27 +137,34 @@ const useActivity = () => {
         console.log('Response structure analysis:');
         console.log('- response.data:', response.data);
         console.log('- typeof response.data:', typeof response.data);
-        console.log('- response.data keys:', response.data ? Object.keys(response.data) : 'N/A');
+        console.log(
+          '- response.data keys:',
+          response.data ? Object.keys(response.data) : 'N/A'
+        );
 
         // Handle different possible API response structures
         let activityData: ActivityResponseData | undefined;
-        
+
         if (response.data) {
           const responseData = response.data as Record<string, unknown>;
-          
+
           // Helper function to validate if object has ActivityResponseData structure
-          const isActivityData = (obj: unknown): obj is ActivityResponseData => {
-            return obj !== null &&
-                   obj !== undefined &&
-                   typeof obj === 'object' && 
-                   'id' in obj &&
-                   'title_en' in obj &&
-                   'title_id' in obj &&
-                   typeof (obj as ActivityResponseData).id === 'number' &&
-                   typeof (obj as ActivityResponseData).title_en === 'string' &&
-                   typeof (obj as ActivityResponseData).title_id === 'string';
+          const isActivityData = (
+            obj: unknown
+          ): obj is ActivityResponseData => {
+            return (
+              obj !== null &&
+              obj !== undefined &&
+              typeof obj === 'object' &&
+              'id' in obj &&
+              'title_en' in obj &&
+              'title_id' in obj &&
+              typeof (obj as ActivityResponseData).id === 'number' &&
+              typeof (obj as ActivityResponseData).title_en === 'string' &&
+              typeof (obj as ActivityResponseData).title_id === 'string'
+            );
           };
-          
+
           // Try different possible response structures
           if (responseData.data && typeof responseData.data === 'object') {
             // Check if it's nested like { data: { data: ActivityResponseData } }
@@ -159,7 +174,8 @@ const useActivity = () => {
               console.log('Using double-nested data structure');
             } else if (isActivityData(responseData.data)) {
               // Structure: { data: ActivityResponseData }
-              activityData = responseData.data as unknown as ActivityResponseData;
+              activityData =
+                responseData.data as unknown as ActivityResponseData;
               console.log('Using single-nested data structure');
             }
           } else if (isActivityData(responseData)) {
@@ -167,16 +183,21 @@ const useActivity = () => {
             activityData = responseData as unknown as ActivityResponseData;
             console.log('Using direct data structure');
           }
-          
+
           // Additional fallback - try to find any object with activity-like properties
           if (!activityData) {
             console.log('Trying fallback parsing...');
-            const checkAllProperties = (obj: unknown): obj is Partial<ActivityResponseData> => {
+            const checkAllProperties = (
+              obj: unknown
+            ): obj is Partial<ActivityResponseData> => {
               if (!obj || typeof obj !== 'object') return false;
               // Look for any object that has at least id and title properties
-              return ('id' in obj && 'title_en' in obj) || ('id' in obj && 'title_id' in obj);
+              return (
+                ('id' in obj && 'title_en' in obj) ||
+                ('id' in obj && 'title_id' in obj)
+              );
             };
-            
+
             // Check direct properties
             if (checkAllProperties(responseData)) {
               activityData = responseData as unknown as ActivityResponseData;
@@ -195,32 +216,43 @@ const useActivity = () => {
         }
 
         console.log('Parsed activityData:', activityData);
-        
-        if (!activityData || (typeof activityData === 'object' && Object.keys(activityData).length === 0)) {
+
+        if (
+          !activityData ||
+          (typeof activityData === 'object' &&
+            Object.keys(activityData).length === 0)
+        ) {
           console.error('Activity data is empty or null:', activityData);
           console.error('Full response:', JSON.stringify(response, null, 2));
-          
+
           // Check if activity already exists in our state as fallback
-          const stateActivity = state.activities.find(activity => activity.id === id);
+          const stateActivity = state.activities.find(
+            (activity) => activity.id === id
+          );
           if (stateActivity) {
             console.log('Found activity in state as fallback:', stateActivity);
             return stateActivity;
           }
-          
+
           throw new Error(`Activity with ID ${id} not found or is empty`);
         }
-        
+
         // Validate that we have essential activity properties
         if (!activityData.id) {
           console.error('Activity data missing ID field:', activityData);
-          
+
           // Check if activity exists in state as fallback
-          const stateActivity = state.activities.find(activity => activity.id === id);
+          const stateActivity = state.activities.find(
+            (activity) => activity.id === id
+          );
           if (stateActivity) {
-            console.log('Found activity in state as fallback (missing ID):', stateActivity);
+            console.log(
+              'Found activity in state as fallback (missing ID):',
+              stateActivity
+            );
             return stateActivity;
           }
-          
+
           throw new Error(`Activity with ID ${id} has invalid data structure`);
         }
 
@@ -240,24 +272,29 @@ const useActivity = () => {
 
         // Add the single activity to the existing activities array
         const updatedActivities = [...state.activities];
-        const existingIndex = updatedActivities.findIndex(activity => activity.id === id);
+        const existingIndex = updatedActivities.findIndex(
+          (activity) => activity.id === id
+        );
         if (existingIndex >= 0) {
           updatedActivities[existingIndex] = transformedData;
         } else {
           updatedActivities.push(transformedData);
         }
 
-        actions.fetchActivitiesSuccess(updatedActivities, state.pagination || {
-          currentPage: 1,
-          totalPages: 1,
-          totalItems: updatedActivities.length,
-          itemsPerPage: 20,
-        });
-        
+        actions.fetchActivitiesSuccess(
+          updatedActivities,
+          state.pagination || {
+            currentPage: 1,
+            totalPages: 1,
+            totalItems: updatedActivities.length,
+            itemsPerPage: 20,
+          }
+        );
+
         return transformedData;
       } catch (error) {
         console.error(`Error fetching activity ${id}:`, error);
-        
+
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch activity';
         actions.fetchActivitiesError(errorMessage);
