@@ -180,9 +180,8 @@ const FormBox = ({
 
       const body = encodeURIComponent(bodyContent);
 
-      const mailtoLink = `mailto:info@ebergroup.com?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:hr@ebergroup.com?subject=${subject}&body=${body}`;
 
-      // Open mailto link
       window.location.href = mailtoLink;
 
       // Reset form after successful submission
