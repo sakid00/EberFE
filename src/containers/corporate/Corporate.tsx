@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import HeaderImage from '@/public/photo/header_corporate.png';
 import { Map } from '@mui/icons-material';
 import { styles } from './style';
@@ -27,6 +28,7 @@ type InfoBoxItem = {
 
 const CorporateContainer = () => {
   const [selectedCompany, setSelectedCompany] = useState<number>(0);
+  const searchParams = useSearchParams();
   const { t, language } = useTranslation();
   const { type } = useDeviceType();
   const { setNavigationComplete } = useNavigation();
@@ -38,13 +40,10 @@ const CorporateContainer = () => {
       try {
         // Check if we already have data to avoid loading state
         if (companies.length > 0) {
-          console.log('📊 Using existing company data');
           return;
         }
 
-        console.log('🔄 Fetching company data...');
         await getCompany({ page: 1, pageSize: 10 });
-        console.log('✅ Company data loaded');
       } catch (error) {
         console.error('❌ Failed to fetch companies:', error);
       }
@@ -53,6 +52,23 @@ const CorporateContainer = () => {
     fetchCompanies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Update selected company based on URL parameter
+  useEffect(() => {
+    const companyParam = searchParams.get('company');
+    if (companyParam !== null && companies.length > 0) {
+      const companyIndex = companies.findIndex(
+        (company) => company.name.toLowerCase() === companyParam.toLowerCase()
+      );
+      if (
+        !isNaN(companyIndex) &&
+        companyIndex >= 0 &&
+        companyIndex < companies.length
+      ) {
+        setSelectedCompany(companyIndex);
+      }
+    }
+  }, [searchParams, companies]);
 
   // Complete navigation once component is mounted and data is ready
   useEffect(() => {
@@ -108,7 +124,6 @@ const CorporateContainer = () => {
 
   // If no data after loading, show empty state instead of skeleton
   if (!isLoading && companies.length === 0) {
-    console.log('📭 No company data available');
     return (
       <Box sx={styles.mainContainer(type)}>
         <Box sx={styles.contentContainer(type)}>

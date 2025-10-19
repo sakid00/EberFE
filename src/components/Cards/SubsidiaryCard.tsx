@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import locationSVG from '../../../public/icon/location.svg';
 import { SUBSIDIARIES_DATA } from '../../containers/home/constants';
 import { useDeviceType, useTranslation } from '../../hooks';
@@ -13,11 +14,25 @@ interface SubsidiaryCardProps {
 export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
   const { t } = useTranslation();
   const { type } = useDeviceType();
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/corporate?company=${t(data.title)}`);
+  };
 
   return (
     <Box
       id={`subsidiaries-${index}`}
+      onClick={handleClick}
       className={`flex flex-col justify-start items-start bg-white ${type === 'mobile' ? 'w-[100%]' : 'w-[40%]'} h-auto p-3 px-4 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+      sx={{
+        cursor: 'pointer',
+        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
+        },
+      }}
     >
       <Box
         sx={{
