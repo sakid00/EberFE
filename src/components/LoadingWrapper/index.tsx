@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage';
-import { useDevAssetLoading as useAssetLoading } from '@/hooks/useDevAssetLoading';
 
 interface LoadingWrapperProps {
   children: React.ReactNode;
@@ -10,17 +9,14 @@ interface LoadingWrapperProps {
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   const [isLoadingVisible, setIsLoadingVisible] = useState(true); // Show loading initially
-  
-  // Use actual loading with modern design - only need progress for display
-  const { progress } = useAssetLoading();
-  
+
   // Show beautiful loading screen for 2.5 seconds then fade out
   useEffect(() => {
     const loadingTimer = setTimeout(() => {
       setIsLoadingVisible(false);
       console.log('✨ Modern loading screen completed!');
     }, 2500); // 2.5 seconds of beautiful loading
-    
+
     return () => clearTimeout(loadingTimer);
   }, []); // Run once on mount
 
@@ -28,7 +24,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   useEffect(() => {
     // Mark that React has loaded
     document.documentElement.classList.add('react-loaded');
-    
+
     // Clean up the initial loading element
     const initialLoading = document.getElementById('initial-loading');
     if (initialLoading) {
@@ -50,7 +46,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     <>
       {/* Modern loading screen */}
       {isLoadingVisible && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             top: 0,
@@ -61,10 +57,10 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
             transition: 'opacity 0.5s ease-out',
           }}
         >
-          <LoadingPage progress={Math.min(progress, 100)} />
+          <LoadingPage />
         </div>
       )}
-      
+
       {/* Main content */}
       <div
         style={{
