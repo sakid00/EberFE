@@ -99,6 +99,8 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     try {
       // Mark form as submitted in localStorage
       localStorage.setItem('hasSubmittedProductForm', 'true');
+      // Store the submitted email for display in success modal
+      localStorage.setItem('submittedEmail', formData.email);
 
       // Mark as submitted and close modal after successful submission
       setHasSubmitted(true);

@@ -28,6 +28,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   handleChangeApplication,
   onTokenReceived,
   onShowSentModal,
+  submittedEmail,
   currentPage,
   totalPages,
   totalItems,
@@ -117,6 +118,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
       <ReqProductSent
         openModal={openSentModal}
         setOpenModal={setOpenSentModal}
+        email={submittedEmail}
       />
     </>
   );

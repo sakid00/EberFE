@@ -27,6 +27,7 @@ export interface ProductContainerProps {
   setOpenSentModal: (value: boolean) => void;
   onTokenReceived?: () => void;
   onShowSentModal?: () => void;
+  submittedEmail?: string;
   // Pagination props
   currentPage: number;
   totalPages: number;

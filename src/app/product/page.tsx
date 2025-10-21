@@ -50,7 +50,7 @@ const ProductsPageContent = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage] = useState<number>(10);
   const [hasAccess, setHasAccess] = useState<boolean>(false);
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string>('');
 
   // Dynamic filter data from API
   const productTypes = filters.types.length > 0 ? filters.types : [];
@@ -111,8 +111,12 @@ const ProductsPageContent = () => {
         );
         if (hasSubmittedForm) {
           // User has already submitted form, show ReqProductSent modal
-          setFormSubmitted(true);
           setOpenSentModal(true);
+          // Retrieve the submitted email from localStorage
+          const storedEmail = localStorage.getItem('submittedEmail');
+          if (storedEmail) {
+            setSubmittedEmail(storedEmail);
+          }
         } else {
           // First time user, show ReqProductModal
           setOpenReqModal(true);
@@ -132,9 +136,11 @@ const ProductsPageContent = () => {
   };
 
   const handleTokenReceived = () => {
-    // Token has been received, can be used for future enhancements
-    console.log('User token received successfully');
-    setFormSubmitted(true);
+    // Retrieve the submitted email from localStorage
+    const storedEmail = localStorage.getItem('submittedEmail');
+    if (storedEmail) {
+      setSubmittedEmail(storedEmail);
+    }
   };
 
   const handleRequestClick = useCallback(() => {
@@ -293,29 +299,6 @@ const ProductsPageContent = () => {
     console.warn('Product API error:', error);
   }
 
-  // If user doesn't have access, show appropriate modal
-  if (!hasAccess) {
-    if (formSubmitted) {
-      // Show ReqProductSent modal after form submission
-      return (
-        <ReqProductSent
-          openModal={openSentModal}
-          setOpenModal={setOpenSentModal}
-        />
-      );
-    } else {
-      // Show ReqProductModal for first time users
-      return (
-        <ReqProductModal
-          openModal={openReqModal}
-          setOpenModal={setOpenReqModal}
-          onSuccessfulSubmission={handleTokenReceived}
-          onShowSentModal={() => setOpenSentModal(true)}
-        />
-      );
-    }
-  }
-
   return (
     <>
       <ProductContainer
@@ -338,16 +321,24 @@ const ProductsPageContent = () => {
         setOpenSentModal={setOpenSentModal}
         onTokenReceived={handleTokenReceived}
         onShowSentModal={() => setOpenSentModal(true)}
+        submittedEmail={submittedEmail}
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={totalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
       />
+      <ReqProductModal
+        openModal={openReqModal}
+        setOpenModal={setOpenReqModal}
+        onSuccessfulSubmission={handleTokenReceived}
+        onShowSentModal={() => setOpenSentModal(true)}
+      />
       <ReqProductSent
         hasAccess={hasAccess}
         openModal={openSentModal}
         setOpenModal={setOpenSentModal}
+        email={submittedEmail}
       />
     </>
   );

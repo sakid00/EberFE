@@ -1,5 +1,6 @@
 import { Box, Button, Modal, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
+import TextParser from '@/components/TextParser/index';
 import { Close } from '@mui/icons-material';
 import { styles } from './style';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -18,12 +19,14 @@ interface ReqProductSentProps {
   openModal: boolean;
   setOpenModal: (open: boolean) => void;
   hasAccess?: boolean;
+  email?: string;
 }
 
 const ReqProductSent: React.FC<ReqProductSentProps> = ({
   openModal,
   setOpenModal,
   hasAccess,
+  email,
 }) => {
   const { t } = useTranslation();
   const router = useRouter();
@@ -36,8 +39,6 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
     setOpenModal(false);
     router.push('/');
   };
-
-  console.log('hasAccess', hasAccess);
 
   return (
     <Modal
@@ -65,11 +66,25 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
           {hasAccess && <Close sx={styles.closeIcon} onClick={handleClose} />}
         </Box>
 
-        <Typography sx={styles.messageText}>
-          {!hasAccess
-            ? t('product.reqProductSentModal.desc_access')
-            : t('product.reqProductSentModal.desc')}
-        </Typography>
+        {!hasAccess ? (
+          <TextParser
+            text={t('product.reqProductSentModal.desc_access').replace(
+              '{email}',
+              email || ''
+            )}
+            patterns={[
+              {
+                pattern: email || '',
+                style: { fontWeight: 700 },
+              },
+            ]}
+            sx={styles.messageText}
+          />
+        ) : (
+          <Typography sx={styles.messageText}>
+            {t('product.reqProductSentModal.desc')}
+          </Typography>
+        )}
 
         <Button sx={styles.confirmButton} onClick={handleGotIt}>
           {t('product.reqProductSentModal.got_it')}
