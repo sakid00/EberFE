@@ -112,6 +112,20 @@ export const styles = {
     fontStyle: 'italic',
     marginTop: '4px',
   },
+
+  consentTitle: {
+    fontSize: '0.8em',
+    color: '#4B5563',
+    fontWeight: 700,
+    marginTop: '16px',
+  },
+
+  consentDesc: {
+    fontSize: '0.8em',
+    color: '#4B5563',
+    fontWeight: 400,
+    marginTop: '3%',
+  },
 };
 
 export const classNames = {

@@ -195,7 +195,19 @@
     },
     "submit_application_desc": "We're always looking for the best talent to join our journey. Join the EBER Group and contribute to bringing innovation, sustainability, and growth to the industry and society.",
     "empty_list_title": "No Job Openings Available",
-    "empty_list_desc": "Currently, there are no open positions. Please check back later or stay connected with us for future opportunities."
+    "empty_list_desc": "Currently, there are no open positions. Please check back later or stay connected with us for future opportunities.",
+    "upload_cv_label": "Upload CV *",
+    "upload_cv_desc": "Please upload a PDF file only. Maximum file size: 5MB",
+    "upload_cv_button": "Choose CV File",
+    "upload_cv_success": "✓ CV uploaded successfully",
+    "upload_cv_error": "Failed to upload CV",
+    "consent": {
+      "title": "Consent Statement",
+      "desc_p1": "By submitting my data through this form, I hereby give consent to EBER Petrochemical to collect, store, and process my personal data as provided through this website solely for the purpose of recruitment and candidate selection.",
+      "desc_p2": "My personal data will be used internally by EBER Petrochemical and will not be disclosed to any third party without my prior written consent, except where required by applicable laws and regulations.",
+      "desc_p3": "EBER Petrochemical will retain my personal data for a period of sixty (60) calendar days from the date of submission. Upon the expiration of this period, the data will be permanently deleted from the company’s system in accordance with its data protection policy.",
+      "desc_p4": "By clicking the “Submit” button or taking similar action, I acknowledge that I have read, understood, and agreed to all terms stated in this Consent Statement."
+    }
   },
   "form_field": {
     "first_name": "First Name",

@@ -191,7 +191,19 @@
     },
     "submit_application_desc": "Kami selalu mencari talenta terbaik untuk menjadi bagian dari perjalanan kami. Bergabunglah dengan EBER Group dan berkontribusi dalam menghadirkan inovasi, keberlanjutan, serta pertumbuhan bagi industri dan masyarakat.",
     "empty_list_title": "Belum Ada Lowongan Tersedia",
-    "empty_list_desc": "Saat ini belum ada posisi yang dibuka. Silakan periksa kembali di lain waktu atau tetap terhubung dengan kami untuk kesempatan berikutnya."
+    "empty_list_desc": "Saat ini belum ada posisi yang dibuka. Silakan periksa kembali di lain waktu atau tetap terhubung dengan kami untuk kesempatan berikutnya.",
+    "upload_cv_label": "Unggah CV *",
+    "upload_cv_desc": "Silakan unggah file PDF saja. Ukuran maksimal: 5MB",
+    "upload_cv_button": "Pilih File CV",
+    "upload_cv_success": "✓ CV berhasil diunggah",
+    "upload_cv_error": "Gagal mengunggah CV",
+    "consent": {
+      "title": "Pernyataan Persetujuan (Consent Statement)",
+      "desc_p1": "Dengan mengirimkan data melalui formulir ini, saya dengan ini memberikan persetujuan kepada EBER Petrochemical untuk mengumpulkan, menyimpan, dan memproses data pribadi saya sebagaimana disampaikan melalui situs ini, semata-mata untuk tujuan proses rekrutmen dan seleksi calon karyawan.",
+      "desc_p2": "Data pribadi saya akan digunakan secara internal oleh EBER Petrochemical dan tidak akan diungkapkan kepada pihak ketiga tanpa persetujuan tertulis dari saya, kecuali apabila diwajibkan oleh peraturan perundang-undangan yang berlaku.",
+      "desc_p3": "EBER Petrochemical akan menyimpan data pribadi saya selama 60 (enam puluh) hari kalender sejak tanggal pengiriman. Setelah jangka waktu tersebut berakhir, data akan dihapus secara permanen dari sistem perusahaan sesuai dengan kebijakan perlindungan data yang berlaku.",
+      "desc_p4": "Dengan menekan tombol “Kirim” atau tindakan serupa, saya menyatakan telah membaca, memahami, dan menyetujui seluruh ketentuan dalam Pernyataan Persetujuan ini."
+    }
   },
   "form_field": {
     "first_name": "Nama Depan",

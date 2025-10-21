@@ -1,4 +1,5 @@
 import DualColorText from '@/components/dualColorText/index';
+import TextParser from '@/components/TextParser/index';
 import { Box, Button, InputLabel, TextField, Typography } from '@mui/material';
 import { styles, classNames } from './style';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
@@ -286,7 +287,9 @@ const FormBox = ({
       </Box>
       {isCareerPage && (
         <Box sx={styles.fieldContainer}>
-          <InputLabel sx={styles.inputLabel}>Upload CV *</InputLabel>
+          <InputLabel sx={styles.inputLabel}>
+            {t('careers.upload_cv_label')}
+          </InputLabel>
           <Box sx={styles.fileUploadContainer}>
             <input
               type="file"
@@ -306,20 +309,48 @@ const FormBox = ({
                   ? 'Uploading...'
                   : formData.cvFile
                     ? `Selected: ${formData.cvFile.name}`
-                    : 'Choose CV File'}
+                    : t('careers.upload_cv_button')}
               </Button>
             </label>
             {formData.cvFileUrl && (
               <Typography sx={styles.uploadSuccessText}>
-                ✓ CV uploaded successfully
+                {t('careers.upload_cv_success')}
               </Typography>
             )}
             {errors.cvFile && (
               <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
             )}
             <Typography sx={styles.disclaimerText}>
-              * Please upload a PDF file only. Maximum file size: 5MB
+              {t('careers.upload_cv_desc')}
             </Typography>
+          </Box>
+          <Box>
+            <Typography sx={styles.consentTitle}>
+              {t('careers.consent.title')}
+            </Typography>
+            <Typography sx={styles.consentDesc}>
+              {t('careers.consent.desc_p1')}
+            </Typography>
+            <Typography sx={styles.consentDesc}>
+              {t('careers.consent.desc_p2')}
+            </Typography>
+            <Typography sx={styles.consentDesc}>
+              {t('careers.consent.desc_p3')}
+            </Typography>
+            <TextParser
+              text={t('careers.consent.desc_p4')}
+              sx={styles.consentDesc}
+              patterns={[
+                {
+                  pattern: /Submit/gi,
+                  style: { fontWeight: 700 },
+                },
+                {
+                  pattern: /Kirim/gi,
+                  style: { fontWeight: 700 },
+                },
+              ]}
+            />
           </Box>
         </Box>
       )}
