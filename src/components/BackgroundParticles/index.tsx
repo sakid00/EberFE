@@ -66,7 +66,7 @@ const ParticlesBackground = () => {
           color: '#000000',
           distance: 150,
           enable: true,
-          opacity: 0.5,
+          opacity: 0.1,
           width: 1,
         },
         move: {
@@ -86,7 +86,7 @@ const ParticlesBackground = () => {
           value: 80,
         },
         opacity: {
-          value: 0.05,
+          value: 0.1,
         },
         shape: {
           type: 'circle',
