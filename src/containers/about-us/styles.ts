@@ -1,13 +1,14 @@
 import { CSSProperties } from 'react';
 import { SxProps, Theme } from '@mui/material';
 import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
+import { Language } from '@/contexts/TranslationContext';
 
 // HeaderSection Styles
 export const headerStyles: {
   headerPhoto: (deviceType: DeviceType) => CSSProperties;
   headerContent: (deviceType: DeviceType) => SxProps<Theme>;
   backgroundText: SxProps<Theme>;
-  description: (deviceType: DeviceType) => CSSProperties;
+  description: (deviceType: DeviceType, language: Language) => CSSProperties;
 } = {
   headerPhoto: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
@@ -19,7 +20,9 @@ export const headerStyles: {
   }),
   headerContent: (deviceType: DeviceType) => ({
     position: 'absolute',
-    top: '20%',
+    height: '10%',
+    width: '50vw',
+    top: '5%',
     left: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
     right: 0,
     bottom: 0,
@@ -34,13 +37,13 @@ export const headerStyles: {
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   },
-  description: (deviceType: DeviceType) => ({
+  description: (deviceType: DeviceType, language: Language) => ({
     paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
     paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    width: dynamicStylingValue(deviceType, '100%', '25%', '25%'),
+    width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
     color: 'white',
     fontWeight: 500,
-    marginTop: dynamicStylingValue(deviceType, '1vh', '4vh', '4vh'),
+    marginTop: language === 'id' ? '4vh' : '1vh',
     fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'

@@ -31,7 +31,7 @@ export const HeaderSection = () => {
             </Typography>
             <Typography
               className="w-1/4"
-              style={headerStyles.description('desktop')}
+              style={headerStyles.description('desktop', 'id')}
             >
               {t('about_us.desc')}
             </Typography>
@@ -46,7 +46,7 @@ export const HeaderSection = () => {
 
 const HeaderSectionContent = () => {
   const { type } = useDeviceType();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   const handleDownload = () => {
     const link = document.createElement('a');
@@ -63,7 +63,7 @@ const HeaderSectionContent = () => {
         <DualColorText
           text1={`${t('about_us.title.our')}\u00a0`}
           text2={t('about_us.title.company')}
-          fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
+          fontSize="4em"
           fontWeight={800}
           inline
           color="white"
@@ -84,7 +84,7 @@ const HeaderSectionContent = () => {
         >
           {t('about_us.title.background')}
         </Typography>
-        <Typography style={headerStyles.description(type)}>
+        <Typography style={headerStyles.description(type, language)}>
           {t('about_us.desc')}
         </Typography>
         {type !== 'mobile' && (

@@ -83,7 +83,7 @@ const Footer = () => {
   });
 
   return (
-    <footer style={{ position: 'relative' }}>
+    <footer style={{ position: 'relative', overflowY: 'visible' }}>
       {type === 'mobile' && isAboutUsPage && (
         <Box
           sx={{
@@ -106,17 +106,18 @@ const Footer = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: dynamicStylingValue(type, '-28%', '-50%', '-50%'),
-              right: '-15%',
+              top: 'var(--bg-top, -35%)',
+              right: 'var(--bg-right, -13%)',
               bottom: 0,
               zIndex: 10,
+              minWidth: dynamicStylingValue(type, '40%', '10%', '10%'),
+              maxWidth: dynamicStylingValue(type, '80%', '50%', '50%'),
             }}
           >
             <Image
               src={bgFooter}
               alt="bg-footer"
               style={{
-                width: dynamicStylingValue(type, '85vw', '50vw', '50vw'),
                 objectFit: 'contain',
               }}
             />
