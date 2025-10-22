@@ -47,7 +47,7 @@ export const headerSectionStyles = {
   leftSide: {
     height: '10%',
     width: '50vw',
-    top: '5%',
+    top: '3%',
     left: '10%',
     position: 'absolute',
     right: 0,
@@ -67,7 +67,7 @@ export const headerSectionStyles = {
         type,
         '100%',
         language === 'en' ? '25%' : '32%',
-        language === 'en' ? '25%' : '32%'
+        '50%'
       ),
       paddingX: dynamicStylingValue(type, '1em', '0px', '0px'),
       color: dynamicStylingValue(
@@ -146,7 +146,7 @@ export const specialtySectionStyles = {
       width: dynamicStylingValue(type, '100%', '70%', '70%'),
       marginTop: '2vh',
       textAlign: 'center',
-      fontSize: '1.22rem',
+      fontSize: '1.1rem',
       color: COLORS.text.secondary,
     }) as SxProps<Theme>,
 
@@ -186,8 +186,8 @@ export const customProductSectionStyles = {
       transform: dynamicStylingValue(
         type,
         'translate(-40%, -58%)',
-        'translate(-70%, -50%)',
-        'translate(-58%, -30%)'
+        'translate(-58%, -60%)',
+        'translate(-58%, -60%)'
       ),
       zIndex: 20,
       willChange: 'transform',
@@ -240,7 +240,7 @@ export const customProductSectionStyles = {
 
   description: {
     color: COLORS.text.light,
-    fontSize: '1.22rem',
+    fontSize: '1.1rem',
     fontWeight: 400,
     marginTop: '20px',
   },
@@ -344,7 +344,7 @@ export const innovationSectionStyles = {
 
   description: (type: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
+      fontSize: '1.1rem',
       fontWeight: 400,
       color: COLORS.text.secondary,
       textAlign: dynamicStylingValue(type, 'center', 'left', 'left'),

@@ -77,7 +77,7 @@ export const headerStyles = {
     textTransform: 'none',
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
-    fontSize: '1.5rem',
+    fontSize: '1.1rem',
     marginRight: 4,
     marginBottom: 0,
     minWidth: 'auto',
@@ -179,8 +179,8 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '5vw',
-    height: '5.5vh',
+    width: '7vw',
+    height: 'auto',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
@@ -190,7 +190,7 @@ export const headerStyles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: '1vh',
+      paddingVertical: '0.5vh',
     },
     '& .MuiSelect-icon': {
       color: COLORS.white,

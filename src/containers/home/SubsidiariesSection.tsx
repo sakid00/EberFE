@@ -29,7 +29,7 @@ export const SubsidiariesSection = () => {
         />
       </Box>
       <Typography
-        fontSize={dynamicStylingValue(type, '0.9em', '1em', '1em')}
+        fontSize={'1.1rem'}
         fontWeight={500}
         sx={subsidiariesSectionStyles.description(type)}
         className={animationClasses.fadeIn}
