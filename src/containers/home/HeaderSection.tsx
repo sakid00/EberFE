@@ -20,10 +20,9 @@ export const HeaderSection = () => {
         <Box
           sx={{
             position: 'absolute',
-            top: '12vh',
+            top: '3%',
             left: 0,
             right: 0,
-            bottom: '50vh',
             zIndex: 0,
             justifyContent: 'center',
             display: 'flex',
@@ -40,23 +39,23 @@ export const HeaderSection = () => {
             }}
           >
             <Typography
-              fontSize={'2.5em'}
+              fontSize={'2.5rem'}
               fontWeight={800}
               sx={headerSectionStyles.title}
             >
               {t('home.title.innovating')}
             </Typography>
             <DualColorText
-              text1={`${t('home.title.as')}\u00a0`}
+              text1={`${t('home.title.as')}`}
               text2={t('home.title.sustainable')}
-              fontSize={'2.5em'}
+              fontSize={'2.5rem'}
               fontWeight={800}
               inline
               color="white"
               sx={headerSectionStyles.title}
             />
             <Typography
-              fontSize={'2.5em'}
+              fontSize={'2.5rem'}
               fontWeight={800}
               sx={headerSectionStyles.title}
             >

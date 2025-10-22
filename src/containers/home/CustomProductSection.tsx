@@ -50,8 +50,9 @@ export const CustomProductSection = () => {
         sx={{
           position: 'relative',
           width: '100vw',
-          height: dynamicStylingValue(type, '80vh', '70vh', '70vh'),
+          height: dynamicStylingValue(type, '100%', '70vh', '70vh'),
           marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
+          paddingBottom: dynamicStylingValue(type, '10%', '0', '0'),
         }}
         contentSx={{
           position: 'relative',

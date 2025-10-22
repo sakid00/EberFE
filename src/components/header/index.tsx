@@ -445,9 +445,9 @@ const Header = () => {
                 sx={{
                   position: 'absolute',
                   width: dynamicStylingValue(type, '90%', '50%', '50%'),
-                  height: '90%',
+                  height: 'auto',
                   aspectRatio: '1/1.1',
-                  top: dynamicStylingValue(type, '55%', '10%', '10%'),
+                  top: dynamicStylingValue(type, '45%', '10%', '10%'),
                   left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
                   right: 0,
                   bottom: 0,

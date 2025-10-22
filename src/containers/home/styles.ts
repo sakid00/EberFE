@@ -56,7 +56,8 @@ export const headerSectionStyles = {
   } as SxProps<Theme>,
 
   title: {
-    marginTop: '-2vh',
+    width: '90%',
+    marginTop: '-1vh',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
@@ -173,7 +174,6 @@ export const customProductSectionStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    // Enable container queries for responsive positioning
     containerType: 'inline-size',
     containerName: 'custom-product-section',
   } as SxProps<Theme>,
@@ -185,7 +185,7 @@ export const customProductSectionStyles = {
       height: dynamicStylingValue(type, '30%', '40%', '40%'),
       transform: dynamicStylingValue(
         type,
-        'translate(-40%, -58%)',
+        'translate(-5%, -60%)',
         'translate(-58%, -60%)',
         'translate(-58%, -60%)'
       ),

@@ -63,7 +63,7 @@ const HeaderSectionContent = () => {
         <DualColorText
           text1={`${t('about_us.title.our')}\u00a0`}
           text2={t('about_us.title.company')}
-          fontSize="4em"
+          fontSize={dynamicStylingValue(type, '2rem', '4em', '4em')}
           fontWeight={800}
           inline
           color="white"
@@ -77,7 +77,7 @@ const HeaderSectionContent = () => {
           }}
         />
         <Typography
-          fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
+          fontSize={dynamicStylingValue(type, '2rem', '4em', '4em')}
           fontWeight={800}
           marginTop={dynamicStylingValue(type, '-1vh', '-2vh', '-2vh')}
           sx={headerStyles.backgroundText}

@@ -93,7 +93,7 @@ export const footerStyles = {
   } as SxProps<Theme>,
 
   copyrightText: {
-    fontSize: '1rem',
+    fontSize: '1em',
     fontWeight: 400,
     color: 'white',
     marginLeft: 0.5,

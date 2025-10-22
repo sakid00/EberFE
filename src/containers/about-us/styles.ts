@@ -21,8 +21,8 @@ export const headerStyles: {
   headerContent: (deviceType: DeviceType) => ({
     position: 'absolute',
     height: '10%',
-    width: '50vw',
-    top: '5%',
+    width: dynamicStylingValue(deviceType, '100vw', '50vw', '50vw'),
+    top: dynamicStylingValue(deviceType, '2%', '5%', '5%'),
     left: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
     right: 0,
     bottom: 0,
