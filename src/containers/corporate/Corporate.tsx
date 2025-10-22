@@ -103,7 +103,6 @@ const CorporateContainer = () => {
   // Show skeleton loading state only when actually loading AND no data
   // More aggressive: only show skeleton on first load with no cache
   if (isLoading && companies.length === 0) {
-    console.log('⏳ Showing corporate skeleton loading...');
     return (
       <Box sx={styles.mainContainer(type)}>
         <SidebarList
@@ -164,10 +163,10 @@ const CorporateContainer = () => {
                 ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
                 : HeaderImage
             }
-            alt={companyList[selectedCompany]?.name || 'Company'}
             width={1000}
             height={1000}
-            style={{ objectFit: 'fill' }}
+            alt={companyList[selectedCompany]?.name || 'Company'}
+            style={{ objectFit: 'fill', width: '100%', height: 'auto' }}
           />
         </Box>
         <Typography sx={styles.companyTitle(type)}>

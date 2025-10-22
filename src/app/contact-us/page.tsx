@@ -11,7 +11,8 @@ const ContactUsPage = () => {
     type === 'mobile'
       ? ({ top: '28vh', width: 'max-content', height: '40vh' } as CSSProperties)
       : ({
-          top: '15vh',
+          top: '10%',
+          right: '6%',
           maxWidth: '40%',
           minwidth: '20%',
           height: 'auto',

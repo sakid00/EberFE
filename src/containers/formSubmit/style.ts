@@ -21,5 +21,6 @@ export const styles = {
     height: '70%',
     right: '5vw',
     top: '20vh',
+    objectFit: 'fill' as const,
   },
 };
