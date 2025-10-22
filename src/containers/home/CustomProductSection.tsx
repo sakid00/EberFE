@@ -19,12 +19,15 @@ export const CustomProductSection = () => {
 
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
-        {type === 'mobile' && (
-        <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
-          <Image 
-            src={getPhoto('fieldPerson2')} 
-            alt="field-person" 
-            fill 
+      {type === 'mobile' && (
+        <Box
+          sx={customProductSectionStyles.imageContainerTransform(type)}
+          data-critical
+        >
+          <Image
+            src={getPhoto('fieldPerson2')}
+            alt="field-person"
+            fill
             priority={true}
             sizes="(max-width: 768px) 100vw, 50vw"
             style={{ objectFit: 'contain' }}
@@ -33,7 +36,11 @@ export const CustomProductSection = () => {
       )}
 
       <ProgressiveBackgroundImage
-        src={type === 'mobile' ? getBackgroundImage('container1Mobile') : getBackgroundImage('container1')}
+        src={
+          type === 'mobile'
+            ? getBackgroundImage('container1Mobile')
+            : getBackgroundImage('container1')
+        }
         alt="container background"
         objectFit={'fill'}
         priority={true}
@@ -41,6 +48,7 @@ export const CustomProductSection = () => {
         placeholderColor="#cbd5e0"
         className={animationClasses.slideRight}
         sx={{
+          position: 'relative',
           width: '100vw',
           height: dynamicStylingValue(type, '80vh', '70vh', '70vh'),
           marginTop: dynamicStylingValue(type, '40vh', '20vh', '20vh'),
@@ -53,18 +61,21 @@ export const CustomProductSection = () => {
           justifyContent: 'center',
           alignItems: 'center',
           paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+          overflow: 'hidden',
         }}
       >
         {type !== 'mobile' && (
-          <Box sx={customProductSectionStyles.imageContainerTransform(type)} data-critical>
+          <Box
+            sx={customProductSectionStyles.imageContainerTransform(type)}
+            data-critical
+          >
             <Image
               src={getPhoto('fieldPerson2')}
               alt="field-person"
-              width={800}
-              height={600}
               style={{
                 objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
-                width: 'clamp(35vw, 100vw, 100vw)', // Responsive width with min/max constraints
+                maxWidth: '100%',
+                minWidth: '20%',
                 height: 'auto', // Maintain aspect ratio
               }}
               sizes={'(max-width: 768px) 35vw, (max-width: 1200px) 44vw, 50vw'}
@@ -92,7 +103,7 @@ export const CustomProductSection = () => {
           >
             {t('home.custom_product_section_title.today')}
           </Typography>
-          <Typography sx={customProductSectionStyles.description(type)}>
+          <Typography sx={customProductSectionStyles.description}>
             {t('home.custom_product_section_desc')}
           </Typography>
 

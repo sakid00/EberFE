@@ -79,7 +79,7 @@ const HeaderSectionContent = () => {
         <Typography
           fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
           fontWeight={800}
-          marginTop={dynamicStylingValue(type, '-1vh', '-3vh', '-3vh')}
+          marginTop={dynamicStylingValue(type, '-1vh', '-2vh', '-2vh')}
           sx={headerStyles.backgroundText}
         >
           {t('about_us.title.background')}
@@ -99,7 +99,7 @@ const HeaderSectionContent = () => {
               borderRadius: 10,
               fontWeight: 600,
               textTransform: 'none',
-              marginTop: '4vh',
+              marginTop: '3vh',
               '&:hover': {
                 background:
                   'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',

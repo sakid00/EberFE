@@ -43,7 +43,7 @@ export const headerStyles: {
     width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
     color: 'white',
     fontWeight: 500,
-    marginTop: language === 'id' ? '4vh' : '1vh',
+    marginTop: language === 'id' ? '4vh' : '2vh',
     fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'
@@ -89,9 +89,7 @@ export const valueStyles: {
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '100%', '60%', '58%'),
-    height: dynamicStylingValue(type, '30%', '90%', '90%'),
-    bottom: dynamicStylingValue(type, '53.5%', '17%', '17%'),
+    bottom: 'var(--bg-bottom, 13%)',
     left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
     zIndex: 1000,
   }),
@@ -135,7 +133,7 @@ export const principleStyles: {
 } = {
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '85%', '55%', '55%'),
+    width: dynamicStylingValue(type, '85%', '40vw', '40vw'),
     height: dynamicStylingValue(type, '38%', '90%', '90%'),
     top: dynamicStylingValue(type, '4%', '10%', '10%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
@@ -147,8 +145,8 @@ export const principleStyles: {
     zIndex: -1,
   },
   spacerBox: {
-    width: 600,
-    height: 509,
+    width: '40vw',
+    height: '50vh',
   },
   contentContainer: (type: DeviceType) =>
     ({

@@ -32,11 +32,11 @@ export const headerStyles = {
     position: 'absolute' as const,
     display: 'block',
     width: '100%',
-    height: dynamicStylingValue(deviceType, '80%', '100%', '80vh'),
+    height: dynamicStylingValue(deviceType, '80%', '100%', '100%'),
     right: 0,
     top: '-30%',
     zIndex: 0,
-    objectFit: 'contain' as const,
+    objectFit: 'fill' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,
@@ -77,7 +77,7 @@ export const headerStyles = {
     textTransform: 'none',
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     marginRight: 4,
     marginBottom: 0,
     minWidth: 'auto',
@@ -179,8 +179,8 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '110px',
-    height: '40px',
+    width: '5vw',
+    height: '5.5vh',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
@@ -190,8 +190,7 @@ export const headerStyles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: '6%',
-      paddingBottom: '6%',
+      paddingVertical: '1vh',
     },
     '& .MuiSelect-icon': {
       color: COLORS.white,
@@ -343,6 +342,8 @@ export const headerStyles = {
   },
   flagImageStyle: {
     marginLeft: '8px',
+    width: '1.5vw',
+    height: 'auto',
   },
   mobileMenuFlagImageStyle: {
     marginLeft: '6px',

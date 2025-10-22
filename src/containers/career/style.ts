@@ -5,6 +5,7 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     zIndex: 1,
+    justifyContent: 'center',
     alignItems: 'stretch',
     gap: '1%',
     marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
@@ -12,7 +13,7 @@ export const styles = {
 
   infoCard: (type: DeviceType) => ({
     backgroundColor: 'white',
-    maxWidth: dynamicStylingValue(type, '100%', '25%', '25%'),
+    maxWidth: dynamicStylingValue(type, '100%', '20%', '20%'),
     height: '10%',
     borderRadius: '12px',
     paddingY: dynamicStylingValue(type, '10%', '2%', '2%'),
@@ -57,6 +58,7 @@ export const styles = {
   },
 
   accordionContainer: {
+    maxWidth: '1200px',
     width: '100%',
     flex: 1,
   },

@@ -21,7 +21,7 @@ export const ValueSection = () => {
     >
       <Box
         id="about-us-fifth-section-title"
-        className="flex flex-col items-center"
+        className="flex flex-col items-center relative"
         sx={valueStyles.titleContainer}
       >
         {type === 'mobile' ? (
@@ -71,12 +71,12 @@ export const ValueSection = () => {
       <ImageBackground
         src={type === 'mobile' ? containerMobile : container}
         alt="container"
-        objectFit={type === 'mobile' ? 'fill' : 'contain'}
+        objectFit={'fill'}
         sx={{
           position: 'relative',
-          width: '110%',
+          width: '100%',
           height: '100vh',
-          marginTop: dynamicStylingValue(type, '30vh', '0px', '0px'),
+          overflow: 'hidden',
         }}
         contentSx={{
           position: 'relative',
@@ -90,7 +90,11 @@ export const ValueSection = () => {
       >
         {type !== 'mobile' && (
           <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
-            <Image src={fieldPerson} alt="field-person" fill />
+            <Image
+              src={fieldPerson}
+              alt="field-person"
+              style={{ width: '60%', height: 'auto', objectFit: 'contain' }}
+            />
           </Box>
         )}
         <Box

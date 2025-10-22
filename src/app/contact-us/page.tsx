@@ -10,7 +10,12 @@ const ContactUsPage = () => {
   const imageStyle =
     type === 'mobile'
       ? ({ top: '28vh', width: 'max-content', height: '40vh' } as CSSProperties)
-      : ({ top: '15vh' } as CSSProperties);
+      : ({
+          top: '15vh',
+          maxWidth: '40%',
+          minwidth: '20%',
+          height: 'auto',
+        } as CSSProperties);
 
   return (
     <FormSubmitContainer

@@ -106,12 +106,12 @@ const Footer = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: 'var(--bg-top, -35%)',
-              right: 'var(--bg-right, -13%)',
+              top: 'var(--bg-top, -25vh)',
+              right: 'var(--bg-right, -10vw)',
               bottom: 0,
               zIndex: 10,
-              minWidth: dynamicStylingValue(type, '40%', '10%', '10%'),
-              maxWidth: dynamicStylingValue(type, '80%', '50%', '50%'),
+              minWidth: dynamicStylingValue(type, '40%', '10vw', '10vw'),
+              maxWidth: dynamicStylingValue(type, '80%', '40vw', '40vw'),
             }}
           >
             <Image

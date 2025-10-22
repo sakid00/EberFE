@@ -33,6 +33,7 @@ export const PrincipleSection = () => {
           width: '100%',
           height: dynamicStylingValue(type, '80vh', '100vh', '80vh'),
           marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
+          position: 'relative',
         }}
         contentSx={{
           position: 'relative',

@@ -100,7 +100,7 @@ export default function RootLayout({
               <DataProvider>
                 <LoadingWrapper>
                   <PrefetchWrapper>
-                    <div className="mobile-container max-w-full overflow-x-hidden relative">
+                    <div className="mobile-container max-w-full relative">
                       <Header />
                       <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
                         <ParticlesBackground />

@@ -157,12 +157,10 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         sx={{ border: 0 }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
-            <span>{value}</span>
+            <span style={{ fontSize: '1.2rem' }}>{value}</span>
             <Image
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
-              width={20}
-              height={15}
               style={headerStyles.flagImageStyle}
             />
           </Box>
@@ -316,9 +314,9 @@ const Header = () => {
       return { width: '60%', height: 'auto' };
     }
     if (isTablet) {
-      return { width: '70%', height: 'auto' };
+      return { width: '10vw', height: 'auto' };
     }
-    return { width: '80%', height: 'auto' };
+    return { width: '10vw', height: 'auto' };
   };
 
   // Logo component
@@ -437,12 +435,7 @@ const Header = () => {
                     zIndex: 1,
                   }}
                 >
-                  <Image
-                    src={getPhoto('subtract')}
-                    alt="header-photo"
-                    width={1000}
-                    height={1000}
-                  />
+                  <Image src={getPhoto('subtract')} alt="header-photo" fill />
                 </Box>
               </>
             )}
@@ -451,11 +444,11 @@ const Header = () => {
               <Box
                 sx={{
                   position: 'absolute',
-                  width: dynamicStylingValue(type, '90%', '60%', '60%'),
-                  height: dynamicStylingValue(type, '48%', '100%', '100%'),
+                  width: dynamicStylingValue(type, '90%', '50%', '50%'),
+                  height: '90%',
                   aspectRatio: '1/1.1',
                   top: dynamicStylingValue(type, '55%', '10%', '10%'),
-                  left: dynamicStylingValue(type, '10%', '40%', '40%'),
+                  left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
                   right: 0,
                   bottom: 0,
                   zIndex: 1,

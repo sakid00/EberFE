@@ -45,9 +45,11 @@ export const headerSectionStyles = {
   } as SxProps<Theme>,
 
   leftSide: {
-    position: 'absolute',
-    top: '20%',
+    height: '10%',
+    width: '50vw',
+    top: '5%',
     left: '10%',
+    position: 'absolute',
     right: 0,
     bottom: 0,
     zIndex: 1,
@@ -144,7 +146,7 @@ export const specialtySectionStyles = {
       width: dynamicStylingValue(type, '100%', '70%', '70%'),
       marginTop: '2vh',
       textAlign: 'center',
-      fontSize: dynamicStylingValue(type, '0.75em', '1em', '1em'),
+      fontSize: '1.22rem',
       color: COLORS.text.secondary,
     }) as SxProps<Theme>,
 
@@ -181,13 +183,11 @@ export const customProductSectionStyles = {
       position: 'absolute',
       width: dynamicStylingValue(type, '100vw', '40vw', '40vw'),
       height: dynamicStylingValue(type, '30%', '40%', '40%'),
-      top: dynamicStylingValue(type, '38%', '12%', '12%'),
-      left: dynamicStylingValue(type, '38%', '38%', '37%'),
       transform: dynamicStylingValue(
         type,
         'translate(-40%, -58%)',
         'translate(-70%, -50%)',
-        'translate(-78%, -10%)'
+        'translate(-58%, -30%)'
       ),
       zIndex: 20,
       willChange: 'transform',
@@ -208,7 +208,7 @@ export const customProductSectionStyles = {
   } as SxProps<Theme>,
 
   spacer: {
-    width: '40%',
+    width: '50%',
     height: '50%',
     display: 'flex',
     justifyContent: 'center',
@@ -238,13 +238,12 @@ export const customProductSectionStyles = {
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
-  description: (type: DeviceType) =>
-    ({
-      color: COLORS.text.light,
-      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
-      fontWeight: 400,
-      marginTop: '20px',
-    }) as SxProps<Theme>,
+  description: {
+    color: COLORS.text.light,
+    fontSize: '1.22rem',
+    fontWeight: 400,
+    marginTop: '20px',
+  },
 
   button: (type: DeviceType) =>
     ({
