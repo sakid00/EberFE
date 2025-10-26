@@ -11,6 +11,7 @@ const SubmitApplicationPage = () => {
   const imageStyle =
     type === 'mobile'
       ? ({
+          position: 'absolute',
           left: '0',
           top: '18vh',
           width: '100vw',

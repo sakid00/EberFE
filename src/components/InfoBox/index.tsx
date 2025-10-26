@@ -36,7 +36,9 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
 
   return (
     <Box sx={styles.container(type)}>
-      <Image src={photo} style={imageStyle} alt="image" />
+      <Box sx={imageStyle}>
+        <Image src={photo} style={{ objectFit: 'fill' }} alt="image" />
+      </Box>
       <Box sx={styles.infoCard}>{infoListMap}</Box>
     </Box>
   );
