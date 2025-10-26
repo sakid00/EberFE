@@ -154,7 +154,7 @@ export const styles = {
       type,
       '1fr', // mobile: 1 column
       'repeat(2, 1fr)', // tablet: 2 columns
-      'repeat(4, 1fr)' // desktop: 4 columns
+      'repeat(2, 1fr)' // desktop: 4 columns
     ),
     gap: dynamicStylingValue(type, '16px', '20px', '24px'),
     marginTop: '16px',
