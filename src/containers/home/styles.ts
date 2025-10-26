@@ -47,7 +47,7 @@ export const headerSectionStyles = {
   leftSide: {
     height: '10%',
     width: '50vw',
-    top: '3%',
+    top: '3.5%',
     left: '10%',
     position: 'absolute',
     right: 0,
