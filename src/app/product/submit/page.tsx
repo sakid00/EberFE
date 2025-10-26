@@ -3,21 +3,12 @@ import Photo from '../../../../public/photo/lab-person.png';
 import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '../../../hooks';
-import { CSSProperties } from 'react';
 
 const SubmitApplicationPage = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
   const imageStyle =
-    type === 'mobile'
-      ? ({
-          position: 'absolute',
-          left: '0',
-          top: '18vh',
-          width: '100vw',
-          height: '60vh',
-        } as CSSProperties)
-      : styles.imageStyle;
+    type === 'mobile' ? styles.imageStyleMobile : styles.imageStyle;
 
   return (
     <FormSubmitContainer

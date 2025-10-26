@@ -32,6 +32,7 @@ const FormSubmitContainer = ({
   text2,
   imageStyle,
   type,
+  containerStyle,
 }: {
   photo: StaticImageData;
   title: string;
@@ -40,6 +41,7 @@ const FormSubmitContainer = ({
   text2: string;
   imageStyle?: React.CSSProperties;
   type: DeviceType;
+  containerStyle?: React.CSSProperties;
 }) => {
   return (
     <Box sx={styles.containerBox(type)}>
@@ -58,6 +60,7 @@ const FormSubmitContainer = ({
         photo={photo}
         imageStyle={{ ...styles.imageStyle, ...imageStyle }}
         type={type}
+        containerStyle={containerStyle}
       />
     </Box>
   );

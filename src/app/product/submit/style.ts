@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 export const styles = {
   imageStyle: {
     zIndex: -1000,
@@ -5,6 +7,13 @@ export const styles = {
     width: '45vw',
     height: '40vh',
     left: '30%',
-    bottom: '12vw',
+    bottom: '15vw',
   },
+  imageStyleMobile: {
+    position: 'absolute',
+    left: '0',
+    top: '18vh',
+    width: '100vw',
+    height: '60vh',
+  } as CSSProperties,
 };

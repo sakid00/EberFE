@@ -20,7 +20,7 @@ const ContactUsPage = () => {
           top: '2vw',
           right: '6%',
           maxWidth: '100vw',
-          width: '40vw',
+          width: '35vw',
           minwidth: '20%',
           height: 'auto',
         } as CSSProperties);

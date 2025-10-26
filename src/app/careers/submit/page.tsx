@@ -3,21 +3,12 @@ import Photo from '../../../../public/photo/field-person.png';
 import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '../../../hooks';
-import { CSSProperties } from 'react';
 
 const SubmitApplicationPage = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
   const imageStyle =
-    type === 'mobile'
-      ? ({
-          position: 'absolute',
-          left: '-5vw',
-          top: '20vh',
-          width: '100vw',
-          height: '50vh',
-        } as CSSProperties)
-      : styles.imageStyle;
+    type === 'mobile' ? styles.imageStyleMobile : styles.imageStyle;
 
   return (
     <FormSubmitContainer
@@ -28,6 +19,7 @@ const SubmitApplicationPage = () => {
       photo={Photo}
       type={type}
       imageStyle={imageStyle}
+      containerStyle={{ alignSelf: 'start', height: '90vh' }}
     />
   );
 };
