@@ -8,6 +8,8 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import ProgressiveBackgroundImage from '@/components/ProgressiveBackgroundImage/index';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { useRouter } from 'next/navigation';
+import ImageBackground from '@/components/ImageBackground';
+import { useMemo } from 'react';
 
 export const CustomProductSection = () => {
   const { type } = useDeviceType();
@@ -17,30 +19,81 @@ export const CustomProductSection = () => {
     router.push('/product/submit');
   };
 
+  const content = useMemo(
+    () => (
+      <>
+        <DualColorText
+          text1={t('home.custom_product_section_title.make_it')}
+          text2={t('home.custom_product_section_title.customize')}
+          fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
+          color="white"
+          fontWeight={800}
+        />
+        <Typography
+          fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
+          fontWeight={800}
+          sx={customProductSectionStyles.title}
+        >
+          {t('home.custom_product_section_title.today')}
+        </Typography>
+        <Typography sx={customProductSectionStyles.description}>
+          {t('home.custom_product_section_desc')}
+        </Typography>
+        <Button
+          sx={customProductSectionStyles.button(type)}
+          onClick={handleCustomProductClick}
+        >
+          {t('home.custom_product_button')}
+        </Button>
+      </>
+    ),
+    [type]
+  );
+
+  if (type === 'mobile') {
+    return (
+      <Box sx={customProductSectionStyles.mainContainerMobile}>
+        <ImageBackground
+          src={getBackgroundImage('container1Mobile')}
+          alt="container background"
+          objectFit={'fill'}
+          priority={true}
+          quality={75}
+          className={animationClasses.slideRight}
+          sx={customProductSectionStyles.imageBackgroundMobile}
+          contentSx={customProductSectionStyles.contentSxMobile}
+        >
+          <Box sx={customProductSectionStyles.contentContainerMobile}>
+            <Box
+              sx={customProductSectionStyles.imageContainerMobile}
+              data-critical
+            >
+              <Image
+                src={getPhoto('fieldPerson2')}
+                alt="field-person"
+                width={100}
+                height={100}
+                priority={true}
+                style={{
+                  objectFit: 'fill',
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </Box>
+            <Box sx={customProductSectionStyles.innerContentContainerMobile}>
+              {content}
+            </Box>
+          </Box>
+        </ImageBackground>
+      </Box>
+    );
+  }
+
   return (
     <Box id="home-third-section" sx={customProductSectionStyles.container}>
-      {type === 'mobile' && (
-        <Box
-          sx={customProductSectionStyles.imageContainerTransform(type)}
-          data-critical
-        >
-          <Image
-            src={getPhoto('fieldPerson2')}
-            alt="field-person"
-            fill
-            priority={true}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ objectFit: 'contain' }}
-          />
-        </Box>
-      )}
-
       <ProgressiveBackgroundImage
-        src={
-          type === 'mobile'
-            ? getBackgroundImage('container1Mobile')
-            : getBackgroundImage('container1')
-        }
+        src={getBackgroundImage('container1')}
         alt="container background"
         objectFit={'fill'}
         priority={true}
@@ -65,27 +118,25 @@ export const CustomProductSection = () => {
           overflow: 'hidden',
         }}
       >
-        {type !== 'mobile' && (
-          <Box
-            sx={customProductSectionStyles.imageContainerTransform(type)}
-            data-critical
-          >
-            <Image
-              src={getPhoto('fieldPerson2')}
-              alt="field-person"
-              style={{
-                objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
-                maxWidth: '100%',
-                minWidth: '20%',
-                height: 'auto', // Maintain aspect ratio
-              }}
-              sizes={'(max-width: 768px) 35vw, (max-width: 1200px) 44vw, 50vw'}
-              priority={true} // Add priority for better loading
-            />
-          </Box>
-        )}
+        <Box
+          sx={customProductSectionStyles.imageContainerTransform(type)}
+          data-critical
+        >
+          <Image
+            src={getPhoto('fieldPerson2')}
+            alt="field-person"
+            style={{
+              objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
+              maxWidth: '100%',
+              minWidth: '20%',
+              height: 'auto', // Maintain aspect ratio
+            }}
+            sizes={'(max-width: 768px) 35vw, (max-width: 1200px) 44vw, 50vw'}
+            priority={true} // Add priority for better loading
+          />
+        </Box>
 
-        {type !== 'mobile' && <Box sx={customProductSectionStyles.spacer} />}
+        <Box sx={customProductSectionStyles.spacer} />
         <Box
           sx={customProductSectionStyles.contentContainer(type)}
           className={animationClasses.slideRight}

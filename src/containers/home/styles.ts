@@ -259,6 +259,42 @@ export const customProductSectionStyles = {
       marginTop: 2,
       textTransform: 'none',
     }) as SxProps<Theme>,
+
+  mainContainerMobile: {
+    display: 'flex',
+    width: '100vw',
+    position: 'relative',
+    marginTop: '25vh',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: 'auto',
+    overflow: 'visible',
+  },
+  contentSxMobile: {
+    height: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+    marginBottom: '-20%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '15vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    zIndex: 1000,
+    width: '100%',
+  },
+  innerContentContainerMobile: {
+    padding: '10%',
+    borderRadius: '1em',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    overflow: 'hidden',
+  },
 };
 
 // Subsidiaries Section Styles
