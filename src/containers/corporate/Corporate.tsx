@@ -355,9 +355,9 @@ const CorporateContainer = () => {
                     <Image
                       src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
                       alt={item.title}
-                      width={200}
-                      height={150}
-                      style={styles.imageStyle}
+                      width={1000}
+                      height={1000}
+                      style={styles.imageCertifStyle}
                     />
                     <Typography sx={styles.imageTitle(type)}>
                       {item.title}

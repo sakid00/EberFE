@@ -169,10 +169,16 @@ export const styles = {
 
   imageStyle: {
     width: '100%',
-    height: 'auto',
     objectFit: 'cover' as const,
     borderRadius: '8px',
     maxHeight: '150px',
+  },
+
+  imageCertifStyle: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'fill' as const,
+    borderRadius: '8px',
   },
 
   imageTitle: (type: DeviceType) => ({
