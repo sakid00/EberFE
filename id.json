@@ -236,13 +236,17 @@
       "let's": "Mari Membangun\u00a0",
       "custom": "Produk Kustom"
     },
-    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
-    "submit_application_button": "Kirim"
+    "submit_application_desc": "Kami menyediakan informasi produk secara lengkap untuk mendukung kebutuhan bisnis Anda. Isi formulir di bawah ini, dan tim kami akan segera menghubungi Anda dengan spesifikasi serta solusi yang sesuai.",
+    "submit_application_button": "Minta Detail Produk"
   },
   "activity": {
     "title": {
       "Our": "Aktivitas",
       "Activity": "Kami"
+    },
+    "desc": {
+      "1": "Jelajahi program CSR dan pengembangan komunitas kami yang membuat dampak positif bagi masyarakat dan lingkungan.",
+      "2": "Tetap terhubung untuk berita terkini, acara perusahaan, dan publikasi dari EBER grup."
     },
     "empty_list_title": "Belum Ada Aktivitas",
     "empty_list_desc": "Tetap terhubung dengan kami untuk informasi terbaru!"

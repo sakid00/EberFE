@@ -19,6 +19,7 @@ const SubmitApplicationPage = () => {
       photo={Photo}
       imageStyle={imageStyle}
       type={type}
+      buttonText={t('custom_product.submit_application_button')}
     />
   );
 };

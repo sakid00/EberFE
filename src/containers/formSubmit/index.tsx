@@ -33,6 +33,7 @@ const FormSubmitContainer = ({
   imageStyle,
   type,
   containerStyle,
+  buttonText,
 }: {
   photo: StaticImageData;
   title: string;
@@ -42,6 +43,7 @@ const FormSubmitContainer = ({
   imageStyle?: React.CSSProperties;
   type: DeviceType;
   containerStyle?: React.CSSProperties;
+  buttonText?: string;
 }) => {
   return (
     <Box sx={styles.containerBox(type)}>
@@ -54,6 +56,7 @@ const FormSubmitContainer = ({
         text1={text1}
         text2={text2}
         formBoxStyle={styles.formBoxStyle(type)}
+        buttonText={buttonText}
       />
       <InfoBox
         infoList={infoList}

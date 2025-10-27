@@ -120,9 +120,7 @@ const ActivityContainer = () => {
             : newsroomList[selectedActivity]?.name}
         </Typography>
         <Typography sx={styles.subtitle(type)}>
-          {selectedCategory === 0
-            ? 'Explore our sustainability initiatives and community engagement programs that make a positive impact on society and the environment.'
-            : 'Stay updated with the latest news, company events, and publications from EBER Group.'}
+          {selectedCategory === 0 ? t('activity.desc.1') : t('activity.desc.2')}
         </Typography>
 
         {/* Error State */}

@@ -31,12 +31,14 @@ const FormBox = ({
   text1,
   text2,
   formBoxStyle,
+  buttonText,
 }: {
   title: string;
   description: string;
   text1: string;
   text2: string;
   formBoxStyle?: React.CSSProperties;
+  buttonText?: string;
 }) => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
@@ -361,7 +363,7 @@ const FormBox = ({
       >
         {isSubmitting
           ? 'Submitting...'
-          : t('contact_us.submit_application_button')}
+          : (buttonText ?? t('contact_us.submit_application_button'))}
       </Button>
     </Box>
   );

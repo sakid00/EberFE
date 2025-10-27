@@ -240,13 +240,17 @@
       "let's": "Let’s Build Your\u00a0",
       "custom": "Custom Product"
     },
-    "submit_application_desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?",
-    "submit_application_button": "Submit"
+    "submit_application_desc": "Don’t wait! Simply fill out the form and get product specifications, best offers, and recommendations tailored to your needs. Our team is ready to assist you quickly and effectively.",
+    "submit_application_button": "Get Product Detail"
   },
   "activity": {
     "title": {
       "Our": "Our",
       "Activity": "Activity"
+    },
+    "desc": {
+      "1": "Explore our sustainability initiatives and community engagement programs that make a positive impact on society and the environment.",
+      "2": "Stay updated with the latest news, company events, and publications from EBER Group."
     },
     "empty_list_title": "No activity yet",
     "empty_list_desc": "Stay tuned for exciting updates from EBER Group!"
