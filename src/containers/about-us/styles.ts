@@ -130,7 +130,39 @@ export const principleStyles: {
   visionDescription: SxProps<Theme>;
   missionTitle: SxProps<Theme>;
   missionDescription: SxProps<Theme>;
+  mainContainerMobile: SxProps<Theme>;
+  imageBackgroundMobile: SxProps<Theme>;
+  contentSxMobile: SxProps<Theme>;
+  contentContainerMobile: SxProps<Theme>;
+  imageContainerMobile: SxProps<Theme>;
 } = {
+  mainContainerMobile: {
+    position: 'relative',
+    marginTop: '25vh',
+    width: '100vw',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: 'auto',
+    overflow: 'visible',
+  },
+  contentSxMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+    marginBottom: '-20%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '5vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    width: '100%',
+    zIndex: 1000,
+  },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
     width: dynamicStylingValue(type, '85%', '40vw', '40vw'),
@@ -153,7 +185,7 @@ export const principleStyles: {
       display: 'flex',
       flexDirection: 'column',
       maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
-      padding: dynamicStylingValue(type, '1em', '0px', '0px'),
+      padding: dynamicStylingValue(type, '10%', '0px', '0px'),
       borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
       backgroundColor: dynamicStylingValue(
         type,
@@ -161,6 +193,7 @@ export const principleStyles: {
         'transparent',
         'transparent'
       ),
+      overflow: 'hidden',
     }) as SxProps<Theme>,
   backgroundText: (type: DeviceType) => ({
     background:
