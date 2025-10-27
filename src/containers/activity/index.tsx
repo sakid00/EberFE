@@ -144,7 +144,7 @@ const ActivityContainer = () => {
                   key={activity.id}
                   image={activity.image}
                   date={(() => {
-                    const date = new Date(activity.updatedAt);
+                    const date = new Date(activity.createdAt);
                     if (isNaN(date.getTime())) {
                       return 'Date not available';
                     }

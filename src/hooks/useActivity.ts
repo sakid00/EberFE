@@ -13,6 +13,7 @@ interface ActivityResponseData {
   image: string;
   pdf: string;
   updatedAt: string;
+  createdAt: string;
 }
 
 interface ActivityRequest {
@@ -97,6 +98,7 @@ const useActivity = () => {
             image: activity.image,
             pdf: activity.pdf,
             updatedAt: activity.updatedAt,
+            createdAt: activity.createdAt,
           })
         );
 
@@ -268,6 +270,7 @@ const useActivity = () => {
           image: activityData.image,
           pdf: activityData.pdf,
           updatedAt: activityData.updatedAt,
+          createdAt: activityData.createdAt,
         };
 
         // Add the single activity to the existing activities array
