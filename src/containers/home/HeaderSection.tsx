@@ -16,52 +16,50 @@ export const HeaderSection = () => {
 
   if (type === 'mobile') {
     return (
-      <Box>
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '2%',
+          left: 0,
+          right: 0,
+          zIndex: 0,
+          justifyContent: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <Box
           sx={{
-            position: 'absolute',
-            top: '3%',
-            left: 0,
-            right: 0,
-            zIndex: 0,
-            justifyContent: 'center',
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'start',
-              justifyContent: 'start',
-              marginLeft: dynamicStylingValue(type, '10%', '0', '0'),
-            }}
+          <Typography
+            fontSize={'2.2rem'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
           >
-            <Typography
-              fontSize={'2.5rem'}
-              fontWeight={800}
-              sx={headerSectionStyles.title}
-            >
-              {t('home.title.innovating')}
-            </Typography>
-            <DualColorText
-              text1={`${t('home.title.as')}`}
-              text2={t('home.title.sustainable')}
-              fontSize={'2.5rem'}
-              fontWeight={800}
-              inline
-              color="white"
-              sx={headerSectionStyles.title}
-            />
-            <Typography
-              fontSize={'2.5rem'}
-              fontWeight={800}
-              sx={headerSectionStyles.title}
-            >
-              {t('home.title.future')}
-            </Typography>
-          </Box>
+            {t('home.title.innovating')}
+          </Typography>
+          <DualColorText
+            text1={`${t('home.title.as')}`}
+            text2={t('home.title.sustainable')}
+            fontSize={'2.2rem'}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerSectionStyles.title}
+          />
+          <Typography
+            fontSize={'2.2rem'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.future')}
+          </Typography>
         </Box>
       </Box>
     );

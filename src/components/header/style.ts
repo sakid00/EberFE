@@ -46,7 +46,7 @@ export const headerStyles = {
     width: '100%',
     height: dynamicStylingValue(
       deviceType,
-      '80vh',
+      '65vh',
       isHomepage ? '80vh' : '50vh',
       isHomepage ? '90vh' : '50vh'
     ),
@@ -58,6 +58,8 @@ export const headerStyles = {
     alignItems: 'start',
     justifyContent: 'center',
     paddingTop: '5vh',
+    display: 'flex',
+    flexDirection: 'column',
   },
   container: {
     display: 'flex',
@@ -78,7 +80,7 @@ export const headerStyles = {
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
     fontSize: '1.1rem',
-    marginRight: 4,
+    marginRight: 1,
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',

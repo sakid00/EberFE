@@ -15,7 +15,7 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -356,6 +356,67 @@ const Header = () => {
     </motion.div>
   );
 
+  const homepageImage = useMemo(
+    () => (
+      <>
+        {isHomePagePath && (
+          <Box
+            sx={{
+              position: 'relative',
+              width: '100vw',
+              height: '100%',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'relative',
+                width: dynamicStylingValue(type, '35%', '20%', '20%'),
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                padding: dynamicStylingValue(type, '2%', '1%', '1%'),
+                borderRadius: '10px',
+                top: dynamicStylingValue(type, '40%', '20%', '20%'),
+                left: dynamicStylingValue(type, '53%', '75%', '75%'),
+                borderBottomRightRadius: '100px',
+              }}
+            >
+              <Typography
+                color="white"
+                fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
+                fontWeight={800}
+              >
+                {t('home.modal.title')}
+              </Typography>
+              <Typography
+                color="white"
+                fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
+                fontWeight={500}
+              >
+                {t('home.modal.desc')}
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+                width: dynamicStylingValue(type, '100%', '50%', '50%'),
+                height: dynamicStylingValue(type, '50%', '80%', '80%'),
+                left: dynamicStylingValue(type, '0%', '40%', '40%'),
+                bottom: dynamicStylingValue(type, '5vh', '-1vh', '-1vh'),
+                zIndex: 1,
+              }}
+            >
+              <Image
+                src={getPhoto('subtract')}
+                alt="header-photo"
+                style={{ objectFit: 'contain' }}
+              />
+            </Box>
+          </Box>
+        )}
+      </>
+    ),
+    [type]
+  );
+
   return (
     <>
       <header style={headerStyles.header}>
@@ -379,66 +440,12 @@ const Header = () => {
                   ? getPhoto('eberBig2Mobile')
                   : getPhoto('eberBig2')
               }
+              width={1000}
+              height={1000}
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
               priority={true}
             />
-
-            {isHomePagePath && (
-              <>
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: dynamicStylingValue(type, '35%', '20%', '20%'),
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: dynamicStylingValue(type, '2%', '1%', '1%'),
-                    borderRadius: '10px',
-                    top: dynamicStylingValue(type, '58%', '30%', '30%'),
-                    left: dynamicStylingValue(type, '53%', '70%', '70%'),
-                    borderBottomRightRadius: '100px',
-                  }}
-                >
-                  <Typography
-                    color="white"
-                    fontSize={dynamicStylingValue(
-                      type,
-                      '0.5em',
-                      '0.9em',
-                      '0.9em'
-                    )}
-                    fontWeight={800}
-                  >
-                    {t('home.modal.title')}
-                  </Typography>
-                  <Typography
-                    color="white"
-                    fontSize={dynamicStylingValue(
-                      type,
-                      '0.5em',
-                      '0.9em',
-                      '0.9em'
-                    )}
-                    fontWeight={500}
-                  >
-                    {t('home.modal.desc')}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: dynamicStylingValue(type, '100%', '50%', '50%'),
-                    height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                    top: dynamicStylingValue(type, '58%', '25%', '28%'),
-                    left: dynamicStylingValue(type, '2%', '38%', '38%'),
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 1,
-                  }}
-                >
-                  <Image src={getPhoto('subtract')} alt="header-photo" fill />
-                </Box>
-              </>
-            )}
 
             {isAboutUsPagePath && (
               <Box
@@ -507,6 +514,7 @@ const Header = () => {
                 </motion.div>
               )}
             </Box>
+            {homepageImage}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>
