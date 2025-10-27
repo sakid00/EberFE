@@ -9,11 +9,13 @@ const logo = '/eber_logo.png';
 interface ModernLoadingScreenProps {
   showLogo?: boolean;
   compact?: boolean;
+  progress?: number;
 }
 
 export const ModernLoadingScreen: React.FC<ModernLoadingScreenProps> = ({
   showLogo = true,
   compact = false,
+  progress = 0,
 }) => {
   return (
     <Box
@@ -68,6 +70,7 @@ export const ModernLoadingScreen: React.FC<ModernLoadingScreenProps> = ({
                 objectFit: 'contain',
                 marginBottom: '20px',
               }}
+              priority
             />
           </motion.div>
         )}
@@ -78,35 +81,44 @@ export const ModernLoadingScreen: React.FC<ModernLoadingScreenProps> = ({
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
         >
-          {/* Modern Progress Bar */}
+          {/* Modern Progress Bar with actual progress */}
           <Box
             sx={{
               width: '100%',
+              maxWidth: '300px',
               height: '6px',
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               borderRadius: '10px',
               marginBottom: '20px',
               overflow: 'hidden',
               border: '1px solid rgba(255,140,0,0.2)',
+              margin: '0 auto 20px',
             }}
           >
             <motion.div
-              animate={{
-                x: ['-100%', '100%'],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
               style={{
-                width: '50%',
                 height: '100%',
                 background:
-                  'linear-gradient(90deg, transparent 0%, rgba(255,140,0,0.6) 50%, transparent 100%)',
+                  'linear-gradient(90deg, rgba(255,140,0,0.8) 0%, rgba(255,165,0,1) 50%, rgba(255,180,0,0.8) 100%)',
+                borderRadius: '10px',
               }}
             />
           </Box>
+
+          {/* Progress Text */}
+          <Typography
+            sx={{
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: '0.9rem',
+              fontWeight: 600,
+              letterSpacing: '1px',
+            }}
+          >
+            Loading assets... {Math.round(progress)}%
+          </Typography>
         </motion.div>
       </Box>
     </Box>

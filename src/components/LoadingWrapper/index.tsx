@@ -1,24 +1,26 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import LoadingPage from '../LoadingPage';
+import { useDevAssetLoading } from '@/hooks/useDevAssetLoading';
 
 interface LoadingWrapperProps {
   children: React.ReactNode;
-  useModernLoading?: boolean; // Option to use modern loading instead
+  useModernLoading?: boolean;
 }
 
 const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
-  const [isLoadingVisible, setIsLoadingVisible] = useState(true); // Show loading initially
+  const [isLoadingVisible, setIsLoadingVisible] = useState(true);
 
-  // Show beautiful loading screen for 2.5 seconds then fade out
+  // Use the asset loading hook to track real image loading progress
+  const { isLoading, progress, isComplete } = useDevAssetLoading();
+
+  // Hide loading screen when assets are complete
   useEffect(() => {
-    const loadingTimer = setTimeout(() => {
+    if (isComplete && !isLoading) {
+      console.log('✨ All assets loaded! Showing website...');
       setIsLoadingVisible(false);
-      console.log('✨ Modern loading screen completed!');
-    }, 2500); // 2.5 seconds of beautiful loading
-
-    return () => clearTimeout(loadingTimer);
-  }, []); // Run once on mount
+    }
+  }, [isComplete, isLoading]);
 
   // Clean up initial CSS loading and ensure scroll position
   useEffect(() => {
@@ -44,7 +46,7 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
 
   return (
     <>
-      {/* Modern loading screen */}
+      {/* Modern loading screen with real progress tracking */}
       {isLoadingVisible && (
         <div
           style={{
@@ -57,11 +59,11 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
             transition: 'opacity 0.5s ease-out',
           }}
         >
-          <LoadingPage />
+          <LoadingPage progress={progress} />
         </div>
       )}
 
-      {/* Main content */}
+      {/* Main content - only show when loading is complete */}
       <div
         style={{
           opacity: isLoadingVisible ? 0 : 1,

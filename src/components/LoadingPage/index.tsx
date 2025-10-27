@@ -2,8 +2,14 @@
 import React from 'react';
 import { ModernLoadingScreen } from '../ModernLoadingScreen';
 
-const LoadingPage: React.FC = () => {
-  return <ModernLoadingScreen showLogo={true} compact={false} />;
+interface LoadingPageProps {
+  progress?: number;
+}
+
+const LoadingPage: React.FC<LoadingPageProps> = ({ progress = 0 }) => {
+  return (
+    <ModernLoadingScreen showLogo={true} compact={false} progress={progress} />
+  );
 };
 
 export default LoadingPage;
