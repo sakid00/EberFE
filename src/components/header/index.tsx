@@ -31,7 +31,7 @@ const enFlag = '/svg/en.svg';
 
 // Constants
 const ANIMATION_DURATION = 50; // Sangat cepat
-const ANIMATION_STAGGER_DELAY = 0.01; // Hampir instan
+const ANIMATION_STAGGER_DELAY = 0.1; // Stagger delay for navigation items
 
 const NAVIGATION_ITEMS = [
   { name: 'navigation_bar.home', navigation: '/', key: 'home' },
@@ -78,19 +78,17 @@ const shouldShowDesktopNavigation = (isMobile: boolean): boolean => !isMobile;
 
 // Subcomponents
 interface NavigationBarProps {
-  isAnimating: boolean;
-  hasAnimated: boolean;
   pathName: string;
   onNavigate: (path: string) => void;
   t: (key: string) => string;
+  animationKey: number;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
-  isAnimating,
-  hasAnimated,
   pathName,
   onNavigate,
   t,
+  animationKey,
 }) => {
   return (
     <>
@@ -99,17 +97,16 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
         return (
           <motion.div
-            key={index}
+            key={`${animationKey}-${index}`}
             initial={{ opacity: 0, y: -50 }}
             animate={{
-              opacity: isAnimating ? 0 : 1,
-              y: isAnimating ? -20 : 0,
-              scale: isAnimating ? 0.95 : 1,
+              opacity: 1,
+              y: 0,
             }}
             transition={{
-              duration: hasAnimated ? 0 : 0.3, // No animation after first load
-              ease: 'easeInOut',
-              delay: hasAnimated ? 0 : index * ANIMATION_STAGGER_DELAY,
+              duration: 0.6,
+              ease: 'easeOut',
+              delay: index * ANIMATION_STAGGER_DELAY,
             }}
           >
             <Button
@@ -263,7 +260,7 @@ const MobileLanguageSelector: React.FC<LanguageSelectorProps> = ({
 const Header = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false); // Track if we've already animated once
+  const [animationKey, setAnimationKey] = useState(0); // Track page changes for re-animation
   const { type, isMobile, isTablet } = useDeviceType();
   const { language, setLanguage, t } = useTranslation();
   const { navigateTo } = useNavigation();
@@ -285,22 +282,15 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Effects - Optimized animation timing
+  // Effects - Trigger animation on every page change
   useEffect(() => {
-    if (!hasAnimated) {
-      // First load - full animation
-      setIsAnimating(true);
-      const timer = setTimeout(() => {
-        setIsAnimating(false);
-        setHasAnimated(true);
-      }, ANIMATION_DURATION);
-      return () => clearTimeout(timer);
-    } else {
-      // Subsequent navigations - skip animation entirely
-      setIsAnimating(false); // No animation for fast navigation
-      // No timer to clear since we skip animation
-    }
-  }, [pathName, hasAnimated]);
+    setIsAnimating(true);
+    setAnimationKey((prev) => prev + 1); // Increment key to force re-animation
+    const timer = setTimeout(() => {
+      setIsAnimating(false);
+    }, ANIMATION_DURATION);
+    return () => clearTimeout(timer);
+  }, [pathName]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -324,20 +314,7 @@ const Header = () => {
 
   // Logo component
   const LogoSection = () => (
-    <motion.div
-      style={headerStyles.logoContainer}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{
-        opacity: isAnimating ? 0 : 1,
-        y: isAnimating ? -30 : 0,
-        scale: isAnimating ? 0.9 : 1,
-      }}
-      transition={{
-        duration: 0.4,
-        ease: 'easeInOut',
-        delay: isAnimating ? 0 : 0.2,
-      }}
-    >
+    <Box style={headerStyles.logoContainer}>
       <Image
         src={logo}
         alt="EBER Logo"
@@ -345,7 +322,7 @@ const Header = () => {
         height={100}
         style={getLogoDimensions()}
       />
-    </motion.div>
+    </Box>
   );
 
   // Right section component
@@ -424,7 +401,7 @@ const Header = () => {
         </Box>
       </>
     ),
-    [type]
+    [type, t]
   );
 
   const aboutUsImage = useMemo(
@@ -490,26 +467,20 @@ const Header = () => {
 
               {/* Desktop and Tablet Navigation */}
               {shouldShowDesktopNavigation(isMobile) && (
-                <motion.div
+                <Box
                   className="desktop-navigation"
-                  style={{
+                  sx={{
                     display: 'flex',
                     flexDirection: 'row',
                   }}
-                  animate={{
-                    opacity: isAnimating ? 0.3 : 1,
-                    y: isAnimating ? -10 : 0,
-                  }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                 >
                   <NavigationBar
-                    isAnimating={isAnimating}
-                    hasAnimated={hasAnimated}
+                    animationKey={animationKey}
                     pathName={pathName}
                     onNavigate={handleNavigate}
                     t={t}
                   />
-                </motion.div>
+                </Box>
               )}
 
               {/* Right Section - Language & Search (Desktop & Tablet) */}
