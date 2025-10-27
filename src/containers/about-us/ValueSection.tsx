@@ -2,14 +2,12 @@ import { Box, Typography } from '@mui/material';
 import { ValueCard } from '@/components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
-import fieldPerson from '@/public/photo/chem-person.png';
+import { getPhoto } from '@/assets/photoAssets';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import ImageBackground from '@/components/ImageBackground/index';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
-import container from '@/public/background/container2.png';
-import containerMobile from '@/public/background/container2-mobile.png';
-import site from '@/public/background/site-bg.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
@@ -37,22 +35,20 @@ export const ValueSection = () => {
           </Typography>
         </Box>
         <ImageBackground
-          src={containerMobile}
+          src={getBackgroundImage('container1Mobile')}
           alt="container"
           objectFit={'fill'}
           sx={valueStyles.imageBackgroundMobile}
           contentSx={valueStyles.contentSxMobile}
         >
           <Box sx={valueStyles.contentContainerMobile}>
-            <Box
-              sx={valueStyles.imageContainerMobile}
-            >
+            <Box sx={valueStyles.imageContainerMobile}>
               <Image
-                src={fieldPerson}
+                src={getPhoto('chemPerson')}
                 alt="field-person"
                 width={100}
                 height={100}
-                priority={true}
+                loading="lazy"
                 style={{
                   objectFit: 'fill',
                   width: '100%',
@@ -101,7 +97,7 @@ export const ValueSection = () => {
       </Box>
 
       <ImageBackground
-        src={container}
+        src={getBackgroundImage('container1')}
         alt="container"
         objectFit={'fill'}
         sx={{
@@ -122,8 +118,9 @@ export const ValueSection = () => {
       >
         <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
           <Image
-            src={fieldPerson}
+            src={getPhoto('chemPerson')}
             alt="field-person"
+            loading="lazy"
             style={{ width: '60%', height: 'auto', objectFit: 'contain' }}
           />
         </Box>
@@ -144,7 +141,12 @@ export const ValueSection = () => {
           height: '100%',
         }}
       >
-        <Image src={site} alt="site" fill />
+        <Image
+          src={getBackgroundImage('siteBg')}
+          alt="site"
+          fill
+          loading="lazy"
+        />
       </Box>
     </Box>
   );

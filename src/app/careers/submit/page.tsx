@@ -1,5 +1,5 @@
 'use client';
-import Photo from '../../../../public/photo/field-person.png';
+import { getPhoto } from '@/assets/photoAssets';
 import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '../../../hooks';
@@ -16,7 +16,7 @@ const SubmitApplicationPage = () => {
       description={t('careers.submit_application_desc')}
       text1={`${t("careers.submit_application_title.let's")}\u00a0`}
       text2={t('careers.submit_application_title.the_future')}
-      photo={Photo}
+      photo={getPhoto('fieldPerson')}
       type={type}
       imageStyle={imageStyle}
       containerStyle={{ alignSelf: 'start', height: '90vh' }}

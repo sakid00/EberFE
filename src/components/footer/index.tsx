@@ -14,7 +14,7 @@ import company3Icon from '@/public/icon/footer-company-3.svg';
 import company4Icon from '@/public/icon/footer-company-4.svg';
 import bgFooter from '@/public/eber-footer.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import site from '@/public/background/site-bg-mobile.png';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { usePathname } from 'next/navigation';
 
 const contactInfoList = [
@@ -95,7 +95,12 @@ const Footer = () => {
             height: '100%',
           }}
         >
-          <Image src={site} alt="site" fill />
+          <Image
+            src={getBackgroundImage('siteBg')}
+            alt="site"
+            fill
+            loading="lazy"
+          />
         </Box>
       )}
       <Box
@@ -117,6 +122,7 @@ const Footer = () => {
             <Image
               src={bgFooter}
               alt="bg-footer"
+              loading="lazy"
               style={{
                 objectFit: 'contain',
               }}

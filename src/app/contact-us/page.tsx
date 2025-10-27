@@ -1,5 +1,5 @@
 'use client';
-import Photo from '../../../public/photo/safety-person.png';
+import { getPhoto } from '@/assets/photoAssets';
 import FormSubmitContainer from '../../containers/formSubmit';
 import { useDeviceType, useTranslation } from '../../hooks';
 import { CSSProperties } from 'react';
@@ -31,7 +31,7 @@ const ContactUsPage = () => {
       description={t('contact_us.submit_application_desc')}
       text1={`${t("contact_us.submit_application_title.let's")}\u00a0`}
       text2={t('contact_us.submit_application_title.reach_out')}
-      photo={Photo}
+      photo={getPhoto('safetyPerson')}
       type={type}
       imageStyle={imageStyle}
     />

@@ -15,20 +15,20 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
   const finishLoading = useCallback(() => {
     setProgress(100);
     setIsComplete(true);
-    // Much shorter transition time
+    // Instant loading - no artificial delay
     setTimeout(() => {
       // Ensure scroll position is at top
       window.scrollTo(0, 0);
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
       setIsLoading(false);
-    }, 400);
+    }, 100);
   }, []);
 
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     let currentProgress = 0;
-    
+
     const incrementProgress = (amount: number) => {
       currentProgress += amount;
       setProgress(Math.min(currentProgress, 100));
@@ -38,12 +38,12 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
       try {
         // Start with immediate progress
         incrementProgress(15);
-        
-        // Set maximum loading time - force finish after 3 seconds
+
+        // Set maximum loading time - force finish after 1 second
         timeoutId = setTimeout(() => {
           console.log('Loading timeout reached - finishing early');
           finishLoading();
-        }, 3000);
+        }, 1000);
 
         // Wait for DOM content (usually very fast)
         if (document.readyState === 'loading') {
@@ -51,7 +51,7 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
             new Promise((resolve) => {
               document.addEventListener('DOMContentLoaded', resolve);
             }),
-            new Promise((resolve) => setTimeout(resolve, 500)) // 500ms max
+            new Promise((resolve) => setTimeout(resolve, 500)), // 500ms max
           ]);
         }
         incrementProgress(25);
@@ -60,15 +60,15 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
         if ('fonts' in document) {
           await Promise.race([
             document.fonts.ready,
-            new Promise((resolve) => setTimeout(resolve, 1000)) // 1s max for fonts
+            new Promise((resolve) => setTimeout(resolve, 1000)), // 1s max for fonts
           ]);
         }
         incrementProgress(30);
 
         // Only wait for critical images (above the fold)
         const images = Array.from(document.images);
-        const criticalImages = images.slice(0, 3); // Only first 3 images
-        
+        const criticalImages = images.slice(0, 2); // Only first 2 images
+
         const imagePromises = criticalImages.map((img) => {
           if (img.complete) return Promise.resolve();
           return Promise.race([
@@ -76,7 +76,7 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
               img.addEventListener('load', resolve);
               img.addEventListener('error', resolve); // Resolve on error too
             }),
-            new Promise((resolve) => setTimeout(resolve, 1500)) // 1.5s max per image
+            new Promise((resolve) => setTimeout(resolve, 500)), // 500ms max per image
           ]);
         });
 
@@ -93,18 +93,16 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
                 window.addEventListener('load', () => resolve(void 0));
               }
             }),
-            new Promise((resolve) => setTimeout(resolve, 800)) // 800ms max
+            new Promise((resolve) => setTimeout(resolve, 800)), // 800ms max
           ]);
         }
         incrementProgress(10);
 
         // Clear timeout since we finished normally
         clearTimeout(timeoutId);
-        
-        // Much shorter final delay
-        await new Promise((resolve) => setTimeout(resolve, 200));
-        finishLoading();
 
+        // Instant loading - no final delay
+        finishLoading();
       } catch (error) {
         console.warn('Asset loading encountered issues:', error);
         clearTimeout(timeoutId);

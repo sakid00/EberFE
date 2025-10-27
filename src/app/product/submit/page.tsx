@@ -1,5 +1,5 @@
 'use client';
-import Photo from '../../../../public/photo/lab-person.png';
+import { getPhoto } from '@/assets/photoAssets';
 import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '../../../hooks';
@@ -16,7 +16,7 @@ const SubmitApplicationPage = () => {
       description={t('custom_product.submit_application_desc')}
       text1={t("custom_product.submit_application_title.let's")}
       text2={t('custom_product.submit_application_title.custom')}
-      photo={Photo}
+      photo={getPhoto('labPerson')}
       imageStyle={imageStyle}
       type={type}
       buttonText={t('custom_product.submit_application_button')}

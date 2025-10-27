@@ -407,6 +407,7 @@ const Header = () => {
               src={getPhoto('subtract')}
               alt="header-photo"
               style={{ objectFit: 'contain' }}
+              loading="lazy"
             />
           </Box>
         </Box>
@@ -435,6 +436,7 @@ const Header = () => {
           width={1000}
           height={1000}
           style={{ objectFit: 'contain' }}
+          loading="lazy"
         />
       </Box>
     ),
@@ -454,7 +456,7 @@ const Header = () => {
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
-            priority={true}
+            priority={false}
             quality={70}
             placeholderColor="#4a5568"
           >
@@ -468,7 +470,7 @@ const Header = () => {
               height={1000}
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
-              priority={true}
+              loading="lazy"
             />
 
             {/* Main Header Container */}

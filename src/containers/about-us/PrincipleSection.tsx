@@ -1,9 +1,8 @@
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import fieldPerson from '@/public/photo/field_person3.png';
+import { getPhoto } from '@/assets/photoAssets';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { principleStyles } from './styles';
-import container from '@/public/background/container1.png';
-import containerMobile from '@/public/background/container1-mobile.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import ImageBackground from '@/components/ImageBackground/index';
@@ -69,23 +68,21 @@ export const PrincipleSection = () => {
     return (
       <Box sx={principleStyles.mainContainerMobile}>
         <ImageBackground
-          src={containerMobile}
+          src={getBackgroundImage('container1Mobile')}
           alt="container"
           objectFit="fill"
           className={animationClasses.slideRight}
           sx={principleStyles.imageBackgroundMobile}
           contentSx={principleStyles.contentSxMobile}
         >
-          <Box
-            sx={principleStyles.contentContainerMobile}
-          >
+          <Box sx={principleStyles.contentContainerMobile}>
             <Box sx={principleStyles.imageContainerMobile}>
               <Image
-                src={fieldPerson}
+                src={getPhoto('fieldPerson3')}
                 alt="field-person"
                 width={100}
                 height={100}
-                priority={true}
+                loading="lazy"
                 style={{
                   objectFit: 'fill',
                   width: '100%',
@@ -107,7 +104,7 @@ export const PrincipleSection = () => {
       className="relative flex justify-center items-center mt-40"
     >
       <ImageBackground
-        src={container}
+        src={getBackgroundImage('container1')}
         alt="container"
         objectFit="fill"
         className={animationClasses.slideRight}
@@ -128,7 +125,12 @@ export const PrincipleSection = () => {
         }}
       >
         <Box sx={principleStyles.fieldPersonContainer(type)}>
-          <Image src={fieldPerson} alt="field-person" fill />
+          <Image
+            src={getPhoto('fieldPerson3')}
+            alt="field-person"
+            fill
+            loading="lazy"
+          />
         </Box>
 
         <Box

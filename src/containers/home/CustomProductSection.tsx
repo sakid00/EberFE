@@ -57,7 +57,7 @@ export const CustomProductSection = () => {
           src={getBackgroundImage('container1Mobile')}
           alt="container background"
           objectFit={'fill'}
-          priority={true}
+          priority={false}
           quality={75}
           className={animationClasses.slideRight}
           sx={customProductSectionStyles.imageBackgroundMobile}
@@ -73,7 +73,7 @@ export const CustomProductSection = () => {
                 alt="field-person"
                 width={100}
                 height={100}
-                priority={true}
+                loading="lazy"
                 style={{
                   objectFit: 'fill',
                   width: '100%',
@@ -96,7 +96,7 @@ export const CustomProductSection = () => {
         src={getBackgroundImage('container1')}
         alt="container background"
         objectFit={'fill'}
-        priority={true}
+        priority={false}
         quality={75}
         placeholderColor="#cbd5e0"
         className={animationClasses.slideRight}
@@ -132,7 +132,7 @@ export const CustomProductSection = () => {
               height: 'auto', // Maintain aspect ratio
             }}
             sizes={'(max-width: 768px) 35vw, (max-width: 1200px) 44vw, 50vw'}
-            priority={true} // Add priority for better loading
+            loading="lazy"
           />
         </Box>
 
