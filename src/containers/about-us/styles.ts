@@ -61,7 +61,40 @@ export const valueStyles: {
   fieldPersonContainer: (type: DeviceType) => SxProps<Theme>;
   valuesGrid: SxProps<Theme>;
   valuesGridMobile: SxProps<Theme>;
+  mainContainerMobile: SxProps<Theme>;
+  imageBackgroundMobile: SxProps<Theme>;
+  contentSxMobile: SxProps<Theme>;
+  contentContainerMobile: SxProps<Theme>;
+  imageContainerMobile: SxProps<Theme>;
 } = {
+  mainContainerMobile: {
+    position: 'relative',
+    marginTop: '20vh',
+    width: '100vw',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: '100vh',
+    overflow: 'visible',
+    marginTop: '30vh',
+  },
+  contentSxMobile: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '15vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    zIndex: 1000,
+    width: '100%',
+  },
   container: {
     position: 'relative',
     zIndex: 3,
