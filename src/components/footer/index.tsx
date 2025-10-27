@@ -2,7 +2,6 @@
 import { Box, Divider, Typography } from '@mui/material';
 import { useDeviceType } from '@/hooks';
 import Image from 'next/image';
-import logo from '@/public/eber_logo.png';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
 import { footerStyles } from './style';
 import locationIcon from '@/public/icon/footer-loc.svg';
@@ -12,10 +11,12 @@ import company1Icon from '@/public/icon/footer-company-1.svg';
 import company2Icon from '@/public/icon/footer-company-2.svg';
 import company3Icon from '@/public/icon/footer-company-3.svg';
 import company4Icon from '@/public/icon/footer-company-4.svg';
-import bgFooter from '@/public/eber-footer.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { usePathname } from 'next/navigation';
+
+const logo = '/eber_logo.png';
+const bgFooter = '/eber-footer.png';
 
 const contactInfoList = [
   {
@@ -121,6 +122,8 @@ const Footer = () => {
           >
             <Image
               src={bgFooter}
+              width={1000}
+              height={1000}
               alt="bg-footer"
               loading="lazy"
               style={{
@@ -129,7 +132,13 @@ const Footer = () => {
             />
           </Box>
           <Box sx={footerStyles.headerSection(type)}>
-            <Image src={logo} style={footerStyles.logo(type)} alt="logo" />
+            <Image
+              src={logo}
+              style={footerStyles.logo(type)}
+              alt="logo"
+              width={100}
+              height={100}
+            />
             <Box sx={footerStyles.dividerContainer}>
               <Divider
                 orientation="vertical"

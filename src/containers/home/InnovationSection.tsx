@@ -16,7 +16,13 @@ export const InnovationSection = () => {
     <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
       {type !== 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>
-          <Image src={getPhoto('tanki')} alt="tangki-image" loading="lazy" />
+          <Image
+            src={getPhoto('tanki')}
+            alt="tangki-image"
+            loading="lazy"
+            width={1000}
+            height={1000}
+          />
         </Box>
       )}
       <Box id="content-wrapper" sx={innovationSectionStyles.contentWrapper}>

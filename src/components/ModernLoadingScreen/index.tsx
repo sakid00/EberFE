@@ -2,8 +2,9 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
-import logo from '@/public/eber_logo.png';
 import Image from 'next/image';
+
+const logo = '/eber_logo.png';
 
 interface ModernLoadingScreenProps {
   showLogo?: boolean;
@@ -59,6 +60,8 @@ export const ModernLoadingScreen: React.FC<ModernLoadingScreenProps> = ({
             <Image
               src={logo}
               alt="EBER Logo"
+              width={100}
+              height={100}
               style={{
                 width: '95%',
                 height: '70%',

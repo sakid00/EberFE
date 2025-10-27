@@ -1,10 +1,6 @@
 'use client';
 import Image from 'next/image';
-import logo from '@/public/eber_logo.png';
-import logoMobile from '@/public/svg/eber-logo-color.svg';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
-import idFlag from '@/public/svg/id.svg';
-import enFlag from '@/public/svg/en.svg';
 import {
   Box,
   Button,
@@ -27,6 +23,11 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
+
+const logo = '/eber_logo.png';
+const logoMobile = '/svg/eber-logo-color.svg';
+const idFlag = '/svg/id.svg';
+const enFlag = '/svg/en.svg';
 
 // Constants
 const ANIMATION_DURATION = 50; // Sangat cepat
@@ -162,6 +163,8 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
               style={headerStyles.flagImageStyle}
+              width={20}
+              height={15}
             />
           </Box>
         )}
@@ -335,7 +338,13 @@ const Header = () => {
         delay: isAnimating ? 0 : 0.2,
       }}
     >
-      <Image src={logo} alt="EBER Logo" style={getLogoDimensions()} />
+      <Image
+        src={logo}
+        alt="EBER Logo"
+        width={100}
+        height={100}
+        style={getLogoDimensions()}
+      />
     </motion.div>
   );
 
@@ -406,6 +415,8 @@ const Header = () => {
             <Image
               src={getPhoto('subtract')}
               alt="header-photo"
+              width={1000}
+              height={1000}
               style={{ objectFit: 'contain' }}
               loading="lazy"
             />

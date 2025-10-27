@@ -35,7 +35,7 @@ const FormSubmitContainer = ({
   containerStyle,
   buttonText,
 }: {
-  photo: StaticImageData;
+  photo: string | StaticImageData;
   title: string;
   description: string;
   text1: string;

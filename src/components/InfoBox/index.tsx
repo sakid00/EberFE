@@ -6,7 +6,7 @@ import { DeviceType, useTranslation } from '../../hooks';
 
 interface IInfoBoxProps {
   infoList: infoListType[];
-  photo: StaticImageData;
+  photo: string | StaticImageData;
   imageStyle?: React.CSSProperties;
   containerStyle?: React.CSSProperties;
   type: DeviceType;

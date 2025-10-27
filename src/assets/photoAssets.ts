@@ -1,48 +1,29 @@
 // Photo Assets Management System with WebP Optimization
 
-// Optimized WebP imports (90%+ smaller than PNG)
-import chemPersonWebP from '@/public/photo/optimized/chem-person_optimized.webp';
-import eberBig2WebP from '@/public/photo/optimized/eber-big-2_optimized.webp';
-import eberBig2MobileWebP from '@/public/photo/optimized/eber-big-2-mobile_optimized.webp';
-import fieldPersonWebP from '@/public/photo/optimized/field-person_optimized.webp';
-import fieldPerson2WebP from '@/public/photo/optimized/field_person2_optimized.webp';
-import fieldPerson3WebP from '@/public/photo/optimized/field_person3_optimized.webp';
-import labPersonWebP from '@/public/photo/optimized/lab-person_optimized.webp';
-import safetyPersonWebP from '@/public/photo/optimized/safety-person_optimized.webp';
-import tankiPersonWebP from '@/public/photo/optimized/tangki-person_optimized.webp';
-import headerCorporateWebP from '@/public/photo/optimized/header_corporate_optimized.webp';
-import subtractWebP from '@/public/photo/optimized/subtract_optimized.webp';
-import subtractMobileWebP from '@/public/photo/optimized/subtract-mobile_optimized.webp';
-import tankiWebP from '@/public/photo/optimized/tangki_optimized.webp';
-import eternalWebP from '@/public/photo/optimized/eternal_optimized.webp';
-import engWebP from '@/public/photo/optimized/eng_optimized.webp';
-import megaWebP from '@/public/photo/optimized/mega_optimized.webp';
-import petroWebP from '@/public/photo/optimized/petro_optimized.webp';
-
 // WebP Photo Assets (90%+ size reduction)
 export const WebPPhotos = {
   // Person/People Photos
-  chemPerson: chemPersonWebP, // 6.2MB → 225KB (97% reduction)
-  eberBig2: eberBig2WebP, // 8.89MB → 18KB (100% reduction)
-  eberBig2Mobile: eberBig2MobileWebP, // 179KB → 8KB (96% reduction)
-  fieldPerson: fieldPersonWebP, // 1.9MB → 72KB (96% reduction)
-  fieldPerson2: fieldPerson2WebP, // 2.1MB → 98KB (96% reduction)
-  fieldPerson3: fieldPerson3WebP, // 1.74MB → 95KB (95% reduction)
-  labPerson: labPersonWebP, // 1.72MB → 79KB (96% reduction)
-  safetyPerson: safetyPersonWebP, // 1.29MB → 47KB (97% reduction)
-  tankiPerson: tankiPersonWebP, // 514KB → 87KB (83% reduction)
+  chemPerson: '/photo/optimized/chem-person_optimized.webp', // 6.2MB → 225KB (97% reduction)
+  eberBig2: '/photo/optimized/eber-big-2_optimized.webp', // 8.89MB → 18KB (100% reduction)
+  eberBig2Mobile: '/photo/optimized/eber-big-2-mobile_optimized.webp', // 179KB → 8KB (96% reduction)
+  fieldPerson: '/photo/optimized/field-person_optimized.webp', // 1.9MB → 72KB (96% reduction)
+  fieldPerson2: '/photo/optimized/field_person2_optimized.webp', // 2.1MB → 98KB (96% reduction)
+  fieldPerson3: '/photo/optimized/field_person3_optimized.webp', // 1.74MB → 95KB (95% reduction)
+  labPerson: '/photo/optimized/lab-person_optimized.webp', // 1.72MB → 79KB (96% reduction)
+  safetyPerson: '/photo/optimized/safety-person_optimized.webp', // 1.29MB → 47KB (97% reduction)
+  tankiPerson: '/photo/optimized/tangki-person_optimized.webp', // 514KB → 87KB (83% reduction)
 
   // Industrial/Corporate Photos
-  headerCorporate: headerCorporateWebP, // 842KB → 26KB (97% reduction)
-  subtract: subtractWebP, // 349KB → 69KB (81% reduction)
-  subtractMobile: subtractMobileWebP, // 992KB → 34KB (97% reduction)
-  tanki: tankiWebP, // 6.88MB → 89KB (99% reduction)
+  headerCorporate: '/photo/optimized/header_corporate_optimized.webp', // 842KB → 26KB (97% reduction)
+  subtract: '/photo/optimized/subtract_optimized.webp', // 349KB → 69KB (81% reduction)
+  subtractMobile: '/photo/optimized/subtract-mobile_optimized.webp', // 992KB → 34KB (97% reduction)
+  tanki: '/photo/optimized/tangki_optimized.webp', // 6.88MB → 89KB (99% reduction)
 
   // Company Logos
-  eternal: eternalWebP, // 9KB → 6KB (30% reduction)
-  eng: engWebP, // 9KB → 5KB (47% reduction)
-  mega: megaWebP, // 15KB → 7KB (62% reduction)
-  petro: petroWebP, // 10KB → 5KB (64% reduction)
+  eternal: '/photo/optimized/eternal_optimized.webp', // 9KB → 6KB (30% reduction)
+  eng: '/photo/optimized/eng_optimized.webp', // 9KB → 5KB (47% reduction)
+  mega: '/photo/optimized/mega_optimized.webp', // 15KB → 7KB (62% reduction)
+  petro: '/photo/optimized/petro_optimized.webp', // 10KB → 5KB (64% reduction)
 } as const;
 
 // Direct getter function - always returns WebP for optimal performance
@@ -52,7 +33,7 @@ export const getPhoto = (photoKey: keyof typeof WebPPhotos) => {
 
 // Type definitions for better TypeScript support
 export type PhotoKey = keyof typeof WebPPhotos;
-export type PhotoAsset = (typeof WebPPhotos)[PhotoKey];
+export type PhotoAsset = string;
 
 // Utility functions
 export const getAllWebPPhotos = () => WebPPhotos;

@@ -119,6 +119,8 @@ export const ValueSection = () => {
         <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
           <Image
             src={getPhoto('chemPerson')}
+            width={1000}
+            height={1000}
             alt="field-person"
             loading="lazy"
             style={{ width: '60%', height: 'auto', objectFit: 'contain' }}
@@ -143,8 +145,10 @@ export const ValueSection = () => {
       >
         <Image
           src={getBackgroundImage('siteBg')}
+          width={1000}
+          height={1000}
           alt="site"
-          fill
+          style={{ objectFit: 'fill', width: '100%', height: '100%' }}
           loading="lazy"
         />
       </Box>

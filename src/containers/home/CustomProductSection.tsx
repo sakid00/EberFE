@@ -125,6 +125,8 @@ export const CustomProductSection = () => {
           <Image
             src={getPhoto('fieldPerson2')}
             alt="field-person"
+            width={1000}
+            height={1000}
             style={{
               objectFit: 'contain', // Changed from 'fill' to 'contain' for better aspect ratio
               maxWidth: '100%',
