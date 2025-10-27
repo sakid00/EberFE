@@ -5,7 +5,7 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     gap: dynamicStylingValue(type, '16px', '1%', '1%'),
-    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+    marginTop: dynamicStylingValue(type, '-45vh', '-20vh', '-20vh'),
   }),
 
   contentContainer: (type: DeviceType) => ({

@@ -57,7 +57,7 @@ export const CustomProductSection = () => {
           src={getBackgroundImage('container1Mobile')}
           alt="container background"
           objectFit={'fill'}
-          priority={false}
+          priority={true}
           quality={75}
           className={animationClasses.slideRight}
           sx={customProductSectionStyles.imageBackgroundMobile}
@@ -96,7 +96,7 @@ export const CustomProductSection = () => {
         src={getBackgroundImage('container1')}
         alt="container background"
         objectFit={'fill'}
-        priority={false}
+        priority={true}
         quality={75}
         placeholderColor="#cbd5e0"
         className={animationClasses.slideRight}

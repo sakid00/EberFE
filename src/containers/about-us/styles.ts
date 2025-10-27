@@ -122,7 +122,7 @@ export const valueStyles: {
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    bottom: 'var(--bg-bottom, 13%)',
+    bottom: '3vw',
     left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
     zIndex: 1000,
   }),

@@ -8,7 +8,7 @@ export const styles = {
     justifyContent: 'center',
     alignItems: 'stretch',
     gap: '1%',
-    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+    marginTop: dynamicStylingValue(type, '-45vh', '-20vh', '-20vh'),
   }),
 
   infoCard: (type: DeviceType) => ({

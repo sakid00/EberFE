@@ -5,7 +5,7 @@ export const styles = {
   mainContainer: (type: DeviceType) => ({
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
-    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+    marginTop: dynamicStylingValue(type, '-45vh', '-20vh', '-20vh'),
     justifyContent: 'center',
   }),
 

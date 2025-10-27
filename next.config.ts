@@ -41,9 +41,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.infouploads',
+        hostname: 'eber-api.agepedia.info',
         port: '',
-        pathname: '/**',
+        pathname: '/uploads/**',
       },
     ],
   },
@@ -79,6 +79,38 @@ const nextConfig: NextConfig = {
       path: false,
     };
     return config;
+  },
+  // Cache headers for static assets (images)
+  async headers() {
+    return [
+      {
+        source: '/photo/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/background/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/icon/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 

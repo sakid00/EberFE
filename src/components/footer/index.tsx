@@ -93,13 +93,15 @@ const Footer = () => {
             right: 0,
             zIndex: -1,
             width: '100%',
-            height: '100%',
+            height: '90%',
           }}
         >
           <Image
             src={getBackgroundImage('siteBg')}
             alt="site"
-            fill
+            style={{ objectFit: 'fill', width: '100%', height: '100%' }}
+            width={1000}
+            height={1000}
             loading="lazy"
           />
         </Box>

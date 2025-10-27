@@ -4,7 +4,7 @@ export const styles = {
   // Main container
   mainContainer: (type: DeviceType) => ({
     marginX: '2vw',
-    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+    marginTop: dynamicStylingValue(type, '-45vh', '-20vh', '-20vh'),
   }),
 
   // Header section styles

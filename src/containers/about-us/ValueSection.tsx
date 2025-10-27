@@ -136,11 +136,11 @@ export const ValueSection = () => {
       <Box
         sx={{
           position: 'absolute',
-          bottom: '-40vh',
+          bottom: '-45vh',
           right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
           zIndex: -1,
           width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
-          height: '100%',
+          height: 'auto%',
         }}
       >
         <Image

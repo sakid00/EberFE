@@ -183,12 +183,9 @@ export const customProductSectionStyles = {
       position: 'absolute',
       width: dynamicStylingValue(type, '100vw', '40vw', '40vw'),
       height: dynamicStylingValue(type, '30%', '40%', '40%'),
-      transform: dynamicStylingValue(
-        type,
-        'translate(-5%, -60%)',
-        'translate(-58%, -60%)',
-        'translate(-58%, -60%)'
-      ),
+      left: '0',
+      right: '20vw',
+      bottom: '21vw',
       zIndex: 20,
       willChange: 'transform',
     }) as SxProps<Theme>,

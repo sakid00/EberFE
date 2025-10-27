@@ -467,7 +467,7 @@ const Header = () => {
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
-            priority={false}
+            priority={true}
             quality={70}
             placeholderColor="#4a5568"
           >
@@ -568,6 +568,8 @@ const Header = () => {
               <Box sx={headerStyles.mobileMenuLogoContainer}>
                 <Image
                   src={type === 'mobile' ? logoMobile : logo}
+                  width={100}
+                  height={100}
                   alt="EBER-Logo"
                   style={headerStyles.mobileMenuLogo}
                 />

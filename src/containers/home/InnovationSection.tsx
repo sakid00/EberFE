@@ -78,7 +78,13 @@ export const InnovationSection = () => {
       </Box>
       {type === 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>
-          <Image src={getPhoto('tanki')} alt="tangki-image" loading="lazy" />
+          <Image
+            src={getPhoto('tanki')}
+            alt="tangki-image"
+            width={1000}
+            height={1000}
+            loading="lazy"
+          />
         </Box>
       )}
       <Box
