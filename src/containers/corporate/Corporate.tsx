@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import HeaderImage from '@/public/photo/header_corporate.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { Map } from '@mui/icons-material';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
@@ -161,7 +161,7 @@ const CorporateContainer = () => {
             src={
               currentCompany?.main_image
                 ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
-                : HeaderImage
+                : getPhoto('headerCorporate')
             }
             width={1000}
             height={1000}
@@ -352,13 +352,15 @@ const CorporateContainer = () => {
               <Box sx={styles.imageGridContainer(type)}>
                 {currentCompanyDetail.images_3.map((item, index) => (
                   <Box key={index} sx={styles.imageCard}>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
-                      alt={item.title}
-                      width={1000}
-                      height={1000}
-                      style={styles.imageCertifStyle}
-                    />
+                    <Box sx={styles.imageCertifContainer}>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
+                        alt={item.title}
+                        width={1000}
+                        height={1000}
+                        style={styles.imageCertifStyle}
+                      />
+                    </Box>
                     <Typography sx={styles.imageTitle(type)}>
                       {item.title}
                     </Typography>

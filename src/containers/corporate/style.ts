@@ -177,8 +177,7 @@ export const styles = {
   imageCertifStyle: {
     width: '100%',
     height: '100%',
-    objectFit: 'fill' as const,
-    borderRadius: '8px',
+    objectFit: 'contain' as const,
   },
 
   imageTitle: (type: DeviceType) => ({
@@ -188,6 +187,14 @@ export const styles = {
     fontWeight: 500,
     textAlign: 'start',
   }),
+
+  imageCertifContainer: {
+    backgroundColor: '#F3F5F7',
+    borderRadius: '8px',
+    width: '100%',
+    height: '100%',
+    padding: '10%',
+  },
 };
 
 export const constants = {
