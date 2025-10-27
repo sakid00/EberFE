@@ -415,6 +415,32 @@ const Header = () => {
     [type]
   );
 
+  const aboutUsImage = useMemo(
+    () => (
+      <Box
+        sx={{
+          position: 'relative',
+          width: dynamicStylingValue(type, '90%', '50%', '50%'),
+          height: dynamicStylingValue(type, '50%', '90%', '90%'),
+          top: dynamicStylingValue(type, '38%', '10%', '10%'),
+          left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
+          right: 0,
+          bottom: 0,
+          zIndex: 1,
+        }}
+      >
+        <Image
+          src={getPhoto('tankiPerson')}
+          alt="header photo"
+          width={1000}
+          height={1000}
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
+    ),
+    [type]
+  );
+
   return (
     <>
       <header style={headerStyles.header}>
@@ -444,24 +470,6 @@ const Header = () => {
               style={headerStyles.headerAccessories(type)}
               priority={true}
             />
-
-            {isAboutUsPagePath && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  width: dynamicStylingValue(type, '90%', '50%', '50%'),
-                  height: dynamicStylingValue(type, 'auto', '90%', '90%'),
-                  aspectRatio: '1/1.1',
-                  top: dynamicStylingValue(type, '45%', '10%', '10%'),
-                  left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 1,
-                }}
-              >
-                <Image src={getPhoto('tankiPerson')} alt="header photo" fill />
-              </Box>
-            )}
 
             {/* Main Header Container */}
             <Box sx={headerStyles.container}>
@@ -513,6 +521,7 @@ const Header = () => {
               )}
             </Box>
             {isHomePagePath && homepageImage}
+            {isAboutUsPagePath && aboutUsImage}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>

@@ -44,7 +44,7 @@ export const headerStyles: {
     color: 'white',
     fontWeight: 500,
     marginTop: language === 'id' ? '4vh' : '2vh',
-    fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
+    fontSize: dynamicStylingValue(deviceType, '0.7em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'
       | 'start',
