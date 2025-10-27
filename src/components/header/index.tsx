@@ -359,59 +359,57 @@ const Header = () => {
   const homepageImage = useMemo(
     () => (
       <>
-        {isHomePagePath && (
+        <Box
+          sx={{
+            position: 'relative',
+            width: '100vw',
+            height: '100%',
+          }}
+        >
           <Box
             sx={{
               position: 'relative',
-              width: '100vw',
-              height: '100%',
+              width: dynamicStylingValue(type, '35%', '20%', '20%'),
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              padding: dynamicStylingValue(type, '2%', '1%', '1%'),
+              borderRadius: '10px',
+              top: dynamicStylingValue(type, '40%', '20%', '20%'),
+              left: dynamicStylingValue(type, '53%', '75%', '75%'),
+              borderBottomRightRadius: '100px',
             }}
           >
-            <Box
-              sx={{
-                position: 'relative',
-                width: dynamicStylingValue(type, '35%', '20%', '20%'),
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: dynamicStylingValue(type, '2%', '1%', '1%'),
-                borderRadius: '10px',
-                top: dynamicStylingValue(type, '40%', '20%', '20%'),
-                left: dynamicStylingValue(type, '53%', '75%', '75%'),
-                borderBottomRightRadius: '100px',
-              }}
+            <Typography
+              color="white"
+              fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
+              fontWeight={800}
             >
-              <Typography
-                color="white"
-                fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
-                fontWeight={800}
-              >
-                {t('home.modal.title')}
-              </Typography>
-              <Typography
-                color="white"
-                fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
-                fontWeight={500}
-              >
-                {t('home.modal.desc')}
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                position: 'absolute',
-                width: dynamicStylingValue(type, '100%', '50%', '50%'),
-                height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                left: dynamicStylingValue(type, '0%', '40%', '40%'),
-                bottom: dynamicStylingValue(type, '5vh', '-1vh', '-1vh'),
-                zIndex: 1,
-              }}
+              {t('home.modal.title')}
+            </Typography>
+            <Typography
+              color="white"
+              fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
+              fontWeight={500}
             >
-              <Image
-                src={getPhoto('subtract')}
-                alt="header-photo"
-                style={{ objectFit: 'contain' }}
-              />
-            </Box>
+              {t('home.modal.desc')}
+            </Typography>
           </Box>
-        )}
+          <Box
+            sx={{
+              position: 'absolute',
+              width: dynamicStylingValue(type, '100%', '50%', '50%'),
+              height: dynamicStylingValue(type, '50%', '80%', '80%'),
+              left: dynamicStylingValue(type, '0%', '40%', '40%'),
+              bottom: dynamicStylingValue(type, '5vh', '-1vh', '-1vh'),
+              zIndex: 1,
+            }}
+          >
+            <Image
+              src={getPhoto('subtract')}
+              alt="header-photo"
+              style={{ objectFit: 'contain' }}
+            />
+          </Box>
+        </Box>
       </>
     ),
     [type]
@@ -514,7 +512,7 @@ const Header = () => {
                 </motion.div>
               )}
             </Box>
-            {homepageImage}
+            {isHomePagePath && homepageImage}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>

@@ -56,7 +56,7 @@ export const headerStyles = {
   }),
   backgroundImageContent: {
     alignItems: 'start',
-    justifyContent: 'center',
+    justifyContent: 'start',
     paddingTop: '5vh',
     display: 'flex',
     flexDirection: 'column',
@@ -79,7 +79,7 @@ export const headerStyles = {
     textTransform: 'none',
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     marginRight: 1,
     marginBottom: 0,
     minWidth: 'auto',
