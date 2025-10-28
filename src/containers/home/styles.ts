@@ -57,6 +57,12 @@ export const headerSectionStyles = {
 
   title: {
     width: '90%',
+    marginTop: '-3vh',
+    color: COLORS.text.white,
+  } as SxProps<Theme>,
+
+  titleMobile: {
+    width: '90%',
     marginTop: '-1vh',
     color: COLORS.text.white,
   } as SxProps<Theme>,
@@ -349,8 +355,8 @@ export const innovationSectionStyles = {
     ({
       position: dynamicStylingValue(type, 'relative', 'absolute', 'absolute'),
       width: dynamicStylingValue(type, '100%', '70vw', '70vw'),
-      top: '-40%',
-      left: dynamicStylingValue(type, '10%', '25%', '25%'),
+      top: '-10vw',
+      left: dynamicStylingValue(type, '10%', '25%', '25vw'),
     }) as SxProps<Theme>,
 
   contentWrapper: {

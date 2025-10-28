@@ -31,7 +31,11 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
           src={val.logo}
           width={30}
           height={30}
-          style={{ objectFit: 'fill', width: '12%', height: '12%' }}
+          style={{
+            objectFit: 'fill',
+            width: index === 2 ? '16%' : '12%',
+            height: index === 2 ? '16%' : '12%',
+          }}
           alt=""
         />
         <Box sx={styles.infoContent}>

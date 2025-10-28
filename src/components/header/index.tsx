@@ -381,11 +381,11 @@ const Header = () => {
           </Box>
           <Box
             sx={{
-              position: 'absolute',
+              position: 'relative',
               width: dynamicStylingValue(type, '100%', '50%', '50%'),
               height: dynamicStylingValue(type, '50%', '80%', '80%'),
-              left: dynamicStylingValue(type, '0%', '40%', '40%'),
-              bottom: dynamicStylingValue(type, '5vh', '-1vh', '-1vh'),
+              left: dynamicStylingValue(type, '0%', '45vw', '45vw'),
+              bottom: dynamicStylingValue(type, '5vh', '-2vw', '-2vw'),
               zIndex: 1,
             }}
           >

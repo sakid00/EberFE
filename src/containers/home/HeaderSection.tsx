@@ -40,7 +40,7 @@ export const HeaderSection = () => {
           <Typography
             fontSize={'2.2rem'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.innovating')}
           </Typography>
@@ -51,12 +51,12 @@ export const HeaderSection = () => {
             fontWeight={800}
             inline
             color="white"
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           />
           <Typography
             fontSize={'2.2rem'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.future')}
           </Typography>

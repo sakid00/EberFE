@@ -103,7 +103,7 @@ export const ValueSection = () => {
         sx={{
           position: 'relative',
           width: '100%',
-          height: '100vh',
+          height: '85vh',
           overflow: 'hidden',
         }}
         contentSx={{
@@ -140,12 +140,12 @@ export const ValueSection = () => {
           right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
           zIndex: -1,
           width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
-          height: 'auto%',
+          height: 'auto',
         }}
       >
         <Image
           src={getBackgroundImage('siteBg')}
-          width={1000}
+          width={2000}
           height={1000}
           alt="site"
           style={{ objectFit: 'fill', width: '100%', height: '100%' }}
