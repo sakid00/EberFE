@@ -68,8 +68,6 @@ export const headerStyles = {
     alignItems: 'center',
     width: '100%',
     maxWidth: '100%',
-    padding: '0 3em',
-    overflow: 'hidden',
   },
   logoContainer: {
     zIndex: 1,
