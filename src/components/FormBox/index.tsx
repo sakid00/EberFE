@@ -183,7 +183,11 @@ const FormBox = ({
 
       const body = encodeURIComponent(bodyContent);
 
-      const mailtoLink = `mailto:hr@ebergroup.com?subject=${subject}&body=${body}`;
+      // Determine email recipient based on page
+      const recipientEmail = isCareerPage
+        ? 'hr@ebergroup.com'
+        : 'info@ebergroup.com';
+      const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
       window.location.href = mailtoLink;
 

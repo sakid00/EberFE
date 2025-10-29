@@ -33,8 +33,8 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
           height={30}
           style={{
             objectFit: 'fill',
-            width: index === 2 ? '16%' : '12%',
-            height: index === 2 ? '16%' : '12%',
+            width: '30px',
+            height: '30px',
           }}
           alt=""
         />
