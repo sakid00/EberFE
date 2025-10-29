@@ -107,18 +107,6 @@ export const ModernLoadingScreen: React.FC<ModernLoadingScreenProps> = ({
               }}
             />
           </Box>
-
-          {/* Progress Text */}
-          <Typography
-            sx={{
-              color: 'rgba(255, 255, 255, 0.9)',
-              fontSize: '0.9rem',
-              fontWeight: 600,
-              letterSpacing: '1px',
-            }}
-          >
-            Loading assets... {Math.round(progress)}%
-          </Typography>
         </motion.div>
       </Box>
     </Box>
