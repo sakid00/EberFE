@@ -23,7 +23,7 @@ const sustainabilityList: listType[] = [
   },
   {
     type: 'Sustainability',
-    name: 'Ethical Governence & Compliance',
+    name: 'Ethical, Governance, & Compliance',
   },
 ];
 const newsroomList: listType[] = [
