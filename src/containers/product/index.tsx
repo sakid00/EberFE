@@ -1,10 +1,8 @@
 import { Box, Pagination, Stack, Typography } from '@mui/material';
-import ReqProductModal from '@/components/ReqProductModal/index';
 import { CustomizationHeader, ProductFilter, ProductTable } from './components';
 import { styles } from './style';
 import { ProductContainerProps } from './types';
 import { useRouter } from 'next/navigation';
-import ReqProductSent from '@/components/ReqProductSent/index';
 import { useDeviceType } from '@/hooks';
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -20,15 +18,8 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   filterByApplication,
   searchQuery,
   setSearchQuery,
-  openReqModal,
-  setOpenReqModal,
-  openSentModal,
-  setOpenSentModal,
   handleChangeFilterByType,
   handleChangeApplication,
-  onTokenReceived,
-  onShowSentModal,
-  submittedEmail,
   currentPage,
   totalPages,
   totalItems,
@@ -109,7 +100,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
         </Box>
       )}
 
-      <ReqProductModal
+      {/* <ReqProductModal
         openModal={openReqModal}
         setOpenModal={setOpenReqModal}
         onSuccessfulSubmission={onTokenReceived}
@@ -119,7 +110,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
         openModal={openSentModal}
         setOpenModal={setOpenSentModal}
         email={submittedEmail}
-      />
+      /> */}
     </>
   );
 };

@@ -21,13 +21,6 @@ export interface ProductContainerProps {
   setSearchQuery: (value: string) => void;
   handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
   handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
-  openReqModal: boolean;
-  setOpenReqModal: (value: boolean) => void;
-  openSentModal: boolean;
-  setOpenSentModal: (value: boolean) => void;
-  onTokenReceived?: () => void;
-  onShowSentModal?: () => void;
-  submittedEmail?: string;
   // Pagination props
   currentPage: number;
   totalPages: number;

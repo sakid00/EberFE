@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import SidebarList, { listType } from '@/components/SidebarList/index';
 import { Box, Typography, Alert, Pagination, Stack } from '@mui/material';
 import ActivityCard from '@/components/Cards/ActivityCard';
@@ -54,19 +54,27 @@ const ActivityContainer = () => {
     pagination,
   } = useActivity();
 
+  const groupFiltered = useMemo(() => {
+    const group =
+      selectedCategory === 0
+        ? sustainabilityList[selectedActivity]?.name || 'Sustainability'
+        : newsroomList[selectedActivity]?.name || 'Newsroom';
+
+    if (group.toLowerCase().includes('ethical')) {
+      return 'Ethical Governence & Compliance';
+    }
+
+    return group;
+  }, [selectedCategory, selectedActivity]);
+
   // Fetch activities when category, activity, or page changes
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const groupFilter =
-          selectedCategory === 0
-            ? sustainabilityList[selectedActivity]?.name || 'Sustainability'
-            : newsroomList[selectedActivity]?.name || 'Newsroom';
-
         await getActivities({
           page: currentPage,
           pageSize,
-          group: groupFilter,
+          group: groupFiltered,
         });
       } catch (error) {
         console.error('Failed to fetch activities:', error);

@@ -244,8 +244,8 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           color="#4B5563"
           marginTop={1}
         >
-          {currentActivity?.updatedAt
-            ? formatDate(currentActivity.updatedAt)
+          {currentActivity?.createdAt
+            ? formatDate(currentActivity.createdAt)
             : 'Date not available'}
         </Typography>
 

@@ -32,6 +32,12 @@ interface IFormData {
   onSuccess: () => void;
 }
 
+interface IRequestProduct {
+  email: string;
+  productCode: string;
+  onSuccess: () => void;
+}
+
 const useProduct = () => {
   const { state, actions } = useProductContext();
   const api = useApi({
@@ -147,6 +153,33 @@ const useProduct = () => {
     [api, actions]
   );
 
+  const requestProduct = useCallback(
+    async (props: IRequestProduct) => {
+      try {
+        const response = await api.execute(
+          '/form-submissions/send-product-email',
+          {
+            method: 'POST',
+            body: {
+              email: props.email,
+              productCode: props.productCode,
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          props.onSuccess();
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'Failed to request product';
+        actions.fetchProductsError(errorMessage);
+        throw error;
+      }
+    },
+    [api, actions]
+  );
+
   // Additional helper functions
   const clearError = useCallback(() => {
     actions.clearError();
@@ -162,7 +195,7 @@ const useProduct = () => {
     clearError,
     resetProductState,
     applyInstantAccess,
-
+    requestProduct,
     // Global state
     products: state.products,
     filters: state.filters,

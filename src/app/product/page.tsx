@@ -39,7 +39,8 @@ export interface IrowData {
 const ProductsPageContent = () => {
   const { language, t } = useTranslation();
   const { type } = useDeviceType();
-  const { getProduct, products, filters, isLoading, error } = useProduct();
+  const { getProduct, products, filters, isLoading, error, requestProduct } =
+    useProduct();
   const searchParams = useSearchParams();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
@@ -143,10 +144,19 @@ const ProductsPageContent = () => {
     }
   };
 
-  const handleRequestClick = useCallback(() => {
-    // Show ReqProductSent modal when user clicks request product button
-    setOpenSentModal(true);
-  }, [setOpenSentModal]);
+  const handleRequestClick = useCallback(
+    (productCode: string) => {
+      const storedEmail = localStorage.getItem('submittedEmail');
+      requestProduct({
+        email: storedEmail ?? '',
+        productCode: productCode,
+        onSuccess: () => {
+          setOpenSentModal(true);
+        },
+      });
+    },
+    [requestProduct]
+  );
 
   // Transform API data to table rows with search filtering and pagination
   const { paginatedRows, totalPages, totalItems } = useMemo(() => {
@@ -199,7 +209,7 @@ const ProductsPageContent = () => {
                 fontWeight: 400,
                 textTransform: 'none',
               }}
-              onClick={handleRequestClick}
+              onClick={() => handleRequestClick(product.code)}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
@@ -228,7 +238,7 @@ const ProductsPageContent = () => {
               fontWeight: 400,
               textTransform: 'none',
             }}
-            onClick={handleRequestClick}
+            onClick={() => handleRequestClick('Sample Product')}
             startIcon={
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
@@ -315,13 +325,6 @@ const ProductsPageContent = () => {
         setSearchQuery={setSearchQuery}
         handleChangeFilterByType={handleChangeFilterByType}
         handleChangeApplication={handleChangeApplication}
-        openReqModal={openReqModal}
-        setOpenReqModal={setOpenReqModal}
-        openSentModal={openSentModal}
-        setOpenSentModal={setOpenSentModal}
-        onTokenReceived={handleTokenReceived}
-        onShowSentModal={() => setOpenSentModal(true)}
-        submittedEmail={submittedEmail}
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={totalItems}
