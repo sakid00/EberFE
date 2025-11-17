@@ -67,7 +67,7 @@ export const headerStyles = {
     justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
-    maxWidth: '100%',
+    paddingX: '8vw',
   },
   logoContainer: {
     zIndex: 1,

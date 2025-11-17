@@ -309,7 +309,7 @@ const Header = () => {
     if (isTablet) {
       return { width: '10vw', height: 'auto' };
     }
-    return { width: '10vw', height: 'auto' };
+    return { width: '10vw', maxWidth: '180px', height: 'auto' };
   };
 
   // Logo component
