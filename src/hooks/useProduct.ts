@@ -162,7 +162,7 @@ const useProduct = () => {
             method: 'POST',
             body: {
               email: props.email,
-              productCode: props.productCode,
+              product_code: props.productCode,
             },
           }
         );

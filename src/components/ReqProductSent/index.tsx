@@ -32,12 +32,22 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
   const router = useRouter();
 
   const handleClose = () => {
-    setOpenModal(false);
+    router.push('/');
+    setTimeout(() => {
+      setOpenModal(false);
+    }, 500);
   };
 
   const handleGotIt = () => {
-    setOpenModal(false);
+    if (hasAccess) {
+      setOpenModal(false);
+      return;
+    }
+
     router.push('/');
+    setTimeout(() => {
+      setOpenModal(false);
+    }, 500);
   };
 
   return (
