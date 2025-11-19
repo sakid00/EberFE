@@ -52,6 +52,8 @@ const ProductsPageContent = () => {
   const [itemsPerPage] = useState<number>(10);
   const [hasAccess, setHasAccess] = useState<boolean>(false);
   const [submittedEmail, setSubmittedEmail] = useState<string>('');
+  const [isRequestingProduct, setIsRequestingProduct] =
+    useState<boolean>(false);
 
   // Dynamic filter data from API
   const productTypes = filters.types.length > 0 ? filters.types : [];
@@ -145,15 +147,22 @@ const ProductsPageContent = () => {
   };
 
   const handleRequestClick = useCallback(
-    (productCode: string) => {
+    async (productCode: string) => {
       const storedEmail = localStorage.getItem('submittedEmail');
-      requestProduct({
-        email: storedEmail ?? '',
-        productCode: productCode,
-        onSuccess: () => {
-          setOpenSentModal(true);
-        },
-      });
+      setIsRequestingProduct(true);
+      try {
+        await requestProduct({
+          email: storedEmail ?? '',
+          productCode: productCode,
+          onSuccess: () => {
+            setOpenSentModal(true);
+          },
+        });
+      } catch (error) {
+        console.error('Failed to request product:', error);
+      } finally {
+        setIsRequestingProduct(false);
+      }
     },
     [requestProduct]
   );
@@ -210,6 +219,7 @@ const ProductsPageContent = () => {
                 textTransform: 'none',
               }}
               onClick={() => handleRequestClick(product.code)}
+              disabled={isRequestingProduct}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
@@ -239,6 +249,7 @@ const ProductsPageContent = () => {
               textTransform: 'none',
             }}
             onClick={() => handleRequestClick('Sample Product')}
+            disabled={isRequestingProduct}
             startIcon={
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
@@ -257,6 +268,7 @@ const ProductsPageContent = () => {
     currentPage,
     itemsPerPage,
     t,
+    isRequestingProduct,
   ]);
 
   // Reset to first page when filters change
