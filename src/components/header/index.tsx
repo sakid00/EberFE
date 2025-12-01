@@ -350,8 +350,8 @@ const Header = () => {
         <Box
           sx={{
             position: 'relative',
-            left: dynamicStylingValue(type, '10%', '10%', '8%'),
-            top: dynamicStylingValue(type, '10%', '-10%', '-10%'),
+            left: '10%',
+            top: '-10%',
             maxWidth: '50%',
             zIndex: 1,
           }}
@@ -423,28 +423,19 @@ const Header = () => {
           <Box
             sx={{
               position: 'relative',
-              width: dynamicStylingValue(type, '45%', '40%', '40%'),
+              width: '45%',
               backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              padding: dynamicStylingValue(type, '2%', '1%', '1%'),
-              paddingX: dynamicStylingValue(type, '3%', '2%', '2%'),
+              padding: '2%',
               borderRadius: '10px',
-              top: dynamicStylingValue(type, '10%', '20%', '20%'),
-              left: dynamicStylingValue(type, '25%', '30%', '30%'),
+              top: '20%',
+              left: '30%',
               borderBottomRightRadius: '100px',
             }}
           >
-            <Typography
-              color="white"
-              fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
-              fontWeight={800}
-            >
+            <Typography color="white" fontSize="0.9em" fontWeight={800}>
               {t('home.modal.title')}
             </Typography>
-            <Typography
-              color="white"
-              fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
-              fontWeight={400}
-            >
+            <Typography color="white" fontSize="0.9em" fontWeight={400}>
               {t('home.modal.desc')}
             </Typography>
           </Box>
@@ -471,20 +462,27 @@ const Header = () => {
 
   const homepageImageMobile = useMemo(
     () => (
-      <>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '500px',
+        }}
+      >
         <Box
           sx={{
             position: 'relative',
             zIndex: 1,
-            width: '100%',
+            width: '100vw',
             display: 'flex',
             flexDirection: 'column',
+            top: '8%',
             gap: 1,
-            top: '10%',
           }}
         >
           <Typography
-            fontSize={'2.5em'}
+            fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
@@ -493,64 +491,55 @@ const Header = () => {
           <DualColorText
             text1={`${t('home.title.as')}\u00a0`}
             text2={t('home.title.sustainable')}
-            fontSize={'2.5em'}
+            fontSize={'9vw'}
             fontWeight={800}
             inline
             color="white"
             sx={headerSectionStyles.title}
           />
           <Typography
-            fontSize={'2.5em'}
+            fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.future')}
           </Typography>
         </Box>
+
         <Box
           sx={{
+            position: 'relative',
+            flex: 1,
+            zIndex: 1,
+            left: '2%',
             display: 'flex',
             flexDirection: 'column',
-            position: 'relative',
-            width: '100vw',
-            height: '100%',
-            maxWidth: '1000px',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
+            height: '50%',
           }}
         >
           <Box
             sx={{
               position: 'relative',
-              zIndex: 1,
-              left: '2%',
+              flex: 1,
+              display: 'flex',
+              alignItems: 'flex-end',
             }}
           >
             <Box
               sx={{
-                position: 'relative',
-                width: dynamicStylingValue(type, '45%', '40%', '40%'),
+                position: 'absolute',
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: dynamicStylingValue(type, '2%', '1%', '1%'),
-                paddingX: '4%',
+                padding: '4%',
                 borderRadius: '10px',
-                top: '10%',
-                left: '50%',
+                top: '5vh',
+                left: '52%',
                 borderBottomRightRadius: '100px',
               }}
             >
-              <Typography
-                color="white"
-                fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
-                fontWeight={800}
-              >
+              <Typography color="white" fontSize={'2.2vw'} fontWeight={800}>
                 {t('home.modal.title')}
               </Typography>
-              <Typography
-                color="white"
-                fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
-                fontWeight={400}
-              >
+              <Typography color="white" fontSize={'2.2vw'} fontWeight={400}>
                 {t('home.modal.desc')}
               </Typography>
             </Box>
@@ -564,7 +553,7 @@ const Header = () => {
             />
           </Box>
         </Box>
-      </>
+      </Box>
     ),
     [type, t]
   );
@@ -672,7 +661,7 @@ const Header = () => {
             {isHomePagePath && (
               <Box
                 sx={{
-                  marginTop: '2%',
+                  position: 'relative',
                   flexDirection: isMobile ? 'column' : 'row',
                   display: 'flex',
                   alignItems: 'center',

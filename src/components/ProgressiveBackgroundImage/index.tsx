@@ -43,7 +43,9 @@ const generateBlurDataURL = (color: string = '#f3f4f6') => {
   ).toString('base64')}`;
 };
 
-export const ProgressiveBackgroundImage: React.FC<ProgressiveBackgroundImageProps> = ({
+export const ProgressiveBackgroundImage: React.FC<
+  ProgressiveBackgroundImageProps
+> = ({
   src,
   placeholder,
   alt,
@@ -142,11 +144,15 @@ export const ProgressiveBackgroundImage: React.FC<ProgressiveBackgroundImageProp
             {/* Smart gradient based on image type */}
             <Box
               className={
-                typeof src === 'string' && src.includes('homepage_header_bg') ? 'header-bg-fallback' :
-                typeof src === 'string' && src.includes('container') ? 'container-bg-fallback' :
-                typeof src === 'string' && src.includes('site-bg') ? 'site-bg-fallback' :
-                typeof src === 'string' && src.includes('footer') ? 'footer-bg-fallback' :
-                ''
+                typeof src === 'string' && src.includes('homepage_header_bg')
+                  ? 'header-bg-fallback'
+                  : typeof src === 'string' && src.includes('container')
+                    ? 'container-bg-fallback'
+                    : typeof src === 'string' && src.includes('site-bg')
+                      ? 'site-bg-fallback'
+                      : typeof src === 'string' && src.includes('footer')
+                        ? 'footer-bg-fallback'
+                        : ''
               }
               sx={{
                 position: 'absolute',
@@ -155,13 +161,14 @@ export const ProgressiveBackgroundImage: React.FC<ProgressiveBackgroundImageProp
                 right: 0,
                 bottom: 0,
                 background: !(
-                  typeof src === 'string' && (
-                    src.includes('homepage_header_bg') ||
+                  typeof src === 'string' &&
+                  (src.includes('homepage_header_bg') ||
                     src.includes('container') ||
                     src.includes('site-bg') ||
-                    src.includes('footer')
-                  )
-                ) ? `linear-gradient(45deg, ${placeholderColor}15, ${placeholderColor}25)` : undefined,
+                    src.includes('footer'))
+                )
+                  ? `linear-gradient(45deg, ${placeholderColor}15, ${placeholderColor}25)`
+                  : undefined,
               }}
             />
           </Box>
