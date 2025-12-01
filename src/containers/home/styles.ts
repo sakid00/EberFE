@@ -138,6 +138,7 @@ export const specialtySectionStyles = {
   } as SxProps<Theme>,
 
   titleContainer: {
+    marginTop: '5%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

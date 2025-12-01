@@ -48,8 +48,9 @@ export const headerStyles = {
       deviceType,
       '65vh',
       isHomepage ? '80vh' : '50vh',
-      isHomepage ? '90vh' : '50vh'
+      isHomepage ? '80vh' : '50vh'
     ),
+    maxHeight: '1000px',
     alignItems: 'start',
     overflow: 'hidden',
     zIndex: 0,
@@ -180,6 +181,7 @@ export const headerStyles = {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
     width: '7vw',
+    maxWidth: '120px',
     height: 'auto',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {

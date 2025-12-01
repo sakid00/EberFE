@@ -1,6 +1,5 @@
 'use client';
 import {
-  HeaderSection,
   SpecialtySection,
   CustomProductSection,
   SubsidiariesSection,
@@ -13,7 +12,6 @@ export default function Home() {
 
   return (
     <>
-      <HeaderSection />
       <SpecialtySection />
       <CustomProductSection />
       <SubsidiariesSection />

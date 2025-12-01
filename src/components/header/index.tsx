@@ -23,6 +23,8 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { headerSectionStyles } from '@/containers/home/styles';
+import DualColorText from '../dualColorText';
 
 const logo = '/eber_logo.png';
 const logoMobile = '/svg/eber-logo-color.svg';
@@ -348,33 +350,100 @@ const Header = () => {
         <Box
           sx={{
             position: 'relative',
+            left: dynamicStylingValue(type, '10%', '10%', '8%'),
+            top: dynamicStylingValue(type, '10%', '-10%', '-10%'),
+            maxWidth: '50%',
+            zIndex: 1,
+          }}
+        >
+          <Typography
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.innovating')}
+          </Typography>
+          <DualColorText
+            text1={`${t('home.title.as')}\u00a0`}
+            text2={t('home.title.sustainable')}
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerSectionStyles.title}
+          />
+          <Typography
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.future')}
+          </Typography>
+          <Typography
+            color="white"
+            marginTop="1%"
+            maxWidth="80%"
+            fontSize={'clamp(0.8em, 1vw, 1em)'}
+          >
+            {t('home.desc')}
+          </Typography>
+          <Box
+            id="buttons-wrapper"
+            sx={{ display: 'flex', marginTop: '4%', gap: 2 }}
+          >
+            <Button
+              size="small"
+              sx={headerSectionStyles.primaryButton}
+              onClick={() => handleNavigate('/product')}
+            >
+              {t('home.product_button')}
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              sx={headerSectionStyles.secondaryButton(type)}
+              onClick={() => handleNavigate('/product/submit')}
+            >
+              {t('home.custom_product_button')}
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
             width: '100vw',
             height: '100%',
+            maxWidth: '1000px',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
           }}
         >
           <Box
             sx={{
               position: 'relative',
-              width: dynamicStylingValue(type, '35%', '20%', '20%'),
+              width: dynamicStylingValue(type, '45%', '40%', '40%'),
               backgroundColor: 'rgba(255, 255, 255, 0.2)',
               padding: dynamicStylingValue(type, '2%', '1%', '1%'),
+              paddingX: dynamicStylingValue(type, '3%', '2%', '2%'),
               borderRadius: '10px',
-              top: dynamicStylingValue(type, '40%', '20%', '20%'),
-              left: dynamicStylingValue(type, '53%', '75%', '75%'),
+              top: dynamicStylingValue(type, '10%', '20%', '20%'),
+              left: dynamicStylingValue(type, '25%', '30%', '30%'),
               borderBottomRightRadius: '100px',
             }}
           >
             <Typography
               color="white"
-              fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
+              fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
               fontWeight={800}
             >
               {t('home.modal.title')}
             </Typography>
             <Typography
               color="white"
-              fontSize={dynamicStylingValue(type, '0.5em', '0.9em', '0.9em')}
-              fontWeight={500}
+              fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
+              fontWeight={400}
             >
               {t('home.modal.desc')}
             </Typography>
@@ -382,13 +451,109 @@ const Header = () => {
           <Box
             sx={{
               position: 'relative',
-              width: dynamicStylingValue(type, '100%', '50%', '50%'),
-              height: dynamicStylingValue(type, '50%', '80%', '80%'),
-              left: dynamicStylingValue(type, '0%', '45vw', '45vw'),
-              bottom: dynamicStylingValue(type, '5vh', '-2vw', '-2vw'),
               zIndex: 1,
             }}
           >
+            <Image
+              src={getPhoto('subtract')}
+              alt="header-photo"
+              width={1000}
+              height={1000}
+              style={{ objectFit: 'contain' }}
+              loading="lazy"
+            />
+          </Box>
+        </Box>
+      </>
+    ),
+    [type, t]
+  );
+
+  const homepageImageMobile = useMemo(
+    () => (
+      <>
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 1,
+            top: '10%',
+          }}
+        >
+          <Typography
+            fontSize={'2.5em'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.innovating')}
+          </Typography>
+          <DualColorText
+            text1={`${t('home.title.as')}\u00a0`}
+            text2={t('home.title.sustainable')}
+            fontSize={'2.5em'}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerSectionStyles.title}
+          />
+          <Typography
+            fontSize={'2.5em'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.future')}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            width: '100vw',
+            height: '100%',
+            maxWidth: '1000px',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 1,
+              left: '2%',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'relative',
+                width: dynamicStylingValue(type, '45%', '40%', '40%'),
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                padding: dynamicStylingValue(type, '2%', '1%', '1%'),
+                paddingX: '4%',
+                borderRadius: '10px',
+                top: '10%',
+                left: '50%',
+                borderBottomRightRadius: '100px',
+              }}
+            >
+              <Typography
+                color="white"
+                fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
+                fontWeight={800}
+              >
+                {t('home.modal.title')}
+              </Typography>
+              <Typography
+                color="white"
+                fontSize={dynamicStylingValue(type, '0.6em', '0.9em', '0.9em')}
+                fontWeight={400}
+              >
+                {t('home.modal.desc')}
+              </Typography>
+            </Box>
             <Image
               src={getPhoto('subtract')}
               alt="header-photo"
@@ -504,7 +669,20 @@ const Header = () => {
                 </motion.div>
               )}
             </Box>
-            {isHomePagePath && homepageImage}
+            {isHomePagePath && (
+              <Box
+                sx={{
+                  marginTop: '2%',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingX: '5%',
+                  height: '100%',
+                }}
+              >
+                {isMobile ? homepageImageMobile : homepageImage}
+              </Box>
+            )}
             {isAboutUsPagePath && aboutUsImage}
           </ProgressiveBackgroundImage>
         </ClientOnly>
