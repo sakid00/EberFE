@@ -33,6 +33,10 @@ const newsroomList: listType[] = [
   },
   {
     type: 'Newsroom',
+    name: 'EBER Calendar',
+  },
+  {
+    type: 'Newsroom',
     name: 'Company Event',
   },
 ];

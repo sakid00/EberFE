@@ -47,6 +47,8 @@ const useActivity = () => {
         if (request.group) {
           if (request.group === 'EBER Magazine') {
             queryParams.set('group', 'Eber Magazine');
+          } else if (request.group === 'EBER Calendar') {
+            queryParams.set('group', 'Calendar');
           } else {
             queryParams.set('group', request.group);
           }
