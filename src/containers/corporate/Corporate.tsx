@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid2';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import HeaderImage from '@/public/photo/header_corporate.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { Map } from '@mui/icons-material';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
@@ -103,7 +103,6 @@ const CorporateContainer = () => {
   // Show skeleton loading state only when actually loading AND no data
   // More aggressive: only show skeleton on first load with no cache
   if (isLoading && companies.length === 0) {
-    console.log('⏳ Showing corporate skeleton loading...');
     return (
       <Box sx={styles.mainContainer(type)}>
         <SidebarList
@@ -162,12 +161,12 @@ const CorporateContainer = () => {
             src={
               currentCompany?.main_image
                 ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${currentCompany.main_image}`
-                : HeaderImage
+                : getPhoto('headerCorporate')
             }
-            alt={companyList[selectedCompany]?.name || 'Company'}
             width={1000}
             height={1000}
-            style={{ objectFit: 'fill' }}
+            alt={companyList[selectedCompany]?.name || 'Company'}
+            style={{ objectFit: 'fill', width: '100%', height: 'auto' }}
           />
         </Box>
         <Typography sx={styles.companyTitle(type)}>
@@ -353,13 +352,15 @@ const CorporateContainer = () => {
               <Box sx={styles.imageGridContainer(type)}>
                 {currentCompanyDetail.images_3.map((item, index) => (
                   <Box key={index} sx={styles.imageCard}>
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
-                      alt={item.title}
-                      width={200}
-                      height={150}
-                      style={styles.imageStyle}
-                    />
+                    <Box sx={styles.imageCertifContainer}>
+                      <Image
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${item.url}`}
+                        alt={item.title}
+                        width={1000}
+                        height={1000}
+                        style={styles.imageCertifStyle}
+                      />
+                    </Box>
                     <Typography sx={styles.imageTitle(type)}>
                       {item.title}
                     </Typography>

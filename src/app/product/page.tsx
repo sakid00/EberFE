@@ -39,7 +39,8 @@ export interface IrowData {
 const ProductsPageContent = () => {
   const { language, t } = useTranslation();
   const { type } = useDeviceType();
-  const { getProduct, products, filters, isLoading, error } = useProduct();
+  const { getProduct, products, filters, isLoading, error, requestProduct } =
+    useProduct();
   const searchParams = useSearchParams();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
@@ -51,6 +52,8 @@ const ProductsPageContent = () => {
   const [itemsPerPage] = useState<number>(10);
   const [hasAccess, setHasAccess] = useState<boolean>(false);
   const [submittedEmail, setSubmittedEmail] = useState<string>('');
+  const [isRequestingProduct, setIsRequestingProduct] =
+    useState<boolean>(false);
 
   // Dynamic filter data from API
   const productTypes = filters.types.length > 0 ? filters.types : [];
@@ -143,10 +146,26 @@ const ProductsPageContent = () => {
     }
   };
 
-  const handleRequestClick = useCallback(() => {
-    // Show ReqProductSent modal when user clicks request product button
-    setOpenSentModal(true);
-  }, [setOpenSentModal]);
+  const handleRequestClick = useCallback(
+    async (productCode: string) => {
+      const storedEmail = localStorage.getItem('submittedEmail');
+      setIsRequestingProduct(true);
+      try {
+        await requestProduct({
+          email: storedEmail ?? '',
+          productCode: productCode,
+          onSuccess: () => {
+            setOpenSentModal(true);
+          },
+        });
+      } catch (error) {
+        console.error('Failed to request product:', error);
+      } finally {
+        setIsRequestingProduct(false);
+      }
+    },
+    [requestProduct]
+  );
 
   // Transform API data to table rows with search filtering and pagination
   const { paginatedRows, totalPages, totalItems } = useMemo(() => {
@@ -199,7 +218,8 @@ const ProductsPageContent = () => {
                 fontWeight: 400,
                 textTransform: 'none',
               }}
-              onClick={handleRequestClick}
+              onClick={() => handleRequestClick(product.code)}
+              disabled={isRequestingProduct}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
               }
@@ -228,7 +248,8 @@ const ProductsPageContent = () => {
               fontWeight: 400,
               textTransform: 'none',
             }}
-            onClick={handleRequestClick}
+            onClick={() => handleRequestClick('Sample Product')}
+            disabled={isRequestingProduct}
             startIcon={
               <Image src={emailIcon} width={16} height={16} alt="email" />
             }
@@ -247,6 +268,7 @@ const ProductsPageContent = () => {
     currentPage,
     itemsPerPage,
     t,
+    isRequestingProduct,
   ]);
 
   // Reset to first page when filters change
@@ -315,13 +337,6 @@ const ProductsPageContent = () => {
         setSearchQuery={setSearchQuery}
         handleChangeFilterByType={handleChangeFilterByType}
         handleChangeApplication={handleChangeApplication}
-        openReqModal={openReqModal}
-        setOpenReqModal={setOpenReqModal}
-        openSentModal={openSentModal}
-        setOpenSentModal={setOpenSentModal}
-        onTokenReceived={handleTokenReceived}
-        onShowSentModal={() => setOpenSentModal(true)}
-        submittedEmail={submittedEmail}
         currentPage={currentPage}
         totalPages={totalPages}
         totalItems={totalItems}

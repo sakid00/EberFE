@@ -16,7 +16,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
   const { activities } = useActivityState();
   const { language } = useTranslation();
   const { getActivityById, getActivities, isLoading, error } = useActivity();
-  const [currentActivity, setCurrentActivity] = useState<ActivityData | null>(null);
+  const [currentActivity, setCurrentActivity] = useState<ActivityData | null>(
+    null
+  );
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const activitiesLoadAttempted = useRef(false);
 
@@ -38,9 +40,11 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
     const loadActivity = async () => {
       try {
         setIsInitialLoading(true);
-        
+
         // First check if activity exists in global state
-        const existingActivity = activities.find((activity) => activity.id === id);
+        const existingActivity = activities.find(
+          (activity) => activity.id === id
+        );
         if (existingActivity) {
           setCurrentActivity(existingActivity);
           setIsInitialLoading(false);
@@ -55,7 +59,7 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         } else {
           console.warn(`Activity with ID ${id} returned null from API`);
         }
-        } catch (error) {
+      } catch (error) {
         console.error('Failed to load activity:', error);
         // If activity ID is invalid and we have other activities available,
         // we can show a "not found" state but still populate the sidebar
@@ -73,7 +77,7 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
     };
 
     loadActivity();
-  // eslint-disable-next-line react-hooks/exhaustive-deps  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // Update current activity when activities in global state change
@@ -89,8 +93,14 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
   // This ensures "Informasi Lainnya" section is populated on page refresh
   useEffect(() => {
     const loadActivitiesForSidebar = async () => {
-      if (activities.length === 0 && !isLoading && !activitiesLoadAttempted.current) {
-        console.log('Activities list is empty, fetching activities for sidebar...');
+      if (
+        activities.length === 0 &&
+        !isLoading &&
+        !activitiesLoadAttempted.current
+      ) {
+        console.log(
+          'Activities list is empty, fetching activities for sidebar...'
+        );
         activitiesLoadAttempted.current = true;
         try {
           // Try to fetch activities from the same group as current activity if possible
@@ -145,10 +155,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             Failed to load activity
           </Typography>
           <Typography variant="body2">
-            {error.includes('not found') 
+            {error.includes('not found')
               ? `The activity with ID ${id} could not be found. It may have been removed or the ID is incorrect.`
-              : error
-            }
+              : error}
           </Typography>
           <Typography variant="caption" sx={{ mt: 1, display: 'block' }}>
             Activity ID: {id}
@@ -207,7 +216,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           alt={`${displayTitle || 'Activity'} - Image`}
           width={1000}
           height={1000}
-          skeletonHeight={Number(dynamicStylingValue(type, '200', '400', '450'))}
+          skeletonHeight={Number(
+            dynamicStylingValue(type, '200', '400', '450')
+          )}
           style={{
             objectFit: 'fill',
             borderRadius: '20px',
@@ -233,8 +244,8 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           color="#4B5563"
           marginTop={1}
         >
-          {currentActivity?.updatedAt
-            ? formatDate(currentActivity.updatedAt)
+          {currentActivity?.createdAt
+            ? formatDate(currentActivity.createdAt)
             : 'Date not available'}
         </Typography>
 
@@ -318,7 +329,7 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
                 image={activity.image}
                 title_en={activity.title_en}
                 title_id={activity.title_id}
-                date={activity.updatedAt ? formatDate(activity.updatedAt) : ''}
+                date={activity.createdAt ? formatDate(activity.createdAt) : ''}
                 pdfUrl={activity.pdf}
                 type={type}
               />

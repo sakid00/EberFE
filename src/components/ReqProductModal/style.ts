@@ -125,10 +125,6 @@ export const styles = {
     fontWeight: 400,
     textTransform: 'none' as const,
     padding: '10px 20px',
-    '&:hover': {
-      background:
-        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
-    },
   },
 };
 

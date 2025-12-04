@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import Image from 'next/image';
-import tangki from '@/public/photo/tangki.png';
+import { getPhoto } from '@/assets/photoAssets';
 import { InnovationCard } from '@/components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
 import { animationClasses, innovationSectionStyles } from './styles';
@@ -16,7 +16,13 @@ export const InnovationSection = () => {
     <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
       {type !== 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>
-          <Image src={tangki} alt="tangki-image" />
+          <Image
+            src={getPhoto('tanki')}
+            alt="tangki-image"
+            loading="lazy"
+            width={1000}
+            height={1000}
+          />
         </Box>
       )}
       <Box id="content-wrapper" sx={innovationSectionStyles.contentWrapper}>
@@ -72,7 +78,13 @@ export const InnovationSection = () => {
       </Box>
       {type === 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>
-          <Image src={tangki} alt="tangki-image" />
+          <Image
+            src={getPhoto('tanki')}
+            alt="tangki-image"
+            width={1000}
+            height={1000}
+            loading="lazy"
+          />
         </Box>
       )}
       <Box

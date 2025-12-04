@@ -32,11 +32,11 @@ export const headerStyles = {
     position: 'absolute' as const,
     display: 'block',
     width: '100%',
-    height: dynamicStylingValue(deviceType, '80%', '100%', '80vh'),
+    height: dynamicStylingValue(deviceType, '80%', '100%', '100%'),
     right: 0,
     top: '-30%',
     zIndex: 0,
-    objectFit: 'contain' as const,
+    objectFit: 'fill' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,
@@ -46,18 +46,21 @@ export const headerStyles = {
     width: '100%',
     height: dynamicStylingValue(
       deviceType,
-      '80vh',
+      '65vh',
       isHomepage ? '80vh' : '50vh',
-      isHomepage ? '90vh' : '50vh'
+      isHomepage ? '80vh' : '50vh'
     ),
+    maxHeight: '1000px',
     alignItems: 'start',
     overflow: 'hidden',
     zIndex: 0,
   }),
   backgroundImageContent: {
-    alignItems: 'start',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     paddingTop: '5vh',
+    display: 'flex',
+    flexDirection: 'column',
   },
   container: {
     display: 'flex',
@@ -65,9 +68,7 @@ export const headerStyles = {
     justifyContent: 'space-around',
     alignItems: 'center',
     width: '100%',
-    maxWidth: '100%',
-    padding: '0 3em',
-    overflow: 'hidden',
+    paddingX: '8vw',
   },
   logoContainer: {
     zIndex: 1,
@@ -78,7 +79,7 @@ export const headerStyles = {
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
     fontSize: '1rem',
-    marginRight: 4,
+    marginRight: 1,
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',
@@ -179,8 +180,9 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '110px',
-    height: '40px',
+    width: '7vw',
+    maxWidth: '120px',
+    height: 'auto',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
@@ -190,8 +192,7 @@ export const headerStyles = {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingTop: '6%',
-      paddingBottom: '6%',
+      paddingVertical: '0.5vh',
     },
     '& .MuiSelect-icon': {
       color: COLORS.white,
@@ -343,6 +344,8 @@ export const headerStyles = {
   },
   flagImageStyle: {
     marginLeft: '8px',
+    width: '1.5vw',
+    height: 'auto',
   },
   mobileMenuFlagImageStyle: {
     marginLeft: '6px',

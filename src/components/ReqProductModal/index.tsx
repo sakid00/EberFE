@@ -94,8 +94,6 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
   };
 
   const handleSuccess = () => {
-    setIsSubmitting(true);
-
     try {
       // Mark form as submitted in localStorage
       localStorage.setItem('hasSubmittedProductForm', 'true');
@@ -123,6 +121,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
   };
 
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     if (!validateForm()) {
       return;
     }
@@ -146,7 +145,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     }
     // Do nothing if form hasn't been submitted - modal stays open
   };
-
+  console.log('kuda', isSubmitting);
   return (
     <Modal
       open={openModal}

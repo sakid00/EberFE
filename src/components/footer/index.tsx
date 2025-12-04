@@ -2,7 +2,6 @@
 import { Box, Divider, Typography } from '@mui/material';
 import { useDeviceType } from '@/hooks';
 import Image from 'next/image';
-import logo from '@/public/eber_logo.png';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
 import { footerStyles } from './style';
 import locationIcon from '@/public/icon/footer-loc.svg';
@@ -12,10 +11,12 @@ import company1Icon from '@/public/icon/footer-company-1.svg';
 import company2Icon from '@/public/icon/footer-company-2.svg';
 import company3Icon from '@/public/icon/footer-company-3.svg';
 import company4Icon from '@/public/icon/footer-company-4.svg';
-import bgFooter from '@/public/eber-footer.png';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import site from '@/public/background/site-bg-mobile.png';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { usePathname } from 'next/navigation';
+
+const logo = '/eber_logo.png';
+const bgFooter = '/eber-footer.png';
 
 const contactInfoList = [
   {
@@ -83,7 +84,7 @@ const Footer = () => {
   });
 
   return (
-    <footer style={{ position: 'relative' }}>
+    <footer style={{ position: 'relative', overflowY: 'visible' }}>
       {type === 'mobile' && isAboutUsPage && (
         <Box
           sx={{
@@ -92,10 +93,17 @@ const Footer = () => {
             right: 0,
             zIndex: -1,
             width: '100%',
-            height: '100%',
+            height: '90%',
           }}
         >
-          <Image src={site} alt="site" fill />
+          <Image
+            src={getBackgroundImage('siteBg')}
+            alt="site"
+            style={{ objectFit: 'fill', width: '100%', height: '100%' }}
+            width={1000}
+            height={1000}
+            loading="lazy"
+          />
         </Box>
       )}
       <Box
@@ -106,23 +114,33 @@ const Footer = () => {
           <Box
             sx={{
               position: 'absolute',
-              top: dynamicStylingValue(type, '-28%', '-50%', '-50%'),
-              right: '-15%',
+              top: 'var(--bg-top, -25vh)',
+              right: 'var(--bg-right, -10vw)',
               bottom: 0,
               zIndex: 10,
+              minWidth: dynamicStylingValue(type, '40%', '10vw', '10vw'),
+              maxWidth: dynamicStylingValue(type, '80%', '40vw', '40vw'),
             }}
           >
             <Image
               src={bgFooter}
+              width={1000}
+              height={1000}
               alt="bg-footer"
+              loading="lazy"
               style={{
-                width: dynamicStylingValue(type, '85vw', '50vw', '50vw'),
                 objectFit: 'contain',
               }}
             />
           </Box>
           <Box sx={footerStyles.headerSection(type)}>
-            <Image src={logo} style={footerStyles.logo(type)} alt="logo" />
+            <Image
+              src={logo}
+              style={footerStyles.logo(type)}
+              alt="logo"
+              width={100}
+              height={100}
+            />
             <Box sx={footerStyles.dividerContainer}>
               <Divider
                 orientation="vertical"

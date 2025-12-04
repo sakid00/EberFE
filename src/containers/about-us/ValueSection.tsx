@@ -2,29 +2,21 @@ import { Box, Typography } from '@mui/material';
 import { ValueCard } from '@/components/Cards/ValueCard';
 import { VALUES_DATA } from './constants';
 import Image from 'next/image';
-import fieldPerson from '@/public/photo/chem-person.png';
+import { getPhoto } from '@/assets/photoAssets';
+import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import ImageBackground from '@/components/ImageBackground/index';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
-import container from '@/public/background/container2.png';
-import containerMobile from '@/public/background/container2-mobile.png';
-import site from '@/public/background/site-bg.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
-  return (
-    <Box
-      id="about-us-fifth-section"
-      className="relative flex flex-col items-center mt-40"
-    >
-      <Box
-        id="about-us-fifth-section-title"
-        className="flex flex-col items-center"
-        sx={valueStyles.titleContainer}
-      >
-        {type === 'mobile' ? (
+
+  if (type === 'mobile') {
+    return (
+      <Box sx={valueStyles.mainContainerMobile}>
+        <Box sx={valueStyles.titleContainer}>
           <Typography
             fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
             fontWeight={'500'}
@@ -41,42 +33,78 @@ export const ValueSection = () => {
               {t('about_us.value_section_title.purpose_driven')}
             </Typography>
           </Typography>
-        ) : (
-          <>
-            <Typography
-              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-              fontWeight={'500'}
-              color="#784791"
-              sx={{ textAlign: 'center' }}
-            >
-              {`${t('about_us.value_section_title.creating')}\u00a0`}
-            </Typography>
-            <Typography
-              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-              fontWeight={'800'}
-              color="#784791"
-            >
-              {t('about_us.value_section_title.purpose_driven')}
-            </Typography>
-          </>
-        )}
+        </Box>
+        <ImageBackground
+          src={getBackgroundImage('container1Mobile')}
+          alt="container"
+          objectFit={'fill'}
+          sx={valueStyles.imageBackgroundMobile}
+          contentSx={valueStyles.contentSxMobile}
+        >
+          <Box sx={valueStyles.contentContainerMobile}>
+            <Box sx={valueStyles.imageContainerMobile}>
+              <Image
+                src={getPhoto('chemPerson')}
+                alt="field-person"
+                width={100}
+                height={100}
+                loading="lazy"
+                style={{
+                  objectFit: 'fill',
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </Box>
+
+            <Box sx={valueStyles.valuesGridMobile}>
+              {VALUES_DATA.map((data, index) => (
+                <ValueCard key={index} data={data} index={index} />
+              ))}
+            </Box>
+          </Box>
+        </ImageBackground>
+      </Box>
+    );
+  }
+  return (
+    <Box
+      id="about-us-fifth-section"
+      className="relative flex flex-col items-center mt-40"
+    >
+      <Box
+        id="about-us-fifth-section-title"
+        className="flex flex-col items-center relative"
+        sx={valueStyles.titleContainer}
+      >
+        <>
+          <Typography
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontWeight={'500'}
+            color="#784791"
+            sx={{ textAlign: 'center' }}
+          >
+            {`${t('about_us.value_section_title.creating')}\u00a0`}
+          </Typography>
+          <Typography
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontWeight={'800'}
+            color="#784791"
+          >
+            {t('about_us.value_section_title.purpose_driven')}
+          </Typography>
+        </>
       </Box>
 
-      {type === 'mobile' && (
-        <Box sx={valueStyles.fieldPersonContainer(type)}>
-          <Image src={fieldPerson} alt="field-person" fill />
-        </Box>
-      )}
-
       <ImageBackground
-        src={type === 'mobile' ? containerMobile : container}
+        src={getBackgroundImage('container1')}
         alt="container"
-        objectFit={type === 'mobile' ? 'fill' : 'contain'}
+        objectFit={'fill'}
         sx={{
           position: 'relative',
-          width: '110%',
-          height: '100vh',
-          marginTop: dynamicStylingValue(type, '30vh', '0px', '0px'),
+          width: '100%',
+          height: '85vh',
+          overflow: 'hidden',
         }}
         contentSx={{
           position: 'relative',
@@ -88,38 +116,42 @@ export const ValueSection = () => {
           paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
         }}
       >
-        {type !== 'mobile' && (
-          <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
-            <Image src={fieldPerson} alt="field-person" fill />
-          </Box>
-        )}
-        <Box
-          sx={
-            type === 'mobile'
-              ? valueStyles.valuesGridMobile
-              : valueStyles.valuesGrid
-          }
-        >
+        <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
+          <Image
+            src={getPhoto('chemPerson')}
+            width={1000}
+            height={1000}
+            alt="field-person"
+            loading="lazy"
+            style={{ width: '60%', height: 'auto', objectFit: 'contain' }}
+          />
+        </Box>
+        <Box sx={valueStyles.valuesGrid}>
           {VALUES_DATA.map((data, index) => (
             <ValueCard key={index} data={data} index={index} />
           ))}
         </Box>
       </ImageBackground>
 
-      {type !== 'mobile' && (
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: '-40vh',
-            right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
-            zIndex: -1,
-            width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
-            height: '100%',
-          }}
-        >
-          <Image src={site} alt="site" fill />
-        </Box>
-      )}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-45vh',
+          right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
+          zIndex: -1,
+          width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
+          height: 'auto',
+        }}
+      >
+        <Image
+          src={getBackgroundImage('siteBg')}
+          width={2000}
+          height={1000}
+          alt="site"
+          style={{ objectFit: 'fill', width: '100%', height: '100%' }}
+          loading="lazy"
+        />
+      </Box>
     </Box>
   );
 };

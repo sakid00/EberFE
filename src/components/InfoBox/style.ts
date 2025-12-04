@@ -9,12 +9,8 @@ export const styles = {
     height: '100%',
     zIndex: 1,
     marginTop: dynamicStylingValue(type, '5%', '0', '0'),
+    maxWidth: dynamicStylingValue(type, '100%', '30%', '30%'),
   }),
-
-  imageStyle: {
-    width: '80%',
-    height: 'auto',
-  },
 
   infoCard: {
     backgroundColor: 'white',

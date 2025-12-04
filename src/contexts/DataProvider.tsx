@@ -121,6 +121,7 @@ export interface ActivityData {
   image: string;
   pdf: string;
   updatedAt: string;
+  createdAt: string;
 }
 
 export interface ActivityState {

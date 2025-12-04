@@ -7,20 +7,21 @@ const nextConfig: NextConfig = {
   reactStrictMode: false, // Disable for faster dev
   poweredByHeader: false,
   compress: true,
-  
+
   // Experimental features for better performance
   experimental: {
     scrollRestoration: true,
   },
   images: {
-    // Image optimization for large background images
-    formats: ['image/webp', 'image/avif'],
+    // Image optimization - AVIF first (smaller), then WebP fallback
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024],
+    minimumCacheTTL: 31536000, // Cache optimized images for 1 year
     // SVG support and security
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    
+
     remotePatterns: [
       ...(process.env.NEXT_PUBLIC_IMAGE_BASE_URL
         ? [
@@ -40,9 +41,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.infouploads',
+        hostname: 'eber-api.agepedia.info',
         port: '',
-        pathname: '/**',
+        pathname: '/uploads/**',
       },
     ],
   },
@@ -78,6 +79,38 @@ const nextConfig: NextConfig = {
       path: false,
     };
     return config;
+  },
+  // Cache headers for static assets (images)
+  async headers() {
+    return [
+      {
+        source: '/photo/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/background/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/icon/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 };
 

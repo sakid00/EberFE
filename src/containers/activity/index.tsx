@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import SidebarList, { listType } from '@/components/SidebarList/index';
 import { Box, Typography, Alert, Pagination, Stack } from '@mui/material';
 import ActivityCard from '@/components/Cards/ActivityCard';
@@ -23,7 +23,7 @@ const sustainabilityList: listType[] = [
   },
   {
     type: 'Sustainability',
-    name: 'Ethical Governence & Compliance',
+    name: 'Ethical, Governance, & Compliance',
   },
 ];
 const newsroomList: listType[] = [
@@ -54,19 +54,27 @@ const ActivityContainer = () => {
     pagination,
   } = useActivity();
 
+  const groupFiltered = useMemo(() => {
+    const group =
+      selectedCategory === 0
+        ? sustainabilityList[selectedActivity]?.name || 'Sustainability'
+        : newsroomList[selectedActivity]?.name || 'Newsroom';
+
+    if (group.toLowerCase().includes('ethical')) {
+      return 'Ethical Governence & Compliance';
+    }
+
+    return group;
+  }, [selectedCategory, selectedActivity]);
+
   // Fetch activities when category, activity, or page changes
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const groupFilter =
-          selectedCategory === 0
-            ? sustainabilityList[selectedActivity]?.name || 'Sustainability'
-            : newsroomList[selectedActivity]?.name || 'Newsroom';
-
         await getActivities({
           page: currentPage,
           pageSize,
-          group: groupFilter,
+          group: groupFiltered,
         });
       } catch (error) {
         console.error('Failed to fetch activities:', error);
@@ -120,9 +128,7 @@ const ActivityContainer = () => {
             : newsroomList[selectedActivity]?.name}
         </Typography>
         <Typography sx={styles.subtitle(type)}>
-          {selectedCategory === 0
-            ? 'Explore our sustainability initiatives and community engagement programs that make a positive impact on society and the environment.'
-            : 'Stay updated with the latest news, company events, and publications from EBER Group.'}
+          {selectedCategory === 0 ? t('activity.desc.1') : t('activity.desc.2')}
         </Typography>
 
         {/* Error State */}
@@ -144,7 +150,7 @@ const ActivityContainer = () => {
                   key={activity.id}
                   image={activity.image}
                   date={(() => {
-                    const date = new Date(activity.updatedAt);
+                    const date = new Date(activity.createdAt);
                     if (isNaN(date.getTime())) {
                       return 'Date not available';
                     }

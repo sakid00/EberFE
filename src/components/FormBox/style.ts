@@ -28,7 +28,7 @@ export const styles = {
   formRow: (type: DeviceType) => ({
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
-    marginTop: '32px',
+    marginTop: '4%',
   }),
 
   halfWidthBox: (type: DeviceType) => ({

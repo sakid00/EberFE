@@ -6,8 +6,9 @@ import { DeviceType, useTranslation } from '../../hooks';
 
 interface IInfoBoxProps {
   infoList: infoListType[];
-  photo: StaticImageData;
+  photo: string | StaticImageData;
   imageStyle?: React.CSSProperties;
+  containerStyle?: React.CSSProperties;
   type: DeviceType;
 }
 
@@ -15,6 +16,7 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
   infoList,
   photo,
   imageStyle,
+  containerStyle,
   type,
 }) => {
   const { t } = useTranslation();
@@ -25,7 +27,17 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
         key={index}
         sx={styles.infoItemContainer}
       >
-        <Image src={val.logo} width={30} height={30} alt="" />
+        <Image
+          src={val.logo}
+          width={30}
+          height={30}
+          style={{
+            objectFit: 'fill',
+            width: '30px',
+            height: '30px',
+          }}
+          alt=""
+        />
         <Box sx={styles.infoContent}>
           <Typography sx={styles.infoTitle}>{t(val.title)}</Typography>
           <Typography sx={styles.infoDescription}>{t(val.desc)}</Typography>
@@ -35,8 +47,20 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
   });
 
   return (
-    <Box sx={styles.container(type)}>
-      <Image src={photo} style={imageStyle} alt="image" />
+    <Box sx={{ ...styles.container(type), ...containerStyle }}>
+      <Box sx={imageStyle}>
+        <Image
+          src={photo}
+          style={{
+            objectFit: 'fill',
+            width: '100%',
+            height: 'auto',
+          }}
+          height={1000}
+          width={1000}
+          alt="image"
+        />
+      </Box>
       <Box sx={styles.infoCard}>{infoListMap}</Box>
     </Box>
   );

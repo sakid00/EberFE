@@ -1,13 +1,14 @@
 import { CSSProperties } from 'react';
 import { SxProps, Theme } from '@mui/material';
 import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
+import { Language } from '@/contexts/TranslationContext';
 
 // HeaderSection Styles
 export const headerStyles: {
   headerPhoto: (deviceType: DeviceType) => CSSProperties;
   headerContent: (deviceType: DeviceType) => SxProps<Theme>;
   backgroundText: SxProps<Theme>;
-  description: (deviceType: DeviceType) => CSSProperties;
+  description: (deviceType: DeviceType, language: Language) => CSSProperties;
 } = {
   headerPhoto: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
@@ -19,7 +20,9 @@ export const headerStyles: {
   }),
   headerContent: (deviceType: DeviceType) => ({
     position: 'absolute',
-    top: '20%',
+    height: '10%',
+    width: dynamicStylingValue(deviceType, '100vw', '50vw', '50vw'),
+    top: dynamicStylingValue(deviceType, '2%', '5%', '5%'),
     left: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
     right: 0,
     bottom: 0,
@@ -34,14 +37,14 @@ export const headerStyles: {
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
   },
-  description: (deviceType: DeviceType) => ({
+  description: (deviceType: DeviceType, language: Language) => ({
     paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
     paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    width: dynamicStylingValue(deviceType, '100%', '25%', '25%'),
+    width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
     color: 'white',
     fontWeight: 500,
-    marginTop: dynamicStylingValue(deviceType, '1vh', '4vh', '4vh'),
-    fontSize: dynamicStylingValue(deviceType, '0.8em', '1em', '1em'),
+    marginTop: language === 'id' ? '4vh' : '2vh',
+    fontSize: dynamicStylingValue(deviceType, '0.7em', '1em', '1em'),
     textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
       | 'center'
       | 'start',
@@ -58,7 +61,40 @@ export const valueStyles: {
   fieldPersonContainer: (type: DeviceType) => SxProps<Theme>;
   valuesGrid: SxProps<Theme>;
   valuesGridMobile: SxProps<Theme>;
+  mainContainerMobile: SxProps<Theme>;
+  imageBackgroundMobile: SxProps<Theme>;
+  contentSxMobile: SxProps<Theme>;
+  contentContainerMobile: SxProps<Theme>;
+  imageContainerMobile: SxProps<Theme>;
 } = {
+  mainContainerMobile: {
+    position: 'relative',
+    marginTop: '20vh',
+    width: '100vw',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: '100vh',
+    overflow: 'visible',
+    marginTop: '30vh',
+  },
+  contentSxMobile: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '15vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    zIndex: 1000,
+    width: '100%',
+  },
   container: {
     position: 'relative',
     zIndex: 3,
@@ -86,9 +122,7 @@ export const valueStyles: {
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '100%', '60%', '58%'),
-    height: dynamicStylingValue(type, '30%', '90%', '90%'),
-    bottom: dynamicStylingValue(type, '53.5%', '17%', '17%'),
+    bottom: '3vw',
     left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
     zIndex: 1000,
   }),
@@ -129,10 +163,42 @@ export const principleStyles: {
   visionDescription: SxProps<Theme>;
   missionTitle: SxProps<Theme>;
   missionDescription: SxProps<Theme>;
+  mainContainerMobile: SxProps<Theme>;
+  imageBackgroundMobile: SxProps<Theme>;
+  contentSxMobile: SxProps<Theme>;
+  contentContainerMobile: SxProps<Theme>;
+  imageContainerMobile: SxProps<Theme>;
 } = {
+  mainContainerMobile: {
+    position: 'relative',
+    marginTop: '25vh',
+    width: '100vw',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: 'auto',
+    overflow: 'visible',
+  },
+  contentSxMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+    marginBottom: '-20%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '5vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    width: '100%',
+    zIndex: 1000,
+  },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '85%', '55%', '55%'),
+    width: dynamicStylingValue(type, '85%', '40vw', '40vw'),
     height: dynamicStylingValue(type, '38%', '90%', '90%'),
     top: dynamicStylingValue(type, '4%', '10%', '10%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
@@ -144,15 +210,15 @@ export const principleStyles: {
     zIndex: -1,
   },
   spacerBox: {
-    width: 600,
-    height: 509,
+    width: '40vw',
+    height: '50vh',
   },
   contentContainer: (type: DeviceType) =>
     ({
       display: 'flex',
       flexDirection: 'column',
       maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
-      padding: dynamicStylingValue(type, '1em', '0px', '0px'),
+      padding: dynamicStylingValue(type, '10%', '0px', '0px'),
       borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
       backgroundColor: dynamicStylingValue(
         type,
@@ -160,6 +226,7 @@ export const principleStyles: {
         'transparent',
         'transparent'
       ),
+      overflow: 'hidden',
     }) as SxProps<Theme>,
   backgroundText: (type: DeviceType) => ({
     background:

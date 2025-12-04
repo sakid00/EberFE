@@ -5,7 +5,7 @@ export const styles = {
     display: 'flex',
     flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
     gap: dynamicStylingValue(type, '16px', '1%', '1%'),
-    marginTop: dynamicStylingValue(type, '-60vh', '-20vh', '-20vh'),
+    marginTop: dynamicStylingValue(type, '-45vh', '-20vh', '-20vh'),
   }),
 
   contentContainer: (type: DeviceType) => ({
@@ -154,7 +154,7 @@ export const styles = {
       type,
       '1fr', // mobile: 1 column
       'repeat(2, 1fr)', // tablet: 2 columns
-      'repeat(4, 1fr)' // desktop: 4 columns
+      'repeat(2, 1fr)' // desktop: 4 columns
     ),
     gap: dynamicStylingValue(type, '16px', '20px', '24px'),
     marginTop: '16px',
@@ -169,10 +169,15 @@ export const styles = {
 
   imageStyle: {
     width: '100%',
-    height: 'auto',
     objectFit: 'cover' as const,
     borderRadius: '8px',
     maxHeight: '150px',
+  },
+
+  imageCertifStyle: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain' as const,
   },
 
   imageTitle: (type: DeviceType) => ({
@@ -182,6 +187,14 @@ export const styles = {
     fontWeight: 500,
     textAlign: 'start',
   }),
+
+  imageCertifContainer: {
+    backgroundColor: '#F3F5F7',
+    borderRadius: '8px',
+    width: '100%',
+    height: '100%',
+    padding: '10%',
+  },
 };
 
 export const constants = {

@@ -45,16 +45,25 @@ export const headerSectionStyles = {
   } as SxProps<Theme>,
 
   leftSide: {
-    position: 'absolute',
-    top: '20%',
+    height: '10%',
+    width: '50vw',
+    top: '3.5%',
     left: '10%',
+    position: 'absolute',
     right: 0,
     bottom: 0,
     zIndex: 1,
   } as SxProps<Theme>,
 
   title: {
-    marginTop: '-2vh',
+    width: '90%',
+    marginTop: '-3vh',
+    color: COLORS.text.white,
+  } as SxProps<Theme>,
+
+  titleMobile: {
+    width: '90%',
+    marginTop: '-1vh',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
@@ -65,7 +74,7 @@ export const headerSectionStyles = {
         type,
         '100%',
         language === 'en' ? '25%' : '32%',
-        language === 'en' ? '25%' : '32%'
+        '50%'
       ),
       paddingX: dynamicStylingValue(type, '1em', '0px', '0px'),
       color: dynamicStylingValue(
@@ -129,6 +138,7 @@ export const specialtySectionStyles = {
   } as SxProps<Theme>,
 
   titleContainer: {
+    marginTop: '5%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -144,7 +154,7 @@ export const specialtySectionStyles = {
       width: dynamicStylingValue(type, '100%', '70%', '70%'),
       marginTop: '2vh',
       textAlign: 'center',
-      fontSize: dynamicStylingValue(type, '0.75em', '1em', '1em'),
+      fontSize: '1.1rem',
       color: COLORS.text.secondary,
     }) as SxProps<Theme>,
 
@@ -171,7 +181,6 @@ export const customProductSectionStyles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    // Enable container queries for responsive positioning
     containerType: 'inline-size',
     containerName: 'custom-product-section',
   } as SxProps<Theme>,
@@ -181,14 +190,9 @@ export const customProductSectionStyles = {
       position: 'absolute',
       width: dynamicStylingValue(type, '100vw', '40vw', '40vw'),
       height: dynamicStylingValue(type, '30%', '40%', '40%'),
-      top: dynamicStylingValue(type, '38%', '12%', '12%'),
-      left: dynamicStylingValue(type, '38%', '38%', '37%'),
-      transform: dynamicStylingValue(
-        type,
-        'translate(-40%, -58%)',
-        'translate(-70%, -50%)',
-        'translate(-78%, -10%)'
-      ),
+      left: '0',
+      right: '20vw',
+      bottom: '21vw',
       zIndex: 20,
       willChange: 'transform',
     }) as SxProps<Theme>,
@@ -208,7 +212,7 @@ export const customProductSectionStyles = {
   } as SxProps<Theme>,
 
   spacer: {
-    width: '40%',
+    width: '50%',
     height: '50%',
     display: 'flex',
     justifyContent: 'center',
@@ -238,13 +242,12 @@ export const customProductSectionStyles = {
     color: COLORS.text.white,
   } as SxProps<Theme>,
 
-  description: (type: DeviceType) =>
-    ({
-      color: COLORS.text.light,
-      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
-      fontWeight: 400,
-      marginTop: '20px',
-    }) as SxProps<Theme>,
+  description: {
+    color: COLORS.text.light,
+    fontSize: '1.1rem',
+    fontWeight: 400,
+    marginTop: '20px',
+  },
 
   button: (type: DeviceType) =>
     ({
@@ -260,6 +263,42 @@ export const customProductSectionStyles = {
       marginTop: 2,
       textTransform: 'none',
     }) as SxProps<Theme>,
+
+  mainContainerMobile: {
+    display: 'flex',
+    width: '100vw',
+    position: 'relative',
+    marginTop: '25vh',
+  },
+  imageBackgroundMobile: {
+    width: '100vw',
+    height: 'auto',
+    overflow: 'visible',
+  },
+  contentSxMobile: {
+    height: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: '5%',
+    marginBottom: '-20%',
+  },
+  contentContainerMobile: {
+    position: 'relative',
+    bottom: '15vh',
+  },
+  imageContainerMobile: {
+    position: 'relative',
+    zIndex: 1000,
+    width: '100%',
+  },
+  innerContentContainerMobile: {
+    padding: '10%',
+    borderRadius: '1em',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    overflow: 'hidden',
+  },
 };
 
 // Subsidiaries Section Styles
@@ -317,8 +356,8 @@ export const innovationSectionStyles = {
     ({
       position: dynamicStylingValue(type, 'relative', 'absolute', 'absolute'),
       width: dynamicStylingValue(type, '100%', '70vw', '70vw'),
-      top: '-40%',
-      left: dynamicStylingValue(type, '10%', '25%', '25%'),
+      top: '-10vw',
+      left: dynamicStylingValue(type, '10%', '25%', '25vw'),
     }) as SxProps<Theme>,
 
   contentWrapper: {
@@ -345,7 +384,7 @@ export const innovationSectionStyles = {
 
   description: (type: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1em'),
+      fontSize: '1.1rem',
       fontWeight: 400,
       color: COLORS.text.secondary,
       textAlign: dynamicStylingValue(type, 'center', 'left', 'left'),

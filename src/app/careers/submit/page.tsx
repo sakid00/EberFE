@@ -1,22 +1,27 @@
 'use client';
-import Photo from '../../../../public/photo/field-person.png';
+import { getPhoto } from '@/assets/photoAssets';
 import FormSubmitContainer from '../../../containers/formSubmit';
 import { styles } from './style';
 import { useDeviceType, useTranslation } from '../../../hooks';
-import { CSSProperties } from 'react';
+import EmailIcon from '@/public/icon/email_purple.svg';
+import PhoneIcon from '@/public/icon/phone_purple.svg';
+import LocationIcon from '@/public/icon/location_purple.svg';
 
 const SubmitApplicationPage = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
   const imageStyle =
-    type === 'mobile'
-      ? ({
-          left: '-5vw',
-          top: '20vh',
-          width: '100vw',
-          height: '50vh',
-        } as CSSProperties)
-      : styles.imageStyle;
+    type === 'mobile' ? styles.imageStyleMobile : styles.imageStyle;
+
+  const careerInfoList = [
+    { logo: EmailIcon, title: 'info_box.email', desc: 'info_box.email_desc_2' },
+    { logo: PhoneIcon, title: 'info_box.phone', desc: 'info_box.phone_desc' },
+    {
+      logo: LocationIcon,
+      title: 'info_box.address',
+      desc: 'info_box.address_desc',
+    },
+  ];
 
   return (
     <FormSubmitContainer
@@ -24,9 +29,11 @@ const SubmitApplicationPage = () => {
       description={t('careers.submit_application_desc')}
       text1={`${t("careers.submit_application_title.let's")}\u00a0`}
       text2={t('careers.submit_application_title.the_future')}
-      photo={Photo}
+      photo={getPhoto('fieldPerson')}
       type={type}
       imageStyle={imageStyle}
+      containerStyle={{ alignSelf: 'start', height: '90vh' }}
+      customInfoList={careerInfoList}
     />
   );
 };

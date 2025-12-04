@@ -41,7 +41,7 @@ export const footerStyles = {
 
   descriptionText: (deviceType: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(deviceType, '0.6em', '0.8em', '0.8em'),
+      fontSize: dynamicStylingValue(deviceType, '0.6em', '1rem', '1rem'),
       fontWeight: 400,
       color: '#8F92A7',
       whiteSpace: 'pre-line',
@@ -56,14 +56,14 @@ export const footerStyles = {
   }),
 
   sectionTitle: {
-    fontSize: '1em',
+    fontSize: '1rem',
     fontWeight: 700,
     color: 'white',
   } as SxProps<Theme>,
 
   contactText: {
     marginLeft: 1,
-    fontSize: '0.8em',
+    fontSize: '1rem',
     fontWeight: 400,
     color: '#8F92A7',
     whiteSpace: 'pre-line',
@@ -71,7 +71,7 @@ export const footerStyles = {
 
   subsidiaryText: {
     marginLeft: 1,
-    fontSize: '0.8em',
+    fontSize: '1rem',
     fontWeight: 400,
     color: '#8F92A7',
   } as SxProps<Theme>,
@@ -93,7 +93,7 @@ export const footerStyles = {
   } as SxProps<Theme>,
 
   copyrightText: {
-    fontSize: '0.8em',
+    fontSize: '0.8rem',
     fontWeight: 400,
     color: 'white',
     marginLeft: 0.5,

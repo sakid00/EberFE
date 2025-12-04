@@ -1,10 +1,6 @@
 'use client';
 import Image from 'next/image';
-import logo from '@/public/eber_logo.png';
-import logoMobile from '@/public/svg/eber-logo-color.svg';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
-import idFlag from '@/public/svg/id.svg';
-import enFlag from '@/public/svg/en.svg';
 import {
   Box,
   Button,
@@ -15,7 +11,7 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,10 +23,17 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { headerSectionStyles } from '@/containers/home/styles';
+import DualColorText from '../dualColorText';
+
+const logo = '/eber_logo.png';
+const logoMobile = '/svg/eber-logo-color.svg';
+const idFlag = '/svg/id.svg';
+const enFlag = '/svg/en.svg';
 
 // Constants
 const ANIMATION_DURATION = 50; // Sangat cepat
-const ANIMATION_STAGGER_DELAY = 0.01; // Hampir instan
+const ANIMATION_STAGGER_DELAY = 0.1; // Stagger delay for navigation items
 
 const NAVIGATION_ITEMS = [
   { name: 'navigation_bar.home', navigation: '/', key: 'home' },
@@ -77,19 +80,17 @@ const shouldShowDesktopNavigation = (isMobile: boolean): boolean => !isMobile;
 
 // Subcomponents
 interface NavigationBarProps {
-  isAnimating: boolean;
-  hasAnimated: boolean;
   pathName: string;
   onNavigate: (path: string) => void;
   t: (key: string) => string;
+  animationKey: number;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({
-  isAnimating,
-  hasAnimated,
   pathName,
   onNavigate,
   t,
+  animationKey,
 }) => {
   return (
     <>
@@ -98,17 +99,16 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
 
         return (
           <motion.div
-            key={index}
+            key={`${animationKey}-${index}`}
             initial={{ opacity: 0, y: -50 }}
             animate={{
-              opacity: isAnimating ? 0 : 1,
-              y: isAnimating ? -20 : 0,
-              scale: isAnimating ? 0.95 : 1,
+              opacity: 1,
+              y: 0,
             }}
             transition={{
-              duration: hasAnimated ? 0 : 0.3, // No animation after first load
-              ease: 'easeInOut',
-              delay: hasAnimated ? 0 : index * ANIMATION_STAGGER_DELAY,
+              duration: 0.6,
+              ease: 'easeOut',
+              delay: index * ANIMATION_STAGGER_DELAY,
             }}
           >
             <Button
@@ -157,13 +157,13 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         sx={{ border: 0 }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
-            <span>{value}</span>
+            <span style={{ fontSize: '1.1rem' }}>{value}</span>
             <Image
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
+              style={headerStyles.flagImageStyle}
               width={20}
               height={15}
-              style={headerStyles.flagImageStyle}
             />
           </Box>
         )}
@@ -262,7 +262,7 @@ const MobileLanguageSelector: React.FC<LanguageSelectorProps> = ({
 const Header = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false); // Track if we've already animated once
+  const [animationKey, setAnimationKey] = useState(0); // Track page changes for re-animation
   const { type, isMobile, isTablet } = useDeviceType();
   const { language, setLanguage, t } = useTranslation();
   const { navigateTo } = useNavigation();
@@ -284,22 +284,15 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Effects - Optimized animation timing
+  // Effects - Trigger animation on every page change
   useEffect(() => {
-    if (!hasAnimated) {
-      // First load - full animation
-      setIsAnimating(true);
-      const timer = setTimeout(() => {
-        setIsAnimating(false);
-        setHasAnimated(true);
-      }, ANIMATION_DURATION);
-      return () => clearTimeout(timer);
-    } else {
-      // Subsequent navigations - skip animation entirely
-      setIsAnimating(false); // No animation for fast navigation
-      // No timer to clear since we skip animation
-    }
-  }, [pathName, hasAnimated]);
+    setIsAnimating(true);
+    setAnimationKey((prev) => prev + 1); // Increment key to force re-animation
+    const timer = setTimeout(() => {
+      setIsAnimating(false);
+    }, ANIMATION_DURATION);
+    return () => clearTimeout(timer);
+  }, [pathName]);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
@@ -316,29 +309,22 @@ const Header = () => {
       return { width: '60%', height: 'auto' };
     }
     if (isTablet) {
-      return { width: '70%', height: 'auto' };
+      return { width: '10vw', height: 'auto' };
     }
-    return { width: '80%', height: 'auto' };
+    return { width: '10vw', maxWidth: '180px', height: 'auto' };
   };
 
   // Logo component
   const LogoSection = () => (
-    <motion.div
-      style={headerStyles.logoContainer}
-      initial={{ opacity: 0, y: -50 }}
-      animate={{
-        opacity: isAnimating ? 0 : 1,
-        y: isAnimating ? -30 : 0,
-        scale: isAnimating ? 0.9 : 1,
-      }}
-      transition={{
-        duration: 0.4,
-        ease: 'easeInOut',
-        delay: isAnimating ? 0 : 0.2,
-      }}
-    >
-      <Image src={logo} alt="EBER Logo" style={getLogoDimensions()} />
-    </motion.div>
+    <Box style={headerStyles.logoContainer}>
+      <Image
+        src={logo}
+        alt="EBER Logo"
+        width={100}
+        height={100}
+        style={getLogoDimensions()}
+      />
+    </Box>
   );
 
   // Right section component
@@ -356,6 +342,247 @@ const Header = () => {
         onLanguageChange={handleLanguageChange}
       />
     </motion.div>
+  );
+
+  const homepageImage = useMemo(
+    () => (
+      <>
+        <Box
+          sx={{
+            position: 'relative',
+            left: '10%',
+            top: '-10%',
+            maxWidth: '50%',
+            zIndex: 1,
+          }}
+        >
+          <Typography
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.innovating')}
+          </Typography>
+          <DualColorText
+            text1={`${t('home.title.as')}\u00a0`}
+            text2={t('home.title.sustainable')}
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerSectionStyles.title}
+          />
+          <Typography
+            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.future')}
+          </Typography>
+          <Typography
+            color="white"
+            marginTop="1%"
+            maxWidth="80%"
+            fontSize={'clamp(0.8em, 1vw, 1em)'}
+          >
+            {t('home.desc')}
+          </Typography>
+          <Box
+            id="buttons-wrapper"
+            sx={{ display: 'flex', marginTop: '4%', gap: 2 }}
+          >
+            <Button
+              size="small"
+              sx={headerSectionStyles.primaryButton}
+              onClick={() => handleNavigate('/product')}
+            >
+              {t('home.product_button')}
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              sx={headerSectionStyles.secondaryButton(type)}
+              onClick={() => handleNavigate('/product/submit')}
+            >
+              {t('home.custom_product_button')}
+            </Button>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            position: 'relative',
+            width: '100vw',
+            height: '100%',
+            maxWidth: '1000px',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              width: '45%',
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              padding: '2%',
+              borderRadius: '10px',
+              top: '20%',
+              left: '30%',
+              borderBottomRightRadius: '100px',
+            }}
+          >
+            <Typography color="white" fontSize="0.9em" fontWeight={800}>
+              {t('home.modal.title')}
+            </Typography>
+            <Typography color="white" fontSize="0.9em" fontWeight={400}>
+              {t('home.modal.desc')}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 1,
+            }}
+          >
+            <Image
+              src={getPhoto('subtract')}
+              alt="header-photo"
+              width={1000}
+              height={1000}
+              style={{ objectFit: 'contain' }}
+              loading="lazy"
+            />
+          </Box>
+        </Box>
+      </>
+    ),
+    [type, t]
+  );
+
+  const homepageImageMobile = useMemo(
+    () => (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          height: '500px',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'relative',
+            zIndex: 1,
+            width: '100vw',
+            display: 'flex',
+            flexDirection: 'column',
+            top: '8%',
+            gap: 1,
+          }}
+        >
+          <Typography
+            fontSize={'9vw'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.innovating')}
+          </Typography>
+          <DualColorText
+            text1={`${t('home.title.as')}\u00a0`}
+            text2={t('home.title.sustainable')}
+            fontSize={'9vw'}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerSectionStyles.title}
+          />
+          <Typography
+            fontSize={'9vw'}
+            fontWeight={800}
+            sx={headerSectionStyles.title}
+          >
+            {t('home.title.future')}
+          </Typography>
+        </Box>
+
+        <Box
+          sx={{
+            position: 'relative',
+            flex: 1,
+            zIndex: 1,
+            left: '2%',
+            display: 'flex',
+            flexDirection: 'column',
+            height: '50%',
+          }}
+        >
+          <Box
+            sx={{
+              position: 'relative',
+              flex: 1,
+              display: 'flex',
+              alignItems: 'flex-end',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                padding: '4%',
+                borderRadius: '10px',
+                top: '5vh',
+                left: '52%',
+                borderBottomRightRadius: '100px',
+              }}
+            >
+              <Typography color="white" fontSize={'2.2vw'} fontWeight={800}>
+                {t('home.modal.title')}
+              </Typography>
+              <Typography color="white" fontSize={'2.2vw'} fontWeight={400}>
+                {t('home.modal.desc')}
+              </Typography>
+            </Box>
+            <Image
+              src={getPhoto('subtract')}
+              alt="header-photo"
+              width={1000}
+              height={1000}
+              style={{ objectFit: 'contain' }}
+              loading="lazy"
+            />
+          </Box>
+        </Box>
+      </Box>
+    ),
+    [type, t]
+  );
+
+  const aboutUsImage = useMemo(
+    () => (
+      <Box
+        sx={{
+          position: 'relative',
+          width: dynamicStylingValue(type, '90%', '50%', '50%'),
+          height: dynamicStylingValue(type, '50%', '90%', '90%'),
+          top: dynamicStylingValue(type, '38%', '10%', '10%'),
+          left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
+          right: 0,
+          bottom: 0,
+          zIndex: 1,
+        }}
+      >
+        <Image
+          src={getPhoto('tankiPerson')}
+          alt="header photo"
+          width={1000}
+          height={1000}
+          style={{ objectFit: 'contain' }}
+          loading="lazy"
+        />
+      </Box>
+    ),
+    [type]
   );
 
   return (
@@ -381,89 +608,12 @@ const Header = () => {
                   ? getPhoto('eberBig2Mobile')
                   : getPhoto('eberBig2')
               }
+              width={1000}
+              height={1000}
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
-              priority={true}
+              loading="lazy"
             />
-
-            {isHomePagePath && (
-              <>
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: dynamicStylingValue(type, '35%', '20%', '20%'),
-                    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                    padding: dynamicStylingValue(type, '2%', '1%', '1%'),
-                    borderRadius: '10px',
-                    top: dynamicStylingValue(type, '58%', '30%', '30%'),
-                    left: dynamicStylingValue(type, '53%', '70%', '70%'),
-                    borderBottomRightRadius: '100px',
-                  }}
-                >
-                  <Typography
-                    color="white"
-                    fontSize={dynamicStylingValue(
-                      type,
-                      '0.5em',
-                      '0.9em',
-                      '0.9em'
-                    )}
-                    fontWeight={800}
-                  >
-                    {t('home.modal.title')}
-                  </Typography>
-                  <Typography
-                    color="white"
-                    fontSize={dynamicStylingValue(
-                      type,
-                      '0.5em',
-                      '0.9em',
-                      '0.9em'
-                    )}
-                    fontWeight={500}
-                  >
-                    {t('home.modal.desc')}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    position: 'absolute',
-                    width: dynamicStylingValue(type, '100%', '50%', '50%'),
-                    height: dynamicStylingValue(type, '50%', '80%', '80%'),
-                    top: dynamicStylingValue(type, '58%', '25%', '28%'),
-                    left: dynamicStylingValue(type, '2%', '38%', '38%'),
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 1,
-                  }}
-                >
-                  <Image
-                    src={getPhoto('subtract')}
-                    alt="header-photo"
-                    width={1000}
-                    height={1000}
-                  />
-                </Box>
-              </>
-            )}
-
-            {isAboutUsPagePath && (
-              <Box
-                sx={{
-                  position: 'absolute',
-                  width: dynamicStylingValue(type, '90%', '60%', '60%'),
-                  height: dynamicStylingValue(type, '48%', '100%', '100%'),
-                  aspectRatio: '1/1.1',
-                  top: dynamicStylingValue(type, '55%', '10%', '10%'),
-                  left: dynamicStylingValue(type, '10%', '40%', '40%'),
-                  right: 0,
-                  bottom: 0,
-                  zIndex: 1,
-                }}
-              >
-                <Image src={getPhoto('tankiPerson')} alt="header photo" fill />
-              </Box>
-            )}
 
             {/* Main Header Container */}
             <Box sx={headerStyles.container}>
@@ -471,26 +621,20 @@ const Header = () => {
 
               {/* Desktop and Tablet Navigation */}
               {shouldShowDesktopNavigation(isMobile) && (
-                <motion.div
+                <Box
                   className="desktop-navigation"
-                  style={{
+                  sx={{
                     display: 'flex',
                     flexDirection: 'row',
                   }}
-                  animate={{
-                    opacity: isAnimating ? 0.3 : 1,
-                    y: isAnimating ? -10 : 0,
-                  }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                 >
                   <NavigationBar
-                    isAnimating={isAnimating}
-                    hasAnimated={hasAnimated}
+                    animationKey={animationKey}
                     pathName={pathName}
                     onNavigate={handleNavigate}
                     t={t}
                   />
-                </motion.div>
+                </Box>
               )}
 
               {/* Right Section - Language & Search (Desktop & Tablet) */}
@@ -514,6 +658,21 @@ const Header = () => {
                 </motion.div>
               )}
             </Box>
+            {isHomePagePath && (
+              <Box
+                sx={{
+                  position: 'relative',
+                  flexDirection: isMobile ? 'column' : 'row',
+                  display: 'flex',
+                  alignItems: 'center',
+                  paddingX: '5%',
+                  height: '100%',
+                }}
+              >
+                {isMobile ? homepageImageMobile : homepageImage}
+              </Box>
+            )}
+            {isAboutUsPagePath && aboutUsImage}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>
@@ -547,6 +706,8 @@ const Header = () => {
               <Box sx={headerStyles.mobileMenuLogoContainer}>
                 <Image
                   src={type === 'mobile' ? logoMobile : logo}
+                  width={100}
+                  height={100}
                   alt="EBER-Logo"
                   style={headerStyles.mobileMenuLogo}
                 />

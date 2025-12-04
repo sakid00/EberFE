@@ -29,8 +29,8 @@ export const ValueCard = ({ data, index }: ValueCardProps) => {
         src={data.img}
         alt={`innovation-img-${index}`}
         style={{
-          width: dynamicStylingValue(type, '25px', '35px', '35px'),
-          height: dynamicStylingValue(type, '25px', '35px', '35px'),
+          width: dynamicStylingValue(type, '25px', '50px', '50px'),
+          height: dynamicStylingValue(type, '25px', '50px', '50px'),
         }}
       />
       <Typography
