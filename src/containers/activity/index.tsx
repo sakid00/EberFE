@@ -165,6 +165,7 @@ const ActivityContainer = () => {
                   id={activity.id}
                   title_en={activity.title_en}
                   title_id={activity.title_id}
+                  group={activity.group}
                 />
               ))
             ) : (

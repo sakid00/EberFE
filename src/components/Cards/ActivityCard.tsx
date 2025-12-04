@@ -21,6 +21,7 @@ interface ActivityCardProps {
   id?: number;
   title_en?: string;
   title_id?: string;
+  group?: string;
 }
 
 const ActivityCard = ({
@@ -31,7 +32,10 @@ const ActivityCard = ({
   id,
   title_en,
   title_id,
+  group,
 }: ActivityCardProps) => {
+  const isCalendar = group?.toLowerCase().includes('calendar');
+  const flipDirection = isCalendar ? 'vertical' : 'horizontal';
   const [isPDFOpen, setIsPDFOpen] = useState(false);
   const router = useRouter();
   const { language } = useTranslation();
@@ -87,6 +91,7 @@ const ActivityCard = ({
         open={isPDFOpen}
         onClose={() => setIsPDFOpen(false)}
         pdfUrl={`${process.env.NEXT_PUBLIC_IMAGE_ACTIVITY_BASE_URL}${pdfUrl}`}
+        flipDirection={flipDirection}
       />
     </>
   );
