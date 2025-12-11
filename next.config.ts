@@ -35,13 +35,13 @@ const nextConfig: NextConfig = {
         : []),
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.info',
+        hostname: 'fish.ebergroup.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.info',
+        hostname: 'fish.ebergroup.com',
         port: '',
         pathname: '/uploads/**',
       },
