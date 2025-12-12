@@ -66,13 +66,10 @@ const useProduct = () => {
         }
 
         const finalUrl = `/products?${queryParams.toString()}`;
-        console.log('Products API URL:', finalUrl); // Debug log
 
         const response = await api.execute(finalUrl, {
           method: 'GET',
         });
-
-        console.log('Products API Response:', response); // Debug log
 
         // Handle different possible API response structures
         const apiResponse = response.data as {
@@ -87,11 +84,8 @@ const useProduct = () => {
         const productData: ProductResponseData[] =
           apiResponse?.data?.data || [];
 
-        console.log('Product Data:', productData); // Debug log
-
         // Extract filter data from response
         const filterData = apiResponse?.data?.filter_feature;
-        console.log('Filter Data:', filterData); // Debug log
 
         if (filterData) {
           const filters = {

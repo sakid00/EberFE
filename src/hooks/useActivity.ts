@@ -41,8 +41,6 @@ const useActivity = () => {
           pageSize: request.pageSize.toString(),
         });
 
-        console.log('Request group:', request.group === 'EBER Magazine');
-
         // Add optional query parameters with proper encoding
         if (request.group) {
           if (request.group === 'EBER Magazine') {
@@ -53,13 +51,10 @@ const useActivity = () => {
         }
 
         const finalUrl = `/articles?${queryParams.toString()}`;
-        console.log('Activities API URL:', finalUrl); // Debug log
 
         const response = await api.execute(finalUrl, {
           method: 'GET',
         });
-
-        console.log('Activities API Response:', response); // Debug log
 
         // Handle different possible API response structures
         const apiResponse = response.data as {
@@ -81,9 +76,6 @@ const useActivity = () => {
           totalItems: activityData.length,
           itemsPerPage: request.pageSize,
         };
-
-        console.log('Activity Data:', activityData); // Debug log
-        console.log('Pagination Data:', paginationData); // Debug log
 
         // Transform API response to match our global state format
         const transformedData: ActivityData[] = activityData?.map(
@@ -122,27 +114,16 @@ const useActivity = () => {
           (activity) => activity.id === id
         );
         if (existingActivity) {
-          console.log('Activity found in state:', existingActivity);
           return existingActivity;
         }
 
         actions.fetchActivitiesStart();
 
         const finalUrl = `/articles/${id}`;
-        console.log('Activity Detail API URL:', finalUrl);
 
         const response = await api.execute(finalUrl, {
           method: 'GET',
         });
-
-        console.log('Activity Detail API Response:', response);
-        console.log('Response structure analysis:');
-        console.log('- response.data:', response.data);
-        console.log('- typeof response.data:', typeof response.data);
-        console.log(
-          '- response.data keys:',
-          response.data ? Object.keys(response.data) : 'N/A'
-        );
 
         // Handle different possible API response structures
         let activityData: ActivityResponseData | undefined;
@@ -173,22 +154,18 @@ const useActivity = () => {
             const nestedData = responseData.data as Record<string, unknown>;
             if (nestedData.data && isActivityData(nestedData.data)) {
               activityData = nestedData.data as unknown as ActivityResponseData;
-              console.log('Using double-nested data structure');
             } else if (isActivityData(responseData.data)) {
               // Structure: { data: ActivityResponseData }
               activityData =
                 responseData.data as unknown as ActivityResponseData;
-              console.log('Using single-nested data structure');
             }
           } else if (isActivityData(responseData)) {
             // Structure: ActivityResponseData (direct activity data at root)
             activityData = responseData as unknown as ActivityResponseData;
-            console.log('Using direct data structure');
           }
 
           // Additional fallback - try to find any object with activity-like properties
           if (!activityData) {
-            console.log('Trying fallback parsing...');
             const checkAllProperties = (
               obj: unknown
             ): obj is Partial<ActivityResponseData> => {
@@ -203,13 +180,11 @@ const useActivity = () => {
             // Check direct properties
             if (checkAllProperties(responseData)) {
               activityData = responseData as unknown as ActivityResponseData;
-              console.log('Using fallback direct parsing');
             } else {
               // Check nested properties
-              for (const [key, value] of Object.entries(responseData)) {
+              for (const [, value] of Object.entries(responseData)) {
                 if (checkAllProperties(value)) {
                   activityData = value as unknown as ActivityResponseData;
-                  console.log(`Using fallback nested parsing from key: ${key}`);
                   break;
                 }
               }
@@ -217,22 +192,16 @@ const useActivity = () => {
           }
         }
 
-        console.log('Parsed activityData:', activityData);
-
         if (
           !activityData ||
           (typeof activityData === 'object' &&
             Object.keys(activityData).length === 0)
         ) {
-          console.error('Activity data is empty or null:', activityData);
-          console.error('Full response:', JSON.stringify(response, null, 2));
-
           // Check if activity already exists in our state as fallback
           const stateActivity = state.activities.find(
             (activity) => activity.id === id
           );
           if (stateActivity) {
-            console.log('Found activity in state as fallback:', stateActivity);
             return stateActivity;
           }
 
@@ -241,17 +210,11 @@ const useActivity = () => {
 
         // Validate that we have essential activity properties
         if (!activityData.id) {
-          console.error('Activity data missing ID field:', activityData);
-
           // Check if activity exists in state as fallback
           const stateActivity = state.activities.find(
             (activity) => activity.id === id
           );
           if (stateActivity) {
-            console.log(
-              'Found activity in state as fallback (missing ID):',
-              stateActivity
-            );
             return stateActivity;
           }
 
@@ -296,8 +259,6 @@ const useActivity = () => {
 
         return transformedData;
       } catch (error) {
-        console.error(`Error fetching activity ${id}:`, error);
-
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch activity';
         actions.fetchActivitiesError(errorMessage);
