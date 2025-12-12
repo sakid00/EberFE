@@ -27,7 +27,11 @@ const nextConfig: NextConfig = {
         ? [
             {
               protocol: 'https' as const,
-              hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
+              // Extract hostname only (remove https:// and any trailing path)
+              hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL.replace(
+                /^https?:\/\//,
+                ''
+              ).replace(/\/.*$/, ''),
               port: '',
               pathname: '/**',
             },
