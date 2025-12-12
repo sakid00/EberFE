@@ -27,15 +27,14 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
     // Mark that React has loaded
     document.documentElement.classList.add('react-loaded');
 
-    // Clean up the initial loading element
+    // Clean up the initial loading element - hide instead of removing to prevent hydration errors
     const initialLoading = document.getElementById('initial-loading');
     if (initialLoading) {
       initialLoading.style.transition = 'opacity 0.5s ease-out';
       initialLoading.style.opacity = '0';
+      // Hide the element instead of removing it to prevent React hydration errors
       setTimeout(() => {
-        if (initialLoading.parentNode) {
-          initialLoading.parentNode.removeChild(initialLoading);
-        }
+        initialLoading.style.display = 'none';
       }, 500);
     }
 
