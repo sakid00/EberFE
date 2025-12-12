@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta
           name="viewport"
@@ -72,7 +72,7 @@ export default function RootLayout({
           media="(max-width: 768px)"
         />
       </head>
-      <body className={`${font.className} ${font.variable} overscroll-none`}>
+      <body className={`${font.className} ${font.variable} overscroll-none`} suppressHydrationWarning>
         {/* Immediate loading screen - disabled for instant loading */}
         <div id="initial-loading" style={{ display: 'none' }}>
           <div style={{ textAlign: 'center' }}>
