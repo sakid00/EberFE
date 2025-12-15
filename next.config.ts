@@ -27,7 +27,11 @@ const nextConfig: NextConfig = {
         ? [
             {
               protocol: 'https' as const,
-              hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL,
+              // Extract hostname only (remove https:// and any trailing path)
+              hostname: process.env.NEXT_PUBLIC_IMAGE_BASE_URL.replace(
+                /^https?:\/\//,
+                ''
+              ).replace(/\/.*$/, ''),
               port: '',
               pathname: '/**',
             },
@@ -35,13 +39,13 @@ const nextConfig: NextConfig = {
         : []),
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.info',
+        hostname: 'fish.ebergroup.com',
         port: '',
         pathname: '/**',
       },
       {
         protocol: 'https' as const,
-        hostname: 'eber-api.agepedia.info',
+        hostname: 'fish.ebergroup.com',
         port: '',
         pathname: '/uploads/**',
       },
