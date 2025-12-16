@@ -80,18 +80,16 @@ const useCompany = () => {
     async (request: CompanyRequest) => {
       try {
         const cacheKey = `${request.page}_${request.pageSize}`;
-        
+
         // Check cache first
         const cachedData = cache.get(cacheKey);
         if (cachedData && cachedData.length > 0) {
-          console.log('Using cached company data');
           actions.fetchCompaniesSuccess(cachedData);
           return cachedData;
         }
 
         // If global state has data, use it and cache it
         if (state.companies.length > 0 && !state.isLoading) {
-          console.log('Using existing company data from state');
           cache.set(cacheKey, state.companies);
           return state.companies;
         }
@@ -109,8 +107,6 @@ const useCompany = () => {
             method: 'GET',
           }
         );
-
-        console.log('API Response:', response); // Debug log
 
         // Handle different possible API response structures
         const apiResponse = response.data as {

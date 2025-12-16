@@ -145,7 +145,7 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
     }
     // Do nothing if form hasn't been submitted - modal stays open
   };
-  console.log('kuda', isSubmitting);
+
   return (
     <Modal
       open={openModal}
