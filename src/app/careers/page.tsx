@@ -1,69 +1,18 @@
-'use client';
-import { useRouter } from 'next/navigation';
-import CareerContainer from '../../containers/career';
-import useCareer from '../../hooks/useCareer';
-import { useEffect, useMemo } from 'react';
-import { Box } from '@mui/material';
-import { useTranslation } from '../../hooks';
-import { useDeviceType } from '../../hooks/useDeviceType';
-import { ListSkeleton } from '@/components/Skeleton';
+import type { Metadata } from 'next';
+import CareersClient from './CareersClient';
 
-export interface ICareerList {
-  title: string;
-  status: string;
-  desc: string;
-}
-
-const CareersPage = () => {
-  const router = useRouter();
-  const { language } = useTranslation();
-  const { type } = useDeviceType();
-  const { getCareer, careers, isLoading } = useCareer();
-
-  useEffect(() => {
-    console.log('Fetching careers from API...');
-    getCareer({
-      page: 1,
-      pageSize: 10,
-    }).catch((error) => {
-      console.error('Failed to fetch careers:', error);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Transform global state careers to ICareerList format
-  const careerList: ICareerList[] = useMemo(() => {
-    if (careers?.length > 0) {
-      return careers?.map((career) => ({
-        title: career.position,
-        status:
-          career.type === 'fulltime'
-            ? 'Full Time'
-            : career.type === 'parttime'
-              ? 'Part Time'
-              : career.type.charAt(0).toUpperCase() + career.type.slice(1), // Transform types to display format
-        desc: language === 'en' ? career.description_en : career.description_id,
-      }));
-    }
-    return [];
-  }, [careers, language]);
-
-  // Loading state with skeleton
-  if (isLoading && careers?.length === 0) {
-    return (
-      <Box sx={{ padding: 2 }}>
-        <ListSkeleton count={6} type={type} showBadge={true} />
-      </Box>
-    );
-  }
-
-  return (
-    <CareerContainer
-      careerList={careerList}
-      router={router}
-      isLoading={isLoading}
-    />
-  );
+export const metadata: Metadata = {
+  title: 'Careers - EBER Group',
+  description:
+    'Join EBER Group - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
+  openGraph: {
+    title: 'Careers - EBER Group',
+    description:
+      'Join EBER Group - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
+    url: 'https://ebergroup.com/careers',
+  },
 };
 
-export default CareersPage;
+export default function CareersPage() {
+  return <CareersClient />;
+}

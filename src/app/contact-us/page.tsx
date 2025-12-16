@@ -1,41 +1,18 @@
-'use client';
-import { getPhoto } from '@/assets/photoAssets';
-import FormSubmitContainer from '../../containers/formSubmit';
-import { useDeviceType, useTranslation } from '../../hooks';
-import { CSSProperties } from 'react';
+import type { Metadata } from 'next';
+import ContactUsClient from './ContactUsClient';
 
-const ContactUsPage = () => {
-  const { type } = useDeviceType();
-  const { t } = useTranslation();
-  const imageStyle =
-    type === 'mobile'
-      ? ({
-          position: 'absolute',
-          top: '28vh',
-          right: '5vw',
-          width: 'max-content',
-          height: '40vh',
-        } as CSSProperties)
-      : ({
-          top: '2vw',
-          right: '6%',
-          maxWidth: '100vw',
-          width: '35vw',
-          minwidth: '20%',
-          height: 'auto',
-        } as CSSProperties);
-
-  return (
-    <FormSubmitContainer
-      title={t('contact_us.submit_application_title_small')}
-      description={t('contact_us.submit_application_desc')}
-      text1={`${t("contact_us.submit_application_title.let's")}\u00a0`}
-      text2={t('contact_us.submit_application_title.reach_out')}
-      photo={getPhoto('safetyPerson')}
-      type={type}
-      imageStyle={imageStyle}
-    />
-  );
+export const metadata: Metadata = {
+  title: 'Contact Us - EBER Group',
+  description:
+    'Get in touch with EBER Group - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
+  openGraph: {
+    title: 'Contact Us - EBER Group',
+    description:
+      'Get in touch with EBER Group - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
+    url: 'https://ebergroup.com/contact-us',
+  },
 };
 
-export default ContactUsPage;
+export default function ContactUsPage() {
+  return <ContactUsClient />;
+}
