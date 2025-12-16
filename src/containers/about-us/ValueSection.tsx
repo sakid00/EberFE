@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { ValueCard } from '@/components/Cards/ValueCard';
-import { VALUES_DATA } from './constants';
+import { CHARACTERS_DATA, VALUES_DATA } from './constants';
 import Image from 'next/image';
 import { getPhoto } from '@/assets/photoAssets';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
@@ -8,17 +8,70 @@ import ImageBackground from '@/components/ImageBackground/index';
 import { valueStyles } from './styles';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
+import { animationClasses } from '../home/styles';
+import { useMemo } from 'react';
+import container2 from '@/public/background/container2.png';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
+
+  const mobileContent = useMemo(() => {
+    return (
+      <Box sx={valueStyles.valuesContainerMobile}>
+        <Typography
+          fontSize={'1em'}
+          fontWeight={'600'}
+          color="white"
+          sx={valueStyles.valuesAndCharactersTitleMobile}
+        >
+          {t('about_us.company_values')}
+        </Typography>
+        <Box sx={valueStyles.valuesGridMobile}>
+          {VALUES_DATA.map((data, index) => {
+            const isLastOdd =
+              index === VALUES_DATA.length - 1 && VALUES_DATA.length % 2 === 1;
+            return (
+              <Box
+                key={index}
+                sx={{
+                  width: isLastOdd ? 'calc(50% - 4px)' : '100%',
+                  height: '100%',
+                  minHeight: 0,
+                  ...(isLastOdd && {
+                    gridColumn: '1 / -1',
+                    justifySelf: 'center',
+                  }),
+                }}
+              >
+                <ValueCard data={data} index={index} isMobile />
+              </Box>
+            );
+          })}
+        </Box>
+        <Typography
+          fontSize={'1em'}
+          fontWeight={'600'}
+          color="white"
+          sx={valueStyles.valuesAndCharactersTitleMobile}
+        >
+          {t('about_us.company_characters')}
+        </Typography>
+        <Box sx={valueStyles.valuesGridCharactersMobile}>
+          {CHARACTERS_DATA.map((data, index) => (
+            <ValueCard key={index} data={data} index={index} isMobile />
+          ))}
+        </Box>
+      </Box>
+    );
+  }, [t]);
 
   if (type === 'mobile') {
     return (
       <Box sx={valueStyles.mainContainerMobile}>
         <Box sx={valueStyles.titleContainer}>
           <Typography
-            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontSize={'1.5em'}
             fontWeight={'500'}
             color="#784791"
             sx={{ textAlign: 'center' }}
@@ -35,9 +88,10 @@ export const ValueSection = () => {
           </Typography>
         </Box>
         <ImageBackground
-          src={getBackgroundImage('container1Mobile')}
+          src={getBackgroundImage('container2Mobile')}
           alt="container"
           objectFit={'fill'}
+          className={animationClasses.slideRight}
           sx={valueStyles.imageBackgroundMobile}
           contentSx={valueStyles.contentSxMobile}
         >
@@ -57,16 +111,13 @@ export const ValueSection = () => {
               />
             </Box>
 
-            <Box sx={valueStyles.valuesGridMobile}>
-              {VALUES_DATA.map((data, index) => (
-                <ValueCard key={index} data={data} index={index} />
-              ))}
-            </Box>
+            {mobileContent}
           </Box>
         </ImageBackground>
       </Box>
     );
   }
+
   return (
     <Box
       id="about-us-fifth-section"
@@ -79,36 +130,28 @@ export const ValueSection = () => {
       >
         <>
           <Typography
-            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+            fontSize={'2em'}
             fontWeight={'500'}
             color="#784791"
             sx={{ textAlign: 'center' }}
           >
             {`${t('about_us.value_section_title.creating')}\u00a0`}
           </Typography>
-          <Typography
-            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-            fontWeight={'800'}
-            color="#784791"
-          >
+          <Typography fontSize={'2em'} fontWeight={'800'} color="#784791">
             {t('about_us.value_section_title.purpose_driven')}
           </Typography>
         </>
       </Box>
 
       <ImageBackground
-        src={getBackgroundImage('container1')}
+        src={container2}
         alt="container"
         objectFit={'fill'}
-        sx={{
-          position: 'relative',
-          width: '100%',
-          height: '85vh',
-          overflow: 'hidden',
-        }}
+        // className={animationClasses.slideRight}
+        sx={valueStyles.imageBackground}
         contentSx={{
           position: 'relative',
-          marginTop: dynamicStylingValue(type, '10%', '5%', '5%'),
+          marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
@@ -116,20 +159,42 @@ export const ValueSection = () => {
           paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
         }}
       >
-        <Box className="w-full " sx={valueStyles.fieldPersonContainer(type)}>
+        <Box sx={valueStyles.fieldPersonContainer}>
           <Image
             src={getPhoto('chemPerson')}
-            width={1000}
-            height={1000}
-            alt="field-person"
+            fill
             loading="lazy"
-            style={{ width: '60%', height: 'auto', objectFit: 'contain' }}
+            alt="field-person"
           />
         </Box>
-        <Box sx={valueStyles.valuesGrid}>
-          {VALUES_DATA.map((data, index) => (
-            <ValueCard key={index} data={data} index={index} />
-          ))}
+
+        <Box sx={valueStyles.valuesContainer}>
+          <Typography
+            fontSize={'1.5em'}
+            fontWeight={'600'}
+            color="#784791"
+            sx={valueStyles.valuesAndCharactersTitle}
+          >
+            {t('about_us.company_values')}
+          </Typography>
+          <Box sx={valueStyles.valuesGrid}>
+            {VALUES_DATA.map((data, index) => (
+              <ValueCard key={index} data={data} index={index} />
+            ))}
+          </Box>
+          <Typography
+            fontSize={'1.5em'}
+            fontWeight={'600'}
+            color="#784791"
+            sx={valueStyles.valuesAndCharactersTitle}
+          >
+            {t('about_us.company_characters')}
+          </Typography>
+          <Box sx={valueStyles.valuesGridCharacters}>
+            {CHARACTERS_DATA.map((data, index) => (
+              <ValueCard key={index} data={data} index={index} />
+            ))}
+          </Box>
         </Box>
       </ImageBackground>
 

@@ -5,16 +5,17 @@ import slide4 from '../../../public/icon/logo-smk3.svg';
 import accountability from '../../../public/icon/accountability.svg';
 import ethical from '../../../public/icon/ethical.svg';
 import transparency from '../../../public/icon/transparency.svg';
-import ingenuity from '../../../public/icon/ingenuity.svg';
-import responsibility from '../../../public/icon/responsibilty.svg';
-import safety from '../../../public/icon/safety.svg';
-import innovation from '../../../public/icon/innovation.svg';
-import trust from '../../../public/icon/trust.svg';
-import quality from '../../../public/icon/quality.svg';
-import creativity from '../../../public/icon/creativity.svg';
-import centricity from '../../../public/icon/centricity.svg';
-import growth from '../../../public/icon/growth.svg';
-import client from '../../../public/icon/client.svg';
+import trustworthy from '../../../public/icon/trustworthy.svg';
+import breaktrough from '../../../public/icon/breaktrough.svg';
+import sustainability from '../../../public/icon/sustainability.svg';
+import operational_excellences from '../../../public/icon/operational.svg';
+import partnertship from '../../../public/icon/partnership.svg';
+import commitment from '../../../public/icon/commitment.svg';
+import continuous_improvement from '../../../public/icon/continuous.svg';
+import loyalty from '../../../public/icon/loyal.svg';
+import positive_attitude from '../../../public/icon/positive.svg';
+import integrity from '../../../public/icon/integrity.svg';
+import innovative from '../../../public/icon/innovative.svg';
 
 export const CERTIFICATION_DATA = [slide1, slide2, slide3, slide4];
 
@@ -38,43 +39,50 @@ export const CORPORATE_DATA = [
 
 export const VALUES_DATA = [
   {
-    title: 'about_us.value_section_cards.social_responsibility',
-    img: responsibility,
+    title: 'about_us.value_section_cards.trustworthy',
+    img: trustworthy,
   },
   {
-    title: 'about_us.value_section_cards.safety',
-    img: safety,
+    title: 'about_us.value_section_cards.breaktrough',
+    img: breaktrough,
   },
   {
-    title: 'about_us.value_section_cards.innovation',
-    img: innovation,
+    title: 'about_us.value_section_cards.sustainability',
+    img: sustainability,
   },
   {
-    title: 'about_us.value_section_cards.ingenuity',
-    img: ingenuity,
+    title: 'about_us.value_section_cards.operational_excellences',
+    img: operational_excellences,
   },
   {
-    title: 'about_us.value_section_cards.trust',
-    img: trust,
+    title: 'about_us.value_section_cards.partnertship',
+    img: partnertship,
+  },
+];
+
+export const CHARACTERS_DATA = [
+  {
+    title: 'about_us.character_section_cards.commitment',
+    img: commitment,
   },
   {
-    title: 'about_us.value_section_cards.quality',
-    img: quality,
+    title: 'about_us.character_section_cards.continuous_improvement',
+    img: continuous_improvement,
   },
   {
-    title: 'about_us.value_section_cards.creativity',
-    img: creativity,
+    title: 'about_us.character_section_cards.loyalty',
+    img: loyalty,
   },
   {
-    title: 'about_us.value_section_cards.centricity',
-    img: centricity,
+    title: 'about_us.character_section_cards.positive_attitude',
+    img: positive_attitude,
   },
   {
-    title: 'about_us.value_section_cards.growth',
-    img: growth,
+    title: 'about_us.character_section_cards.integrity',
+    img: integrity,
   },
   {
-    title: 'about_us.value_section_cards.client',
-    img: client,
+    title: 'about_us.character_section_cards.innovative',
+    img: innovative,
   },
 ];

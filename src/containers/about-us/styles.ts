@@ -58,19 +58,69 @@ export const valueStyles: {
   backgroundImage: SxProps<Theme>;
   contentContainer: SxProps<Theme>;
   mainShape: SxProps<Theme>;
-  fieldPersonContainer: (type: DeviceType) => SxProps<Theme>;
+  fieldPersonContainer: SxProps<Theme>;
   valuesGrid: SxProps<Theme>;
+  valuesGridCharacters: SxProps<Theme>;
   valuesGridMobile: SxProps<Theme>;
   mainContainerMobile: SxProps<Theme>;
+  imageBackground: SxProps<Theme>;
   imageBackgroundMobile: SxProps<Theme>;
+  contentSx: SxProps<Theme>;
   contentSxMobile: SxProps<Theme>;
   contentContainerMobile: SxProps<Theme>;
   imageContainerMobile: SxProps<Theme>;
+  valuesContainer: SxProps<Theme>;
+  valuesAndCharactersTitle: SxProps<Theme>;
+  valuesAndCharactersTitleMobile: SxProps<Theme>;
+  valuesContainerMobile: SxProps<Theme>;
+  valuesGridCharactersMobile: SxProps<Theme>;
 } = {
+  valuesContainerMobile: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    borderRadius: '5%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: '3%',
+    width: '80vw',
+    maxWidth: '100vw',
+    flex: 1,
+    minHeight: 0,
+    overflow: 'hidden',
+    boxSizing: 'border-box',
+    marginBottom: '5%',
+  },
+  valuesContainer: {
+    top: '33vh',
+    position: 'absolute',
+    zIndex: 100000,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    maxWidth: '70%',
+  },
+  valuesAndCharactersTitle: {
+    marginY: '0.5%',
+    marginLeft: '1%',
+  },
+  valuesAndCharactersTitleMobile: {
+    marginY: '1%',
+    marginLeft: '5%',
+    alignSelf: 'flex-start',
+    flexShrink: 0,
+  },
   mainContainerMobile: {
     position: 'relative',
     marginTop: '20vh',
     width: '100vw',
+  },
+  imageBackground: {
+    width: '100%',
+    height: '80vh',
+    position: 'relative',
+    overflow: 'visible',
   },
   imageBackgroundMobile: {
     width: '100vw',
@@ -78,22 +128,39 @@ export const valueStyles: {
     overflow: 'visible',
     marginTop: '30vh',
   },
-  contentSxMobile: {
+  contentSx: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  contentSxMobile: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     paddingX: '5%',
+    marginBottom: '-20%',
+    height: 'calc(100vh + 28vh)', // Extra height to allow child to extend
+    minHeight: 0,
   },
   contentContainerMobile: {
     position: 'relative',
-    bottom: '15vh',
+    bottom: '28vh',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1,
+    minHeight: 0,
+    height: 'calc(100% + 28vh)', // Add extra height to compensate for bottom offset
+    maxHeight: 'calc(100vh + 28vh)',
+    overflow: 'hidden',
   },
   imageContainerMobile: {
     position: 'relative',
     zIndex: 1000,
     width: '100%',
+    flex: '0 0 auto',
   },
   container: {
     position: 'relative',
@@ -120,34 +187,63 @@ export const valueStyles: {
     overflow: 'visible',
     overflowClipMargin: 'content-box',
   },
-  fieldPersonContainer: (type: DeviceType) => ({
+  fieldPersonContainer: {
     position: 'absolute',
-    bottom: '3vw',
-    left: dynamicStylingValue(type, '5%', '-2%', '-2%'),
-    zIndex: 1000,
-  }),
+    width: '40vw',
+    height: '110%',
+    bottom: '0vh',
+    left: '-2%',
+    zIndex: 20,
+  },
   valuesGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
-    gridTemplateRows: 'repeat(2, 1fr)',
     position: 'relative',
-    gap: '5px',
+    gap: '1%',
     padding: '10px',
     zIndex: 100000,
+    width: '100%',
+  },
+  valuesGridCharacters: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(6, 1fr)',
+    position: 'relative',
+    gap: '1%',
+    padding: '10px',
+    zIndex: 100000,
+    width: '100%',
   },
   valuesGridMobile: {
     width: '100%',
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    borderRadius: '10px',
+    maxWidth: '100%',
     position: 'relative',
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, 1fr)',
-    gridTemplateRows: 'repeat(5, 1fr)',
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    gridTemplateRows: 'repeat(3, minmax(0, 1fr))',
     gap: '8px',
-    padding: '10px',
-    justifyItems: 'center',
-    alignItems: 'center',
+    padding: '8px',
+    justifyItems: 'stretch',
+    alignItems: 'stretch',
     zIndex: 100000,
+    boxSizing: 'border-box',
+    flex: 1,
+    minHeight: 0,
+  },
+  valuesGridCharactersMobile: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    gridTemplateRows: 'repeat(3, minmax(0, 1fr))',
+    position: 'relative',
+    gap: '8px',
+    padding: '8px',
+    zIndex: 100000,
+    width: '100%',
+    maxWidth: '100%',
+    justifyItems: 'stretch',
+    alignItems: 'stretch',
+    boxSizing: 'border-box',
+    flex: 1,
+    minHeight: 0,
   },
 };
 
