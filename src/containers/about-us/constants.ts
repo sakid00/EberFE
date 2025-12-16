@@ -1,7 +1,3 @@
-import slide1 from '../../../public/icon/isoqar-ukas.svg';
-import slide2 from '../../../public/icon/isokar-ukas22.svg';
-import slide3 from '../../../public/icon/intertek-certification.svg';
-import slide4 from '../../../public/icon/logo-smk3.svg';
 import accountability from '../../../public/icon/accountability.svg';
 import ethical from '../../../public/icon/ethical.svg';
 import transparency from '../../../public/icon/transparency.svg';
@@ -16,8 +12,6 @@ import loyalty from '../../../public/icon/loyal.svg';
 import positive_attitude from '../../../public/icon/positive.svg';
 import integrity from '../../../public/icon/integrity.svg';
 import innovative from '../../../public/icon/innovative.svg';
-
-export const CERTIFICATION_DATA = [slide1, slide2, slide3, slide4];
 
 export const CORPORATE_DATA = [
   {

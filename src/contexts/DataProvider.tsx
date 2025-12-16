@@ -137,6 +137,29 @@ export interface ActivityState {
   } | null;
 }
 
+// ===== CERTIFICATE API TYPES =====
+export interface CertificateData {
+  id: number;
+  name: string;
+  image: string;
+  status: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CertificateState {
+  certificates: CertificateData[];
+  isLoading: boolean;
+  error: string | null;
+  lastUpdated: Date | null;
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+  } | null;
+}
+
 // ===== NEXT API TYPES (PLACEHOLDER) =====
 // TODO: Replace these with your actual API response structure
 export interface NextApiData {
@@ -159,6 +182,7 @@ export interface GlobalState {
   product: ProductState;
   company: CompanyState;
   activity: ActivityState;
+  certificate: CertificateState;
   nextApi: NextApiState;
 }
 
@@ -204,6 +228,24 @@ type DataAction =
   | { type: 'ACTIVITY_FETCH_ERROR'; payload: string }
   | { type: 'ACTIVITY_CLEAR_ERROR' }
   | { type: 'ACTIVITY_RESET' }
+
+  // Certificate Actions
+  | { type: 'CERTIFICATE_FETCH_START' }
+  | {
+      type: 'CERTIFICATE_FETCH_SUCCESS';
+      payload: {
+        certificates: CertificateData[];
+        pagination: {
+          currentPage: number;
+          totalPages: number;
+          totalItems: number;
+          itemsPerPage: number;
+        };
+      };
+    }
+  | { type: 'CERTIFICATE_FETCH_ERROR'; payload: string }
+  | { type: 'CERTIFICATE_CLEAR_ERROR' }
+  | { type: 'CERTIFICATE_RESET' }
 
   // Next API Actions (PLACEHOLDER)
   | { type: 'NEXT_API_FETCH_START' }
@@ -257,6 +299,21 @@ interface DataContextType {
     activityClearError: () => void;
     activityReset: () => void;
 
+    // Certificate Actions
+    certificateFetchStart: () => void;
+    certificateFetchSuccess: (
+      certificates: CertificateData[],
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        itemsPerPage: number;
+      }
+    ) => void;
+    certificateFetchError: (error: string) => void;
+    certificateClearError: () => void;
+    certificateReset: () => void;
+
     // Next API Actions (PLACEHOLDER)
     nextApiFetchStart: () => void;
     nextApiFetchSuccess: (data: NextApiData[]) => void;
@@ -304,6 +361,14 @@ const initialActivityState: ActivityState = {
   pagination: null,
 };
 
+const initialCertificateState: CertificateState = {
+  certificates: [],
+  isLoading: false,
+  error: null,
+  lastUpdated: null,
+  pagination: null,
+};
+
 const initialNextApiState: NextApiState = {
   data: [],
   isLoading: false,
@@ -316,6 +381,7 @@ const initialState: GlobalState = {
   product: initialProductState,
   company: initialCompanyState,
   activity: initialActivityState,
+  certificate: initialCertificateState,
   nextApi: initialNextApiState,
 };
 
@@ -541,6 +607,56 @@ function dataReducer(state: GlobalState, action: DataAction): GlobalState {
         activity: initialActivityState,
       };
 
+    // ===== CERTIFICATE ACTIONS =====
+    case 'CERTIFICATE_FETCH_START':
+      return {
+        ...state,
+        certificate: {
+          ...state.certificate,
+          isLoading: true,
+          error: null,
+        },
+      };
+
+    case 'CERTIFICATE_FETCH_SUCCESS':
+      return {
+        ...state,
+        certificate: {
+          ...state.certificate,
+          certificates: action.payload.certificates,
+          pagination: action.payload.pagination,
+          isLoading: false,
+          error: null,
+          lastUpdated: new Date(),
+        },
+      };
+
+    case 'CERTIFICATE_FETCH_ERROR':
+      return {
+        ...state,
+        certificate: {
+          ...state.certificate,
+          isLoading: false,
+          error: action.payload,
+          certificates: [],
+        },
+      };
+
+    case 'CERTIFICATE_CLEAR_ERROR':
+      return {
+        ...state,
+        certificate: {
+          ...state.certificate,
+          error: null,
+        },
+      };
+
+    case 'CERTIFICATE_RESET':
+      return {
+        ...state,
+        certificate: initialCertificateState,
+      };
+
     // ===== NEXT API ACTIONS (PLACEHOLDER) =====
     case 'NEXT_API_FETCH_START':
       return {
@@ -665,6 +781,26 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
     activityClearError: () => dispatch({ type: 'ACTIVITY_CLEAR_ERROR' }),
     activityReset: () => dispatch({ type: 'ACTIVITY_RESET' }),
 
+    // Certificate Actions
+    certificateFetchStart: () => dispatch({ type: 'CERTIFICATE_FETCH_START' }),
+    certificateFetchSuccess: (
+      certificates: CertificateData[],
+      pagination: {
+        currentPage: number;
+        totalPages: number;
+        totalItems: number;
+        itemsPerPage: number;
+      }
+    ) =>
+      dispatch({
+        type: 'CERTIFICATE_FETCH_SUCCESS',
+        payload: { certificates, pagination },
+      }),
+    certificateFetchError: (error: string) =>
+      dispatch({ type: 'CERTIFICATE_FETCH_ERROR', payload: error }),
+    certificateClearError: () => dispatch({ type: 'CERTIFICATE_CLEAR_ERROR' }),
+    certificateReset: () => dispatch({ type: 'CERTIFICATE_RESET' }),
+
     // Next API Actions (PLACEHOLDER)
     nextApiFetchStart: () => dispatch({ type: 'NEXT_API_FETCH_START' }),
     nextApiFetchSuccess: (data: NextApiData[]) =>
@@ -765,6 +901,22 @@ export const useActivityContext = () => {
   };
 };
 
+// Specialized hook for certificate data
+export const useCertificateContext = () => {
+  const { state, actions } = useDataContext();
+
+  return {
+    state: state.certificate,
+    actions: {
+      fetchCertificatesStart: actions.certificateFetchStart,
+      fetchCertificatesSuccess: actions.certificateFetchSuccess,
+      fetchCertificatesError: actions.certificateFetchError,
+      clearError: actions.certificateClearError,
+      resetState: actions.certificateReset,
+    },
+  };
+};
+
 // Specialized hook for next API data (PLACEHOLDER)
 export const useNextApiContext = () => {
   const { state, actions } = useDataContext();
@@ -816,6 +968,18 @@ export const useActivityState = () => {
     error: state.activity.error,
     lastUpdated: state.activity.lastUpdated,
     hasActivities: state.activity.activities.length > 0,
+  };
+};
+
+export const useCertificateState = () => {
+  const { state } = useDataContext();
+  return {
+    certificates: state.certificate.certificates,
+    isLoading: state.certificate.isLoading,
+    error: state.certificate.error,
+    lastUpdated: state.certificate.lastUpdated,
+    pagination: state.certificate.pagination,
+    hasCertificates: state.certificate.certificates.length > 0,
   };
 };
 

@@ -1,6 +1,9 @@
 export { useAssetLoading } from './useAssetLoading';
 export { useDevAssetLoading } from './useDevAssetLoading';
-export { useNavigationCache, useNavigationDataCache } from './useNavigationCache';
+export {
+  useNavigationCache,
+  useNavigationDataCache,
+} from './useNavigationCache';
 
 // Main API hook
 export { useApi } from './useApi';
@@ -26,3 +29,6 @@ export type { DeviceType, DeviceInfo } from './useDeviceType';
 
 // Translation hook
 export { useTranslation } from './useTranslation';
+
+// Certificate hook
+export { default as useCertificate } from './useCertificate';
