@@ -371,15 +371,81 @@ export const corporateStyles: {
 export const certificationStyles: {
   description: (deviceType: DeviceType) => React.CSSProperties;
   cardsContainer: SxProps<Theme>;
+  cardsContainerMobile: SxProps<Theme>;
+  leftArrow: SxProps<Theme>;
+  leftArrowMobile: SxProps<Theme>;
+  rightArrow: SxProps<Theme>;
+  rightArrowMobile: SxProps<Theme>;
 } = {
   description: (deviceType: DeviceType) => ({
     width: dynamicStylingValue(deviceType, '100%', '60%', '60%'),
     marginTop: '20px',
   }),
   cardsContainer: {
+    position: 'relative',
+    width: '58%',
     display: 'flex',
-    flexDirection: 'row',
-    gap: '10px',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: '40px',
+  },
+  cardsContainerMobile: {
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '24px',
+    px: 1,
+  },
+  leftArrow: {
+    position: 'absolute',
+    left: 0,
+    zIndex: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+    '&:hover': {
+      backgroundColor: 'white',
+      transform: 'scale(1.1)',
+    },
+    transition: 'all 0.2s ease',
+  },
+  leftArrowMobile: {
+    position: 'absolute',
+    left: 0,
+    zIndex: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+    width: 36,
+    height: 36,
+    '&:active': {
+      backgroundColor: 'white',
+      transform: 'scale(0.95)',
+    },
+  },
+  rightArrow: {
+    position: 'absolute',
+    right: 0,
+    zIndex: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+    '&:hover': {
+      backgroundColor: 'white',
+      transform: 'scale(1.1)',
+    },
+    transition: 'all 0.2s ease',
+  },
+  rightArrowMobile: {
+    position: 'absolute',
+    right: 0,
+    zIndex: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+    width: 36,
+    height: 36,
+    '&:active': {
+      backgroundColor: 'white',
+      transform: 'scale(0.95)',
+    },
   },
 };

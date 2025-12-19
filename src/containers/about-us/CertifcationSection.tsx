@@ -144,34 +144,12 @@ export const CertificationSection = () => {
           {t('about_us.certification_section_desc')}
         </Typography>
         {type === 'mobile' ? (
-          <Box
-            sx={{
-              position: 'relative',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: '24px',
-              px: 1,
-            }}
-          >
+          <Box sx={certificationStyles.cardsContainerMobile}>
             {/* Mobile Left Arrow */}
             {certificates.length > VISIBLE_CARDS_MOBILE && (
               <IconButton
                 onClick={mobileSlidePrev}
-                sx={{
-                  position: 'absolute',
-                  left: 0,
-                  zIndex: 10,
-                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                  width: 36,
-                  height: 36,
-                  '&:active': {
-                    backgroundColor: 'white',
-                    transform: 'scale(0.95)',
-                  },
-                }}
+                sx={certificationStyles.leftArrowMobile}
               >
                 <ChevronLeft sx={{ fontSize: 24, color: '#F54B02' }} />
               </IconButton>
@@ -213,19 +191,7 @@ export const CertificationSection = () => {
             {certificates.length > VISIBLE_CARDS_MOBILE && (
               <IconButton
                 onClick={mobileSlideNext}
-                sx={{
-                  position: 'absolute',
-                  right: 0,
-                  zIndex: 10,
-                  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                  width: 36,
-                  height: 36,
-                  '&:active': {
-                    backgroundColor: 'white',
-                    transform: 'scale(0.95)',
-                  },
-                }}
+                sx={certificationStyles.rightArrowMobile}
               >
                 <ChevronRight sx={{ fontSize: 24, color: '#F54B02' }} />
               </IconButton>
@@ -233,14 +199,7 @@ export const CertificationSection = () => {
           </Box>
         ) : (
           <Box
-            sx={{
-              position: 'relative',
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: '40px',
-            }}
+            sx={certificationStyles.cardsContainer}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -248,18 +207,7 @@ export const CertificationSection = () => {
             {certificates.length > VISIBLE_CARDS_DESKTOP && (
               <IconButton
                 onClick={slidePrev}
-                sx={{
-                  position: 'absolute',
-                  left: 0,
-                  zIndex: 10,
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    transform: 'scale(1.1)',
-                  },
-                  transition: 'all 0.2s ease',
-                }}
+                sx={certificationStyles.leftArrow}
               >
                 <ChevronLeft sx={{ fontSize: 32, color: '#F54B02' }} />
               </IconButton>
@@ -301,18 +249,7 @@ export const CertificationSection = () => {
             {certificates.length > VISIBLE_CARDS_DESKTOP && (
               <IconButton
                 onClick={slideNext}
-                sx={{
-                  position: 'absolute',
-                  right: 0,
-                  zIndex: 10,
-                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    transform: 'scale(1.1)',
-                  },
-                  transition: 'all 0.2s ease',
-                }}
+                sx={certificationStyles.rightArrow}
               >
                 <ChevronRight sx={{ fontSize: 32, color: '#F54B02' }} />
               </IconButton>
