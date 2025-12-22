@@ -1,4 +1,3 @@
-import { ICareerList } from '../../app/careers/page';
 import CareerAccordion from '@/components/CareerAccordion/index';
 import DualColorText from '@/components/dualColorText/index';
 import { Box, Typography } from '@mui/material';
@@ -7,6 +6,7 @@ import { styles } from './style';
 import { useDeviceType, useTranslation } from '@/hooks';
 import emptyIcon from '@/public/icon/empty-career.svg';
 import Image from 'next/image';
+import { ICareerList } from '@/app/careers/CareersClient';
 
 interface ICareerContainer {
   careerList: ICareerList[];

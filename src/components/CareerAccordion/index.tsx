@@ -1,4 +1,3 @@
-import { ICareerList } from '../../app/careers/page';
 import {
   Accordion,
   AccordionDetails,
@@ -11,6 +10,7 @@ import { styles, getAccordionMarginTop } from './style';
 import { useDeviceType, useTranslation } from '../../hooks';
 import { dynamicStylingValue } from '../../hooks/useDeviceType';
 import DOMPurify from 'isomorphic-dompurify';
+import { ICareerList } from '@/app/careers/CareersClient';
 
 interface ICareerAccordion {
   list: ICareerList[];
