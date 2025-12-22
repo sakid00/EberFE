@@ -1,6 +1,7 @@
 import { useApi } from './useApi';
 import { useCareerContext, CareerData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 type CareerType = 'fulltime' | 'parttime' | 'internship' | 'contract';
 
@@ -82,6 +83,16 @@ const useCareer = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch careers';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useCareer',
+            operation: 'getCareer',
+          },
+          extra: {
+            request,
+            errorMessage,
+          },
+        });
         actions.fetchCareersError(errorMessage);
         throw error;
       }
@@ -126,6 +137,18 @@ const useCareer = () => {
         console.error('Upload error:', error);
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to upload CV file';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useCareer',
+            operation: 'uploadCVFile',
+          },
+          extra: {
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+            errorMessage,
+          },
+        });
         throw new Error(errorMessage);
       }
     },

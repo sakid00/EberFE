@@ -2,6 +2,7 @@ import { useApi } from './useApi';
 import { useCompanyContext, CompanyData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 import { useNavigationCache } from './useNavigationCache';
+import * as Sentry from '@sentry/nextjs';
 
 interface CompanyResponseData {
   address_en: string;
@@ -136,6 +137,16 @@ const useCompany = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch companies';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useCompany',
+            operation: 'getCompany',
+          },
+          extra: {
+            request,
+            errorMessage,
+          },
+        });
         actions.fetchCompaniesError(errorMessage);
         throw error;
       }

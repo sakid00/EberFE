@@ -4,6 +4,7 @@ import {
   CertificateData,
 } from '../contexts/DataProvider';
 import { useCallback } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 // ===== API REQUEST TYPES =====
 interface CertificateRequest {
@@ -71,6 +72,16 @@ const useCertificate = () => {
           error instanceof Error
             ? error.message
             : 'Failed to fetch certificates';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useCertificate',
+            operation: 'getCertificates',
+          },
+          extra: {
+            request,
+            errorMessage,
+          },
+        });
         actions.fetchCertificatesError(errorMessage);
         throw error;
       }
