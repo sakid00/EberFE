@@ -69,6 +69,46 @@ export default function RootLayout({
         />
         <meta name="emotion-insertion-point" content="" />
 
+        {/* Structured Data - Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'EBER Group',
+              url: 'https://ebergroup.com',
+              logo: 'https://ebergroup.com/logo.png',
+              description: 'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
+              sameAs: [
+                // Add your social media URLs here when available
+              ],
+            }),
+          }}
+        />
+
+        {/* Structured Data - WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'EBER Group',
+              url: 'https://ebergroup.com',
+              description: 'EBER Group - Excellence in Every Detail',
+              publisher: {
+                '@type': 'Organization',
+                name: 'EBER Group',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://ebergroup.com/logo.png',
+                },
+              },
+            }),
+          }}
+        />
+
         {/* Resource hints for better loading performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
