@@ -80,9 +80,6 @@ export default function RootLayout({
               url: 'https://ebergroup.com',
               logo: 'https://ebergroup.com/logo.png',
               description: 'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
-              sameAs: [
-                // Add your social media URLs here when available
-              ],
             }),
           }}
         />
