@@ -13,6 +13,7 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Image from 'next/image';
 import { useDeviceType } from '../../hooks/useDeviceType';
+import * as Sentry from '@sentry/nextjs';
 
 // Dynamically import react-pdf components to avoid SSR issues
 const Document = dynamic(
@@ -328,7 +329,10 @@ const PDFViewer = ({
   };
 
   const onDocumentLoadError = (error: Error) => {
-    console.error('PDF load error:', error);
+    Sentry.captureException(error, {
+      tags: { component: 'PDFViewer', operation: 'documentLoad' },
+      extra: { pdfUrl },
+    });
     setError('Failed to load PDF');
     setLoading(false);
   };
@@ -365,7 +369,10 @@ const PDFViewer = ({
                 images.push(canvas.toDataURL());
               }
             } catch (error) {
-              console.error(`Error converting page ${pageNumber}:`, error);
+              Sentry.captureException(error, {
+                tags: { component: 'PDFViewer', operation: 'convertPage' },
+                extra: { pageNumber, pdfUrl },
+              });
               // Create fallback placeholder for failed pages
               const canvas = document.createElement('canvas');
               const context = canvas.getContext('2d');
@@ -383,7 +390,10 @@ const PDFViewer = ({
             }
           }
         } catch (error) {
-          console.error('Error loading PDF for conversion:', error);
+          Sentry.captureException(error, {
+            tags: { component: 'PDFViewer', operation: 'loadPDFForConversion' },
+            extra: { pdfUrl, numPages },
+          });
         }
         setPageImages(images);
       };

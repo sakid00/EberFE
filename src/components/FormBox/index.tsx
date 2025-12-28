@@ -7,6 +7,7 @@ import { useTranslation } from '@/hooks';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import useCareer from '@/hooks/useCareer';
+import * as Sentry from '@sentry/nextjs';
 
 interface FormData {
   firstName: string;
@@ -201,7 +202,9 @@ const FormBox = ({
         cvFileUrl: '',
       });
     } catch (error) {
-      console.error('Error creating mailto link:', error);
+      Sentry.captureException(error, {
+        tags: { component: 'FormBox', operation: 'handleSubmit' },
+      });
     } finally {
       setIsSubmitting(false);
     }

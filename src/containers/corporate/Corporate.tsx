@@ -13,6 +13,7 @@ import useCompany from '@/hooks/useCompany';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { CorporateSkeleton } from '@/components/Skeleton';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import * as Sentry from '@sentry/nextjs';
 
 // Type for info box items that can come from either API or constants
 type InfoBoxItem = {
@@ -45,7 +46,9 @@ const CorporateContainer = () => {
 
         await getCompany({ page: 1, pageSize: 10 });
       } catch (error) {
-        console.error('❌ Failed to fetch companies:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'CorporateContainer', operation: 'fetchCompanies' },
+        });
       }
     };
 

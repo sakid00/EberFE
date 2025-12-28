@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from '@/hooks/useTranslation';
 import useProduct from '@/hooks/useProduct';
+import * as Sentry from '@sentry/nextjs';
 
 interface FormData {
   fullName: string;
@@ -114,7 +115,9 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
         onSuccessfulSubmission();
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      Sentry.captureException(error, {
+        tags: { component: 'ReqProductModal', operation: 'handleSuccess' },
+      });
     } finally {
       setIsSubmitting(false);
     }

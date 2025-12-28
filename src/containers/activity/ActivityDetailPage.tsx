@@ -11,6 +11,7 @@ import useActivity from '@/hooks/useActivity';
 import { useEffect, useState, useRef } from 'react';
 import { ActivityData } from '@/contexts/DataProvider';
 import DOMPurify from 'isomorphic-dompurify';
+import * as Sentry from '@sentry/nextjs';
 
 const ActivityDetailPage = ({ id }: { id: number }) => {
   const { type } = useDeviceType();
@@ -61,7 +62,10 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           console.warn(`Activity with ID ${id} returned null from API`);
         }
       } catch (error) {
-        console.error('Failed to load activity:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'ActivityDetailPage', operation: 'loadActivity' },
+          extra: { activityId: id },
+        });
         // If activity ID is invalid and we have other activities available,
         // we can show a "not found" state but still populate the sidebar
         if (activities.length === 0) {
@@ -69,7 +73,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             console.log('Attempting to load some activities for context...');
             await getActivities({ page: 1, pageSize: 6 });
           } catch (fallbackError) {
-            console.error('Failed to load fallback activities:', fallbackError);
+            Sentry.captureException(fallbackError, {
+              tags: { component: 'ActivityDetailPage', operation: 'loadFallbackActivities' },
+            });
           }
         }
       } finally {
@@ -115,7 +121,10 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             await getActivities({ page: 1, pageSize: 10 });
           }
         } catch (error) {
-          console.error('Failed to load activities for sidebar:', error);
+          Sentry.captureException(error, {
+            tags: { component: 'ActivityDetailPage', operation: 'loadActivitiesForSidebar' },
+            extra: { group: currentActivity?.group },
+          });
           // Reset the flag on error so we can retry
           activitiesLoadAttempted.current = false;
         }

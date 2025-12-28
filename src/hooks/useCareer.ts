@@ -128,13 +128,15 @@ const useCareer = () => {
         const fileUrl = responseData?.data?.downloadUrl;
 
         if (!fileUrl) {
-          console.error('No file URL found in response:', responseData);
+          Sentry.captureMessage('No file URL found in response', {
+            level: 'error',
+            extra: { responseData },
+          });
           throw new Error('File upload response does not contain a valid URL');
         }
 
         return fileUrl;
       } catch (error) {
-        console.error('Upload error:', error);
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to upload CV file';
         Sentry.captureException(error, {

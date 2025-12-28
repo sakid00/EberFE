@@ -18,6 +18,7 @@ import { TableSkeleton } from '@/components/Skeleton';
 import { useSearchParams } from 'next/navigation';
 import ReqProductSent from '@/components/ReqProductSent/index';
 import ReqProductModal from '@/components/ReqProductModal/index';
+import * as Sentry from '@sentry/nextjs';
 
 const cellTitles = [
   'product.product_table.product_code',
@@ -83,7 +84,10 @@ const ProductsPageContent = () => {
     }
 
     getProduct(requestParams).catch((error) => {
-      console.error('Failed to fetch products:', error);
+      Sentry.captureException(error, {
+        tags: { component: 'ProductClient', operation: 'fetchProducts' },
+        extra: { requestParams },
+      });
     });
   }, [getProduct, filterByType, filterByApplication]);
 
@@ -159,7 +163,10 @@ const ProductsPageContent = () => {
           },
         });
       } catch (error) {
-        console.error('Failed to request product:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'ProductClient', operation: 'requestProduct' },
+          extra: { productCode },
+        });
       } finally {
         setIsRequestingProduct(false);
       }

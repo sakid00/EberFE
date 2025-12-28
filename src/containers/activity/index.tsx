@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { useTranslation } from '@/hooks/useTranslation';
 import { CardSkeleton } from '@/components/Skeleton';
 import { styles } from './style';
+import * as Sentry from '@sentry/nextjs';
 
 const activityList = ['Sustainability', 'Newsroom'];
 const sustainabilityList: listType[] = [
@@ -81,7 +82,10 @@ const ActivityContainer = () => {
           group: groupFiltered,
         });
       } catch (error) {
-        console.error('Failed to fetch activities:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'ActivityContainer', operation: 'fetchActivities' },
+          extra: { currentPage, pageSize, groupFiltered },
+        });
       }
     };
 
