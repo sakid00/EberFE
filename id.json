@@ -147,18 +147,23 @@
       "purpose_driven": "Nilai-Nilai Berorientasi Tujuan & Budaya yang Mengutamakan Manusia"
     },
     "value_section_cards": {
-      "social_responsibility": "Tanggung Jawab Sosial",
-      "safety": "Keselamatan",
-      "innovation": "Inovasi",
-      "ingenuity": "Kecerdasan",
-      "trust": "Kepercayaan",
-      "quality": "Kualitas",
-      "creativity": "Kreativitas",
-      "centricity": "Berorientasi Nilai",
-      "growth": "Pertumbuhan",
-      "client": "Klien"
+      "trustworthy": "Terpercaya",
+      "breaktrough": "Terobosan",
+      "sustainability": "Berkelanjutan",
+      "operational_excellences": "Kinerja Operasional",
+      "partnertship": "Kemitraan"
     },
-    "download_button": "Profil Perusahaan"
+    "character_section_cards": {
+      "commitment": "Komitmen",
+      "continuous_improvement": "Peningkatan Berkesinambungan",
+      "loyalty": "Kekompakan",
+      "positive_attitude": "Sikap Positif",
+      "integrity": "Integritas",
+      "innovative": "Inovatif"
+    },
+    "download_button": "Profil Perusahaan",
+    "company_values": "Nilai-Nilai Perusahaan",
+    "company_characters": "Karakter Perusahaan"
   },
   "footer": {
     "desc": "Didirikan pada tahun 2021, EBER Group membawahi empat perusahaan manufaktur kimia terkemuka yang beroperasi di seluruh Indonesia, menghadirkan material spesialti berkinerja tinggi dan solusi kimia yang inovatif.",

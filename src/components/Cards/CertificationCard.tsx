@@ -14,12 +14,35 @@ export const CertificationCard = ({
 }: CertificationCardProps) => (
   <Box
     id={`specialty-${index}`}
-    className={`flex flex-col justify-center items-center bg-white ${isMobile ? 'w-[100%] h-[100%]' : 'w-[40%] h-[40%]'} ${isMobile ? 'p-5' : 'p-10'} rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+    sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'white',
+      width: isMobile ? '140px' : '250px',
+      height: isMobile ? '140px' : '250px',
+      padding: isMobile ? '16px' : '40px',
+      borderRadius: isMobile ? '12px' : '16px',
+      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+      flexShrink: 0,
+      transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+      '&:hover': {
+        transform: isMobile ? 'none' : 'translateY(-4px)',
+        boxShadow: isMobile ? undefined : '0 8px 24px rgba(0, 0, 0, 0.15)',
+      },
+    }}
   >
     <Image
-      src={data}
+      src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${data}`}
       alt={`specialty-img-${index}`}
-      style={{ width: '150px', height: '150px' }}
+      width={isMobile ? 100 : 150}
+      height={isMobile ? 100 : 150}
+      style={{
+        width: isMobile ? '100px' : '150px',
+        height: isMobile ? '100px' : '150px',
+        objectFit: 'contain',
+      }}
     />
   </Box>
 );

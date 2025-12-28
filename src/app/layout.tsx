@@ -16,8 +16,15 @@ import { PrefetchWrapper } from '@/components/PrefetchWrapper';
 
 export const metadata: Metadata = {
   title: 'EBER Group',
-  description: 'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
-  keywords: ['EBER Group', 'EBER', 'corporate', 'business solutions', 'innovation'],
+  description:
+    'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
+  keywords: [
+    'EBER Group',
+    'EBER',
+    'corporate',
+    'business solutions',
+    'innovation',
+  ],
   authors: [{ name: 'EBER Group' }],
   openGraph: {
     title: 'EBER Group',
@@ -138,7 +145,10 @@ export default function RootLayout({
           media="(max-width: 768px)"
         />
       </head>
-      <body className={`${font.className} ${font.variable} overscroll-none`} suppressHydrationWarning>
+      <body
+        className={`${font.className} ${font.variable} overscroll-none`}
+        suppressHydrationWarning
+      >
         {/* Immediate loading screen - disabled for instant loading */}
         <div id="initial-loading" style={{ display: 'none' }}>
           <div style={{ textAlign: 'center' }}>
@@ -168,7 +178,9 @@ export default function RootLayout({
                   <PrefetchWrapper>
                     <div className="mobile-container max-w-full h-full relative overflow-hidden">
                       <Header />
-                      <Box className={`px-[5vw] md:px-[10vw] mb-[40vh]`}>
+                      <Box
+                        className={`px-[5vw] md:px-[10vw] mb-[40vh] h-full w-full`}
+                      >
                         <ParticlesBackground />
                         {children}
                       </Box>

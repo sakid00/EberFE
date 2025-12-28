@@ -151,18 +151,23 @@
       "purpose_driven": "Purpose–Driven Values & a People–First Culture"
     },
     "value_section_cards": {
-      "social_responsibility": "Social Responsibility",
-      "safety": "Safety",
-      "innovation": "Innovation",
-      "ingenuity": "Ingenuity",
-      "trust": "Trust",
-      "quality": "Quality",
-      "creativity": "Creativity",
-      "centricity": "Value Centricity",
-      "growth": "Growth",
-      "client": "Client"
+      "trustworthy": "Trustworthy",
+      "breaktrough": "Breaktrough",
+      "sustainability": "Sustainability",
+      "operational_excellences": "Operational Excellences",
+      "partnertship": "Partnertship"
     },
-    "download_button": "Company Profile"
+    "character_section_cards": {
+      "commitment": "Commitment",
+      "continuous_improvement": "Continuous Improvement",
+      "loyalty": "Loyalty",
+      "positive_attitude": "Positive Attitude",
+      "integrity": "Integrity",
+      "innovative": "Innovative"
+    },
+    "download_button": "Company Profile",
+    "company_values": "Company Values",
+    "company_characters": "Company Characters"
   },
   "footer": {
     "desc": "Established in 2021, EBER Group oversees four top-performing chemical manufacturing companies operating across Indonesia, delivering high-performance specialty materials and chemical solutions.",

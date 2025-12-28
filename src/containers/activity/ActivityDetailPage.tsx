@@ -10,6 +10,7 @@ import ImageWithLoading from '@/components/ImageWithLoading';
 import useActivity from '@/hooks/useActivity';
 import { useEffect, useState, useRef } from 'react';
 import { ActivityData } from '@/contexts/DataProvider';
+import DOMPurify from 'isomorphic-dompurify';
 
 const ActivityDetailPage = ({ id }: { id: number }) => {
   const { type } = useDeviceType();
@@ -298,7 +299,9 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             },
           }}
           dangerouslySetInnerHTML={{
-            __html: displayBody || 'No content available for this activity.',
+            __html: DOMPurify.sanitize(
+              displayBody || 'No content available for this activity.'
+            ),
           }}
         />
       </Box>

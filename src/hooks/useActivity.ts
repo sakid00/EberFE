@@ -1,6 +1,7 @@
 import { useApi } from './useApi';
 import { useActivityContext, ActivityData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 interface ActivityResponseData {
   id: number;
@@ -45,6 +46,8 @@ const useActivity = () => {
         if (request.group) {
           if (request.group === 'EBER Magazine') {
             queryParams.set('group', 'Eber Magazine');
+          } else if (request.group === 'EBER Calendar') {
+            queryParams.set('group', 'Calendar');
           } else {
             queryParams.set('group', request.group);
           }
@@ -99,6 +102,16 @@ const useActivity = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch activities';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useActivity',
+            operation: 'getActivities',
+          },
+          extra: {
+            request,
+            errorMessage,
+          },
+        });
         actions.fetchActivitiesError(errorMessage);
         throw error;
       }
@@ -261,6 +274,16 @@ const useActivity = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch activity';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useActivity',
+            operation: 'getActivityById',
+          },
+          extra: {
+            activityId: id,
+            errorMessage,
+          },
+        });
         actions.fetchActivitiesError(errorMessage);
         throw error;
       }

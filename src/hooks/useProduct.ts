@@ -1,6 +1,7 @@
 import { useApi } from './useApi';
 import { useProductContext, ProductData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 interface ProductResponseData {
   id: number;
@@ -111,6 +112,16 @@ const useProduct = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch products';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useProduct',
+            operation: 'getProduct',
+          },
+          extra: {
+            request,
+            errorMessage,
+          },
+        });
         actions.fetchProductsError(errorMessage);
         throw error;
       }
@@ -140,6 +151,16 @@ const useProduct = () => {
           error instanceof Error
             ? error.message
             : 'Failed to apply instant access';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useProduct',
+            operation: 'applyInstantAccess',
+          },
+          extra: {
+            email: props.formData.email,
+            errorMessage,
+          },
+        });
         actions.fetchProductsError(errorMessage);
         throw error;
       }
@@ -167,6 +188,17 @@ const useProduct = () => {
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to request product';
+        Sentry.captureException(error, {
+          tags: {
+            hook: 'useProduct',
+            operation: 'requestProduct',
+          },
+          extra: {
+            email: props.email,
+            productCode: props.productCode,
+            errorMessage,
+          },
+        });
         actions.fetchProductsError(errorMessage);
         throw error;
       }

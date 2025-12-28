@@ -2,8 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton, Modal, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutIcon from '@mui/icons-material/ZoomOut';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import Image from 'next/image';
 import { useDeviceType } from '../../hooks/useDeviceType';
 
@@ -37,16 +44,258 @@ interface PDFViewerProps {
   pdfUrl: string;
   open: boolean;
   onClose: () => void;
+  flipDirection?: 'horizontal' | 'vertical';
 }
 
-const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
+const PDFViewer = ({
+  pdfUrl,
+  open,
+  onClose,
+  flipDirection = 'horizontal',
+}: PDFViewerProps) => {
+  const isVertical = flipDirection === 'vertical';
   const [numPages, setNumPages] = useState<number>(0);
   const [pageImages, setPageImages] = useState<string[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const bookRef = useRef<HTMLElement | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection2, setFlipDirection2] = useState<'up' | 'down' | null>(
+    null
+  );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bookRef = useRef<any>(null);
   const { type } = useDeviceType();
+
+  // Touch/swipe state for vertical mode
+  const touchStartY = useRef<number>(0);
+  const touchEndY = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
+
+  // Zoom state for mobile
+  const [zoom, setZoom] = useState<number>(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const lastTouchDistance = useRef<number>(0);
+  const lastPinchCenter = useRef({ x: 0, y: 0 });
+  const isPinching = useRef<boolean>(false);
+  const panStartPos = useRef({ x: 0, y: 0 });
+  const lastPosition = useRef({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const MIN_ZOOM = 1;
+  const MAX_ZOOM = 3;
+  const ZOOM_STEP = 0.5;
+
+  const handlePrevPage = () => {
+    if (isVertical) {
+      if (currentPage > 0) {
+        // Disable flip animation for mobile
+        if (type === 'mobile') {
+          setCurrentPage((prev) => Math.max(0, prev - 1));
+        } else {
+          setFlipDirection2('up');
+          setIsFlipping(true);
+          setTimeout(() => {
+            setCurrentPage((prev) => Math.max(0, prev - 1));
+            setIsFlipping(false);
+            setFlipDirection2(null);
+          }, 300);
+        }
+      }
+    } else if (bookRef.current) {
+      bookRef.current.pageFlip().flipPrev();
+    }
+  };
+
+  const handleNextPage = () => {
+    if (isVertical) {
+      if (currentPage < pageImages.length - 1) {
+        // Disable flip animation for mobile
+        if (type === 'mobile') {
+          setCurrentPage((prev) => Math.min(pageImages.length - 1, prev + 1));
+        } else {
+          setFlipDirection2('down');
+          setIsFlipping(true);
+          setTimeout(() => {
+            setCurrentPage((prev) => Math.min(pageImages.length - 1, prev + 1));
+            setIsFlipping(false);
+            setFlipDirection2(null);
+          }, 300);
+        }
+      }
+    } else if (bookRef.current) {
+      bookRef.current.pageFlip().flipNext();
+    }
+  };
+
+  // Touch handlers for vertical swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartY.current = e.touches[0].clientY;
+    isDragging.current = true;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging.current) return;
+    touchEndY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    const swipeDistance = touchStartY.current - touchEndY.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      // Swipe up - next page
+      handleNextPage();
+    } else if (swipeDistance < -minSwipeDistance) {
+      // Swipe down - previous page
+      handlePrevPage();
+    }
+  };
+
+  // Mouse handlers for desktop drag
+  const handleMouseDown = (e: React.MouseEvent) => {
+    touchStartY.current = e.clientY;
+    isDragging.current = true;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    touchEndY.current = e.clientY;
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    const swipeDistance = touchStartY.current - touchEndY.current;
+    const minSwipeDistance = 50;
+
+    if (swipeDistance > minSwipeDistance) {
+      // Drag up - next page
+      handleNextPage();
+    } else if (swipeDistance < -minSwipeDistance) {
+      // Drag down - previous page
+      handlePrevPage();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+  };
+
+  // Zoom control functions
+  const handleZoomIn = () => {
+    setZoom((prev) => Math.min(MAX_ZOOM, prev + ZOOM_STEP));
+  };
+
+  const handleZoomOut = () => {
+    setZoom((prev) => {
+      const newZoom = Math.max(MIN_ZOOM, prev - ZOOM_STEP);
+      if (newZoom === MIN_ZOOM) {
+        setPosition({ x: 0, y: 0 });
+      }
+      return newZoom;
+    });
+  };
+
+  const handleZoomReset = () => {
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  // Get distance between two touch points
+  const getTouchDistance = (touches: React.TouchList) => {
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return Math.hypot(
+      touch2.clientX - touch1.clientX,
+      touch2.clientY - touch1.clientY
+    );
+  };
+
+  // Get center point between two touches
+  const getTouchCenter = (touches: React.TouchList) => {
+    const touch1 = touches[0];
+    const touch2 = touches[1];
+    return {
+      x: (touch1.clientX + touch2.clientX) / 2,
+      y: (touch1.clientY + touch2.clientY) / 2,
+    };
+  };
+
+  // Mobile pinch-to-zoom touch handlers (gestures for page navigation disabled)
+  const handleMobileTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Pinch start
+      isPinching.current = true;
+      lastTouchDistance.current = getTouchDistance(e.touches);
+      lastPinchCenter.current = getTouchCenter(e.touches);
+    } else if (e.touches.length === 1 && zoom > 1) {
+      // Pan start (only when zoomed in)
+      panStartPos.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      };
+      lastPosition.current = { ...position };
+    }
+    // Page navigation gestures disabled for mobile - use buttons instead
+  };
+
+  const handleMobileTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && isPinching.current) {
+      // Pinch zoom
+      const currentDistance = getTouchDistance(e.touches);
+      const scale = currentDistance / lastTouchDistance.current;
+
+      setZoom((prev) => {
+        const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, prev * scale));
+        return newZoom;
+      });
+
+      lastTouchDistance.current = currentDistance;
+    } else if (e.touches.length === 1 && zoom > 1 && !isPinching.current) {
+      // Pan when zoomed
+      const deltaX = e.touches[0].clientX - panStartPos.current.x;
+      const deltaY = e.touches[0].clientY - panStartPos.current.y;
+
+      const container = containerRef.current;
+      if (container) {
+        const maxPanX = (container.offsetWidth * (zoom - 1)) / 2;
+        const maxPanY = (container.offsetHeight * (zoom - 1)) / 2;
+
+        setPosition({
+          x: Math.min(
+            maxPanX,
+            Math.max(-maxPanX, lastPosition.current.x + deltaX)
+          ),
+          y: Math.min(
+            maxPanY,
+            Math.max(-maxPanY, lastPosition.current.y + deltaY)
+          ),
+        });
+      }
+    }
+    // Page navigation gestures disabled for mobile
+  };
+
+  const handleMobileTouchEnd = (e: React.TouchEvent) => {
+    if (isPinching.current && e.touches.length < 2) {
+      isPinching.current = false;
+      // Reset position if zoomed out to 1
+      if (zoom <= 1) {
+        setPosition({ x: 0, y: 0 });
+      }
+    }
+    // Page navigation gestures disabled for mobile - use buttons instead
+  };
+
+  const onFlip = (e: { data: number }) => {
+    setCurrentPage(e.data);
+  };
 
   useEffect(() => {
     setIsClient(true);
@@ -59,8 +308,17 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
       setError(null);
       setNumPages(0);
       setPageImages([]);
+      setCurrentPage(0);
+      setZoom(1);
+      setPosition({ x: 0, y: 0 });
     }
   }, [open]);
+
+  // Reset zoom when page changes
+  useEffect(() => {
+    setZoom(1);
+    setPosition({ x: 0, y: 0 });
+  }, [currentPage]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     console.log('PDF loaded successfully with', numPages, 'pages');
@@ -127,8 +385,6 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
         } catch (error) {
           console.error('Error loading PDF for conversion:', error);
         }
-
-        console.log('Converted', images.length, 'pages to images');
         setPageImages(images);
       };
 
@@ -144,6 +400,17 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        '@keyframes bounce': {
+          '0%, 20%, 50%, 80%, 100%': {
+            transform: 'translateY(0)',
+          },
+          '40%': {
+            transform: 'translateY(-5px)',
+          },
+          '60%': {
+            transform: 'translateY(-3px)',
+          },
+        },
       }}
     >
       <Box
@@ -152,11 +419,12 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
           boxShadow: 24,
           p: 4,
           position: 'relative',
-          width: '90%',
-          height: '90%',
+          width: type === 'mobile' ? '100%' : '70%',
+          height: type === 'mobile' ? '100%' : '90%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          borderRadius: type === 'mobile' ? 0 : 10,
         }}
       >
         <IconButton
@@ -193,52 +461,322 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            position: 'relative',
           }}
         >
+          {/* Previous Navigation Button (Left for horizontal, Up for vertical) */}
           {isClient && pageImages.length > 0 && (
-            <HTMLFlipBook
-              width={600}
-              height={type === 'mobile' ? 450 : 700}
-              size="fixed"
-              minWidth={300}
-              maxWidth={1000}
-              minHeight={400}
-              maxHeight={1533}
-              showCover={true}
-              ref={bookRef}
-              className="pdf-flipbook"
-              style={{}}
-              startPage={0}
-              drawShadow={true}
-              flippingTime={1000}
-              usePortrait={true}
-              startZIndex={0}
-              autoSize={true}
-              maxShadowOpacity={1}
-              mobileScrollSupport={true}
-              clickEventForward={true}
-              useMouseEvents={true}
-              swipeDistance={0}
-              showPageCorners={true}
-              disableFlipByClick={false}
+            <IconButton
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+              sx={{
+                position: 'absolute',
+                ...(isVertical
+                  ? {
+                      top: { xs: 8, sm: 16 },
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                    }
+                  : {
+                      left: {
+                        xs: '10%',
+                        sm: 16,
+                        md: 32,
+                      },
+                      top: type === 'mobile' ? '85%' : '50%',
+                      transform: 'translateY(-50%)',
+                    }),
+                zIndex: 100,
+                bgcolor: 'rgba(120, 71, 145, 0.9)',
+                color: 'white',
+                width: { xs: 40, sm: 48 },
+                height: { xs: 40, sm: 48 },
+                '&:hover': {
+                  bgcolor: 'rgba(120, 71, 145, 1)',
+                },
+                '&:disabled': {
+                  bgcolor: 'rgba(0, 0, 0, 0.2)',
+                  color: 'rgba(255, 255, 255, 0.5)',
+                },
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              }}
             >
-              {pageImages.map((pageImage, index) => (
-                <div
-                  key={index}
-                  className="pdf-page"
-                  style={{ background: 'white', position: 'relative' }}
+              {isVertical ? (
+                <KeyboardArrowUpIcon sx={{ fontSize: { xs: 28, sm: 32 } }} />
+              ) : (
+                <ChevronLeftIcon sx={{ fontSize: { xs: 28, sm: 32 } }} />
+              )}
+            </IconButton>
+          )}
+
+          {/* Next Navigation Button (Right for horizontal, Down for vertical) */}
+          {isClient && pageImages.length > 0 && (
+            <IconButton
+              onClick={handleNextPage}
+              disabled={currentPage >= pageImages.length - 1}
+              sx={{
+                position: 'absolute',
+                ...(isVertical
+                  ? {
+                      bottom: { xs: 50, sm: 60 },
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                    }
+                  : {
+                      right: {
+                        xs: '10%',
+                        sm: 16,
+                        md: 32,
+                      },
+                      top: type === 'mobile' ? '85%' : '50%',
+                      transform: 'translateY(-50%)',
+                    }),
+                zIndex: 100,
+                bgcolor: 'rgba(120, 71, 145, 0.9)',
+                color: 'white',
+                width: { xs: 40, sm: 48 },
+                height: { xs: 40, sm: 48 },
+                '&:hover': {
+                  bgcolor: 'rgba(120, 71, 145, 1)',
+                },
+                '&:disabled': {
+                  bgcolor: 'rgba(0, 0, 0, 0.2)',
+                  color: 'rgba(255, 255, 255, 0.5)',
+                },
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              }}
+            >
+              {isVertical ? (
+                <KeyboardArrowDownIcon sx={{ fontSize: { xs: 28, sm: 32 } }} />
+              ) : (
+                <ChevronRightIcon sx={{ fontSize: { xs: 28, sm: 32 } }} />
+              )}
+            </IconButton>
+          )}
+
+          {/* Zoom Controls */}
+          {type === 'mobile' && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '5%',
+                right: '10%',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 0.5,
+                zIndex: 101,
+              }}
+            >
+              <IconButton
+                onClick={handleZoomIn}
+                disabled={zoom >= MAX_ZOOM}
+                sx={{
+                  bgcolor: 'rgba(120, 71, 145, 0.9)',
+                  color: 'white',
+                  width: 36,
+                  height: 36,
+                  '&:hover': {
+                    bgcolor: 'rgba(120, 71, 145, 1)',
+                  },
+                  '&:disabled': {
+                    bgcolor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                  },
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                }}
+              >
+                <ZoomInIcon sx={{ fontSize: 20 }} />
+              </IconButton>
+              <IconButton
+                onClick={handleZoomOut}
+                disabled={zoom <= MIN_ZOOM}
+                sx={{
+                  bgcolor: 'rgba(120, 71, 145, 0.9)',
+                  color: 'white',
+                  width: 36,
+                  height: 36,
+                  '&:hover': {
+                    bgcolor: 'rgba(120, 71, 145, 1)',
+                  },
+                  '&:disabled': {
+                    bgcolor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.5)',
+                  },
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                }}
+              >
+                <ZoomOutIcon sx={{ fontSize: 20 }} />
+              </IconButton>
+              {zoom > 1 && (
+                <IconButton
+                  onClick={handleZoomReset}
+                  sx={{
+                    bgcolor: 'rgba(120, 71, 145, 0.9)',
+                    color: 'white',
+                    width: 36,
+                    height: 36,
+                    '&:hover': {
+                      bgcolor: 'rgba(120, 71, 145, 1)',
+                    },
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                  }}
                 >
-                  <Image
-                    src={pageImage}
-                    alt={`Page ${index + 1}`}
-                    fill
-                    style={{
-                      objectFit: 'contain',
-                    }}
-                  />
-                </div>
-              ))}
-            </HTMLFlipBook>
+                  <RestartAltIcon sx={{ fontSize: 20 }} />
+                </IconButton>
+              )}
+            </Box>
+          )}
+
+          {isClient && pageImages.length > 0 && !isVertical && (
+            <Box
+              ref={containerRef}
+              sx={{
+                position: 'relative',
+                overflow: type === 'mobile' ? 'hidden' : 'visible',
+                touchAction: type === 'mobile' ? 'none' : 'auto',
+              }}
+              onTouchStart={
+                type === 'mobile' ? handleMobileTouchStart : undefined
+              }
+              onTouchMove={
+                type === 'mobile' ? handleMobileTouchMove : undefined
+              }
+              onTouchEnd={type === 'mobile' ? handleMobileTouchEnd : undefined}
+            >
+              <Box
+                sx={{
+                  transition: zoom === 1 ? 'transform 0.2s ease-out' : 'none',
+                  transform:
+                    type === 'mobile'
+                      ? `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`
+                      : 'none',
+                }}
+              >
+                <HTMLFlipBook
+                  width={600}
+                  height={type === 'mobile' ? 450 : 700}
+                  size="fixed"
+                  minWidth={300}
+                  maxWidth={1000}
+                  minHeight={400}
+                  maxHeight={1533}
+                  showCover={true}
+                  ref={bookRef}
+                  className="pdf-flipbook"
+                  style={{ pointerEvents: 'none' }}
+                  startPage={0}
+                  drawShadow={type !== 'mobile'}
+                  flippingTime={1000}
+                  usePortrait={type === 'mobile' ? true : false}
+                  startZIndex={0}
+                  autoSize={true}
+                  maxShadowOpacity={type === 'mobile' ? 0 : 1}
+                  mobileScrollSupport={false}
+                  clickEventForward={false}
+                  useMouseEvents={false}
+                  swipeDistance={10000}
+                  showPageCorners={false}
+                  disableFlipByClick={true}
+                  onFlip={onFlip}
+                >
+                  {pageImages.map((pageImage, index) => (
+                    <div
+                      key={index}
+                      className="pdf-page"
+                      style={{
+                        position: 'relative',
+                        cursor: 'default',
+                        pointerEvents: 'none',
+                      }}
+                    >
+                      <Image
+                        src={pageImage}
+                        alt={`Page ${index + 1}`}
+                        fill
+                        style={{
+                          objectFit: 'contain',
+                          cursor: 'default',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </div>
+                  ))}
+                </HTMLFlipBook>
+              </Box>
+            </Box>
+          )}
+
+          {/* Vertical Calendar Viewer with Swipe/Drag Support */}
+          {isClient && pageImages.length > 0 && isVertical && (
+            <Box
+              ref={containerRef}
+              sx={{
+                width: type === 'mobile' ? '95%' : '600px',
+                height: type === 'mobile' ? '70%' : '80%',
+                position: 'relative',
+                overflow: 'hidden',
+                borderRadius: 2,
+                boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
+                cursor: zoom > 1 ? 'move' : 'grab',
+                userSelect: 'none',
+                perspective: '1000px',
+                touchAction: 'none',
+                '&:active': {
+                  cursor: zoom > 1 ? 'move' : 'grabbing',
+                },
+              }}
+              onTouchStart={
+                type === 'mobile' ? handleMobileTouchStart : handleTouchStart
+              }
+              onTouchMove={
+                type === 'mobile' ? handleMobileTouchMove : handleTouchMove
+              }
+              onTouchEnd={
+                type === 'mobile' ? handleMobileTouchEnd : handleTouchEnd
+              }
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  transformStyle: 'preserve-3d',
+                  transition:
+                    type === 'mobile'
+                      ? 'none'
+                      : isFlipping
+                        ? 'transform 0.3s ease-in-out'
+                        : zoom === 1
+                          ? 'transform 0.2s ease-out'
+                          : 'none',
+                  transform:
+                    type === 'mobile'
+                      ? `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`
+                      : isFlipping
+                        ? flipDirection2 === 'down'
+                          ? 'rotateX(-15deg)'
+                          : 'rotateX(15deg)'
+                        : `rotateX(0deg) scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
+                  transformOrigin:
+                    flipDirection2 === 'down' ? 'top center' : 'bottom center',
+                }}
+              >
+                <Image
+                  src={pageImages[currentPage]}
+                  alt={`Page ${currentPage + 1}`}
+                  fill
+                  style={{
+                    objectFit: 'contain',
+                    background: 'white',
+                  }}
+                  draggable={false}
+                />
+              </Box>
+            </Box>
           )}
 
           {!isClient && (
@@ -269,6 +807,28 @@ const PDFViewer = ({ pdfUrl, open, onClose }: PDFViewerProps) => {
                 <p>Converting pages...</p>
               </Box>
             )}
+
+          {/* Page Indicator */}
+          {isClient && pageImages.length > 0 && (
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: { xs: 8, sm: 16 },
+                left: '50%',
+                transform: 'translateX(-50%)',
+                bgcolor: 'rgba(120, 71, 145, 0.9)',
+                color: 'white',
+                px: 2,
+                py: 0.5,
+                borderRadius: 2,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+              }}
+            >
+              <Typography variant="body2" fontWeight={500}>
+                {currentPage + 1} / {pageImages.length}
+              </Typography>
+            </Box>
+          )}
         </Box>
       </Box>
     </Modal>

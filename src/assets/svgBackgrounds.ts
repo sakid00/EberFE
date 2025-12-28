@@ -3,6 +3,8 @@ export const WebPBackgrounds = {
   container1: '/background/optimized/container1_optimized.webp',
   container1Mobile: '/background/optimized/container1_mobile_optimized.webp',
   siteBg: '/background/optimized/site-bg_optimized.webp',
+  container2: '/background/optimized/container2_optimized.webp',
+  container2Mobile: '/background/optimized/container2_mobile_optimized.webp',
 } as const;
 
 // Direct getter function - always returns WebP for optimal performance

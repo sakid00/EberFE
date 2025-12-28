@@ -33,6 +33,10 @@ const newsroomList: listType[] = [
   },
   {
     type: 'Newsroom',
+    name: 'EBER Calendar',
+  },
+  {
+    type: 'Newsroom',
     name: 'Company Event',
   },
 ];
@@ -165,6 +169,7 @@ const ActivityContainer = () => {
                   id={activity.id}
                   title_en={activity.title_en}
                   title_id={activity.title_id}
+                  group={activity.group}
                 />
               ))
             ) : (

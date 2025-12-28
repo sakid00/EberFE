@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
+import * as Sentry from '@sentry/nextjs';
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD';
 
@@ -134,6 +135,21 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
         setStatus(response.status);
 
         if (!response.ok) {
+          // Capture HTTP error in Sentry
+          Sentry.captureMessage(`HTTP error: ${response.status}`, {
+            level: 'error',
+            tags: {
+              type: 'http_error',
+              method: finalOptions.method || 'GET',
+              status_code: response.status.toString(),
+            },
+            extra: {
+              url: fullUrl,
+              method: finalOptions.method,
+              status: response.status,
+              statusText: response.statusText,
+            },
+          });
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
@@ -148,12 +164,28 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
           status: response.status,
         };
       } catch (err: unknown) {
-        const errorMessage =
-          err instanceof Error && err.name === 'AbortError'
-            ? 'Request was aborted'
-            : err instanceof Error
-              ? err.message
-              : 'An error occurred';
+        const isAbortError = err instanceof Error && err.name === 'AbortError';
+        const errorMessage = isAbortError
+          ? 'Request was aborted'
+          : err instanceof Error
+            ? err.message
+            : 'An error occurred';
+
+        // Capture error in Sentry (skip aborted requests as they're intentional)
+        if (!isAbortError) {
+          Sentry.captureException(err, {
+            tags: {
+              type: 'api_error',
+              method: finalOptions.method || 'GET',
+            },
+            extra: {
+              url: fullUrl,
+              method: finalOptions.method,
+              errorMessage,
+              timeout: finalOptions.timeout,
+            },
+          });
+        }
 
         setError(errorMessage);
         setLoading(false);

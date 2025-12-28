@@ -1,4 +1,3 @@
-import { ICareerList } from '../../app/careers/page';
 import {
   Accordion,
   AccordionDetails,
@@ -10,6 +9,8 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import { styles, getAccordionMarginTop } from './style';
 import { useDeviceType, useTranslation } from '../../hooks';
 import { dynamicStylingValue } from '../../hooks/useDeviceType';
+import DOMPurify from 'isomorphic-dompurify';
+import { ICareerList } from '@/app/careers/CareersClient';
 
 interface ICareerAccordion {
   list: ICareerList[];
@@ -124,7 +125,9 @@ const CareerAccordion: React.FC<ICareerAccordion> = ({ list, router }) => {
                 },
               }}
               dangerouslySetInnerHTML={{
-                __html: val.desc || 'No content available for this activity.',
+                __html: DOMPurify.sanitize(
+                  val.desc || 'No content available for this activity.'
+                ),
               }}
             />
           </Box>
