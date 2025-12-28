@@ -234,7 +234,8 @@
       "reach_out": "Kami Siap Membantu"
     },
     "submit_application_desc": "Kami selalu terbuka untuk setiap pertanyaan, permintaan informasi, maupun peluang kerja sama. Tim kami siap memberikan dukungan dan solusi terbaik bagi Anda. Jangan ragu untuk menghubungi kami melalui formulir di bawah ini atau informasi kontak yang tersedia.",
-    "submit_application_button": "Kirim"
+    "submit_application_button": "Kirim",
+    "submit_success": "Aplikasi berhasil dikirim"
   },
   "custom_product": {
     "submit_application_title_small": "Hubungi Kami!",

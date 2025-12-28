@@ -6,8 +6,7 @@ import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { useTranslation } from '@/hooks';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import useCareer from '@/hooks/useCareer';
-import * as Sentry from '@sentry/nextjs';
+import useContactForm from '@/hooks/useContactForm';
 
 interface FormData {
   firstName: string;
@@ -15,7 +14,6 @@ interface FormData {
   email: string;
   message: string;
   cvFile?: File | null;
-  cvFileUrl?: string;
 }
 
 interface FormErrors {
@@ -44,7 +42,12 @@ const FormBox = ({
   const { type } = useDeviceType();
   const { t } = useTranslation();
   const pathname = usePathname();
-  const { uploadCVFile } = useCareer();
+  const {
+    submitApplication,
+    isSubmitting,
+    isSuccess,
+    error: submitError,
+  } = useContactForm();
   const isCareerPage = pathname?.includes('/careers/submit');
 
   const [formData, setFormData] = useState<FormData>({
@@ -53,12 +56,9 @@ const FormBox = ({
     email: '',
     message: '',
     cvFile: null,
-    cvFileUrl: '',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isUploadingCV, setIsUploadingCV] = useState(false);
 
   const handleInputChange =
     (field: keyof FormData) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,9 +75,7 @@ const FormBox = ({
       }
     };
 
-  const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -112,23 +110,6 @@ const FormBox = ({
         ...prev,
         cvFile: '',
       }));
-    }
-
-    // Upload the file immediately
-    setIsUploadingCV(true);
-    try {
-      const fileUrl = await uploadCVFile(file);
-      setFormData((prev) => ({
-        ...prev,
-        cvFileUrl: fileUrl,
-      }));
-    } catch (error) {
-      setErrors((prev) => ({
-        ...prev,
-        cvFile: error instanceof Error ? error.message : 'Failed to upload CV',
-      }));
-    } finally {
-      setIsUploadingCV(false);
     }
   };
 
@@ -165,33 +146,15 @@ const FormBox = ({
       return;
     }
 
-    setIsSubmitting(true);
+    const result = await submitApplication({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      message: formData.message,
+      file: formData.cvFile,
+    });
 
-    try {
-      // Create mailto link with form data
-      const subject = encodeURIComponent(
-        `Contact Form Submission from ${formData.firstName} ${formData.lastName}`
-      );
-      let bodyContent =
-        `Name: ${formData.firstName} ${formData.lastName}\n` +
-        `Email: ${formData.email}\n` +
-        `Message:\n${formData.message || 'No message provided'}`;
-
-      // Add CV link if available
-      if (formData.cvFileUrl) {
-        bodyContent += `\n\nCV Document: ${formData.cvFileUrl}`;
-      }
-
-      const body = encodeURIComponent(bodyContent);
-
-      // Determine email recipient based on page
-      const recipientEmail = isCareerPage
-        ? 'hr@ebergroup.com'
-        : 'info@ebergroup.com';
-      const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
-
-      window.location.href = mailtoLink;
-
+    if (result.success) {
       // Reset form after successful submission
       setFormData({
         firstName: '',
@@ -199,14 +162,7 @@ const FormBox = ({
         email: '',
         message: '',
         cvFile: null,
-        cvFileUrl: '',
       });
-    } catch (error) {
-      Sentry.captureException(error, {
-        tags: { component: 'FormBox', operation: 'handleSubmit' },
-      });
-    } finally {
-      setIsSubmitting(false);
     }
   };
   return (
@@ -311,21 +267,14 @@ const FormBox = ({
               <Button
                 component="span"
                 variant="outlined"
-                disabled={isUploadingCV}
+                disabled={isSubmitting}
                 sx={styles.fileUploadButton}
               >
-                {isUploadingCV
-                  ? 'Uploading...'
-                  : formData.cvFile
-                    ? `Selected: ${formData.cvFile.name}`
-                    : t('careers.upload_cv_button')}
+                {formData.cvFile
+                  ? `Selected: ${formData.cvFile.name}`
+                  : t('careers.upload_cv_button')}
               </Button>
             </label>
-            {formData.cvFileUrl && (
-              <Typography sx={styles.uploadSuccessText}>
-                {t('careers.upload_cv_success')}
-              </Typography>
-            )}
             {errors.cvFile && (
               <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
             )}
@@ -363,10 +312,19 @@ const FormBox = ({
           </Box>
         </Box>
       )}
+      {submitError && (
+        <Typography sx={styles.errorText}>{submitError}</Typography>
+      )}
+      {isSuccess && (
+        <Typography sx={styles.uploadSuccessText}>
+          {t('contact_us.submit_success') ||
+            'Application submitted successfully!'}
+        </Typography>
+      )}
       <Button
         sx={styles.submitButton}
         onClick={handleSubmit}
-        disabled={isSubmitting || (isCareerPage && isUploadingCV)}
+        disabled={isSubmitting}
       >
         {isSubmitting
           ? 'Submitting...'

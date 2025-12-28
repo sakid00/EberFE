@@ -32,3 +32,6 @@ export { useTranslation } from './useTranslation';
 
 // Certificate hook
 export { default as useCertificate } from './useCertificate';
+
+// Contact form hook
+export { default as useContactForm } from './useContactForm';
