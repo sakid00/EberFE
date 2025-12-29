@@ -382,12 +382,11 @@ export const certificationStyles: {
     marginTop: '20px',
   }),
   cardsContainer: {
-    position: 'relative',
-    width: '58%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '40px',
+    gap: '16px',
   },
   cardsContainerMobile: {
     position: 'relative',
@@ -399,9 +398,7 @@ export const certificationStyles: {
     px: 1,
   },
   leftArrow: {
-    position: 'absolute',
-    left: 0,
-    zIndex: 10,
+    flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
     '&:hover': {
@@ -424,9 +421,7 @@ export const certificationStyles: {
     },
   },
   rightArrow: {
-    position: 'absolute',
-    right: 0,
-    zIndex: 10,
+    flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
     '&:hover': {

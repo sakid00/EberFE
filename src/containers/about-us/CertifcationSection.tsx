@@ -10,7 +10,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 const VISIBLE_CARDS_DESKTOP = 4;
 const VISIBLE_CARDS_MOBILE = 2;
 const AUTO_SLIDE_INTERVAL = 3000;
-const CARD_WIDTH_DESKTOP = 250;
+const CARD_WIDTH_DESKTOP = 200;
 const CARD_WIDTH_MOBILE = 150;
 const GAP_DESKTOP = 16;
 const GAP_MOBILE = 12;
@@ -218,10 +218,9 @@ export const CertificationSection = () => {
               sx={{
                 overflow: 'hidden',
                 width:
-                  certificates.length > VISIBLE_CARDS_DESKTOP
-                    ? 'calc(100% - 120px)'
+                  certificates.length >= VISIBLE_CARDS_DESKTOP
+                    ? `${VISIBLE_CARDS_DESKTOP * CARD_WIDTH_DESKTOP + (VISIBLE_CARDS_DESKTOP - 1) * GAP_DESKTOP}px`
                     : 'auto',
-                mx: certificates.length > VISIBLE_CARDS_DESKTOP ? 'auto' : 0,
               }}
             >
               <Box
