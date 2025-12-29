@@ -17,7 +17,6 @@ const LoadingWrapper: React.FC<LoadingWrapperProps> = ({ children }) => {
   // Hide loading screen when assets are complete
   useEffect(() => {
     if (isComplete && !isLoading) {
-      console.log('✨ All assets loaded! Showing website...');
       setIsLoadingVisible(false);
     }
   }, [isComplete, isLoading]);

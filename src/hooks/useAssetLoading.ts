@@ -41,7 +41,6 @@ export const useAssetLoading = (): UseAssetLoadingReturn => {
 
         // Set maximum loading time - force finish after 1 second
         timeoutId = setTimeout(() => {
-          console.log('Loading timeout reached - finishing early');
           finishLoading();
         }, 1000);
 

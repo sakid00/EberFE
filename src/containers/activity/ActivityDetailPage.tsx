@@ -54,7 +54,6 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         }
 
         // If not found in state, fetch from API
-        console.log('Activity not found in state, fetching from API...');
         const fetchedActivity = await getActivityById(id);
         if (fetchedActivity) {
           setCurrentActivity(fetchedActivity);
@@ -70,7 +69,6 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         // we can show a "not found" state but still populate the sidebar
         if (activities.length === 0) {
           try {
-            console.log('Attempting to load some activities for context...');
             await getActivities({ page: 1, pageSize: 6 });
           } catch (fallbackError) {
             Sentry.captureException(fallbackError, {
@@ -105,19 +103,14 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         !isLoading &&
         !activitiesLoadAttempted.current
       ) {
-        console.log(
-          'Activities list is empty, fetching activities for sidebar...'
-        );
         activitiesLoadAttempted.current = true;
         try {
           // Try to fetch activities from the same group as current activity if possible
           const group = currentActivity?.group;
           if (group) {
-            console.log('Fetching activities from same group:', group);
             await getActivities({ page: 1, pageSize: 10, group });
           } else {
             // Fallback: fetch mixed activities if no group info available
-            console.log('No group info available, fetching mixed activities');
             await getActivities({ page: 1, pageSize: 10 });
           }
         } catch (error) {

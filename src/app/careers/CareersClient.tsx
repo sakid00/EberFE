@@ -22,7 +22,6 @@ const CareersClient = () => {
   const { getCareer, careers, isLoading } = useCareer();
 
   useEffect(() => {
-    console.log('Fetching careers from API...');
     getCareer({
       page: 1,
       pageSize: 10,

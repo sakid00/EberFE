@@ -58,15 +58,11 @@ const useCareer = () => {
           }
         );
 
-        console.log('API Response:', response); // Debug log
-
         // Handle different possible API response structures
         const apiResponse = response.data as {
           data?: { data?: CareerResponseData[] };
         };
         const careerData: CareerResponseData[] = apiResponse?.data?.data || [];
-
-        console.log('Career Data:', careerData); // Debug log
 
         // Transform API response to match our global state format
         const transformedData: CareerData[] = careerData?.map((career) => ({

@@ -64,7 +64,6 @@ const ProductsPageContent = () => {
 
   // Fetch products from API with filters
   const fetchProducts = useCallback(() => {
-    console.log('Fetching products from API...');
     const requestParams: {
       page: number;
       pageSize: number;

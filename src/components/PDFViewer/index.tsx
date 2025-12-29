@@ -322,7 +322,6 @@ const PDFViewer = ({
   }, [currentPage]);
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    console.log('PDF loaded successfully with', numPages, 'pages');
     setNumPages(numPages);
     setLoading(false);
     setError(null);
@@ -340,7 +339,6 @@ const PDFViewer = ({
   // Convert PDF pages to images for the flipbook
   useEffect(() => {
     if (numPages > 0) {
-      console.log('Starting to convert', numPages, 'pages to images');
       const convertPagesToImages = async () => {
         const images: string[] = [];
 

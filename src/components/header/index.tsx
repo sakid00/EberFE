@@ -182,13 +182,11 @@ const MobileLanguageSelector: React.FC<LanguageSelectorProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLanguageClick = (value: string) => {
-    console.log('Custom language selector clicked:', value);
     onLanguageChange({ target: { value } } as SelectChangeEvent);
     setIsOpen(false);
   };
 
   const toggleDropdown = () => {
-    console.log('Custom dropdown toggled:', !isOpen);
     setIsOpen(!isOpen);
   };
 
