@@ -1,16 +1,36 @@
 import { useApi } from './useApi';
-import { useProductContext, ProductData } from '../contexts/DataProvider';
+import {
+  useProductContext,
+  ProductData,
+  ProductPagination,
+} from '../contexts/DataProvider';
 import { useCallback } from 'react';
 import * as Sentry from '@sentry/nextjs';
 
 interface ProductResponseData {
-  id: number;
-  code: string;
+  application: string;
   application_en: string;
   application_id: string;
+  code: string;
+  createdAt: string;
+  id: number;
+  performanceFeature: string;
   performanceFeature_en: string;
   performanceFeature_id: string;
+  status: boolean;
   type: string;
+  updatedAt: string;
+}
+
+interface ProductFilterData {
+  types?: string[];
+  applications?: string[];
+}
+
+interface ProductPaginationData {
+  page: number;
+  pageSize: number;
+  total: number;
 }
 
 interface ProductRequest {
@@ -73,21 +93,25 @@ const useProduct = () => {
         });
 
         // Handle different possible API response structures
-        const apiResponse = response.data as {
-          data?: {
-            data?: ProductResponseData[];
-            filter_feature?: {
-              types?: string[];
-              applications?: string[];
-            };
-          };
-        };
-        const productData: ProductResponseData[] =
-          apiResponse?.data?.data || [];
+        const rawResponse = response.data as any;
+
+        let productData: ProductResponseData[] = [];
+        let filterData: ProductFilterData | undefined;
+        let paginationData: ProductPaginationData | undefined;
+
+        if (rawResponse?.data?.data && Array.isArray(rawResponse.data.data)) {
+          productData = rawResponse.data.data;
+          filterData = rawResponse.data.filter_feature;
+          paginationData = rawResponse.data.meta || rawResponse.data.pagination;
+        } else if (rawResponse?.data && Array.isArray(rawResponse.data)) {
+          productData = rawResponse.data;
+          filterData = rawResponse.filter_feature;
+          paginationData = rawResponse.meta || rawResponse.pagination;
+        } else if (Array.isArray(rawResponse)) {
+          productData = rawResponse;
+        }
 
         // Extract filter data from response
-        const filterData = apiResponse?.data?.filter_feature;
-
         if (filterData) {
           const filters = {
             types: filterData.types || [],
@@ -96,10 +120,29 @@ const useProduct = () => {
           actions.fetchFiltersSuccess(filters);
         }
 
+        const extractedPage = paginationData?.page ?? 0;
+
+        const extractedPageSize = paginationData?.pageSize ?? 0;
+
+        const extractedTotal = paginationData?.total ?? 0;
+
+        const extractedTotalPages =
+          extractedTotal > 0
+            ? Math.ceil(extractedTotal / extractedPageSize)
+            : 1;
+
+        const pagination: ProductPagination = {
+          currentPage: extractedPage,
+          totalPages: extractedTotalPages,
+          totalItems: extractedTotal,
+          itemsPerPage: extractedPageSize,
+        };
+
         // Transform API response to match our global state format
         const transformedData: ProductData[] = productData?.map((product) => ({
           id: product.id,
           code: product.code,
+          application: product.application,
           application_en: product.application_en,
           application_id: product.application_id,
           performanceFeature_en: product.performanceFeature_en,
@@ -107,8 +150,8 @@ const useProduct = () => {
           type: product.type,
         }));
 
-        actions.fetchProductsSuccess(transformedData);
-        return transformedData;
+        actions.fetchProductsSuccess(transformedData, pagination);
+        return { products: transformedData, pagination };
       } catch (error) {
         const errorMessage =
           error instanceof Error ? error.message : 'Failed to fetch products';
@@ -225,6 +268,7 @@ const useProduct = () => {
     // Global state
     products: state.products,
     filters: state.filters,
+    pagination: state.pagination,
     isLoading: state.isLoading,
     error: state.error,
     lastUpdated: state.lastUpdated,

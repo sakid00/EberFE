@@ -25,6 +25,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
   totalItems,
   itemsPerPage,
   onPageChange,
+  isLoading = false,
 }) => {
   const { type } = useDeviceType();
   const router = useRouter();
@@ -51,7 +52,7 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
           handleChangeApplication={handleChangeApplication}
         />
 
-        <ProductTable cellTitles={cellTitles} rows={rows} />
+        <ProductTable cellTitles={cellTitles} rows={rows} isLoading={isLoading} />
       </Box>
 
       {/* Pagination Controls */}

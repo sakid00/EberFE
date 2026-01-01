@@ -36,7 +36,7 @@ export const usePrefetchNavigation = () => {
       // Prefetch product data jika belum ada
       if (products.length === 0) {
         try {
-          await getProduct({ page: 1, pageSize: 100 });
+          await getProduct({ page: 1, pageSize: 10 });
         } catch {
           // Silently fail - prefetch is not critical
         }
