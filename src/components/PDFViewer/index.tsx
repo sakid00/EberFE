@@ -83,6 +83,13 @@ const PDFViewer = ({
   const panStartPos = useRef({ x: 0, y: 0 });
   const lastPosition = useRef({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const flipbookWrapperRef = useRef<HTMLDivElement>(null);
+
+  // Dynamic flipbook dimensions based on container size
+  const [flipbookDimensions, setFlipbookDimensions] = useState({
+    width: 400,
+    height: 550,
+  });
 
   const MIN_ZOOM = 1;
   const MAX_ZOOM = 3;
@@ -321,6 +328,40 @@ const PDFViewer = ({
     setPosition({ x: 0, y: 0 });
   }, [currentPage]);
 
+  // Calculate flipbook dimensions based on container size (50% of container width)
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (flipbookWrapperRef.current) {
+        const containerWidth = flipbookWrapperRef.current.offsetWidth;
+        // Use 50% of container width for the flipbook
+        const flipbookWidth = Math.floor(containerWidth * 0.5);
+        // Maintain aspect ratio (roughly A4 paper ratio ~1:1.4)
+        const flipbookHeight = Math.floor(flipbookWidth * 1);
+
+        setFlipbookDimensions({
+          width: Math.max(200, flipbookWidth), // Minimum 200px width
+          height: Math.max(280, flipbookHeight), // Minimum 280px height
+        });
+      }
+    };
+
+    // Initial calculation
+    updateDimensions();
+
+    // Set up ResizeObserver to recalculate on container resize
+    const resizeObserver = new ResizeObserver(() => {
+      updateDimensions();
+    });
+
+    if (flipbookWrapperRef.current) {
+      resizeObserver.observe(flipbookWrapperRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [open, isClient, pageImages.length]);
+
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setLoading(false);
@@ -427,7 +468,7 @@ const PDFViewer = ({
           boxShadow: 24,
           p: 4,
           position: 'relative',
-          width: type === 'mobile' ? '100%' : '70%',
+          width: type === 'mobile' ? '100%' : '80%',
           height: type === 'mobile' ? '100%' : '90%',
           display: 'flex',
           flexDirection: 'column',
@@ -462,6 +503,7 @@ const PDFViewer = ({
 
         {/* Flipbook */}
         <Box
+          ref={flipbookWrapperRef}
           sx={{
             width: '100%',
             height: '100%',
@@ -642,6 +684,9 @@ const PDFViewer = ({
                 position: 'relative',
                 overflow: type === 'mobile' ? 'hidden' : 'visible',
                 touchAction: type === 'mobile' ? 'none' : 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
               onTouchStart={
                 type === 'mobile' ? handleMobileTouchStart : undefined
@@ -661,13 +706,13 @@ const PDFViewer = ({
                 }}
               >
                 <HTMLFlipBook
-                  width={600}
-                  height={type === 'mobile' ? 450 : 700}
+                  width={type === 'mobile' ? 300 : flipbookDimensions.width}
+                  height={type === 'mobile' ? 450 : flipbookDimensions.height}
                   size="fixed"
-                  minWidth={300}
-                  maxWidth={1000}
-                  minHeight={400}
-                  maxHeight={1533}
+                  minWidth={200}
+                  maxWidth={flipbookDimensions.width}
+                  minHeight={280}
+                  maxHeight={flipbookDimensions.height}
                   showCover={true}
                   ref={bookRef}
                   className="pdf-flipbook"
@@ -719,7 +764,7 @@ const PDFViewer = ({
             <Box
               ref={containerRef}
               sx={{
-                width: type === 'mobile' ? '95%' : '600px',
+                width: type === 'mobile' ? '95%' : '50%',
                 height: type === 'mobile' ? '70%' : '80%',
                 position: 'relative',
                 overflow: 'hidden',
