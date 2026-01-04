@@ -31,14 +31,12 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
     }
 
     if (previousPathname.current !== pathname) {
-      console.log('🚀 Fast navigation context:', previousPathname.current, '->', pathname);
       setIsFirstLoad(false);
       setIsNavigating(true);
       
       // Auto-complete navigation immediately
       navigationTimeout.current = setTimeout(() => {
         setIsNavigating(false);
-        console.log('⏰ Navigation auto-completed');
       }, 10); // Sangat cepat - hampir instan
       
       previousPathname.current = pathname;
@@ -57,7 +55,6 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
   const navigateTo = (path: string) => {
     if (path === pathname) return; // Don't navigate to same page
     
-    console.log('🎯 Initiating navigation to:', path);
     setIsNavigating(true);
     router.push(path);
   };
@@ -68,7 +65,6 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
       navigationTimeout.current = null;
     }
     setIsNavigating(false);
-    console.log('✅ Navigation manually completed');
   };
 
   // Cleanup timeout on unmount

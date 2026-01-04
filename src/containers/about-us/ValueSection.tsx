@@ -170,9 +170,9 @@ export const ValueSection = () => {
 
         <Box sx={valueStyles.valuesContainer}>
           <Typography
-            fontSize={'1.5em'}
+            fontSize={'1.2em'}
             fontWeight={'600'}
-            color="#784791"
+            color="white"
             sx={valueStyles.valuesAndCharactersTitle}
           >
             {t('about_us.company_values')}
@@ -183,9 +183,9 @@ export const ValueSection = () => {
             ))}
           </Box>
           <Typography
-            fontSize={'1.5em'}
+            fontSize={'1.2em'}
             fontWeight={'600'}
-            color="#784791"
+            color="white"
             sx={valueStyles.valuesAndCharactersTitle}
           >
             {t('about_us.company_characters')}

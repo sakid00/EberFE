@@ -238,7 +238,8 @@
       "reach_out": "Reach Out to Us"
     },
     "submit_application_desc": "We value every opportunity to connect with you. Whether you have questions, need more information about our products and services, or wish to explore potential collaborations, our team is ready to assist you. Reach out to us and let’s build something meaningful together.",
-    "submit_application_button": "Submit"
+    "submit_application_button": "Submit",
+    "submit_success": "Application submitted successfully"
   },
   "custom_product": {
     "submit_application_title_small": "Talk to Us!",

@@ -12,8 +12,6 @@ export const PrefetchWrapper: React.FC<PrefetchWrapperProps> = ({ children }) =>
   useEffect(() => {
     // Prefetch semua route utama setelah first load selesai
     const prefetchTimer = setTimeout(() => {
-      console.log('⚡ Prefetching all routes for instant navigation...');
-      
       // Prefetch halaman utama
       router.prefetch('/');
       router.prefetch('/about-us');
@@ -22,8 +20,6 @@ export const PrefetchWrapper: React.FC<PrefetchWrapperProps> = ({ children }) =>
       router.prefetch('/activity');
       router.prefetch('/careers');
       router.prefetch('/contact-us');
-      
-      console.log('✅ All routes prefetched - navigation will be instant!');
     }, 3000); // Tunggu 3 detik setelah mount
 
     return () => clearTimeout(prefetchTimer);

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ActivityDetailContainer from '../../../containers/activity/ActivityDetailPage';
+import * as Sentry from '@sentry/nextjs';
 
 interface ActivityDetailPageProps {
   params: Promise<{
@@ -31,7 +32,10 @@ async function getActivity(id: number) {
     }
     return data;
   } catch (error) {
-    console.error('Failed to fetch activity for metadata:', error);
+    Sentry.captureException(error, {
+      tags: { page: 'ActivityDetailPage', operation: 'getActivityMetadata' },
+      extra: { activityId: id },
+    });
     return null;
   }
 }

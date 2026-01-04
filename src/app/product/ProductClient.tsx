@@ -18,6 +18,7 @@ import { TableSkeleton } from '@/components/Skeleton';
 import { useSearchParams } from 'next/navigation';
 import ReqProductSent from '@/components/ReqProductSent/index';
 import ReqProductModal from '@/components/ReqProductModal/index';
+import * as Sentry from '@sentry/nextjs';
 
 const cellTitles = [
   'product.product_table.product_code',
@@ -39,8 +40,15 @@ export interface IrowData {
 const ProductsPageContent = () => {
   const { language, t } = useTranslation();
   const { type } = useDeviceType();
-  const { getProduct, products, filters, isLoading, error, requestProduct } =
-    useProduct();
+  const {
+    getProduct,
+    products,
+    filters,
+    pagination,
+    isLoading,
+    error,
+    requestProduct,
+  } = useProduct();
   const searchParams = useSearchParams();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
   const [filterByType, setFilterByType] = useState<string[]>([]);
@@ -61,37 +69,41 @@ const ProductsPageContent = () => {
   const productApplications =
     filters.applications.length > 0 ? filters.applications : [];
 
-  // Fetch products from API with filters
-  const fetchProducts = useCallback(() => {
-    console.log('Fetching products from API...');
-    const requestParams: {
-      page: number;
-      pageSize: number;
-      type?: string;
-      application?: string;
-    } = {
-      page: 1,
-      pageSize: 100, // Get a large number to show all products
-    };
+  const fetchProducts = useCallback(
+    (page: number = currentPage) => {
+      const requestParams: {
+        page: number;
+        pageSize: number;
+        type?: string;
+        application?: string;
+      } = {
+        page,
+        pageSize: itemsPerPage,
+      };
 
-    // Add filters if they are selected
-    if (filterByType.length > 0) {
-      requestParams.type = filterByType.join(','); // Join multiple types
-    }
-    if (filterByApplication.length > 0) {
-      requestParams.application = filterByApplication.join(','); // Join multiple applications
-    }
+      // Add filters if they are selected
+      if (filterByType.length > 0) {
+        requestParams.type = filterByType.join(','); // Join multiple types
+      }
+      if (filterByApplication.length > 0) {
+        requestParams.application = filterByApplication.join(','); // Join multiple applications
+      }
 
-    getProduct(requestParams).catch((error) => {
-      console.error('Failed to fetch products:', error);
-    });
-  }, [getProduct, filterByType, filterByApplication]);
+      getProduct(requestParams).catch((error) => {
+        Sentry.captureException(error, {
+          tags: { component: 'ProductClient', operation: 'fetchProducts' },
+          extra: { requestParams },
+        });
+      });
+    },
+    [getProduct, filterByType, filterByApplication, currentPage, itemsPerPage]
+  );
 
-  // Fetch products when filters change or on component mount
+  // Fetch products when filters or page change, or on component mount
   useEffect(() => {
-    fetchProducts();
+    fetchProducts(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterByApplication, filterByType]);
+  }, [filterByApplication, filterByType, currentPage]);
 
   // Check access parameter from URL
   useEffect(() => {
@@ -159,7 +171,10 @@ const ProductsPageContent = () => {
           },
         });
       } catch (error) {
-        console.error('Failed to request product:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'ProductClient', operation: 'requestProduct' },
+          extra: { productCode },
+        });
       } finally {
         setIsRequestingProduct(false);
       }
@@ -167,48 +182,90 @@ const ProductsPageContent = () => {
     [requestProduct]
   );
 
-  // Transform API data to table rows with search filtering and pagination
-  const { paginatedRows, totalPages, totalItems } = useMemo(() => {
-    if (products?.length > 0) {
-      let filteredProducts = products;
+  // Transform API data to table rows with client-side search filtering
+  // Note: Pagination is handled server-side, but search is still client-side for quick filtering
+  const { displayedRows, filteredTotalPages, filteredTotalItems } =
+    useMemo(() => {
+      if (products?.length > 0) {
+        let filteredProducts = products;
 
-      // Apply search filter if search query exists
-      if (searchQuery.trim()) {
-        const query = searchQuery.toLowerCase().trim();
-        filteredProducts = products.filter((product) => {
-          const application =
-            language === 'en' ? product.application_en : product.application_id;
-          const perfFeature =
-            language === 'en'
-              ? product.performanceFeature_en
-              : product.performanceFeature_id;
+        // Apply search filter if search query exists (client-side filtering)
+        if (searchQuery.trim()) {
+          const query = searchQuery.toLowerCase().trim();
+          filteredProducts = products.filter((product) => {
+            const application =
+              language === 'en'
+                ? product.application_en
+                : product.application_id;
+            const perfFeature =
+              language === 'en'
+                ? product.performanceFeature_en
+                : product.performanceFeature_id;
 
-          return (
-            (product.code?.toLowerCase() || '').includes(query) ||
-            (application?.toLowerCase() || '').includes(query) ||
-            (perfFeature?.toLowerCase() || '').includes(query) ||
-            (product.type?.toLowerCase() || '').includes(query)
-          );
-        });
+            return (
+              (product.code?.toLowerCase() || '').includes(query) ||
+              (application?.toLowerCase() || '').includes(query) ||
+              (perfFeature?.toLowerCase() || '').includes(query) ||
+              (product.type?.toLowerCase() || '').includes(query)
+            );
+          });
+        }
+
+        const rows = filteredProducts.map((product) =>
+          createData({
+            productCode: product.code,
+            application:
+              language === 'en'
+                ? product.application_en
+                : product.application_id,
+            perfFeature:
+              language === 'en'
+                ? product.performanceFeature_en
+                : product.performanceFeature_id,
+            typeOfProd: product.type,
+            getMoreDetail: (
+              <Button
+                variant="text"
+                sx={{
+                  color: '#784791',
+                  fontSize: '1em',
+                  fontWeight: 400,
+                  textTransform: 'none',
+                }}
+                onClick={() => handleRequestClick(product.code)}
+                disabled={isRequestingProduct}
+                startIcon={
+                  <Image src={emailIcon} width={16} height={16} alt="email" />
+                }
+              >
+                {t('product.request_product')}
+              </Button>
+            ),
+          })
+        );
+
+        // If search is applied, use filtered count; otherwise use server pagination
+        const isSearching = searchQuery.trim().length > 0;
+        const totalItems = isSearching
+          ? filteredProducts.length
+          : pagination?.totalItems || products.length;
+        const totalPages = isSearching
+          ? Math.ceil(filteredProducts.length / itemsPerPage)
+          : pagination?.totalPages || 1;
+
+        return {
+          displayedRows: rows,
+          filteredTotalPages: totalPages,
+          filteredTotalItems: totalItems,
+        };
       }
-
-      // Calculate pagination
-      const totalItems = filteredProducts.length;
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-
-      const paginatedRows = paginatedProducts.map((product) =>
+      // Fallback static data
+      const fallbackRows = [
         createData({
-          productCode: product.code,
-          application:
-            language === 'en' ? product.application_en : product.application_id,
-          perfFeature:
-            language === 'en'
-              ? product.performanceFeature_en
-              : product.performanceFeature_id,
-          typeOfProd: product.type,
+          productCode: 'Sample Product',
+          application: 'Sample Application',
+          perfFeature: 'Sample Feature',
+          typeOfProd: 'Sample Type',
           getMoreDetail: (
             <Button
               variant="text"
@@ -218,7 +275,7 @@ const ProductsPageContent = () => {
                 fontWeight: 400,
                 textTransform: 'none',
               }}
-              onClick={() => handleRequestClick(product.code)}
+              onClick={() => handleRequestClick('Sample Product')}
               disabled={isRequestingProduct}
               startIcon={
                 <Image src={emailIcon} width={16} height={16} alt="email" />
@@ -227,53 +284,28 @@ const ProductsPageContent = () => {
               {t('product.request_product')}
             </Button>
           ),
-        })
-      );
+        }),
+      ];
+      return {
+        displayedRows: fallbackRows,
+        filteredTotalPages: 1,
+        filteredTotalItems: 1,
+      };
+    }, [
+      products,
+      language,
+      searchQuery,
+      handleRequestClick,
+      pagination,
+      itemsPerPage,
+      t,
+      isRequestingProduct,
+    ]);
 
-      return { paginatedRows, totalPages, totalItems };
-    }
-    // Fallback static data
-    const fallbackRows = [
-      createData({
-        productCode: 'Sample Product',
-        application: 'Sample Application',
-        perfFeature: 'Sample Feature',
-        typeOfProd: 'Sample Type',
-        getMoreDetail: (
-          <Button
-            variant="text"
-            sx={{
-              color: '#784791',
-              fontSize: '1em',
-              fontWeight: 400,
-              textTransform: 'none',
-            }}
-            onClick={() => handleRequestClick('Sample Product')}
-            disabled={isRequestingProduct}
-            startIcon={
-              <Image src={emailIcon} width={16} height={16} alt="email" />
-            }
-          >
-            {t('product.request_product')}
-          </Button>
-        ),
-      }),
-    ];
-    return { paginatedRows: fallbackRows, totalPages: 1, totalItems: 1 };
-  }, [
-    products,
-    language,
-    searchQuery,
-    handleRequestClick,
-    currentPage,
-    itemsPerPage,
-    t,
-    isRequestingProduct,
-  ]);
-
-  // Reset to first page when filters change
+  // Reset to first page when filters or search query change
   useEffect(() => {
     setCurrentPage(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filterByType, filterByApplication, searchQuery]);
 
   const handleChangeFilterByType = (
@@ -327,7 +359,7 @@ const ProductsPageContent = () => {
         productTypes={productTypes}
         productApplications={productApplications}
         cellTitles={cellTitles}
-        rows={paginatedRows}
+        rows={displayedRows}
         isSeeAllProduct={isSeeAllProduct}
         setIsSeeAllProduct={setIsSeeAllProduct}
         filterByType={filterByType}
@@ -338,10 +370,11 @@ const ProductsPageContent = () => {
         handleChangeFilterByType={handleChangeFilterByType}
         handleChangeApplication={handleChangeApplication}
         currentPage={currentPage}
-        totalPages={totalPages}
-        totalItems={totalItems}
+        totalPages={filteredTotalPages}
+        totalItems={filteredTotalItems}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
+        isLoading={isLoading}
       />
       <ReqProductModal
         openModal={openReqModal}
@@ -380,4 +413,3 @@ const ProductClient = () => {
 };
 
 export default ProductClient;
-

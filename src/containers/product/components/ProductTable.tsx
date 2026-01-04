@@ -1,4 +1,6 @@
 import {
+  Box,
+  CircularProgress,
   Paper,
   Table,
   TableBody,
@@ -13,11 +15,42 @@ import { ProductTableProps } from '../types';
 import { useDeviceType } from '@/hooks';
 import { useTranslation } from '@/hooks/useTranslation';
 
-const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
+const ProductTable: React.FC<ProductTableProps> = ({
+  cellTitles,
+  rows,
+  isLoading = false,
+}) => {
   const { type } = useDeviceType();
   const { t } = useTranslation();
   return (
-    <TableContainer component={Paper} sx={styles.tableContainer(type)}>
+    <Box sx={{ position: 'relative' }}>
+      {isLoading && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            zIndex: 10,
+            borderRadius: 1,
+          }}
+        >
+          <CircularProgress color="primary" />
+        </Box>
+      )}
+      <TableContainer
+        component={Paper}
+        sx={{
+          ...styles.tableContainer(type),
+          opacity: isLoading ? 0.5 : 1,
+          transition: 'opacity 0.2s ease-in-out',
+        }}
+      >
       <Table sx={styles.table(type)} size="small" aria-label="products table">
         <TableHead>
           <TableRow sx={styles.tableHeaderRow}>
@@ -62,6 +95,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ cellTitles, rows }) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </Box>
   );
 };
 

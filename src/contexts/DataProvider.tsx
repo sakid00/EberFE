@@ -22,6 +22,7 @@ export interface CareerState {
 export interface ProductData {
   id: number;
   code: string;
+  application: string;
   application_en: string;
   application_id: string;
   performanceFeature_en: string;
@@ -34,9 +35,17 @@ export interface ProductFilters {
   applications: string[];
 }
 
+export interface ProductPagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+}
+
 export interface ProductState {
   products: ProductData[];
   filters: ProductFilters;
+  pagination: ProductPagination | null;
   isLoading: boolean;
   error: string | null;
   lastUpdated: Date | null;
@@ -197,7 +206,13 @@ type DataAction =
 
   // Product Actions
   | { type: 'PRODUCT_FETCH_START' }
-  | { type: 'PRODUCT_FETCH_SUCCESS'; payload: ProductData[] }
+  | {
+      type: 'PRODUCT_FETCH_SUCCESS';
+      payload: {
+        products: ProductData[];
+        pagination: ProductPagination;
+      };
+    }
   | { type: 'PRODUCT_FETCH_ERROR'; payload: string }
   | { type: 'PRODUCT_FILTERS_SUCCESS'; payload: ProductFilters }
   | { type: 'PRODUCT_CLEAR_ERROR' }
@@ -270,7 +285,10 @@ interface DataContextType {
 
     // Product Actions
     productFetchStart: () => void;
-    productFetchSuccess: (products: ProductData[]) => void;
+    productFetchSuccess: (
+      products: ProductData[],
+      pagination: ProductPagination
+    ) => void;
     productFetchError: (error: string) => void;
     productFiltersSuccess: (filters: ProductFilters) => void;
     productClearError: () => void;
@@ -340,6 +358,7 @@ const initialProductState: ProductState = {
     types: [],
     applications: [],
   },
+  pagination: null,
   isLoading: false,
   error: null,
   lastUpdated: null,
@@ -453,7 +472,8 @@ function dataReducer(state: GlobalState, action: DataAction): GlobalState {
         ...state,
         product: {
           ...state.product,
-          products: action.payload,
+          products: action.payload.products,
+          pagination: action.payload.pagination,
           isLoading: false,
           error: null,
           lastUpdated: new Date(),
@@ -468,6 +488,7 @@ function dataReducer(state: GlobalState, action: DataAction): GlobalState {
           isLoading: false,
           error: action.payload,
           products: [],
+          pagination: null,
         },
       };
 
@@ -738,8 +759,14 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
     // Product Actions
     productFetchStart: () => dispatch({ type: 'PRODUCT_FETCH_START' }),
-    productFetchSuccess: (products: ProductData[]) =>
-      dispatch({ type: 'PRODUCT_FETCH_SUCCESS', payload: products }),
+    productFetchSuccess: (
+      products: ProductData[],
+      pagination: ProductPagination
+    ) =>
+      dispatch({
+        type: 'PRODUCT_FETCH_SUCCESS',
+        payload: { products, pagination },
+      }),
     productFetchError: (error: string) =>
       dispatch({ type: 'PRODUCT_FETCH_ERROR', payload: error }),
     productFiltersSuccess: (filters: ProductFilters) =>
@@ -950,6 +977,7 @@ export const useProductState = () => {
   return {
     products: state.product.products,
     filters: state.product.filters,
+    pagination: state.product.pagination,
     isLoading: state.product.isLoading,
     error: state.product.error,
     lastUpdated: state.product.lastUpdated,

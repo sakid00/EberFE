@@ -7,6 +7,7 @@ import { Box } from '@mui/material';
 import { useTranslation } from '../../hooks';
 import { useDeviceType } from '../../hooks/useDeviceType';
 import { ListSkeleton } from '@/components/Skeleton';
+import * as Sentry from '@sentry/nextjs';
 
 export interface ICareerList {
   title: string;
@@ -21,12 +22,13 @@ const CareersClient = () => {
   const { getCareer, careers, isLoading } = useCareer();
 
   useEffect(() => {
-    console.log('Fetching careers from API...');
     getCareer({
       page: 1,
       pageSize: 10,
     }).catch((error) => {
-      console.error('Failed to fetch careers:', error);
+      Sentry.captureException(error, {
+        tags: { component: 'CareersClient', operation: 'fetchCareers' },
+      });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

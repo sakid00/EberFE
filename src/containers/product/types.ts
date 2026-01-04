@@ -27,6 +27,8 @@ export interface ProductContainerProps {
   totalItems: number;
   itemsPerPage: number;
   onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+  // Loading state
+  isLoading?: boolean;
 }
 
 export interface CustomizationHeaderProps {
@@ -51,6 +53,7 @@ export interface ProductTableProps {
   cellTitles: string[];
   rows: IRowData[];
   onRequestProductClick?: () => void;
+  isLoading?: boolean;
 }
 
 export interface FilterSelectProps {

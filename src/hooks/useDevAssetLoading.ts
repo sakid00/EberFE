@@ -63,45 +63,19 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
       return 0;
     });
 
-    console.log(
-      `📸 Waiting for ${criticalImages.length} critical images (background images first)...`
-    );
-    criticalImages.forEach((img, idx) => {
-      const filename = img.src.split('/').pop();
-      const isBackground =
-        img.src.includes('homepage_header_bg') ||
-        img.src.includes('site-bg') ||
-        img.src.includes('container');
-      console.log(
-        `${idx + 1}. ${filename} ${isBackground ? '(🎨 Background)' : '(📷 Regular)'}`
-      );
-    });
-
-    const imagePromises = criticalImages.map((img, index) => {
+    const imagePromises = criticalImages.map((img) => {
       if (img.complete && img.naturalWidth > 0) {
-        console.log(
-          `✅ Image ${index + 1} already loaded:`,
-          img.src.split('/').pop()
-        );
         return Promise.resolve();
       }
 
       return new Promise<void>((resolve) => {
         const onLoad = () => {
-          console.log(
-            `✅ Image ${index + 1} loaded:`,
-            img.src.split('/').pop()
-          );
           img.removeEventListener('load', onLoad);
           img.removeEventListener('error', onError);
           resolve();
         };
 
         const onError = () => {
-          console.warn(
-            `❌ Image ${index + 1} failed to load:`,
-            img.src.split('/').pop()
-          );
           img.removeEventListener('load', onLoad);
           img.removeEventListener('error', onError);
           resolve(); // Resolve anyway to not block loading
@@ -118,10 +92,6 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
         const timeout = isBackgroundImage ? 1500 : 800; // 1.5s for backgrounds, 800ms for others
 
         setTimeout(() => {
-          console.warn(
-            `⏰ Image ${index + 1} timeout (${timeout / 1000}s):`,
-            img.src.split('/').pop()
-          );
           img.removeEventListener('load', onLoad);
           img.removeEventListener('error', onError);
           resolve();
@@ -130,7 +100,6 @@ export const useDevAssetLoading = (): UseAssetLoadingReturn => {
     });
 
     await Promise.all(imagePromises);
-    console.log('🎉 All critical images processed!');
   }, []);
 
   useEffect(() => {

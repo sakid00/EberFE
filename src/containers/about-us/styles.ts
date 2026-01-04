@@ -92,14 +92,17 @@ export const valueStyles: {
     marginBottom: '5%',
   },
   valuesContainer: {
-    top: '33vh',
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    borderRadius: '5%',
+    top: '30%',
     position: 'absolute',
     zIndex: 100000,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    maxWidth: '70%',
+    maxWidth: '80%',
+    padding: '2%',
   },
   valuesAndCharactersTitle: {
     marginY: '0.5%',
@@ -189,10 +192,10 @@ export const valueStyles: {
   },
   fieldPersonContainer: {
     position: 'absolute',
-    width: '40vw',
+    width: '60%',
     height: '110%',
     bottom: '0vh',
-    left: '-2%',
+    left: '-3%',
     zIndex: 20,
   },
   valuesGrid: {
@@ -382,12 +385,11 @@ export const certificationStyles: {
     marginTop: '20px',
   }),
   cardsContainer: {
-    position: 'relative',
-    width: '58%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '40px',
+    gap: '16px',
   },
   cardsContainerMobile: {
     position: 'relative',
@@ -399,9 +401,7 @@ export const certificationStyles: {
     px: 1,
   },
   leftArrow: {
-    position: 'absolute',
-    left: 0,
-    zIndex: 10,
+    flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
     '&:hover': {
@@ -424,9 +424,7 @@ export const certificationStyles: {
     },
   },
   rightArrow: {
-    position: 'absolute',
-    right: 0,
-    zIndex: 10,
+    flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
     '&:hover': {

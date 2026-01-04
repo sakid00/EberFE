@@ -11,6 +11,7 @@ import useActivity from '@/hooks/useActivity';
 import { useEffect, useState, useRef } from 'react';
 import { ActivityData } from '@/contexts/DataProvider';
 import DOMPurify from 'isomorphic-dompurify';
+import * as Sentry from '@sentry/nextjs';
 
 const ActivityDetailPage = ({ id }: { id: number }) => {
   const { type } = useDeviceType();
@@ -53,7 +54,6 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         }
 
         // If not found in state, fetch from API
-        console.log('Activity not found in state, fetching from API...');
         const fetchedActivity = await getActivityById(id);
         if (fetchedActivity) {
           setCurrentActivity(fetchedActivity);
@@ -61,15 +61,19 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           console.warn(`Activity with ID ${id} returned null from API`);
         }
       } catch (error) {
-        console.error('Failed to load activity:', error);
+        Sentry.captureException(error, {
+          tags: { component: 'ActivityDetailPage', operation: 'loadActivity' },
+          extra: { activityId: id },
+        });
         // If activity ID is invalid and we have other activities available,
         // we can show a "not found" state but still populate the sidebar
         if (activities.length === 0) {
           try {
-            console.log('Attempting to load some activities for context...');
             await getActivities({ page: 1, pageSize: 6 });
           } catch (fallbackError) {
-            console.error('Failed to load fallback activities:', fallbackError);
+            Sentry.captureException(fallbackError, {
+              tags: { component: 'ActivityDetailPage', operation: 'loadFallbackActivities' },
+            });
           }
         }
       } finally {
@@ -99,23 +103,21 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
         !isLoading &&
         !activitiesLoadAttempted.current
       ) {
-        console.log(
-          'Activities list is empty, fetching activities for sidebar...'
-        );
         activitiesLoadAttempted.current = true;
         try {
           // Try to fetch activities from the same group as current activity if possible
           const group = currentActivity?.group;
           if (group) {
-            console.log('Fetching activities from same group:', group);
             await getActivities({ page: 1, pageSize: 10, group });
           } else {
             // Fallback: fetch mixed activities if no group info available
-            console.log('No group info available, fetching mixed activities');
             await getActivities({ page: 1, pageSize: 10 });
           }
         } catch (error) {
-          console.error('Failed to load activities for sidebar:', error);
+          Sentry.captureException(error, {
+            tags: { component: 'ActivityDetailPage', operation: 'loadActivitiesForSidebar' },
+            extra: { group: currentActivity?.group },
+          });
           // Reset the flag on error so we can retry
           activitiesLoadAttempted.current = false;
         }
