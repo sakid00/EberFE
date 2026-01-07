@@ -228,7 +228,7 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 50px 50px;
@@ -237,8 +237,12 @@ img {
 }
 
 @keyframes gridMove {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
 }
 
 /* Geometric background shapes */
@@ -253,7 +257,11 @@ img {
 
 .eber-shape {
   position: absolute;
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.1),
+    rgba(251, 191, 36, 0.05)
+  );
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
@@ -286,7 +294,8 @@ img {
 }
 
 @keyframes industrialFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: rotate(45deg) translateY(0px);
     opacity: 0.1;
   }
@@ -309,8 +318,15 @@ img {
 }
 
 @keyframes accentPulse {
-  0%, 100% { opacity: 0.3; transform: scaleX(1); }
-  50% { opacity: 0.8; transform: scaleX(1.1); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scaleX(1.1);
+  }
 }
 
 /* Logo styling */
@@ -334,7 +350,9 @@ img {
     filter: brightness(1);
   }
   to {
-    text-shadow: 0 8px 40px rgba(245, 158, 11, 0.6), 0 0 50px rgba(251, 191, 36, 0.4);
+    text-shadow:
+      0 8px 40px rgba(245, 158, 11, 0.6),
+      0 0 50px rgba(251, 191, 36, 0.4);
     filter: brightness(1.1);
   }
 }
@@ -344,7 +362,9 @@ img {
     box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
   }
   to {
-    box-shadow: 0 0 25px rgba(245, 158, 11, 0.8), 0 0 35px rgba(251, 191, 36, 0.4);
+    box-shadow:
+      0 0 25px rgba(245, 158, 11, 0.8),
+      0 0 35px rgba(251, 191, 36, 0.4);
   }
 }
 
@@ -360,7 +380,8 @@ img {
   position: absolute;
   border: 3px solid;
   border-radius: 50%;
-  border-color: rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3) rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3);
+  border-color: rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3)
+    rgba(245, 158, 11, 0.6) rgba(245, 158, 11, 0.3);
 }
 
 .eber-gear::before {
@@ -414,13 +435,21 @@ img {
 }
 
 @keyframes gearRotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 @keyframes gearRotateReverse {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
 /* Progress indicator animation */
@@ -429,7 +458,8 @@ img {
 }
 
 @keyframes indicatorPulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(1);
     box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
   }
@@ -481,37 +511,37 @@ img {
     width: 150px;
     height: 150px;
   }
-  
+
   .eber-shape-2 {
     width: 120px;
     height: 120px;
   }
-  
+
   .eber-shape-3 {
     width: 80px;
     height: 80px;
   }
-  
+
   .eber-gear-container {
     width: 100px;
     height: 100px;
   }
-  
+
   .eber-gear-large {
     width: 50px;
     height: 50px;
   }
-  
+
   .eber-gear-medium {
     width: 30px;
     height: 30px;
   }
-  
+
   .eber-gear-small {
     width: 20px;
     height: 20px;
   }
-  
+
   .eber-accent-line {
     width: 60%;
     height: 2px;

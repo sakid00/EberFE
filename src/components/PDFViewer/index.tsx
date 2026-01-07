@@ -301,6 +301,66 @@ const PDFViewer = ({
     // Page navigation gestures disabled for mobile - use buttons instead
   };
 
+  // Desktop mouse wheel zoom handler
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+      setZoom((prev) => {
+        const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, prev + delta));
+        if (newZoom === MIN_ZOOM) {
+          setPosition({ x: 0, y: 0 });
+        }
+        return newZoom;
+      });
+    }
+  };
+
+  // Desktop mouse pan handlers (when zoomed)
+  const isPanning = useRef<boolean>(false);
+  const panMouseStartPos = useRef({ x: 0, y: 0 });
+
+  const handlePanMouseDown = (e: React.MouseEvent) => {
+    if (zoom > 1) {
+      isPanning.current = true;
+      panMouseStartPos.current = { x: e.clientX, y: e.clientY };
+      lastPosition.current = { ...position };
+      e.preventDefault();
+    }
+  };
+
+  const handlePanMouseMove = (e: React.MouseEvent) => {
+    if (!isPanning.current || zoom <= 1) return;
+
+    const deltaX = e.clientX - panMouseStartPos.current.x;
+    const deltaY = e.clientY - panMouseStartPos.current.y;
+
+    const container = containerRef.current;
+    if (container) {
+      const maxPanX = (container.offsetWidth * (zoom - 1)) / 2;
+      const maxPanY = (container.offsetHeight * (zoom - 1)) / 2;
+
+      setPosition({
+        x: Math.min(
+          maxPanX,
+          Math.max(-maxPanX, lastPosition.current.x + deltaX)
+        ),
+        y: Math.min(
+          maxPanY,
+          Math.max(-maxPanY, lastPosition.current.y + deltaY)
+        ),
+      });
+    }
+  };
+
+  const handlePanMouseUp = () => {
+    isPanning.current = false;
+  };
+
+  const handlePanMouseLeave = () => {
+    isPanning.current = false;
+  };
+
   const onFlip = (e: { data: number }) => {
     setCurrentPage(e.data);
   };
@@ -333,14 +393,14 @@ const PDFViewer = ({
     const updateDimensions = () => {
       if (flipbookWrapperRef.current) {
         const containerWidth = flipbookWrapperRef.current.offsetWidth;
+        const containerHeight = flipbookWrapperRef.current.offsetHeight;
         // Use 50% of container width for the flipbook
-        const flipbookWidth = Math.floor(containerWidth * 0.5);
+        const flipbookWidth = Math.floor(containerWidth * 0.1);
         // Maintain aspect ratio (roughly A4 paper ratio ~1:1.4)
-        const flipbookHeight = Math.floor(flipbookWidth * 1);
-
+        const flipbookHeight = Math.floor(containerHeight * 0.5);
         setFlipbookDimensions({
-          width: Math.max(200, flipbookWidth), // Minimum 200px width
-          height: Math.max(280, flipbookHeight), // Minimum 280px height
+          width: Math.max(600, flipbookWidth), // Minimum 200px width
+          height: Math.max(800, flipbookHeight), // Minimum 280px height
         });
       }
     };
@@ -605,12 +665,12 @@ const PDFViewer = ({
           )}
 
           {/* Zoom Controls */}
-          {type === 'mobile' && (
+          {isClient && pageImages.length > 0 && (
             <Box
               sx={{
                 position: 'absolute',
-                top: '5%',
-                right: '10%',
+                top: type === 'mobile' ? '5%' : { xs: 16, sm: 24 },
+                right: type === 'mobile' ? '10%' : { xs: 16, sm: 24 },
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 0.5,
@@ -623,8 +683,8 @@ const PDFViewer = ({
                 sx={{
                   bgcolor: 'rgba(120, 71, 145, 0.9)',
                   color: 'white',
-                  width: 36,
-                  height: 36,
+                  width: { xs: 36, sm: 40 },
+                  height: { xs: 36, sm: 40 },
                   '&:hover': {
                     bgcolor: 'rgba(120, 71, 145, 1)',
                   },
@@ -635,7 +695,7 @@ const PDFViewer = ({
                   boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
                 }}
               >
-                <ZoomInIcon sx={{ fontSize: 20 }} />
+                <ZoomInIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
               </IconButton>
               <IconButton
                 onClick={handleZoomOut}
@@ -643,8 +703,8 @@ const PDFViewer = ({
                 sx={{
                   bgcolor: 'rgba(120, 71, 145, 0.9)',
                   color: 'white',
-                  width: 36,
-                  height: 36,
+                  width: { xs: 36, sm: 40 },
+                  height: { xs: 36, sm: 40 },
                   '&:hover': {
                     bgcolor: 'rgba(120, 71, 145, 1)',
                   },
@@ -655,7 +715,7 @@ const PDFViewer = ({
                   boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
                 }}
               >
-                <ZoomOutIcon sx={{ fontSize: 20 }} />
+                <ZoomOutIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
               </IconButton>
               {zoom > 1 && (
                 <IconButton
@@ -663,15 +723,15 @@ const PDFViewer = ({
                   sx={{
                     bgcolor: 'rgba(120, 71, 145, 0.9)',
                     color: 'white',
-                    width: 36,
-                    height: 36,
+                    width: { xs: 36, sm: 40 },
+                    height: { xs: 36, sm: 40 },
                     '&:hover': {
                       bgcolor: 'rgba(120, 71, 145, 1)',
                     },
                     boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
                   }}
                 >
-                  <RestartAltIcon sx={{ fontSize: 20 }} />
+                  <RestartAltIcon sx={{ fontSize: { xs: 20, sm: 24 } }} />
                 </IconButton>
               )}
             </Box>
@@ -682,11 +742,12 @@ const PDFViewer = ({
               ref={containerRef}
               sx={{
                 position: 'relative',
-                overflow: type === 'mobile' ? 'hidden' : 'visible',
+                overflow: 'hidden',
                 touchAction: type === 'mobile' ? 'none' : 'auto',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                cursor: zoom > 1 ? 'move' : 'default',
               }}
               onTouchStart={
                 type === 'mobile' ? handleMobileTouchStart : undefined
@@ -695,14 +756,16 @@ const PDFViewer = ({
                 type === 'mobile' ? handleMobileTouchMove : undefined
               }
               onTouchEnd={type === 'mobile' ? handleMobileTouchEnd : undefined}
+              onWheel={type !== 'mobile' ? handleWheel : undefined}
+              onMouseDown={type !== 'mobile' ? handlePanMouseDown : undefined}
+              onMouseMove={type !== 'mobile' ? handlePanMouseMove : undefined}
+              onMouseUp={type !== 'mobile' ? handlePanMouseUp : undefined}
+              onMouseLeave={type !== 'mobile' ? handlePanMouseLeave : undefined}
             >
               <Box
                 sx={{
                   transition: zoom === 1 ? 'transform 0.2s ease-out' : 'none',
-                  transform:
-                    type === 'mobile'
-                      ? `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`
-                      : 'none',
+                  transform: `scale(${zoom}) translate(${position.x / zoom}px, ${position.y / zoom}px)`,
                 }}
               >
                 <HTMLFlipBook
@@ -710,9 +773,9 @@ const PDFViewer = ({
                   height={type === 'mobile' ? 450 : flipbookDimensions.height}
                   size="fixed"
                   minWidth={200}
-                  maxWidth={flipbookDimensions.width}
+                  maxWidth={1000}
                   minHeight={280}
-                  maxHeight={flipbookDimensions.height}
+                  maxHeight={1000}
                   showCover={true}
                   ref={bookRef}
                   className="pdf-flipbook"
@@ -787,10 +850,25 @@ const PDFViewer = ({
               onTouchEnd={
                 type === 'mobile' ? handleMobileTouchEnd : handleTouchEnd
               }
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseLeave}
+              onWheel={type !== 'mobile' ? handleWheel : undefined}
+              onMouseDown={
+                type !== 'mobile' && zoom > 1
+                  ? handlePanMouseDown
+                  : handleMouseDown
+              }
+              onMouseMove={
+                type !== 'mobile' && zoom > 1
+                  ? handlePanMouseMove
+                  : handleMouseMove
+              }
+              onMouseUp={
+                type !== 'mobile' && zoom > 1 ? handlePanMouseUp : handleMouseUp
+              }
+              onMouseLeave={
+                type !== 'mobile' && zoom > 1
+                  ? handlePanMouseLeave
+                  : handleMouseLeave
+              }
             >
               <Box
                 sx={{
