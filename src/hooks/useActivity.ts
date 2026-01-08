@@ -120,14 +120,16 @@ const useActivity = () => {
   );
 
   const getActivityById = useCallback(
-    async (id: number): Promise<ActivityData | null> => {
+    async (id: number, forceRefresh = false): Promise<ActivityData | null> => {
       try {
-        // Check if activity already exists in state
-        const existingActivity = state.activities.find(
-          (activity) => activity.id === id
-        );
-        if (existingActivity) {
-          return existingActivity;
+        // Check if activity already exists in state (skip if forcing refresh)
+        if (!forceRefresh) {
+          const existingActivity = state.activities.find(
+            (activity) => activity.id === id
+          );
+          if (existingActivity) {
+            return existingActivity;
+          }
         }
 
         actions.fetchActivitiesStart();

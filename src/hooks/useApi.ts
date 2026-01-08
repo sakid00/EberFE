@@ -79,10 +79,7 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
       setLoading(true);
       setStatus(null);
 
-      // Cancel any existing request
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
+      // Clear previous timeout (but don't abort - let concurrent requests complete)
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
@@ -130,6 +127,7 @@ export function useApi<T = unknown>(config: ApiConfig = {}): UseApiReturn<T> {
           headers,
           body,
           signal: abortControllerRef.current.signal,
+          cache: 'no-store', // Disable caching to always get fresh data
         });
 
         setStatus(response.status);
