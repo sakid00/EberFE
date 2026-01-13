@@ -63,7 +63,7 @@ export const headerSectionStyles = {
 
   titleMobile: {
     width: '90%',
-    marginTop: '-1vh',
+    marginTop: '-6%',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 

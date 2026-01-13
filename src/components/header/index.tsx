@@ -390,10 +390,10 @@ const Header = () => {
         </Box>
         <Box sx={headerStyles.homepageImageContainer}>
           <Box sx={headerStyles.homepageModalBox}>
-            <Typography color="white" fontSize="0.9em" fontWeight={800}>
+            <Typography color="white" fontSize="0.85em" fontWeight={800}>
               {t('home.modal.title')}
             </Typography>
-            <Typography color="white" fontSize="0.9em" fontWeight={400}>
+            <Typography color="white" fontSize="0.85em" fontWeight={400}>
               {t('home.modal.desc')}
             </Typography>
           </Box>
@@ -401,8 +401,8 @@ const Header = () => {
             <Image
               src={getPhoto('subtract')}
               alt="header-photo"
-              width={1000}
-              height={1000}
+              width={900}
+              height={900}
               style={headerStyles.contentImageStyle}
               loading="lazy"
             />
@@ -420,7 +420,7 @@ const Header = () => {
           <Typography
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.innovating')}
           </Typography>
@@ -430,12 +430,12 @@ const Header = () => {
             fontWeight={800}
             inline
             color="white"
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           />
           <Typography
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.future')}
           </Typography>

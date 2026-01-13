@@ -56,8 +56,8 @@ export const headerStyles = {
     zIndex: 0,
   }),
   backgroundImageContent: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: '5vh',
     display: 'flex',
     flexDirection: 'column',
@@ -407,6 +407,8 @@ export const headerStyles = {
     alignItems: 'center',
     paddingX: '5%',
     height: '100%',
+    maxHeight: isMobile ? '90%' : '100%',
+    maxWidth: '90%',
   }),
 
   // Homepage title section
@@ -432,7 +434,7 @@ export const headerStyles = {
     position: 'relative',
     width: '100vw',
     height: '100%',
-    maxWidth: '1000px',
+    maxWidth: '900px',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -444,8 +446,8 @@ export const headerStyles = {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '2%',
     borderRadius: '10px',
-    top: '20%',
-    left: '30%',
+    top: '10%',
+    left: '25%',
     borderBottomRightRadius: '100px',
   },
 
@@ -488,7 +490,8 @@ export const headerStyles = {
     left: '2%',
     display: 'flex',
     flexDirection: 'column' as const,
-    height: '50%',
+    height: '100%',
+    maxHeight: '1000px',
   },
 
   mobileHomepageImageWrapper: {
