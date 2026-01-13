@@ -27,15 +27,13 @@ interface FormErrors {
 const FormBox = ({
   title,
   description,
-  text1,
-  text2,
+  text,
   formBoxStyle,
   buttonText,
 }: {
   title: string;
   description: string;
-  text1: string;
-  text2: string;
+  text: string;
   formBoxStyle?: React.CSSProperties;
   buttonText?: string;
 }) => {
@@ -169,8 +167,7 @@ const FormBox = ({
     <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
       <Typography sx={styles.getInTouchText}>{title}</Typography>
       <DualColorText
-        text1={text1}
-        text2={text2}
+        text={text}
         inline
         fontSize={dynamicStylingValue(type, '1em', '1.8em', '1.8em')}
         fontWeight={800}

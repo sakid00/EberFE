@@ -52,8 +52,7 @@ export const SpecialtySection = () => {
         className={animationClasses.fadeIn}
       >
         <DualColorText
-          text1={`${t('home.specialty_section_title.leader_in')}\u00a0`}
-          text2={t('home.specialty_section_title.high_performance')}
+          text={`${t('home.specialty_section_title.leader_in')}\u00a0{${t('home.specialty_section_title.high_performance')}}`}
           fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
           fontWeight={800}
           inline

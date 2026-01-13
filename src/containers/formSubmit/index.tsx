@@ -28,8 +28,7 @@ const FormSubmitContainer = ({
   photo,
   title,
   description,
-  text1,
-  text2,
+  text,
   imageStyle,
   type,
   containerStyle,
@@ -39,8 +38,7 @@ const FormSubmitContainer = ({
   photo: string | StaticImageData;
   title: string;
   description: string;
-  text1: string;
-  text2: string;
+  text: string;
   imageStyle?: React.CSSProperties;
   type: DeviceType;
   containerStyle?: React.CSSProperties;
@@ -55,8 +53,7 @@ const FormSubmitContainer = ({
           description ??
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?'
         }
-        text1={text1}
-        text2={text2}
+        text={text}
         formBoxStyle={styles.formBoxStyle(type)}
         buttonText={buttonText}
       />

@@ -14,8 +14,7 @@ export const HeaderSection = () => {
         <>
           <Box id="home-header" sx={headerStyles.headerContent('desktop')}>
             <DualColorText
-              text1={`${t('about_us.title.our')}\u00a0`}
-              text2={t('about_us.title.company')}
+              text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
               fontSize="4em"
               fontWeight={800}
               inline
@@ -61,8 +60,7 @@ const HeaderSectionContent = () => {
     <>
       <Box id="home-header" sx={headerStyles.headerContent(type)}>
         <DualColorText
-          text1={`${t('about_us.title.our')}\u00a0`}
-          text2={t('about_us.title.company')}
+          text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
           fontSize={dynamicStylingValue(type, '2rem', '4em', '4em')}
           fontWeight={800}
           inline

@@ -16,8 +16,7 @@ export const CorporateSection = () => {
     >
       <div className="animate-fade-in">
         <DualColorText
-          text1={`${t('about_us.corporate_section_title.corporate')}\u00a0`}
-          text2={t('about_us.corporate_section_title.governance')}
+          text={`${t('about_us.corporate_section_title.corporate')}\u00a0{${t('about_us.corporate_section_title.governance')}}`}
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
           fontWeight={700}
           inline

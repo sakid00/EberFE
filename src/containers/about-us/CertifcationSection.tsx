@@ -127,8 +127,7 @@ export const CertificationSection = () => {
       >
         <Box className="flex flex-col animate-fade-in justify-center">
           <DualColorText
-            text1={`${t('about_us.certification_section_title.our')}\u00a0`}
-            text2={t('about_us.certification_section_title.certification')}
+            text={`${t('about_us.certification_section_title.our')}\u00a0{${t('about_us.certification_section_title.certification')}}`}
             fontSize={dynamicStylingValue(type, '1.5em', '2rem', '2rem')}
             fontWeight={700}
             inline

@@ -112,8 +112,7 @@ const CorporateContainer = () => {
           selected={selectedCompany}
           setSelected={() => {}} // Disabled during loading
           list={[{ name: 'Loading...', type: 'Loading...' }]}
-          text1={t('home.subsidiaries_section_title.eber_group')}
-          text2={t('home.subsidiaries_section_title.subsidiaries')}
+          text={`${t('home.subsidiaries_section_title.eber_group')}{${t('home.subsidiaries_section_title.subsidiaries')}}`}
           inline={false}
           type={type}
         />
@@ -147,8 +146,7 @@ const CorporateContainer = () => {
         selected={selectedCompany}
         setSelected={setSelectedCompany}
         list={companyList}
-        text1={t('home.subsidiaries_section_title.eber_group')}
-        text2={t('home.subsidiaries_section_title.subsidiaries')}
+        text={`${t('home.subsidiaries_section_title.eber_group')}{${t('home.subsidiaries_section_title.subsidiaries')}}`}
         inline={false}
         fontSize={dynamicStylingValue(
           type,

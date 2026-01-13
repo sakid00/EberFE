@@ -310,8 +310,7 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           className={`flex flex-col p-8 ml-4 bg-white rounded-xl z-100 shadow-lg w-[25%]`}
         >
           <DualColorText
-            text1="Informasi"
-            text2="Lainnya"
+            text="Informasi {Lainnya}"
             fontSize={dynamicStylingValue(type, '0.8em', '1.5em', '1.5em')}
             fontWeight={800}
           />

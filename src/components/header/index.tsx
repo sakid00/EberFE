@@ -346,23 +346,22 @@ const Header = () => {
       <>
         <Box sx={headerStyles.homepageTitleSection}>
           <Typography
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text1={`${t('home.title.as')}\u00a0`}
-            text2={t('home.title.sustainable')}
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             inline
             color="white"
             sx={headerSectionStyles.title}
           />
           <Typography
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
@@ -426,8 +425,7 @@ const Header = () => {
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text1={`${t('home.title.as')}\u00a0`}
-            text2={t('home.title.sustainable')}
+            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
             fontSize={'9vw'}
             fontWeight={800}
             inline

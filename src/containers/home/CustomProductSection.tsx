@@ -23,8 +23,7 @@ export const CustomProductSection = () => {
     () => (
       <>
         <DualColorText
-          text1={t('home.custom_product_section_title.make_it')}
-          text2={t('home.custom_product_section_title.customize')}
+          text={`${t('home.custom_product_section_title.make_it')}{${t('home.custom_product_section_title.customize')}}`}
           fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
           color="white"
           fontWeight={800}
@@ -144,8 +143,7 @@ export const CustomProductSection = () => {
           className={animationClasses.slideRight}
         >
           <DualColorText
-            text1={t('home.custom_product_section_title.make_it')}
-            text2={t('home.custom_product_section_title.customize')}
+            text={`${t('home.custom_product_section_title.make_it')}{${t('home.custom_product_section_title.customize')}}`}
             fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
             color="white"
             fontWeight={800}

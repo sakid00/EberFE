@@ -21,8 +21,7 @@ export const SubsidiariesSection = () => {
         className={animationClasses.fadeIn}
       >
         <DualColorText
-          text1={`${t('home.subsidiaries_section_title.eber_group')}\u00a0`}
-          text2={t('home.subsidiaries_section_title.subsidiaries')}
+          text={`${t('home.subsidiaries_section_title.eber_group')}\u00a0{${t('home.subsidiaries_section_title.subsidiaries')}}`}
           fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
           fontWeight={800}
           inline

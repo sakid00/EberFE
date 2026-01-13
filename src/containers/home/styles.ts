@@ -57,7 +57,7 @@ export const headerSectionStyles = {
 
   title: {
     width: '90%',
-    marginTop: '-3vh',
+    marginTop: '-2%',
     color: COLORS.text.white,
   } as SxProps<Theme>,
 

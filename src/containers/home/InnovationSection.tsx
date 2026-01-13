@@ -34,8 +34,7 @@ export const InnovationSection = () => {
           {type !== 'mobile' ? (
             <>
               <DualColorText
-                text1={`${t('home.innovation_section_title.driving')}\u00a0`}
-                text2={t('home.innovation_section_title.innovation')}
+                text={`${t('home.innovation_section_title.driving')}\u00a0{${t('home.innovation_section_title.innovation')}}`}
                 fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
                 fontWeight={800}
                 color="#030712"

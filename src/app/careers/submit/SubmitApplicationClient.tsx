@@ -27,8 +27,7 @@ const SubmitApplicationClient = () => {
     <FormSubmitContainer
       title={t('careers.submit_application_title_small')}
       description={t('careers.submit_application_desc')}
-      text1={`${t("careers.submit_application_title.let's")}\u00a0`}
-      text2={t('careers.submit_application_title.the_future')}
+      text={`${t("careers.submit_application_title.let's")}\u00a0{${t('careers.submit_application_title.the_future')}}`}
       photo={getPhoto('fieldPerson')}
       type={type}
       imageStyle={imageStyle}
