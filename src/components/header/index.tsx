@@ -22,7 +22,6 @@ import { HeaderLoadingScreen } from '../ModernLoadingScreen';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { headerSectionStyles } from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
 
@@ -345,15 +344,7 @@ const Header = () => {
   const homepageImage = useMemo(
     () => (
       <>
-        <Box
-          sx={{
-            position: 'relative',
-            left: '10%',
-            top: '-10%',
-            maxWidth: '50%',
-            zIndex: 1,
-          }}
-        >
+        <Box sx={headerStyles.homepageTitleSection}>
           <Typography
             fontSize={'clamp(2em, 4vw, 5em)'}
             fontWeight={800}
@@ -377,18 +368,10 @@ const Header = () => {
           >
             {t('home.title.future')}
           </Typography>
-          <Typography
-            color="white"
-            marginTop="1%"
-            maxWidth="80%"
-            fontSize={'clamp(0.8em, 1vw, 1em)'}
-          >
+          <Typography sx={headerStyles.homepageDescriptionText}>
             {t('home.desc')}
           </Typography>
-          <Box
-            id="buttons-wrapper"
-            sx={{ display: 'flex', marginTop: '4%', gap: 2 }}
-          >
+          <Box id="buttons-wrapper" sx={headerStyles.homepageButtonsWrapper}>
             <Button
               size="small"
               sx={headerSectionStyles.primaryButton}
@@ -406,30 +389,8 @@ const Header = () => {
             </Button>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            width: '100vw',
-            height: '100%',
-            maxWidth: '1000px',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              width: '45%',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              padding: '2%',
-              borderRadius: '10px',
-              top: '20%',
-              left: '30%',
-              borderBottomRightRadius: '100px',
-            }}
-          >
+        <Box sx={headerStyles.homepageImageContainer}>
+          <Box sx={headerStyles.homepageModalBox}>
             <Typography color="white" fontSize="0.9em" fontWeight={800}>
               {t('home.modal.title')}
             </Typography>
@@ -437,18 +398,13 @@ const Header = () => {
               {t('home.modal.desc')}
             </Typography>
           </Box>
-          <Box
-            sx={{
-              position: 'relative',
-              zIndex: 1,
-            }}
-          >
+          <Box sx={headerStyles.homepageImageWrapper}>
             <Image
               src={getPhoto('subtract')}
               alt="header-photo"
               width={1000}
               height={1000}
-              style={{ objectFit: 'contain' }}
+              style={headerStyles.contentImageStyle}
               loading="lazy"
             />
           </Box>
@@ -460,25 +416,8 @@ const Header = () => {
 
   const homepageImageMobile = useMemo(
     () => (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: '500px',
-        }}
-      >
-        <Box
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            width: '100vw',
-            display: 'flex',
-            flexDirection: 'column',
-            top: '8%',
-            gap: 1,
-          }}
-        >
+      <Box sx={headerStyles.mobileHomepageContainer}>
+        <Box sx={headerStyles.mobileHomepageTitleSection}>
           <Typography
             fontSize={'9vw'}
             fontWeight={800}
@@ -504,36 +443,9 @@ const Header = () => {
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            position: 'relative',
-            flex: 1,
-            zIndex: 1,
-            left: '2%',
-            display: 'flex',
-            flexDirection: 'column',
-            height: '50%',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              flex: 1,
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
-            <Box
-              sx={{
-                position: 'absolute',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: '4%',
-                borderRadius: '10px',
-                top: '5vh',
-                left: '52%',
-                borderBottomRightRadius: '100px',
-              }}
-            >
+        <Box sx={headerStyles.mobileHomepageContentSection}>
+          <Box sx={headerStyles.mobileHomepageImageWrapper}>
+            <Box sx={headerStyles.mobileHomepageModalBox}>
               <Typography color="white" fontSize={'2.2vw'} fontWeight={800}>
                 {t('home.modal.title')}
               </Typography>
@@ -546,7 +458,7 @@ const Header = () => {
               alt="header-photo"
               width={1000}
               height={1000}
-              style={{ objectFit: 'contain' }}
+              style={headerStyles.contentImageStyle}
               loading="lazy"
             />
           </Box>
@@ -558,24 +470,13 @@ const Header = () => {
 
   const aboutUsImage = useMemo(
     () => (
-      <Box
-        sx={{
-          position: 'relative',
-          width: dynamicStylingValue(type, '90%', '50%', '50%'),
-          height: dynamicStylingValue(type, '50%', '90%', '90%'),
-          top: dynamicStylingValue(type, '38%', '10%', '10%'),
-          left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-        }}
-      >
+      <Box sx={headerStyles.aboutUsImageContainer(type)}>
         <Image
           src={getPhoto('tankiPerson')}
           alt="header photo"
           width={1000}
           height={1000}
-          style={{ objectFit: 'contain' }}
+          style={headerStyles.contentImageStyle}
           loading="lazy"
         />
       </Box>
@@ -621,10 +522,7 @@ const Header = () => {
               {shouldShowDesktopNavigation(isMobile) && (
                 <Box
                   className="desktop-navigation"
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                  }}
+                  sx={headerStyles.desktopNavigationContainer}
                 >
                   <NavigationBar
                     animationKey={animationKey}
@@ -657,16 +555,7 @@ const Header = () => {
               )}
             </Box>
             {isHomePagePath && (
-              <Box
-                sx={{
-                  position: 'relative',
-                  flexDirection: isMobile ? 'column' : 'row',
-                  display: 'flex',
-                  alignItems: 'center',
-                  paddingX: '5%',
-                  height: '100%',
-                }}
-              >
+              <Box sx={headerStyles.homepageContentWrapper(isMobile)}>
                 {isMobile ? homepageImageMobile : homepageImage}
               </Box>
             )}

@@ -392,4 +392,136 @@ export const headerStyles = {
       border: '1px solid rgba(255, 255, 255, 0.4)',
     },
   },
+
+  // Desktop navigation container
+  desktopNavigationContainer: {
+    display: 'flex',
+    flexDirection: 'row' as const,
+  },
+
+  // Homepage content wrapper
+  homepageContentWrapper: (isMobile: boolean): SxProps<Theme> => ({
+    position: 'relative',
+    flexDirection: isMobile ? 'column' : 'row',
+    display: 'flex',
+    alignItems: 'center',
+    paddingX: '5%',
+    height: '100%',
+  }),
+
+  // Homepage title section
+  homepageTitleSection: {
+    position: 'relative',
+    left: '10%',
+    top: '-10%',
+    maxWidth: '50%',
+    zIndex: 1,
+  },
+
+  // Homepage buttons wrapper
+  homepageButtonsWrapper: {
+    display: 'flex',
+    marginTop: '4%',
+    gap: 2,
+  },
+
+  // Homepage image container
+  homepageImageContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    position: 'relative',
+    width: '100vw',
+    height: '100%',
+    maxWidth: '1000px',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+
+  // Homepage modal box
+  homepageModalBox: {
+    position: 'relative',
+    width: '45%',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: '2%',
+    borderRadius: '10px',
+    top: '20%',
+    left: '30%',
+    borderBottomRightRadius: '100px',
+  },
+
+  // Homepage image wrapper
+  homepageImageWrapper: {
+    position: 'relative',
+    zIndex: 1,
+  },
+
+  // Homepage description text
+  homepageDescriptionText: {
+    color: 'white',
+    marginTop: '1%',
+    maxWidth: '80%',
+    fontSize: 'clamp(0.8em, 1vw, 1em)',
+  },
+
+  // Mobile homepage styles
+  mobileHomepageContainer: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'center',
+    height: '500px',
+  },
+
+  mobileHomepageTitleSection: {
+    position: 'relative',
+    zIndex: 1,
+    width: '100vw',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    top: '8%',
+    gap: 1,
+  },
+
+  mobileHomepageContentSection: {
+    position: 'relative',
+    flex: 1,
+    zIndex: 1,
+    left: '2%',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    height: '50%',
+  },
+
+  mobileHomepageImageWrapper: {
+    position: 'relative',
+    flex: 1,
+    display: 'flex',
+    alignItems: 'flex-end',
+  },
+
+  mobileHomepageModalBox: {
+    position: 'absolute',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: '4%',
+    borderRadius: '10px',
+    top: '5vh',
+    left: '52%',
+    borderBottomRightRadius: '100px',
+  },
+
+  // About us image container
+  aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
+    position: 'relative',
+    width: dynamicStylingValue(deviceType, '90%', '50%', '50%'),
+    height: dynamicStylingValue(deviceType, '50%', '90%', '90%'),
+    top: dynamicStylingValue(deviceType, '38%', '10%', '10%'),
+    left: dynamicStylingValue(deviceType, '10%', '50vw', '50vw'),
+    right: 0,
+    bottom: 0,
+    zIndex: 1,
+  }),
+
+  // Shared image style
+  contentImageStyle: {
+    objectFit: 'contain' as const,
+  },
 };
