@@ -59,13 +59,20 @@ export const customProductSectionStyles = {
   } as SxProps<Theme>,
 
   title: {
-    fontWeight: 700,
     color: COLORS.text.white,
+  } as SxProps<Theme>,
+
+  titleMobileSecondText: {
+    background:
+      'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    whiteSpace: 'nowrap',
   } as SxProps<Theme>,
 
   description: {
     color: COLORS.text.light,
-    fontSize: '1rem',
+    fontSize: '0.75rem',
     fontWeight: 400,
     marginTop: '20px',
   },
@@ -81,7 +88,7 @@ export const customProductSectionStyles = {
       width: dynamicStylingValue(type, '100%', '35%', '40%'),
       height: '8%',
       fontSize: '14px',
-      marginTop: '5%',
+      marginTop: dynamicStylingValue(type, '15%', '5%', '5%'),
       textTransform: 'none',
     }) as SxProps<Theme>,
 
@@ -103,7 +110,7 @@ export const customProductSectionStyles = {
     justifyContent: 'center',
     alignItems: 'center',
     paddingX: '5%',
-    marginBottom: '-20%',
+    marginBottom: '-25%',
   },
   contentContainerMobile: {
     position: 'relative',

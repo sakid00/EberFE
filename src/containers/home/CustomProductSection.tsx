@@ -26,14 +26,22 @@ export const CustomProductSection = () => {
   const content = useMemo(
     () => (
       <>
-        <DualColorText
-          text={`${t('home.custom_product_section_title.make_it')}{${t('home.custom_product_section_title.customize')}}`}
-          fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
-          color="white"
-          fontWeight={800}
-        />
         <Typography
-          fontSize={dynamicStylingValue(type, '1.4em', '2em', '2em')}
+          fontSize={'1.4em'}
+          fontWeight={800}
+          sx={customProductSectionStyles.title}
+        >
+          {t('home.custom_product_section_title.make_it')}
+        </Typography>
+        <Typography
+          fontSize={'1.4em'}
+          fontWeight={800}
+          sx={customProductSectionStyles.titleMobileSecondText}
+        >
+          {t('home.custom_product_section_title.customize')}
+        </Typography>
+        <Typography
+          fontSize={'1.4em'}
           fontWeight={800}
           sx={customProductSectionStyles.title}
         >
