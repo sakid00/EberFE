@@ -98,7 +98,7 @@ export const CustomProductSection = () => {
         priority={true}
         quality={75}
         placeholderColor="#cbd5e0"
-        // className={animationClasses.slideRight}
+        className={animationClasses.slideRight}
         sx={customProductSectionStyles.progressiveBackgroundSx}
         contentSx={customProductSectionStyles.progressiveBackgroundContentSx}
       >
@@ -117,7 +117,7 @@ export const CustomProductSection = () => {
         <Box sx={customProductSectionStyles.spacer} />
         <Box
           sx={customProductSectionStyles.contentContainer}
-          // className={animationClasses.slideRight}
+          className={animationClasses.slideRight}
         >
           <DualColorText
             text={`${t('home.custom_product_section_title.make_it')}{${t('home.custom_product_section_title.customize')}}`}
