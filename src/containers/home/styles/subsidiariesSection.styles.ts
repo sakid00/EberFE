@@ -1,4 +1,10 @@
-import { COLORS, dynamicStylingValue, DeviceType, SxProps, Theme } from './common';
+import {
+  COLORS,
+  dynamicStylingValue,
+  DeviceType,
+  SxProps,
+  Theme,
+} from './common';
 
 // Subsidiaries Section Styles
 export const subsidiariesSectionStyles = {
@@ -22,13 +28,16 @@ export const subsidiariesSectionStyles = {
 
   description: (type: DeviceType) =>
     ({
-      width: dynamicStylingValue(type, '100%', '80%', '80%'),
+      width: dynamicStylingValue(type, '100%', '80%', '90%'),
       marginTop: '2vh',
       textAlign: 'center',
       color: COLORS.text.secondary,
     }) as SxProps<Theme>,
 
   cardsContainer: {
+    width: '100vw',
+    maxWidth: '2000px',
+    paddingX: '10%',
     display: 'flex',
     flexDirection: 'row',
     gap: 1.5,

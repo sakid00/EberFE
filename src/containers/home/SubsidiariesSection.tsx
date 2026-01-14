@@ -23,13 +23,13 @@ export const SubsidiariesSection = () => {
       >
         <DualColorText
           text={`${t('home.subsidiaries_section_title.eber_group')}\u00a0{${t('home.subsidiaries_section_title.subsidiaries')}}`}
-          fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
           fontWeight={800}
           inline
         />
       </Box>
       <Typography
-        fontSize={'1.1rem'}
+        fontSize={dynamicStylingValue(type, '0.75rem', '1.5rem', '1.5rem')}
         fontWeight={500}
         sx={subsidiariesSectionStyles.description(type)}
         className={animationClasses.fadeIn}
