@@ -13,6 +13,7 @@ export interface IDualColorTextProps {
   fontWeight?: number;
   fontSize?: string;
   sx?: SxProps<Theme>;
+  className?: string;
 }
 
 const gradientStyle: React.CSSProperties = {
@@ -31,6 +32,7 @@ const DualColorText = ({
   fontWeight,
   fontSize,
   sx,
+  className,
 }: IDualColorTextProps) => {
   const defaultStyle: React.CSSProperties = {
     color: color ?? 'black',
@@ -55,7 +57,10 @@ const DualColorText = ({
     : [];
 
   return (
-    <Box className={`${inline ? 'flex' : ''} mt-1 flex-wrap`} sx={sx}>
+    <Box
+      className={`${inline ? 'flex' : ''} mt-1 flex-wrap ${className}`}
+      sx={sx}
+    >
       <TextParser
         text={displayText}
         patterns={patterns}

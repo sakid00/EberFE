@@ -22,7 +22,10 @@ import { HeaderLoadingScreen } from '../ModernLoadingScreen';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
-import { headerSectionStyles } from '@/containers/home/styles';
+import {
+  animationClasses,
+  headerSectionStyles,
+} from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
 
 const logo = '/eber_logo.png';
@@ -346,6 +349,7 @@ const Header = () => {
       <>
         <Box sx={headerStyles.homepageTitleSection}>
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
@@ -359,18 +363,27 @@ const Header = () => {
             inline
             color="white"
             sx={headerSectionStyles.title}
+            className={animationClasses.slideRight}
           />
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.future')}
           </Typography>
-          <Typography sx={headerStyles.homepageDescriptionText}>
+          <Typography
+            sx={headerStyles.homepageDescriptionText}
+            className={animationClasses.stagger}
+          >
             {t('home.desc')}
           </Typography>
-          <Box id="buttons-wrapper" sx={headerStyles.homepageButtonsWrapper}>
+          <Box
+            id="buttons-wrapper"
+            sx={headerStyles.homepageButtonsWrapper}
+            className={animationClasses.stagger}
+          >
             <Button
               size="small"
               sx={headerSectionStyles.primaryButton}
@@ -389,7 +402,10 @@ const Header = () => {
           </Box>
         </Box>
         <Box sx={headerStyles.homepageImageContainer}>
-          <Box sx={headerStyles.homepageModalBox}>
+          <Box
+            sx={headerStyles.homepageModalBox}
+            className={animationClasses.slideLeft}
+          >
             <Typography color="white" fontSize="0.85em" fontWeight={800}>
               {t('home.modal.title')}
             </Typography>
@@ -397,7 +413,10 @@ const Header = () => {
               {t('home.modal.desc')}
             </Typography>
           </Box>
-          <Box sx={headerStyles.homepageImageWrapper}>
+          <Box
+            sx={headerStyles.homepageImageWrapper}
+            className={animationClasses.slideRight}
+          >
             <Image
               src={getPhoto('subtract')}
               alt="header-photo"
@@ -418,6 +437,7 @@ const Header = () => {
       <Box sx={headerStyles.mobileHomepageContainer}>
         <Box sx={headerStyles.mobileHomepageTitleSection}>
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.titleMobile}
@@ -426,6 +446,7 @@ const Header = () => {
           </Typography>
           <DualColorText
             text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             inline
@@ -433,6 +454,7 @@ const Header = () => {
             sx={headerSectionStyles.titleMobile}
           />
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.titleMobile}
@@ -443,7 +465,10 @@ const Header = () => {
 
         <Box sx={headerStyles.mobileHomepageContentSection}>
           <Box sx={headerStyles.mobileHomepageImageWrapper}>
-            <Box sx={headerStyles.mobileHomepageModalBox}>
+            <Box
+              sx={headerStyles.mobileHomepageModalBox}
+              className={animationClasses.slideLeft}
+            >
               <Typography color="white" fontSize={'2.2vw'} fontWeight={800}>
                 {t('home.modal.title')}
               </Typography>
@@ -458,6 +483,7 @@ const Header = () => {
               height={1000}
               style={headerStyles.contentImageStyle}
               loading="lazy"
+              className={animationClasses.slideRight}
             />
           </Box>
         </Box>
