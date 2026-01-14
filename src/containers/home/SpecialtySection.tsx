@@ -2,11 +2,9 @@ import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import { SpecialtyCard } from '@/components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
-import {
-  specialtySectionStyles,
-  animationClasses,
-  headerSectionStyles,
-} from './styles';
+import { specialtySectionStyles } from './styles/specialtySection.styles';
+import { headerSectionStyles } from './styles/headerSection.styles';
+import { animationClasses } from './styles/common';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useRouter } from 'next/navigation';

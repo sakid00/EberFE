@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { getPhoto } from '@/assets/photoAssets';
 import { InnovationCard } from '@/components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
-import { animationClasses, innovationSectionStyles } from './styles';
+import { innovationSectionStyles } from './styles/innovationSection.styles';
+import { animationClasses } from './styles/common';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 

@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
-import { headerSectionStyles } from './styles';
+import { headerSectionStyles } from './styles/headerSection.styles';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useRouter } from 'next/navigation';
