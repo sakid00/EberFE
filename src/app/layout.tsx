@@ -142,7 +142,7 @@ export default function RootLayout({
                     <div className="mobile-container max-w-full h-full relative overflow-hidden">
                       <Header />
                       <Box
-                        className={`px-[5vw] md:px-[10vw] mb-[40vh] h-full w-full max-w-[2000px]`}
+                        className={`px-[5vw] md:px-[10vw] mb-[40vh] h-full w-full `}
                       >
                         <ParticlesBackground />
                         {children}
