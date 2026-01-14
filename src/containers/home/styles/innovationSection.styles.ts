@@ -1,8 +1,16 @@
-import { COLORS, dynamicStylingValue, DeviceType, SxProps, Theme } from './common';
+import {
+  COLORS,
+  dynamicStylingValue,
+  DeviceType,
+  SxProps,
+  Theme,
+} from './common';
 
 // Innovation Section Styles
 export const innovationSectionStyles = {
   container: {
+    flexDirection: 'column',
+    display: 'flex',
     position: 'relative',
     marginTop: '30%',
   } as SxProps<Theme>,
@@ -10,9 +18,11 @@ export const innovationSectionStyles = {
   imageContainer: (type: DeviceType) =>
     ({
       position: dynamicStylingValue(type, 'relative', 'absolute', 'absolute'),
-      width: dynamicStylingValue(type, '100%', '70vw', '70vw'),
-      top: '-10vw',
-      left: dynamicStylingValue(type, '10%', '25%', '25vw'),
+      alignSelf: 'flex-end',
+      width: dynamicStylingValue(type, '100%', '80%', '80%'),
+      height: dynamicStylingValue(type, '20%', '90vh', '90vh'),
+      right: dynamicStylingValue(type, '-10%', '-15%', '-15%'),
+      bottom: dynamicStylingValue(type, '0%', '20%', '20%'),
     }) as SxProps<Theme>,
 
   contentWrapper: {
@@ -34,20 +44,22 @@ export const innovationSectionStyles = {
 
   subtitle: {
     color: COLORS.text.primary,
-    width: '23vw',
+    width: '35vw',
   } as SxProps<Theme>,
 
   description: (type: DeviceType) =>
     ({
-      fontSize: '1.1rem',
+      fontSize: dynamicStylingValue(type, '0.75rem', '1.1rem', '1.5rem'),
       fontWeight: 400,
       color: COLORS.text.secondary,
       textAlign: dynamicStylingValue(type, 'center', 'left', 'left'),
       marginTop: 2,
+      width: dynamicStylingValue(type, '100%', '30vw', '30vw'),
     }) as SxProps<Theme>,
 
   spacer: {
-    width: '80%',
+    width: '20%',
+    backgroundColor: 'blue',
   } as SxProps<Theme>,
 
   cardsContainer: {

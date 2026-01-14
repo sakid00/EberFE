@@ -20,9 +20,8 @@ export const InnovationSection = () => {
           <Image
             src={getPhoto('tanki')}
             alt="tangki-image"
+            fill
             loading="lazy"
-            width={1000}
-            height={1000}
           />
         </Box>
       )}
@@ -36,14 +35,14 @@ export const InnovationSection = () => {
             <>
               <DualColorText
                 text={`${t('home.innovation_section_title.driving')}\u00a0{${t('home.innovation_section_title.innovation')}}`}
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-                fontWeight={800}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontWeight={700}
                 color="#030712"
                 inline
               />
               <Typography
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-                fontWeight={800}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontWeight={700}
                 sx={innovationSectionStyles.subtitle}
               >
                 {t('home.innovation_section_title.through_technology')}
@@ -74,7 +73,6 @@ export const InnovationSection = () => {
             {t('home.innovation_section_desc')}
           </Typography>
         </Box>
-        {type !== 'mobile' && <Box sx={innovationSectionStyles.spacer} />}
       </Box>
       {type === 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>
