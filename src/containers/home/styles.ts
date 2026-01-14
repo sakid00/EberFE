@@ -69,7 +69,7 @@ export const headerSectionStyles = {
 
   description: (language: Language, type: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(type, '0.8em', '0.95em', '0.95em'),
+      fontSize: dynamicStylingValue(type, '0.9em', '0.95em', '0.95em'),
       width: dynamicStylingValue(
         type,
         '100%',
@@ -97,6 +97,7 @@ export const headerSectionStyles = {
     }) as SxProps<Theme>,
 
   primaryButton: {
+    fontSize: '1em',
     color: COLORS.text.white,
     background: COLORS.primary.gradient,
     padding: 2,
@@ -107,6 +108,7 @@ export const headerSectionStyles = {
 
   secondaryButton: (type: DeviceType) =>
     ({
+      fontSize: '1em',
       color: dynamicStylingValue(
         type,
         '#784791',
@@ -138,7 +140,7 @@ export const specialtySectionStyles = {
   } as SxProps<Theme>,
 
   titleContainer: {
-    marginTop: '5%',
+    marginTop: '10%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -151,14 +153,20 @@ export const specialtySectionStyles = {
 
   description: (type: DeviceType) =>
     ({
-      width: dynamicStylingValue(type, '100%', '70%', '70%'),
+      width: dynamicStylingValue(type, '100%', '70%', '90%'),
+      maxWidth: '2000px',
       marginTop: '2vh',
       textAlign: 'center',
-      fontSize: '1.1rem',
+      fontSize: dynamicStylingValue(type, '0.75rem', '1.5rem', '1.5rem'),
       color: COLORS.text.secondary,
     }) as SxProps<Theme>,
 
   cardsContainer: {
+    width: '100vw',
+    maxWidth: '2000px',
+    height: '25vh',
+    maxHeight: '80vh',
+    paddingX: '10%',
     display: 'flex',
     flexDirection: 'row',
     gap: 1.5,

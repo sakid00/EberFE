@@ -26,7 +26,11 @@ export const SpecialtySection = () => {
       className={animationClasses.onScroll}
     >
       {type === 'mobile' && (
-        <Box id="buttons-wrapper" sx={headerSectionStyles.buttonsWrapper(type)}>
+        <Box
+          id="buttons-wrapper"
+          sx={headerSectionStyles.buttonsWrapper(type)}
+          className={animationClasses.stagger}
+        >
           <Typography sx={headerSectionStyles.description(language, type)}>
             {t('home.desc')}
           </Typography>
@@ -53,12 +57,12 @@ export const SpecialtySection = () => {
       >
         <DualColorText
           text={`${t('home.specialty_section_title.leader_in')}\u00a0{${t('home.specialty_section_title.high_performance')}}`}
-          fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
           fontWeight={800}
           inline
         />
         <Typography
-          fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
           fontWeight={800}
           sx={specialtySectionStyles.title}
           className={animationClasses.fadeIn}

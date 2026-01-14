@@ -16,7 +16,7 @@ export const SpecialtyCard = ({ data, index }: SpecialtyCardProps) => {
   return (
     <Box
       id={`specialty-${index}`}
-      className={`flex flex-col justify-center items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[40%] h-[50%] min-h-[300px]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-8 px-6'} gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+      className={`flex flex-col justify-center items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[90%] min-h-[200px] max-h-[1000px]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-6 px-6'} gap-2 rounded-2xl shadow-lg `}
     >
       <Box className="flex justify-center items-center">
         <Image
@@ -31,7 +31,7 @@ export const SpecialtyCard = ({ data, index }: SpecialtyCardProps) => {
       </Box>
       <Box className="flex flex-col gap-2 justify-center">
         <Typography
-          fontSize={dynamicStylingValue(type, '0.8em', '1.5em', '1.5em')}
+          fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.5em')}
           textAlign={'center'}
           fontWeight={'800'}
           color="#030712"
