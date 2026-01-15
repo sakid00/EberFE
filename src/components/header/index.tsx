@@ -15,7 +15,11 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { headerStyles } from './style';
+import {
+  headerStyles,
+  aboutUsDescriptionStyle,
+  aboutUsFontSizes,
+} from './style';
 import ProgressiveBackgroundImage from '../ProgressiveBackgroundImage';
 import { ClientOnly } from '../ClientOnly';
 import { HeaderLoadingScreen } from '../ModernLoadingScreen';
@@ -27,6 +31,7 @@ import {
   headerSectionStyles,
 } from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 const logo = '/eber_logo.png';
 const logoMobile = '/svg/eber-logo-color.svg';
@@ -492,20 +497,59 @@ const Header = () => {
     [type, t]
   );
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/eber-compro.pdf';
+    link.download = 'eber-company-profile.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const aboutUsImage = useMemo(
     () => (
-      <Box sx={headerStyles.aboutUsImageContainer(type)}>
-        <Image
-          src={getPhoto('tankiPerson')}
-          alt="header photo"
-          width={1000}
-          height={1000}
-          style={headerStyles.contentImageStyle}
-          loading="lazy"
-        />
-      </Box>
+      <>
+        <Box sx={headerStyles.aboutUsContentContainer(type)}>
+          <DualColorText
+            text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
+            fontSize={aboutUsFontSizes.title(type)}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerStyles.aboutUsDualColorText(type)}
+          />
+          <Typography
+            fontSize={aboutUsFontSizes.title(type)}
+            fontWeight={800}
+            marginTop={aboutUsFontSizes.marginTop(type)}
+            sx={headerStyles.aboutUsGradientTitle(type)}
+          >
+            {t('about_us.title.background')}
+          </Typography>
+          <Typography style={aboutUsDescriptionStyle(type, language)}>
+            {t('about_us.desc')}
+          </Typography>
+          {type !== 'mobile' && (
+            <Button
+              size="small"
+              onClick={handleDownload}
+              sx={headerStyles.aboutUsDownloadButton}
+            >
+              {t('about_us.download_button')}
+            </Button>
+          )}
+        </Box>
+        <Box sx={headerStyles.aboutUsImageContainer(type)}>
+          <Image
+            src={getPhoto('tankiPerson')}
+            alt="header photo"
+            fill
+            loading="lazy"
+          />
+        </Box>
+      </>
     ),
-    [type]
+    [type, language]
   );
 
   return (
@@ -583,7 +627,11 @@ const Header = () => {
                 {isMobile ? homepageImageMobile : homepageImage}
               </Box>
             )}
-            {isAboutUsPagePath && aboutUsImage}
+            {isAboutUsPagePath && (
+              <Box sx={headerStyles.aboutUsPageWrapper(isMobile)}>
+                {aboutUsImage}
+              </Box>
+            )}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>

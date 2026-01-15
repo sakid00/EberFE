@@ -514,17 +514,94 @@ export const headerStyles = {
   // About us image container
   aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
     position: 'relative',
-    width: dynamicStylingValue(deviceType, '90%', '50%', '50%'),
-    height: dynamicStylingValue(deviceType, '50%', '90%', '90%'),
-    top: dynamicStylingValue(deviceType, '38%', '10%', '10%'),
-    left: dynamicStylingValue(deviceType, '10%', '50vw', '50vw'),
-    right: 0,
-    bottom: 0,
+    width: dynamicStylingValue(deviceType, '100%', '50%', '70%'),
+    height: dynamicStylingValue(deviceType, '70%', '90%', '100%'),
+    top: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
+    left: dynamicStylingValue(deviceType, '5%', '50vw', '7%'),
     zIndex: 1,
   }),
+
+  // About us page wrapper
+  aboutUsPageWrapper: (isMobile: boolean): SxProps<Theme> => ({
+    width: '100vw',
+    position: 'relative',
+    flexDirection: isMobile ? 'column' : 'row',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    height: '100vh',
+    maxHeight: isMobile ? '90%' : '100%',
+    maxWidth: '100%',
+    paddingX: '5%',
+  }),
+
+  // About us content container
+  aboutUsContentContainer: (deviceType: DeviceType): SxProps<Theme> => ({
+    position: 'relative',
+    alignSelf: 'center',
+    width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
+    bottom: dynamicStylingValue(deviceType, '0', '5%', '5%'),
+    left: dynamicStylingValue(deviceType, '0', '5%', '5%'),
+  }),
+
+  // About us dual color text
+  aboutUsDualColorText: (deviceType: DeviceType): SxProps<Theme> => ({
+    justifyContent: dynamicStylingValue(deviceType, 'center', 'start', 'start'),
+  }),
+
+  // About us gradient title
+  aboutUsGradientTitle: (deviceType: DeviceType): SxProps<Theme> => ({
+    display: 'flex',
+    background:
+      'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    justifyContent: dynamicStylingValue(deviceType, 'center', 'start', 'start'),
+  }),
+
+  // About us download button
+  aboutUsDownloadButton: {
+    width: '30%',
+    fontSize: '1em',
+    color: 'white',
+    background:
+      'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+    padding: 2,
+    borderRadius: 10,
+    fontWeight: 600,
+    textTransform: 'none',
+    marginTop: '3vh',
+    '&:hover': {
+      background:
+        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+    },
+  } as SxProps<Theme>,
 
   // Shared image style
   contentImageStyle: {
     objectFit: 'contain' as const,
   },
+};
+
+// About us description style (for inline style prop)
+export const aboutUsDescriptionStyle = (
+  deviceType: DeviceType,
+  language: string
+) => ({
+  width: dynamicStylingValue(deviceType, '100%', '50%', '90%'),
+  color: 'white',
+  fontWeight: 400,
+  marginTop: language === 'id' ? '4vh' : '1vh',
+  fontSize: dynamicStylingValue(deviceType, '0.7em', '1em', '1.25em'),
+  textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
+    | 'center'
+    | 'start',
+});
+
+// About us font sizes
+export const aboutUsFontSizes = {
+  title: (deviceType: DeviceType) =>
+    dynamicStylingValue(deviceType, '2.5rem', '4em', 'clamp(2em, 4vw, 5em)'),
+  marginTop: (deviceType: DeviceType) =>
+    dynamicStylingValue(deviceType, '-1vh', '-2vh', '-2vh'),
 };

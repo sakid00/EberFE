@@ -3,54 +3,6 @@ import { SxProps, Theme } from '@mui/material';
 import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { Language } from '@/contexts/TranslationContext';
 
-// HeaderSection Styles
-export const headerStyles: {
-  headerPhoto: (deviceType: DeviceType) => CSSProperties;
-  headerContent: (deviceType: DeviceType) => SxProps<Theme>;
-  backgroundText: SxProps<Theme>;
-  description: (deviceType: DeviceType, language: Language) => CSSProperties;
-} = {
-  headerPhoto: (deviceType: DeviceType) => ({
-    position: 'absolute' as const,
-    width: dynamicStylingValue(deviceType, '80vw', '50vw', '50vw'),
-    height: dynamicStylingValue(deviceType, '40vh', '80vh', '80vh'),
-    right: 0,
-    top: dynamicStylingValue(deviceType, '42vh', '10vh', '10vh'),
-    zIndex: 1,
-  }),
-  headerContent: (deviceType: DeviceType) => ({
-    position: 'absolute',
-    height: '10%',
-    width: dynamicStylingValue(deviceType, '100vw', '50vw', '50vw'),
-    top: dynamicStylingValue(deviceType, '2%', '5%', '5%'),
-    left: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
-    right: 0,
-    bottom: 0,
-    zIndex: 1,
-    textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
-      | 'center'
-      | 'start',
-  }),
-  backgroundText: {
-    background:
-      'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  },
-  description: (deviceType: DeviceType, language: Language) => ({
-    paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
-    color: 'white',
-    fontWeight: 500,
-    marginTop: language === 'id' ? '4vh' : '2vh',
-    fontSize: dynamicStylingValue(deviceType, '0.7em', '1em', '1em'),
-    textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
-      | 'center'
-      | 'start',
-  }),
-};
-
 // ValueSection Styles
 export const valueStyles: {
   container: SxProps<Theme>;
