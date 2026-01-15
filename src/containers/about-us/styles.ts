@@ -323,26 +323,38 @@ export const corporateStyles: {
 };
 
 // CertificationSection Styles
-export const certificationStyles: {
-  description: (deviceType: DeviceType) => React.CSSProperties;
-  cardsContainer: SxProps<Theme>;
-  cardsContainerMobile: SxProps<Theme>;
-  leftArrow: SxProps<Theme>;
-  leftArrowMobile: SxProps<Theme>;
-  rightArrow: SxProps<Theme>;
-  rightArrowMobile: SxProps<Theme>;
-} = {
+export const certificationStyles = {
+  // Mobile download button
+  mobileDownloadButton: {
+    width: '100%',
+    color: 'white',
+    background:
+      'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+    padding: 2,
+    borderRadius: 10,
+    fontWeight: 600,
+    textTransform: 'none',
+    marginTop: '4vh',
+    zIndex: 1,
+    '&:hover': {
+      background:
+        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+    },
+  } as SxProps<Theme>,
+
   description: (deviceType: DeviceType) => ({
-    width: dynamicStylingValue(deviceType, '100%', '60%', '60%'),
+    width: dynamicStylingValue(deviceType, '100%', '60%', '70%'),
     marginTop: '20px',
   }),
+
   cardsContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '40px',
     gap: '16px',
-  },
+  } as SxProps<Theme>,
+
   cardsContainerMobile: {
     position: 'relative',
     width: '100%',
@@ -351,7 +363,58 @@ export const certificationStyles: {
     justifyContent: 'center',
     marginTop: '24px',
     px: 1,
-  },
+  } as SxProps<Theme>,
+
+  // Mobile cards overflow container
+  mobileCardsOverflowContainer: (
+    certificatesLength: number,
+    visibleCards: number
+  ): SxProps<Theme> => ({
+    overflow: 'hidden',
+    width: certificatesLength > visibleCards ? 'calc(100% - 80px)' : 'auto',
+    mx: 'auto',
+  }),
+
+  // Mobile slider container
+  mobileSliderContainer: (
+    mobileIndex: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    display: 'flex',
+    flexDirection: 'row',
+    gap: `${gap}px`,
+    transform: `translateX(-${mobileIndex * (cardWidth + gap)}px)`,
+    transition: 'transform 0.5s ease-in-out',
+  }),
+
+  // Desktop cards overflow container
+  desktopCardsOverflowContainer: (
+    certificatesLength: number,
+    visibleCards: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    overflow: 'hidden',
+    width:
+      certificatesLength >= visibleCards
+        ? `${visibleCards * cardWidth + (visibleCards - 1) * gap}px`
+        : 'auto',
+  }),
+
+  // Desktop slider container
+  desktopSliderContainer: (
+    currentIndex: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    display: 'flex',
+    flexDirection: 'row',
+    gap: `${gap}px`,
+    transform: `translateX(-${currentIndex * (cardWidth + gap)}px)`,
+    transition: 'transform 0.5s ease-in-out',
+  }),
+
   leftArrow: {
     flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -361,7 +424,8 @@ export const certificationStyles: {
       transform: 'scale(1.1)',
     },
     transition: 'all 0.2s ease',
-  },
+  } as SxProps<Theme>,
+
   leftArrowMobile: {
     position: 'absolute',
     left: 0,
@@ -374,7 +438,8 @@ export const certificationStyles: {
       backgroundColor: 'white',
       transform: 'scale(0.95)',
     },
-  },
+  } as SxProps<Theme>,
+
   rightArrow: {
     flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -384,7 +449,8 @@ export const certificationStyles: {
       transform: 'scale(1.1)',
     },
     transition: 'all 0.2s ease',
-  },
+  } as SxProps<Theme>,
+
   rightArrowMobile: {
     position: 'absolute',
     right: 0,
@@ -397,5 +463,16 @@ export const certificationStyles: {
       backgroundColor: 'white',
       transform: 'scale(0.95)',
     },
+  } as SxProps<Theme>,
+
+  // Arrow icon styles
+  arrowIconDesktop: {
+    fontSize: 32,
+    color: '#F54B02',
+  },
+
+  arrowIconMobile: {
+    fontSize: 24,
+    color: '#F54B02',
   },
 };
