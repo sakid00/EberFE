@@ -3,7 +3,7 @@ import { Box, Divider, Typography } from '@mui/material';
 import { useDeviceType } from '@/hooks';
 import Image from 'next/image';
 import CopyrightIcon from '@mui/icons-material/CopyrightOutlined';
-import { footerStyles } from './style';
+import { footerStyles, footerImageStyles } from './style';
 import locationIcon from '@/public/icon/footer-loc.svg';
 import emailIcon from '@/public/icon/footer-mail.svg';
 import phoneIcon from '@/public/icon/footer-phone.svg';
@@ -11,7 +11,6 @@ import company1Icon from '@/public/icon/footer-company-1.svg';
 import company2Icon from '@/public/icon/footer-company-2.svg';
 import company3Icon from '@/public/icon/footer-company-3.svg';
 import company4Icon from '@/public/icon/footer-company-4.svg';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import { usePathname } from 'next/navigation';
 
@@ -26,7 +25,7 @@ const contactInfoList = [
         alt="location"
         width={20}
         height={20}
-        style={{ alignSelf: 'start' }}
+        style={footerImageStyles.locationIcon}
       />
     ),
     desc: `Millennium Centennial Center, 38th Floor\n Jl. Jend Sudirman Kav.25\n Jakarta 12920, Indonesia`,
@@ -69,7 +68,7 @@ const Footer = () => {
     return (
       <Box className="flex mt-4" key={index}>
         {val.logo}
-        <Typography sx={footerStyles.contactText}>{val.desc}</Typography>
+        <Typography sx={footerStyles.contactText(type)}>{val.desc}</Typography>
       </Box>
     );
   });
@@ -78,28 +77,21 @@ const Footer = () => {
     return (
       <Box className="flex mt-4" key={index}>
         {val.logo}
-        <Typography sx={footerStyles.subsidiaryText}>{val.name}</Typography>
+        <Typography sx={footerStyles.subsidiaryText(type)}>
+          {val.name}
+        </Typography>
       </Box>
     );
   });
 
   return (
-    <footer style={{ position: 'relative', overflowY: 'visible' }}>
+    <footer style={footerStyles.footerWrapper}>
       {type === 'mobile' && isAboutUsPage && (
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: ' 100%',
-            right: 0,
-            zIndex: -1,
-            width: '100%',
-            height: '90%',
-          }}
-        >
+        <Box sx={footerStyles.aboutUsBgContainer}>
           <Image
             src={getBackgroundImage('siteBg')}
             alt="site"
-            style={{ objectFit: 'fill', width: '100%', height: '100%' }}
+            style={footerImageStyles.aboutUsBgImage}
             width={1000}
             height={1000}
             loading="lazy"
@@ -111,26 +103,14 @@ const Footer = () => {
         className="justify-center align-center px-[10vw] pb-[2vh] z-100"
       >
         <Box className="flex flex-col relative">
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 'var(--bg-top, -25vh)',
-              right: 'var(--bg-right, -10vw)',
-              bottom: 0,
-              zIndex: 10,
-              minWidth: dynamicStylingValue(type, '40%', '10vw', '10vw'),
-              maxWidth: dynamicStylingValue(type, '80%', '40vw', '40vw'),
-            }}
-          >
+          <Box sx={footerStyles.bgFooterContainer(type)}>
             <Image
               src={bgFooter}
               width={1000}
               height={1000}
               alt="bg-footer"
               loading="lazy"
-              style={{
-                objectFit: 'contain',
-              }}
+              style={footerImageStyles.bgFooterImage}
             />
           </Box>
           <Box sx={footerStyles.headerSection(type)}>
@@ -141,7 +121,7 @@ const Footer = () => {
               width={100}
               height={100}
             />
-            <Box sx={footerStyles.dividerContainer}>
+            <Box sx={footerStyles.dividerContainer(type)}>
               <Divider
                 orientation="vertical"
                 variant="middle"
@@ -156,13 +136,13 @@ const Footer = () => {
           </Box>
           <Box sx={footerStyles.infoSection(type)}>
             <Box>
-              <Typography sx={footerStyles.sectionTitle}>
+              <Typography sx={footerStyles.sectionTitle(type)}>
                 Contact Information
               </Typography>
               <Box className="w-[100%]">{contactInfoListMap}</Box>
             </Box>
             <Box>
-              <Typography sx={footerStyles.sectionTitle}>
+              <Typography sx={footerStyles.sectionTitle(type)}>
                 Our Subsidiaries
               </Typography>
               <Box>{subsidiariesListMap}</Box>
