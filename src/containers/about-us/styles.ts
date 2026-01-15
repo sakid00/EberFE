@@ -4,29 +4,7 @@ import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { Language } from '@/contexts/TranslationContext';
 
 // ValueSection Styles
-export const valueStyles: {
-  container: SxProps<Theme>;
-  titleContainer: SxProps<Theme>;
-  backgroundImage: SxProps<Theme>;
-  contentContainer: SxProps<Theme>;
-  mainShape: SxProps<Theme>;
-  fieldPersonContainer: SxProps<Theme>;
-  valuesGrid: SxProps<Theme>;
-  valuesGridCharacters: SxProps<Theme>;
-  valuesGridMobile: SxProps<Theme>;
-  mainContainerMobile: SxProps<Theme>;
-  imageBackground: SxProps<Theme>;
-  imageBackgroundMobile: SxProps<Theme>;
-  contentSx: SxProps<Theme>;
-  contentSxMobile: SxProps<Theme>;
-  contentContainerMobile: SxProps<Theme>;
-  imageContainerMobile: SxProps<Theme>;
-  valuesContainer: SxProps<Theme>;
-  valuesAndCharactersTitle: SxProps<Theme>;
-  valuesAndCharactersTitleMobile: SxProps<Theme>;
-  valuesContainerMobile: SxProps<Theme>;
-  valuesGridCharactersMobile: SxProps<Theme>;
-} = {
+export const valueStyles = {
   valuesContainerMobile: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: '5%',
@@ -42,7 +20,8 @@ export const valueStyles: {
     overflow: 'hidden',
     boxSizing: 'border-box',
     marginBottom: '5%',
-  },
+  } as SxProps<Theme>,
+
   valuesContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: '5%',
@@ -55,41 +34,59 @@ export const valueStyles: {
     alignItems: 'flex-start',
     maxWidth: '80%',
     padding: '2%',
-  },
+  } as SxProps<Theme>,
+
   valuesAndCharactersTitle: {
     marginY: '0.5%',
     marginLeft: '1%',
-  },
+  } as SxProps<Theme>,
+
   valuesAndCharactersTitleMobile: {
     marginY: '1%',
     marginLeft: '5%',
     alignSelf: 'flex-start',
     flexShrink: 0,
-  },
+  } as SxProps<Theme>,
+
   mainContainerMobile: {
     position: 'relative',
     marginTop: '20vh',
     width: '100vw',
-  },
+  } as SxProps<Theme>,
+
   imageBackground: {
     width: '100%',
     height: '80vh',
     position: 'relative',
     overflow: 'visible',
-  },
+  } as SxProps<Theme>,
+
   imageBackgroundMobile: {
     width: '100vw',
     height: '100vh',
     overflow: 'visible',
     marginTop: '30vh',
-  },
+  } as SxProps<Theme>,
+
   contentSx: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as SxProps<Theme>,
+
+  // Desktop content sx for ImageBackground
+  contentSxDesktop: (type: DeviceType): SxProps<Theme> => ({
+    position: 'relative',
+    marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+  }),
+
   contentSxMobile: {
     display: 'flex',
     flexDirection: 'column',
@@ -97,9 +94,10 @@ export const valueStyles: {
     alignItems: 'center',
     paddingX: '5%',
     marginBottom: '-20%',
-    height: 'calc(100vh + 28vh)', // Extra height to allow child to extend
+    height: 'calc(100vh + 28vh)',
     minHeight: 0,
-  },
+  } as SxProps<Theme>,
+
   contentContainerMobile: {
     position: 'relative',
     bottom: '28vh',
@@ -107,41 +105,53 @@ export const valueStyles: {
     flexDirection: 'column',
     flex: 1,
     minHeight: 0,
-    height: 'calc(100% + 28vh)', // Add extra height to compensate for bottom offset
+    height: 'calc(100% + 28vh)',
     maxHeight: 'calc(100vh + 28vh)',
     overflow: 'hidden',
-  },
+  } as SxProps<Theme>,
+
   imageContainerMobile: {
     position: 'relative',
     zIndex: 1000,
     width: '100%',
     flex: '0 0 auto',
-  },
+  } as SxProps<Theme>,
+
   container: {
     position: 'relative',
     zIndex: 3,
-  },
+  } as SxProps<Theme>,
+
   titleContainer: {
     position: 'relative',
     marginBottom: '10vh',
     zIndex: 3,
-  },
+  } as SxProps<Theme>,
+
+  // Title text center alignment
+  titleTextCenter: {
+    textAlign: 'center',
+  } as SxProps<Theme>,
+
   backgroundImage: {
     width: '100vw',
     height: '100vh',
     marginTop: '10vh',
-  },
+  } as SxProps<Theme>,
+
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  } as SxProps<Theme>,
+
   mainShape: {
     transform: 'scale(0.5)',
     background:
       'linear-gradient(-145deg,rgba(19, 64, 91, 1) 21%, rgba(120, 71, 145, 1) 70%, rgba(221, 156, 54, 1) 100%)',
     overflow: 'visible',
     overflowClipMargin: 'content-box',
-  },
+  } as SxProps<Theme>,
+
   fieldPersonContainer: {
     position: 'absolute',
     width: '60%',
@@ -149,7 +159,8 @@ export const valueStyles: {
     bottom: '0vh',
     left: '-3%',
     zIndex: 20,
-  },
+  } as SxProps<Theme>,
+
   valuesGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
@@ -158,7 +169,8 @@ export const valueStyles: {
     padding: '10px',
     zIndex: 100000,
     width: '100%',
-  },
+  } as SxProps<Theme>,
+
   valuesGridCharacters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 1fr)',
@@ -167,7 +179,8 @@ export const valueStyles: {
     padding: '10px',
     zIndex: 100000,
     width: '100%',
-  },
+  } as SxProps<Theme>,
+
   valuesGridMobile: {
     width: '100%',
     maxWidth: '100%',
@@ -183,7 +196,8 @@ export const valueStyles: {
     boxSizing: 'border-box',
     flex: 1,
     minHeight: 0,
-  },
+  } as SxProps<Theme>,
+
   valuesGridCharactersMobile: {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
@@ -199,6 +213,41 @@ export const valueStyles: {
     boxSizing: 'border-box',
     flex: 1,
     minHeight: 0,
+  } as SxProps<Theme>,
+
+  // Mobile card wrapper for last odd item
+  mobileCardWrapper: (isLastOdd: boolean): SxProps<Theme> => ({
+    width: isLastOdd ? 'calc(50% - 4px)' : '100%',
+    height: '100%',
+    minHeight: 0,
+    ...(isLastOdd && {
+      gridColumn: '1 / -1',
+      justifySelf: 'center',
+    }),
+  }),
+
+  // Bottom site background container
+  siteBgContainer: (type: DeviceType): SxProps<Theme> => ({
+    position: 'absolute',
+    bottom: '-45vh',
+    right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
+    zIndex: -1,
+    width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
+    height: 'auto',
+  }),
+};
+
+// Image styles for ValueSection
+export const valueImageStyles = {
+  mobileChemPerson: {
+    objectFit: 'fill' as const,
+    width: '100%',
+    height: '100%',
+  },
+  siteBg: {
+    objectFit: 'fill' as const,
+    width: '100%',
+    height: '100%',
   },
 };
 

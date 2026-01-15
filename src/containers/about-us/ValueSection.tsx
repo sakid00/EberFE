@@ -5,8 +5,7 @@ import Image from 'next/image';
 import { getPhoto } from '@/assets/photoAssets';
 import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import ImageBackground from '@/components/ImageBackground/index';
-import { valueStyles } from './styles';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
+import { valueStyles, valueImageStyles } from './styles';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { animationClasses } from '../home/styles';
 import { useMemo } from 'react';
@@ -32,18 +31,7 @@ export const ValueSection = () => {
             const isLastOdd =
               index === VALUES_DATA.length - 1 && VALUES_DATA.length % 2 === 1;
             return (
-              <Box
-                key={index}
-                sx={{
-                  width: isLastOdd ? 'calc(50% - 4px)' : '100%',
-                  height: '100%',
-                  minHeight: 0,
-                  ...(isLastOdd && {
-                    gridColumn: '1 / -1',
-                    justifySelf: 'center',
-                  }),
-                }}
-              >
+              <Box key={index} sx={valueStyles.mobileCardWrapper(isLastOdd)}>
                 <ValueCard data={data} index={index} isMobile />
               </Box>
             );
@@ -74,7 +62,7 @@ export const ValueSection = () => {
             fontSize={'1.5em'}
             fontWeight={'500'}
             color="#784791"
-            sx={{ textAlign: 'center' }}
+            sx={valueStyles.titleTextCenter}
           >
             {`${t('about_us.value_section_title.creating')}\u00a0`}
             <Typography
@@ -103,11 +91,7 @@ export const ValueSection = () => {
                 width={100}
                 height={100}
                 loading="lazy"
-                style={{
-                  objectFit: 'fill',
-                  width: '100%',
-                  height: '100%',
-                }}
+                style={valueImageStyles.mobileChemPerson}
               />
             </Box>
 
@@ -133,7 +117,7 @@ export const ValueSection = () => {
             fontSize={'2em'}
             fontWeight={'500'}
             color="#784791"
-            sx={{ textAlign: 'center' }}
+            sx={valueStyles.titleTextCenter}
           >
             {`${t('about_us.value_section_title.creating')}\u00a0`}
           </Typography>
@@ -147,17 +131,8 @@ export const ValueSection = () => {
         src={container2}
         alt="container"
         objectFit={'fill'}
-        // className={animationClasses.slideRight}
         sx={valueStyles.imageBackground}
-        contentSx={{
-          position: 'relative',
-          marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
-        }}
+        contentSx={valueStyles.contentSxDesktop(type)}
       >
         <Box sx={valueStyles.fieldPersonContainer}>
           <Image
@@ -192,28 +167,19 @@ export const ValueSection = () => {
           </Typography>
           <Box sx={valueStyles.valuesGridCharacters}>
             {CHARACTERS_DATA.map((data, index) => (
-              <ValueCard key={index} data={data} index={index} />
+              <ValueCard key={index} data={data} index={index} isCharacter />
             ))}
           </Box>
         </Box>
       </ImageBackground>
 
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: '-45vh',
-          right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
-          zIndex: -1,
-          width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
-          height: 'auto',
-        }}
-      >
+      <Box sx={valueStyles.siteBgContainer(type)}>
         <Image
           src={getBackgroundImage('siteBg')}
           width={2000}
           height={1000}
           alt="site"
-          style={{ objectFit: 'fill', width: '100%', height: '100%' }}
+          style={valueImageStyles.siteBg}
           loading="lazy"
         />
       </Box>
