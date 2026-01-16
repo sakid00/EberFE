@@ -47,6 +47,7 @@ const FormBox = ({
     error: submitError,
   } = useContactForm();
   const isCareerPage = pathname?.includes('/careers/submit');
+  const isProduct = pathname?.includes('/product/submit');
 
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -139,6 +140,16 @@ const FormBox = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  const getSendTo = () => {
+    if (isCareerPage) {
+      return 'CAREER';
+    } else if (isProduct) {
+      return 'PRODUCT';
+    } else {
+      return 'CONTACT_US';
+    }
+  };
+
   const handleSubmit = async () => {
     if (!validateForm()) {
       return;
@@ -150,6 +161,7 @@ const FormBox = ({
       email: formData.email,
       message: formData.message,
       file: formData.cvFile,
+      sendTo: getSendTo(),
     });
 
     if (result.success) {
