@@ -56,8 +56,8 @@ export const headerStyles = {
     zIndex: 0,
   }),
   backgroundImageContent: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     paddingTop: '5vh',
     display: 'flex',
     flexDirection: 'column',
