@@ -442,7 +442,7 @@ export const headerStyles = {
   // Homepage modal box
   homepageModalBox: {
     position: 'relative',
-    width: '45%',
+    width: '50%',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '2%',
     borderRadius: '10px',
@@ -470,7 +470,8 @@ export const headerStyles = {
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center',
-    height: '500px',
+    height: '55vh',
+    maxHeight: '420px',
   },
 
   mobileHomepageTitleSection: {
@@ -503,19 +504,28 @@ export const headerStyles = {
 
   mobileHomepageModalBox: {
     position: 'absolute',
+    width: '60%',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '4%',
     borderRadius: '10px',
-    top: '5vh',
+    top: '5%',
     left: '52%',
     borderBottomRightRadius: '100px',
+  },
+
+  mobileHomepageImage: {
+    width: '100%',
+    height: '32vh',
+    position: 'relative',
+    left: '10%',
+    top: '10%',
   },
 
   // About us image container
   aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
     position: 'relative',
-    width: dynamicStylingValue(deviceType, '100%', '50%', '70%'),
-    height: dynamicStylingValue(deviceType, '70%', '90%', '100%'),
+    width: dynamicStylingValue(deviceType, '95%', '50%', '70%'),
+    height: dynamicStylingValue(deviceType, '80%', '90%', '100%'),
     top: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
     left: dynamicStylingValue(deviceType, '5%', '50vw', '7%'),
     zIndex: 1,
