@@ -43,15 +43,15 @@ export const headerStyles = {
     isHomepage: boolean
   ): SxProps<Theme> => ({
     position: 'relative',
-    width: '110%',
-    marginLeft: '-5%',
+    width: deviceType === 'mobile' ? '100%' : '110%',
+    marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
       '120vw',
       isHomepage ? '50vw' : '50vh',
       isHomepage ? '50vw' : '50vh'
     ),
-    minHeight: isHomepage ? '650px' : '300px',
+    minHeight: isHomepage && deviceType !== 'mobile' ? '650px' : '300px',
     maxHeight: '1000px',
     alignItems: 'start',
     overflow: 'hidden',
