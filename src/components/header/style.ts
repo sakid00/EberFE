@@ -37,7 +37,6 @@ export const headerStyles = {
     right: 0,
     top: '-30%',
     zIndex: 0,
-    objectFit: 'fill' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,
@@ -48,7 +47,7 @@ export const headerStyles = {
     marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
-      '120vw',
+      isHomepage ? '120vw' : '65vh',
       isHomepage ? '50vw' : '50vh',
       isHomepage ? '50vw' : '50vh'
     ),

@@ -160,6 +160,9 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         value={langValue}
         onChange={onLanguageChange}
         sx={{ border: 0 }}
+        MenuProps={{
+          disableScrollLock: true,
+        }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
             <span style={{ fontSize: '1.1rem' }}>{value}</span>
@@ -571,29 +574,40 @@ const Header = () => {
                 ? 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 98%, rgba(221, 156, 54, 1) 100%)'
                 : 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 84%, rgba(221, 156, 54, 1) 100%)'
             }
-            roundedBottom={isHomePagePath || isAboutUsPagePath}
+            roundedBottom={true}
             roundedBottomRadius={
               isMobile
                 ? '0 0 95% 95% / 0 0 10% 10%'
                 : '0% 0% 32% 85% / 0% 0% 15% 21%'
             }
           >
-            <Image
-              src={
-                isMobile && !isTablet
-                  ? getPhoto('eberBig2Mobile')
-                  : getPhoto('eberBig2')
-              }
-              width={1000}
-              height={1000}
-              alt="header accessories"
+            <Box
               style={headerStyles.headerAccessories(type)}
-              loading="lazy"
               className={animationClasses.slideRight}
-            />
+            >
+              <Image
+                src={
+                  isMobile && !isTablet
+                    ? getPhoto('eberBig2Mobile')
+                    : getPhoto('eberBig2')
+                }
+                width={1000}
+                height={1000}
+                alt="header accessories"
+                style={{
+                  objectFit: 'fill',
+                  width: '100%',
+                  height: '100%',
+                }}
+                loading="lazy"
+              />
+            </Box>
 
             {/* Main Header Container */}
-            <Box sx={headerStyles.container} style={{ marginBottom: isMobile ? '20px' : '70px' }}>
+            <Box
+              sx={headerStyles.container}
+              style={{ marginBottom: isMobile ? '20px' : '70px' }}
+            >
               <LogoSection />
 
               {/* Desktop and Tablet Navigation */}
