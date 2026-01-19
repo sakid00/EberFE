@@ -34,6 +34,16 @@ interface ProgressiveBackgroundImageProps extends Omit<BoxProps, 'children'> {
   contentSx?: BoxProps['sx'];
   /** Blur placeholder color */
   placeholderColor?: string;
+  /** Use gradient background on mobile instead of image */
+  useMobileGradient?: boolean;
+  /** Mobile breakpoint in pixels */
+  mobileBreakpoint?: number;
+  /** Custom gradient colors for mobile [start, middle, end] */
+  mobileGradientColors?: [string, string, string];
+  /** Enable rounded bottom crop effect */
+  roundedBottom?: boolean;
+  /** Radius of the rounded bottom curve */
+  roundedBottomRadius?: string;
 }
 
 // Generate a simple blur placeholder
@@ -61,12 +71,36 @@ export const ProgressiveBackgroundImage: React.FC<
   centerChildren = false,
   contentSx,
   placeholderColor = '#e5e7eb',
+  useMobileGradient = false,
+  mobileBreakpoint = 768,
+  mobileGradientColors = [
+    'rgba(19, 64, 91, 1)',
+    'rgba(120, 71, 145, 1)',
+    'rgba(221, 156, 54, 1)',
+  ],
+  roundedBottom = false,
+  roundedBottomRadius = '50% 50% 0 0 / 0 0 100px 100px',
   sx,
   className,
   ...boxProps
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on client side
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < mobileBreakpoint);
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Listen for resize
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, [mobileBreakpoint]);
 
   const handleLoad = useCallback(() => {
     setImageLoaded(true);
@@ -98,15 +132,21 @@ export const ProgressiveBackgroundImage: React.FC<
     }
   };
 
-  // Preload the image for better performance
+  // Preload the image for better performance (only on desktop)
   useEffect(() => {
-    if (priority && typeof src === 'string') {
+    if (priority && typeof src === 'string' && !isMobile) {
       const img = new window.Image();
       img.onload = () => setImageLoaded(true);
       img.onerror = () => setImageFailed(true);
       img.src = src;
     }
-  }, [src, priority]);
+  }, [src, priority, isMobile]);
+
+  // Generate mobile gradient background
+  const mobileGradient = `linear-gradient(135deg, ${mobileGradientColors[0]} 0%, ${mobileGradientColors[1]} 99%, ${mobileGradientColors[2]} 100%)`;
+
+  // Should use gradient instead of image
+  const shouldUseGradient = useMobileGradient && isMobile;
 
   return (
     <Box
@@ -114,107 +154,128 @@ export const ProgressiveBackgroundImage: React.FC<
       sx={{
         position: 'relative',
         overflow: 'hidden',
+        // Apply rounded bottom effect using border-radius
+        ...(roundedBottom && {
+          borderRadius: roundedBottomRadius,
+        }),
         ...sx,
       }}
       {...boxProps}
     >
-      {/* Background Image with Progressive Loading */}
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 0,
-        }}
-      >
-        {/* Placeholder/Loading State */}
-        {!imageLoaded && !imageFailed && (
-          <Box
-            className="bg-shimmer"
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-            }}
-          >
-            {/* Smart gradient based on image type */}
+      {/* Mobile Gradient Background */}
+      {shouldUseGradient && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: mobileGradient,
+            zIndex: 0,
+          }}
+        />
+      )}
+
+      {/* Desktop: Background Image with Progressive Loading */}
+      {!shouldUseGradient && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0,
+          }}
+        >
+          {/* Placeholder/Loading State */}
+          {!imageLoaded && !imageFailed && (
             <Box
-              className={
-                typeof src === 'string' && src.includes('homepage_header_bg')
-                  ? 'header-bg-fallback'
-                  : typeof src === 'string' && src.includes('container')
-                    ? 'container-bg-fallback'
-                    : typeof src === 'string' && src.includes('site-bg')
-                      ? 'site-bg-fallback'
-                      : typeof src === 'string' && src.includes('footer')
-                        ? 'footer-bg-fallback'
-                        : ''
-              }
+              className="bg-shimmer"
               sx={{
                 position: 'absolute',
                 top: 0,
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: !(
-                  typeof src === 'string' &&
-                  (src.includes('homepage_header_bg') ||
-                    src.includes('container') ||
-                    src.includes('site-bg') ||
-                    src.includes('footer'))
-                )
-                  ? `linear-gradient(45deg, ${placeholderColor}15, ${placeholderColor}25)`
-                  : undefined,
               }}
-            />
-          </Box>
-        )}
+            >
+              {/* Smart gradient based on image type */}
+              <Box
+                className={
+                  typeof src === 'string' && src.includes('homepage_header_bg')
+                    ? 'header-bg-fallback'
+                    : typeof src === 'string' && src.includes('container')
+                      ? 'container-bg-fallback'
+                      : typeof src === 'string' && src.includes('site-bg')
+                        ? 'site-bg-fallback'
+                        : typeof src === 'string' && src.includes('footer')
+                          ? 'footer-bg-fallback'
+                          : ''
+                }
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: !(
+                    typeof src === 'string' &&
+                    (src.includes('homepage_header_bg') ||
+                      src.includes('container') ||
+                      src.includes('site-bg') ||
+                      src.includes('footer'))
+                  )
+                    ? `linear-gradient(45deg, ${placeholderColor}15, ${placeholderColor}25)`
+                    : undefined,
+                }}
+              />
+            </Box>
+          )}
 
-        {/* Actual Image */}
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          style={{
-            objectFit,
-            objectPosition,
-            opacity: imageLoaded ? 1 : 0,
-            transition: 'opacity 0.6s ease-in-out',
-          }}
-          onLoad={handleLoad}
-          onError={handleError}
-          priority={priority}
-          quality={quality}
-          sizes="100vw"
-          placeholder={placeholder ? 'blur' : 'empty'}
-          blurDataURL={placeholder || generateBlurDataURL(placeholderColor)}
-        />
-
-        {/* Error State */}
-        {imageFailed && (
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: `linear-gradient(45deg, ${placeholderColor}20, ${placeholderColor}40)`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: '#666',
-              fontSize: '14px',
+          {/* Actual Image */}
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            style={{
+              objectFit,
+              objectPosition,
+              opacity: imageLoaded ? 1 : 0,
+              transition: 'opacity 0.6s ease-in-out',
             }}
-          >
-            Background image failed to load
-          </Box>
-        )}
-      </Box>
+            onLoad={handleLoad}
+            onError={handleError}
+            priority={priority}
+            quality={quality}
+            sizes="100vw"
+            placeholder={placeholder ? 'blur' : 'empty'}
+            blurDataURL={placeholder || generateBlurDataURL(placeholderColor)}
+          />
+
+          {/* Error State */}
+          {imageFailed && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: `linear-gradient(45deg, ${placeholderColor}20, ${placeholderColor}40)`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#666',
+                fontSize: '14px',
+              }}
+            >
+              Background image failed to load
+            </Box>
+          )}
+        </Box>
+      )}
 
       {/* Optional Overlay */}
       {showOverlay && (

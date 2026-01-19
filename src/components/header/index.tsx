@@ -423,7 +423,7 @@ const Header = () => {
             className={animationClasses.slideRight}
           >
             <Image
-              src={getPhoto('subtract')}
+              src='/photo/subtract.png'
               alt="header-photo"
               width={900}
               height={900}
@@ -482,13 +482,14 @@ const Header = () => {
               </Typography>
             </Box>
             <Image
-              src={getPhoto('subtract')}
+              src='/photo/subtract.png'
               alt="header-photo"
               width={1000}
               height={1000}
               style={{ ...headerStyles.contentImageStyle,
                 position: 'absolute',
-                bottom: '-10%',
+                bottom: '-5%',
+                left: '-3%',
                }
             }
               loading="lazy"
@@ -572,6 +573,9 @@ const Header = () => {
             priority={true}
             quality={70}
             placeholderColor="#4a5568"
+            useMobileGradient={true}
+            roundedBottom={isMobile && (isHomePagePath || isAboutUsPagePath)}
+            roundedBottomRadius="0 0 95% 95% / 0 0 50px 50px"
           >
             <Image
               src={

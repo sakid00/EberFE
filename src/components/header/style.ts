@@ -408,7 +408,7 @@ export const headerStyles = {
     paddingX: '5%',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
-    maxWidth: '90%',
+    maxWidth: isMobile ? '100%' : '90%',
   }),
 
   // Homepage title section
@@ -506,7 +506,7 @@ export const headerStyles = {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '4%',
     borderRadius: '10px',
-    bottom: '60%',
+    bottom: '65%',
     left: '52%',
     borderBottomRightRadius: '100px',
   },
