@@ -23,7 +23,7 @@ export const InnovationCard = ({ data, index }: InnovationCardProps) => {
       </Box>
       <Box className="flex flex-col gap-2 flex-grow justify-center">
         <Typography
-          fontSize={dynamicStylingValue(type, '0.8em', '1.5em', '1.5em')}
+          fontSize={dynamicStylingValue(type, '0.9em', '1.5em', '1.75em')}
           textAlign={'center'}
           fontWeight={'700'}
           color="#030712"
@@ -31,7 +31,7 @@ export const InnovationCard = ({ data, index }: InnovationCardProps) => {
           {t(data.title)}
         </Typography>
         <Typography
-          fontSize={dynamicStylingValue(type, '0.7em', '0.9em', '0.9em')}
+          fontSize={dynamicStylingValue(type, '0.7em', '0.9em', '1em')}
           textAlign={'center'}
           fontWeight={400}
           color="#4B5563"

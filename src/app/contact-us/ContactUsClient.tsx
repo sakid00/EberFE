@@ -29,8 +29,7 @@ const ContactUsClient = () => {
     <FormSubmitContainer
       title={t('contact_us.submit_application_title_small')}
       description={t('contact_us.submit_application_desc')}
-      text1={`${t("contact_us.submit_application_title.let's")}\u00a0`}
-      text2={t('contact_us.submit_application_title.reach_out')}
+      text={`${t("contact_us.submit_application_title.let's")}\u00a0{${t('contact_us.submit_application_title.reach_out')}}`}
       photo={getPhoto('safetyPerson')}
       type={type}
       imageStyle={imageStyle}

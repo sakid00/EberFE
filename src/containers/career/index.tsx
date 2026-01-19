@@ -59,8 +59,7 @@ const CareerContainer = ({
     <Box sx={styles.mainContainer(type)}>
       <Box sx={styles.infoCard(type)}>
         <DualColorText
-          text1={t('careers.title.our')}
-          text2={t('careers.title.open')}
+          text={`${t('careers.title.our')}{${t('careers.title.open')}}`}
           fontSize={'1.7em'}
           inline
           sx={{

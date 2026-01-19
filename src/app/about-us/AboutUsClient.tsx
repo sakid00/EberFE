@@ -1,6 +1,5 @@
 'use client';
 import {
-  HeaderSection,
   CertificationSection,
   useScrollAnimation,
   PrincipleSection,
@@ -13,7 +12,6 @@ const AboutUsClient = () => {
 
   return (
     <>
-      <HeaderSection />
       <CertificationSection />
       <PrincipleSection />
       <CorporateSection />

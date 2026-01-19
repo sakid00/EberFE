@@ -124,8 +124,7 @@ const ActivityContainer = () => {
         listCategory={activityList}
         list={sustainabilityList}
         secondList={newsroomList}
-        text1={`${t('activity.title.Our')}\u00a0`}
-        text2={t('activity.title.Activity')}
+        text={`${t('activity.title.Our')}\u00a0{${t('activity.title.Activity')}}`}
         type={type}
         sx={{ marginLeft: '5%' }}
       />

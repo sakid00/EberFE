@@ -27,15 +27,13 @@ interface FormErrors {
 const FormBox = ({
   title,
   description,
-  text1,
-  text2,
+  text,
   formBoxStyle,
   buttonText,
 }: {
   title: string;
   description: string;
-  text1: string;
-  text2: string;
+  text: string;
   formBoxStyle?: React.CSSProperties;
   buttonText?: string;
 }) => {
@@ -49,6 +47,7 @@ const FormBox = ({
     error: submitError,
   } = useContactForm();
   const isCareerPage = pathname?.includes('/careers/submit');
+  const isProduct = pathname?.includes('/product/submit');
 
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -141,6 +140,16 @@ const FormBox = ({
     return Object.keys(newErrors).length === 0;
   };
 
+  const getSendTo = () => {
+    if (isCareerPage) {
+      return 'CAREER';
+    } else if (isProduct) {
+      return 'PRODUCT';
+    } else {
+      return 'CONTACT_US';
+    }
+  };
+
   const handleSubmit = async () => {
     if (!validateForm()) {
       return;
@@ -152,6 +161,7 @@ const FormBox = ({
       email: formData.email,
       message: formData.message,
       file: formData.cvFile,
+      sendTo: getSendTo(),
     });
 
     if (result.success) {
@@ -169,8 +179,7 @@ const FormBox = ({
     <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
       <Typography sx={styles.getInTouchText}>{title}</Typography>
       <DualColorText
-        text1={text1}
-        text2={text2}
+        text={text}
         inline
         fontSize={dynamicStylingValue(type, '1em', '1.8em', '1.8em')}
         fontWeight={800}

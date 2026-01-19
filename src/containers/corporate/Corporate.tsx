@@ -47,7 +47,10 @@ const CorporateContainer = () => {
         await getCompany({ page: 1, pageSize: 10 });
       } catch (error) {
         Sentry.captureException(error, {
-          tags: { component: 'CorporateContainer', operation: 'fetchCompanies' },
+          tags: {
+            component: 'CorporateContainer',
+            operation: 'fetchCompanies',
+          },
         });
       }
     };
@@ -112,8 +115,7 @@ const CorporateContainer = () => {
           selected={selectedCompany}
           setSelected={() => {}} // Disabled during loading
           list={[{ name: 'Loading...', type: 'Loading...' }]}
-          text1={t('home.subsidiaries_section_title.eber_group')}
-          text2={t('home.subsidiaries_section_title.subsidiaries')}
+          text={`${t('home.subsidiaries_section_title.eber_group')}{${t('home.subsidiaries_section_title.subsidiaries')}}`}
           inline={false}
           type={type}
         />
@@ -147,14 +149,13 @@ const CorporateContainer = () => {
         selected={selectedCompany}
         setSelected={setSelectedCompany}
         list={companyList}
-        text1={t('home.subsidiaries_section_title.eber_group')}
-        text2={t('home.subsidiaries_section_title.subsidiaries')}
+        text={`${t('home.subsidiaries_section_title.eber_group')} {${t('home.subsidiaries_section_title.subsidiaries')}}`}
         inline={false}
         fontSize={dynamicStylingValue(
           type,
-          '1.5em',
-          language === 'en' ? '1.7em' : '1.4em',
-          language === 'en' ? '1.7em' : '1.4em'
+          '1.3em',
+          language === 'en' ? '0.6em' : '0.5em',
+          language === 'en' ? '0.8em' : '0.6em'
         )}
         type={type}
       />

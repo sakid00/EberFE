@@ -3,78 +3,8 @@ import { SxProps, Theme } from '@mui/material';
 import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 import { Language } from '@/contexts/TranslationContext';
 
-// HeaderSection Styles
-export const headerStyles: {
-  headerPhoto: (deviceType: DeviceType) => CSSProperties;
-  headerContent: (deviceType: DeviceType) => SxProps<Theme>;
-  backgroundText: SxProps<Theme>;
-  description: (deviceType: DeviceType, language: Language) => CSSProperties;
-} = {
-  headerPhoto: (deviceType: DeviceType) => ({
-    position: 'absolute' as const,
-    width: dynamicStylingValue(deviceType, '80vw', '50vw', '50vw'),
-    height: dynamicStylingValue(deviceType, '40vh', '80vh', '80vh'),
-    right: 0,
-    top: dynamicStylingValue(deviceType, '42vh', '10vh', '10vh'),
-    zIndex: 1,
-  }),
-  headerContent: (deviceType: DeviceType) => ({
-    position: 'absolute',
-    height: '10%',
-    width: dynamicStylingValue(deviceType, '100vw', '50vw', '50vw'),
-    top: dynamicStylingValue(deviceType, '2%', '5%', '5%'),
-    left: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
-    right: 0,
-    bottom: 0,
-    zIndex: 1,
-    textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
-      | 'center'
-      | 'start',
-  }),
-  backgroundText: {
-    background:
-      'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-  },
-  description: (deviceType: DeviceType, language: Language) => ({
-    paddingRight: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    paddingLeft: dynamicStylingValue(deviceType, '10%', '0', '0'),
-    width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
-    color: 'white',
-    fontWeight: 500,
-    marginTop: language === 'id' ? '4vh' : '2vh',
-    fontSize: dynamicStylingValue(deviceType, '0.7em', '1em', '1em'),
-    textAlign: dynamicStylingValue(deviceType, 'center', 'start', 'start') as
-      | 'center'
-      | 'start',
-  }),
-};
-
 // ValueSection Styles
-export const valueStyles: {
-  container: SxProps<Theme>;
-  titleContainer: SxProps<Theme>;
-  backgroundImage: SxProps<Theme>;
-  contentContainer: SxProps<Theme>;
-  mainShape: SxProps<Theme>;
-  fieldPersonContainer: SxProps<Theme>;
-  valuesGrid: SxProps<Theme>;
-  valuesGridCharacters: SxProps<Theme>;
-  valuesGridMobile: SxProps<Theme>;
-  mainContainerMobile: SxProps<Theme>;
-  imageBackground: SxProps<Theme>;
-  imageBackgroundMobile: SxProps<Theme>;
-  contentSx: SxProps<Theme>;
-  contentSxMobile: SxProps<Theme>;
-  contentContainerMobile: SxProps<Theme>;
-  imageContainerMobile: SxProps<Theme>;
-  valuesContainer: SxProps<Theme>;
-  valuesAndCharactersTitle: SxProps<Theme>;
-  valuesAndCharactersTitleMobile: SxProps<Theme>;
-  valuesContainerMobile: SxProps<Theme>;
-  valuesGridCharactersMobile: SxProps<Theme>;
-} = {
+export const valueStyles = {
   valuesContainerMobile: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: '5%',
@@ -90,7 +20,8 @@ export const valueStyles: {
     overflow: 'hidden',
     boxSizing: 'border-box',
     marginBottom: '5%',
-  },
+  } as SxProps<Theme>,
+
   valuesContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
     borderRadius: '5%',
@@ -103,41 +34,59 @@ export const valueStyles: {
     alignItems: 'flex-start',
     maxWidth: '80%',
     padding: '2%',
-  },
+  } as SxProps<Theme>,
+
   valuesAndCharactersTitle: {
     marginY: '0.5%',
     marginLeft: '1%',
-  },
+  } as SxProps<Theme>,
+
   valuesAndCharactersTitleMobile: {
     marginY: '1%',
     marginLeft: '5%',
     alignSelf: 'flex-start',
     flexShrink: 0,
-  },
+  } as SxProps<Theme>,
+
   mainContainerMobile: {
     position: 'relative',
     marginTop: '20vh',
     width: '100vw',
-  },
+  } as SxProps<Theme>,
+
   imageBackground: {
     width: '100%',
     height: '80vh',
     position: 'relative',
     overflow: 'visible',
-  },
+  } as SxProps<Theme>,
+
   imageBackgroundMobile: {
     width: '100vw',
     height: '100vh',
     overflow: 'visible',
     marginTop: '30vh',
-  },
+  } as SxProps<Theme>,
+
   contentSx: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-  },
+  } as SxProps<Theme>,
+
+  // Desktop content sx for ImageBackground
+  contentSxDesktop: (type: DeviceType): SxProps<Theme> => ({
+    position: 'relative',
+    marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+  }),
+
   contentSxMobile: {
     display: 'flex',
     flexDirection: 'column',
@@ -145,9 +94,10 @@ export const valueStyles: {
     alignItems: 'center',
     paddingX: '5%',
     marginBottom: '-20%',
-    height: 'calc(100vh + 28vh)', // Extra height to allow child to extend
+    height: 'calc(100vh + 28vh)',
     minHeight: 0,
-  },
+  } as SxProps<Theme>,
+
   contentContainerMobile: {
     position: 'relative',
     bottom: '28vh',
@@ -155,41 +105,53 @@ export const valueStyles: {
     flexDirection: 'column',
     flex: 1,
     minHeight: 0,
-    height: 'calc(100% + 28vh)', // Add extra height to compensate for bottom offset
+    height: 'calc(100% + 28vh)',
     maxHeight: 'calc(100vh + 28vh)',
     overflow: 'hidden',
-  },
+  } as SxProps<Theme>,
+
   imageContainerMobile: {
     position: 'relative',
     zIndex: 1000,
     width: '100%',
     flex: '0 0 auto',
-  },
+  } as SxProps<Theme>,
+
   container: {
     position: 'relative',
     zIndex: 3,
-  },
+  } as SxProps<Theme>,
+
   titleContainer: {
     position: 'relative',
     marginBottom: '10vh',
     zIndex: 3,
-  },
+  } as SxProps<Theme>,
+
+  // Title text center alignment
+  titleTextCenter: {
+    textAlign: 'center',
+  } as SxProps<Theme>,
+
   backgroundImage: {
     width: '100vw',
     height: '100vh',
     marginTop: '10vh',
-  },
+  } as SxProps<Theme>,
+
   contentContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  } as SxProps<Theme>,
+
   mainShape: {
     transform: 'scale(0.5)',
     background:
       'linear-gradient(-145deg,rgba(19, 64, 91, 1) 21%, rgba(120, 71, 145, 1) 70%, rgba(221, 156, 54, 1) 100%)',
     overflow: 'visible',
     overflowClipMargin: 'content-box',
-  },
+  } as SxProps<Theme>,
+
   fieldPersonContainer: {
     position: 'absolute',
     width: '60%',
@@ -197,7 +159,8 @@ export const valueStyles: {
     bottom: '0vh',
     left: '-3%',
     zIndex: 20,
-  },
+  } as SxProps<Theme>,
+
   valuesGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
@@ -206,7 +169,8 @@ export const valueStyles: {
     padding: '10px',
     zIndex: 100000,
     width: '100%',
-  },
+  } as SxProps<Theme>,
+
   valuesGridCharacters: {
     display: 'grid',
     gridTemplateColumns: 'repeat(6, 1fr)',
@@ -215,7 +179,8 @@ export const valueStyles: {
     padding: '10px',
     zIndex: 100000,
     width: '100%',
-  },
+  } as SxProps<Theme>,
+
   valuesGridMobile: {
     width: '100%',
     maxWidth: '100%',
@@ -231,7 +196,8 @@ export const valueStyles: {
     boxSizing: 'border-box',
     flex: 1,
     minHeight: 0,
-  },
+  } as SxProps<Theme>,
+
   valuesGridCharactersMobile: {
     display: 'grid',
     gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
@@ -247,6 +213,41 @@ export const valueStyles: {
     boxSizing: 'border-box',
     flex: 1,
     minHeight: 0,
+  } as SxProps<Theme>,
+
+  // Mobile card wrapper for last odd item
+  mobileCardWrapper: (isLastOdd: boolean): SxProps<Theme> => ({
+    width: isLastOdd ? 'calc(50% - 4px)' : '100%',
+    height: '100%',
+    minHeight: 0,
+    ...(isLastOdd && {
+      gridColumn: '1 / -1',
+      justifySelf: 'center',
+    }),
+  }),
+
+  // Bottom site background container
+  siteBgContainer: (type: DeviceType): SxProps<Theme> => ({
+    position: 'absolute',
+    bottom: '-45vh',
+    right: dynamicStylingValue(type, '0', '-10vw', '-10vw'),
+    zIndex: -1,
+    width: dynamicStylingValue(type, '120vw', '100vw', '100vw'),
+    height: 'auto',
+  }),
+};
+
+// Image styles for ValueSection
+export const valueImageStyles = {
+  mobileChemPerson: {
+    objectFit: 'fill' as const,
+    width: '100%',
+    height: '100%',
+  },
+  siteBg: {
+    objectFit: 'fill' as const,
+    width: '100%',
+    height: '100%',
   },
 };
 
@@ -371,26 +372,38 @@ export const corporateStyles: {
 };
 
 // CertificationSection Styles
-export const certificationStyles: {
-  description: (deviceType: DeviceType) => React.CSSProperties;
-  cardsContainer: SxProps<Theme>;
-  cardsContainerMobile: SxProps<Theme>;
-  leftArrow: SxProps<Theme>;
-  leftArrowMobile: SxProps<Theme>;
-  rightArrow: SxProps<Theme>;
-  rightArrowMobile: SxProps<Theme>;
-} = {
+export const certificationStyles = {
+  // Mobile download button
+  mobileDownloadButton: {
+    width: '100%',
+    color: 'white',
+    background:
+      'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+    padding: 2,
+    borderRadius: 10,
+    fontWeight: 600,
+    textTransform: 'none',
+    marginTop: '4vh',
+    zIndex: 1,
+    '&:hover': {
+      background:
+        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+    },
+  } as SxProps<Theme>,
+
   description: (deviceType: DeviceType) => ({
-    width: dynamicStylingValue(deviceType, '100%', '60%', '60%'),
+    width: dynamicStylingValue(deviceType, '100%', '60%', '70%'),
     marginTop: '20px',
   }),
+
   cardsContainer: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: '40px',
     gap: '16px',
-  },
+  } as SxProps<Theme>,
+
   cardsContainerMobile: {
     position: 'relative',
     width: '100%',
@@ -399,7 +412,58 @@ export const certificationStyles: {
     justifyContent: 'center',
     marginTop: '24px',
     px: 1,
-  },
+  } as SxProps<Theme>,
+
+  // Mobile cards overflow container
+  mobileCardsOverflowContainer: (
+    certificatesLength: number,
+    visibleCards: number
+  ): SxProps<Theme> => ({
+    overflow: 'hidden',
+    width: certificatesLength > visibleCards ? 'calc(100% - 80px)' : 'auto',
+    mx: 'auto',
+  }),
+
+  // Mobile slider container
+  mobileSliderContainer: (
+    mobileIndex: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    display: 'flex',
+    flexDirection: 'row',
+    gap: `${gap}px`,
+    transform: `translateX(-${mobileIndex * (cardWidth + gap)}px)`,
+    transition: 'transform 0.5s ease-in-out',
+  }),
+
+  // Desktop cards overflow container
+  desktopCardsOverflowContainer: (
+    certificatesLength: number,
+    visibleCards: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    overflow: 'hidden',
+    width:
+      certificatesLength >= visibleCards
+        ? `${visibleCards * cardWidth + (visibleCards - 1) * gap}px`
+        : 'auto',
+  }),
+
+  // Desktop slider container
+  desktopSliderContainer: (
+    currentIndex: number,
+    cardWidth: number,
+    gap: number
+  ): SxProps<Theme> => ({
+    display: 'flex',
+    flexDirection: 'row',
+    gap: `${gap}px`,
+    transform: `translateX(-${currentIndex * (cardWidth + gap)}px)`,
+    transition: 'transform 0.5s ease-in-out',
+  }),
+
   leftArrow: {
     flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -409,7 +473,8 @@ export const certificationStyles: {
       transform: 'scale(1.1)',
     },
     transition: 'all 0.2s ease',
-  },
+  } as SxProps<Theme>,
+
   leftArrowMobile: {
     position: 'absolute',
     left: 0,
@@ -422,7 +487,8 @@ export const certificationStyles: {
       backgroundColor: 'white',
       transform: 'scale(0.95)',
     },
-  },
+  } as SxProps<Theme>,
+
   rightArrow: {
     flexShrink: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -432,7 +498,8 @@ export const certificationStyles: {
       transform: 'scale(1.1)',
     },
     transition: 'all 0.2s ease',
-  },
+  } as SxProps<Theme>,
+
   rightArrowMobile: {
     position: 'absolute',
     right: 0,
@@ -445,5 +512,16 @@ export const certificationStyles: {
       backgroundColor: 'white',
       transform: 'scale(0.95)',
     },
+  } as SxProps<Theme>,
+
+  // Arrow icon styles
+  arrowIconDesktop: {
+    fontSize: 32,
+    color: '#F54B02',
+  },
+
+  arrowIconMobile: {
+    fontSize: 24,
+    color: '#F54B02',
   },
 };

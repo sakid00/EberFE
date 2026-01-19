@@ -204,7 +204,9 @@ const ProductsPageContent = () => {
 
             return (
               (product.code?.toLowerCase() || '').includes(query) ||
-              (application?.toLowerCase() || '').includes(query) ||
+              (
+                application?.toLowerCase() || product.application?.toLowerCase()
+              ).includes(query) ||
               (perfFeature?.toLowerCase() || '').includes(query) ||
               (product.type?.toLowerCase() || '').includes(query)
             );
@@ -215,9 +217,9 @@ const ProductsPageContent = () => {
           createData({
             productCode: product.code,
             application:
-              language === 'en'
+              (language === 'en'
                 ? product.application_en
-                : product.application_id,
+                : product.application_id) ?? product.application,
             perfFeature:
               language === 'en'
                 ? product.performanceFeature_en

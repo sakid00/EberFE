@@ -2,11 +2,9 @@ import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
 import { SpecialtyCard } from '@/components/Cards/SpecialtyCard';
 import { SPECIALTY_DATA } from './constants';
-import {
-  specialtySectionStyles,
-  animationClasses,
-  headerSectionStyles,
-} from './styles';
+import { specialtySectionStyles } from './styles/specialtySection.styles';
+import { headerSectionStyles } from './styles/headerSection.styles';
+import { animationClasses } from './styles/common';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useRouter } from 'next/navigation';
@@ -26,7 +24,11 @@ export const SpecialtySection = () => {
       className={animationClasses.onScroll}
     >
       {type === 'mobile' && (
-        <Box id="buttons-wrapper" sx={headerSectionStyles.buttonsWrapper(type)}>
+        <Box
+          id="buttons-wrapper"
+          sx={headerSectionStyles.buttonsWrapper(type)}
+          className={animationClasses.stagger}
+        >
           <Typography sx={headerSectionStyles.description(language, type)}>
             {t('home.desc')}
           </Typography>
@@ -52,14 +54,13 @@ export const SpecialtySection = () => {
         className={animationClasses.fadeIn}
       >
         <DualColorText
-          text1={`${t('home.specialty_section_title.leader_in')}\u00a0`}
-          text2={t('home.specialty_section_title.high_performance')}
-          fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
+          text={`${t('home.specialty_section_title.leader_in')}\u00a0{${t('home.specialty_section_title.high_performance')}}`}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
           fontWeight={800}
           inline
         />
         <Typography
-          fontSize={dynamicStylingValue(type, '1.1em', '2em', '2em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
           fontWeight={800}
           sx={specialtySectionStyles.title}
           className={animationClasses.fadeIn}

@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { getPhoto } from '@/assets/photoAssets';
 import { InnovationCard } from '@/components/Cards/InnovationCard';
 import { INNOVATION_DATA } from './constants';
-import { animationClasses, innovationSectionStyles } from './styles';
+import { innovationSectionStyles } from './styles/innovationSection.styles';
+import { animationClasses } from './styles/common';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useDeviceType, useTranslation } from '@/hooks';
 
@@ -19,9 +20,8 @@ export const InnovationSection = () => {
           <Image
             src={getPhoto('tanki')}
             alt="tangki-image"
+            fill
             loading="lazy"
-            width={1000}
-            height={1000}
           />
         </Box>
       )}
@@ -34,16 +34,15 @@ export const InnovationSection = () => {
           {type !== 'mobile' ? (
             <>
               <DualColorText
-                text1={`${t('home.innovation_section_title.driving')}\u00a0`}
-                text2={t('home.innovation_section_title.innovation')}
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-                fontWeight={800}
+                text={`${t('home.innovation_section_title.driving')}\u00a0{${t('home.innovation_section_title.innovation')}}`}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontWeight={700}
                 color="#030712"
                 inline
               />
               <Typography
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
-                fontWeight={800}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontWeight={700}
                 sx={innovationSectionStyles.subtitle}
               >
                 {t('home.innovation_section_title.through_technology')}
@@ -74,7 +73,6 @@ export const InnovationSection = () => {
             {t('home.innovation_section_desc')}
           </Typography>
         </Box>
-        {type !== 'mobile' && <Box sx={innovationSectionStyles.spacer} />}
       </Box>
       {type === 'mobile' && (
         <Box sx={innovationSectionStyles.imageContainer(type)}>

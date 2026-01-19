@@ -154,12 +154,14 @@ export const getCurrentDeviceType = (
   return deviceInfo.type;
 };
 
-export const dynamicStylingValue = (
+// Solution 3: Generic Type Support
+// Now supports numbers, strings, objects, arrays, etc.
+export const dynamicStylingValue = <T>(
   deviceType: DeviceType,
-  mobileValue: string,
-  tabletValue: string,
-  desktopValue: string
-) => {
+  mobileValue: T,
+  tabletValue: T,
+  desktopValue: T
+): T => {
   switch (deviceType) {
     case 'mobile':
       return mobileValue;
@@ -170,4 +172,205 @@ export const dynamicStylingValue = (
     default:
       return tabletValue;
   }
+};
+
+// Solution 4: Fluid/Interpolated Values
+
+// Helper function for linear interpolation between two numeric values
+export const fluidValue = (
+  width: number,
+  minWidth: number,
+  maxWidth: number,
+  minValue: number,
+  maxValue: number
+): number => {
+  // Clamp to min/max bounds
+  if (width <= minWidth) return minValue;
+  if (width >= maxWidth) return maxValue;
+
+  // Linear interpolation
+  const progress = (width - minWidth) / (maxWidth - minWidth);
+  return minValue + progress * (maxValue - minValue);
+};
+
+// Options for useResponsiveValue hook
+export interface ResponsiveValueOptions {
+  minWidth?: number; // Default: 320 (small mobile)
+  maxWidth?: number; // Default: 1440 (large desktop)
+  tabletValue?: number; // Optional intermediate value at tablet breakpoint
+}
+
+// Hook for responsive values that scale with viewport width
+// For numeric values: smoothly interpolates between min and max
+// For string values: returns discrete values based on device type
+export const useResponsiveValue = <T extends number | string>(
+  mobileValue: T,
+  desktopValue: T,
+  options?: ResponsiveValueOptions
+): T => {
+  const { width, type } = useDeviceType();
+  const { minWidth = 320, maxWidth = 1440, tabletValue } = options || {};
+
+  // For numeric values, use fluid interpolation
+  if (typeof mobileValue === 'number' && typeof desktopValue === 'number') {
+    // If tabletValue is provided, use two-segment interpolation
+    if (tabletValue !== undefined) {
+      const tabletBreakpoint = DEFAULT_BREAKPOINTS.tablet;
+
+      if (width <= DEFAULT_BREAKPOINTS.mobile) {
+        // Mobile range: interpolate from mobileValue to tabletValue
+        return fluidValue(
+          width,
+          minWidth,
+          DEFAULT_BREAKPOINTS.mobile,
+          mobileValue,
+          tabletValue
+        ) as T;
+      } else if (width <= tabletBreakpoint) {
+        // Tablet range: use tabletValue or interpolate slightly
+        return fluidValue(
+          width,
+          DEFAULT_BREAKPOINTS.mobile,
+          tabletBreakpoint,
+          tabletValue,
+          tabletValue + (desktopValue - tabletValue) * 0.3
+        ) as T;
+      } else {
+        // Desktop range: interpolate from near-tablet to desktopValue
+        return fluidValue(
+          width,
+          tabletBreakpoint,
+          maxWidth,
+          tabletValue + (desktopValue - tabletValue) * 0.3,
+          desktopValue
+        ) as T;
+      }
+    }
+
+    // Simple two-point interpolation
+    return fluidValue(
+      width,
+      minWidth,
+      maxWidth,
+      mobileValue,
+      desktopValue
+    ) as T;
+  }
+
+  // For string values, fall back to discrete device-type-based selection
+  if (type === 'mobile') return mobileValue;
+  return desktopValue;
+};
+
+// Hook variant with three explicit values (mobile, tablet, desktop) with interpolation
+export const useResponsiveValueThree = <T extends number | string>(
+  mobileValue: T,
+  tabletValue: T,
+  desktopValue: T,
+  options?: { minWidth?: number; maxWidth?: number }
+): T => {
+  const { width, type } = useDeviceType();
+  const { minWidth = 320, maxWidth = 1440 } = options || {};
+  const mobileBreakpoint = DEFAULT_BREAKPOINTS.mobile;
+  const tabletBreakpoint = DEFAULT_BREAKPOINTS.tablet;
+
+  // For numeric values, use fluid interpolation across three segments
+  if (
+    typeof mobileValue === 'number' &&
+    typeof tabletValue === 'number' &&
+    typeof desktopValue === 'number'
+  ) {
+    if (width <= mobileBreakpoint) {
+      // Mobile range: minWidth to mobileBreakpoint
+      return fluidValue(
+        width,
+        minWidth,
+        mobileBreakpoint,
+        mobileValue,
+        tabletValue
+      ) as T;
+    } else if (width <= tabletBreakpoint) {
+      // Tablet range: mobileBreakpoint to tabletBreakpoint
+      return fluidValue(
+        width,
+        mobileBreakpoint,
+        tabletBreakpoint,
+        tabletValue,
+        tabletValue + (desktopValue - tabletValue) * 0.5
+      ) as T;
+    } else {
+      // Desktop range: tabletBreakpoint to maxWidth
+      return fluidValue(
+        width,
+        tabletBreakpoint,
+        maxWidth,
+        tabletValue + (desktopValue - tabletValue) * 0.5,
+        desktopValue
+      ) as T;
+    }
+  }
+
+  // For string values, use discrete selection
+  switch (type) {
+    case 'mobile':
+      return mobileValue;
+    case 'tablet':
+      return tabletValue;
+    case 'desktop':
+      return desktopValue;
+    default:
+      return tabletValue;
+  }
+};
+
+// Utility function for width-based responsive value (non-hook version)
+// Use this in style objects or outside of React components
+export const getResponsiveValue = <T extends number | string>(
+  width: number,
+  mobileValue: T,
+  tabletValue: T,
+  desktopValue: T,
+  options?: { minWidth?: number; maxWidth?: number }
+): T => {
+  const { minWidth = 320, maxWidth = 1440 } = options || {};
+  const mobileBreakpoint = DEFAULT_BREAKPOINTS.mobile;
+  const tabletBreakpoint = DEFAULT_BREAKPOINTS.tablet;
+
+  // For numeric values, use fluid interpolation
+  if (
+    typeof mobileValue === 'number' &&
+    typeof tabletValue === 'number' &&
+    typeof desktopValue === 'number'
+  ) {
+    if (width <= mobileBreakpoint) {
+      return fluidValue(
+        width,
+        minWidth,
+        mobileBreakpoint,
+        mobileValue,
+        tabletValue
+      ) as T;
+    } else if (width <= tabletBreakpoint) {
+      return fluidValue(
+        width,
+        mobileBreakpoint,
+        tabletBreakpoint,
+        tabletValue,
+        tabletValue + (desktopValue - tabletValue) * 0.5
+      ) as T;
+    } else {
+      return fluidValue(
+        width,
+        tabletBreakpoint,
+        maxWidth,
+        tabletValue + (desktopValue - tabletValue) * 0.5,
+        desktopValue
+      ) as T;
+    }
+  }
+
+  // For string values, use discrete selection based on width
+  if (width < mobileBreakpoint) return mobileValue;
+  if (width < tabletBreakpoint) return tabletValue;
+  return desktopValue;
 };

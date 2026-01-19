@@ -101,22 +101,7 @@ export const CertificationSection = () => {
       {type === 'mobile' && (
         <Button
           onClick={handleDownload}
-          sx={{
-            width: '100%',
-            color: 'white',
-            background:
-              'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
-            padding: 2,
-            borderRadius: 10,
-            fontWeight: 600,
-            textTransform: 'none',
-            marginTop: '4vh',
-            zIndex: 1,
-            '&:hover': {
-              background:
-                'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
-            },
-          }}
+          sx={certificationStyles.mobileDownloadButton}
         >
           {t('about_us.download_button')}
         </Button>
@@ -127,9 +112,8 @@ export const CertificationSection = () => {
       >
         <Box className="flex flex-col animate-fade-in justify-center">
           <DualColorText
-            text1={`${t('about_us.certification_section_title.our')}\u00a0`}
-            text2={t('about_us.certification_section_title.certification')}
-            fontSize={dynamicStylingValue(type, '1.5em', '2rem', '2rem')}
+            text={`${t('about_us.certification_section_title.our')}\u00a0{${t('about_us.certification_section_title.certification')}}`}
+            fontSize={dynamicStylingValue(type, '1.5em', '2rem', '3rem')}
             fontWeight={700}
             inline
           />
@@ -138,7 +122,7 @@ export const CertificationSection = () => {
           flexWrap={'wrap'}
           className=" text-[#4B5563] animate-fade-in"
           textAlign={'center'}
-          fontSize="1.2rem"
+          fontSize={dynamicStylingValue(type, '1.2rem', '1.5rem', '1.5rem')}
           style={certificationStyles.description(type)}
         >
           {t('about_us.certification_section_desc')}
@@ -151,30 +135,24 @@ export const CertificationSection = () => {
                 onClick={mobileSlidePrev}
                 sx={certificationStyles.leftArrowMobile}
               >
-                <ChevronLeft sx={{ fontSize: 24, color: '#F54B02' }} />
+                <ChevronLeft sx={certificationStyles.arrowIconMobile} />
               </IconButton>
             )}
 
             {/* Mobile Cards Container */}
             <Box
-              sx={{
-                overflow: 'hidden',
-                width:
-                  certificates.length > VISIBLE_CARDS_MOBILE
-                    ? 'calc(100% - 80px)'
-                    : 'auto',
-                mx: 'auto',
-              }}
+              sx={certificationStyles.mobileCardsOverflowContainer(
+                certificates.length,
+                VISIBLE_CARDS_MOBILE
+              )}
             >
               <Box
                 id="specialty-list"
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: `${GAP_MOBILE}px`,
-                  transform: `translateX(-${mobileIndex * (CARD_WIDTH_MOBILE + GAP_MOBILE)}px)`,
-                  transition: 'transform 0.5s ease-in-out',
-                }}
+                sx={certificationStyles.mobileSliderContainer(
+                  mobileIndex,
+                  CARD_WIDTH_MOBILE,
+                  GAP_MOBILE
+                )}
               >
                 {certificates.map((data, index) => (
                   <CertificationCard
@@ -193,7 +171,7 @@ export const CertificationSection = () => {
                 onClick={mobileSlideNext}
                 sx={certificationStyles.rightArrowMobile}
               >
-                <ChevronRight sx={{ fontSize: 24, color: '#F54B02' }} />
+                <ChevronRight sx={certificationStyles.arrowIconMobile} />
               </IconButton>
             )}
           </Box>
@@ -209,29 +187,26 @@ export const CertificationSection = () => {
                 onClick={slidePrev}
                 sx={certificationStyles.leftArrow}
               >
-                <ChevronLeft sx={{ fontSize: 32, color: '#F54B02' }} />
+                <ChevronLeft sx={certificationStyles.arrowIconDesktop} />
               </IconButton>
             )}
 
             {/* Cards Container */}
             <Box
-              sx={{
-                overflow: 'hidden',
-                width:
-                  certificates.length >= VISIBLE_CARDS_DESKTOP
-                    ? `${VISIBLE_CARDS_DESKTOP * CARD_WIDTH_DESKTOP + (VISIBLE_CARDS_DESKTOP - 1) * GAP_DESKTOP}px`
-                    : 'auto',
-              }}
+              sx={certificationStyles.desktopCardsOverflowContainer(
+                certificates.length,
+                VISIBLE_CARDS_DESKTOP,
+                CARD_WIDTH_DESKTOP,
+                GAP_DESKTOP
+              )}
             >
               <Box
                 id="specialty-list"
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  gap: `${GAP_DESKTOP}px`,
-                  transform: `translateX(-${currentIndex * (CARD_WIDTH_DESKTOP + GAP_DESKTOP)}px)`,
-                  transition: 'transform 0.5s ease-in-out',
-                }}
+                sx={certificationStyles.desktopSliderContainer(
+                  currentIndex,
+                  CARD_WIDTH_DESKTOP,
+                  GAP_DESKTOP
+                )}
               >
                 {certificates.map((data, index) => (
                   <CertificationCard
@@ -250,7 +225,7 @@ export const CertificationSection = () => {
                 onClick={slideNext}
                 sx={certificationStyles.rightArrow}
               >
-                <ChevronRight sx={{ fontSize: 32, color: '#F54B02' }} />
+                <ChevronRight sx={certificationStyles.arrowIconDesktop} />
               </IconButton>
             )}
           </Box>

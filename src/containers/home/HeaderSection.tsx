@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from '@mui/material';
 import DualColorText from '@/components/dualColorText/index';
-import { headerSectionStyles } from './styles';
+import { headerSectionStyles } from './styles/headerSection.styles';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { dynamicStylingValue } from '@/hooks/useDeviceType';
 import { useRouter } from 'next/navigation';
@@ -45,8 +45,7 @@ export const HeaderSection = () => {
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text1={`${t('home.title.as')}`}
-            text2={t('home.title.sustainable')}
+            text={`${t('home.title.as')}{${t('home.title.sustainable')}}`}
             fontSize={'2.2rem'}
             fontWeight={800}
             inline
@@ -76,8 +75,7 @@ export const HeaderSection = () => {
           {t('home.title.innovating')}
         </Typography>
         <DualColorText
-          text1={`${t('home.title.as')}\u00a0`}
-          text2={t('home.title.sustainable')}
+          text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
           fontSize={dynamicStylingValue(type, '2em', '4em', '4em')}
           fontWeight={800}
           inline

@@ -37,24 +37,14 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
     });
   };
 
-  // Fetch activity data on component mount
+  // Fetch activity data on component mount - always fetch fresh data
   useEffect(() => {
     const loadActivity = async () => {
       try {
         setIsInitialLoading(true);
 
-        // First check if activity exists in global state
-        const existingActivity = activities.find(
-          (activity) => activity.id === id
-        );
-        if (existingActivity) {
-          setCurrentActivity(existingActivity);
-          setIsInitialLoading(false);
-          return;
-        }
-
-        // If not found in state, fetch from API
-        const fetchedActivity = await getActivityById(id);
+        // Always fetch fresh data from API (forceRefresh = true)
+        const fetchedActivity = await getActivityById(id, true);
         if (fetchedActivity) {
           setCurrentActivity(fetchedActivity);
         } else {
@@ -72,7 +62,10 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
             await getActivities({ page: 1, pageSize: 6 });
           } catch (fallbackError) {
             Sentry.captureException(fallbackError, {
-              tags: { component: 'ActivityDetailPage', operation: 'loadFallbackActivities' },
+              tags: {
+                component: 'ActivityDetailPage',
+                operation: 'loadFallbackActivities',
+              },
             });
           }
         }
@@ -115,7 +108,10 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           }
         } catch (error) {
           Sentry.captureException(error, {
-            tags: { component: 'ActivityDetailPage', operation: 'loadActivitiesForSidebar' },
+            tags: {
+              component: 'ActivityDetailPage',
+              operation: 'loadActivitiesForSidebar',
+            },
             extra: { group: currentActivity?.group },
           });
           // Reset the flag on error so we can retry
@@ -314,8 +310,7 @@ const ActivityDetailPage = ({ id }: { id: number }) => {
           className={`flex flex-col p-8 ml-4 bg-white rounded-xl z-100 shadow-lg w-[25%]`}
         >
           <DualColorText
-            text1="Informasi"
-            text2="Lainnya"
+            text="Informasi {Lainnya}"
             fontSize={dynamicStylingValue(type, '0.8em', '1.5em', '1.5em')}
             fontWeight={800}
           />

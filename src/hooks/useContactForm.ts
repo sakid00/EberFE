@@ -10,6 +10,7 @@ interface ContactFormData {
   email: string;
   message: string;
   file?: File | null;
+  sendTo: 'CAREER' | 'CONTACT_US' | 'PRODUCT';
 }
 
 interface SubmitResponse {
@@ -37,6 +38,17 @@ const useContactForm = (): UseContactFormReturn => {
     retries: 1,
   });
 
+  const getEndpoint = useCallback((sendTo: ContactFormData['sendTo']) => {
+    switch (sendTo) {
+      case 'CAREER':
+        return '/careers/apply';
+      case 'CONTACT_US':
+        return '/email/send/contact';
+      case 'PRODUCT':
+        return '/email/send/custom-products';
+    }
+  }, []);
+
   const submitApplication = useCallback(
     async (data: ContactFormData): Promise<SubmitResponse> => {
       setIsSubmitting(true);
@@ -54,7 +66,7 @@ const useContactForm = (): UseContactFormReturn => {
           formData.append('file', data.file);
         }
 
-        const response = await api.execute('/careers/apply', {
+        const response = await api.execute(getEndpoint(data.sendTo), {
           method: 'POST',
           body: formData,
         });

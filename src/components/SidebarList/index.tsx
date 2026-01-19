@@ -45,8 +45,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   selectedCategory,
   setSelectedCategory,
   list,
-  text1,
-  text2,
+  text,
   inline,
   secondaryText,
   secondList,
@@ -157,8 +156,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   return (
     <Box className="bg-white max-w-1/4 h-1/5 rounded-xl p-5 z-100">
       <DualColorText
-        text1={text1}
-        text2={text2}
+        text={text}
         fontSize={
           fontSize ?? dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')
         }
@@ -168,8 +166,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       />
       {secondaryText && (
         <DualColorText
-          text1={''}
-          text2={secondaryText ?? ''}
+          text={`{${secondaryText}}`}
           fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
           fontWeight={800}
           inline

@@ -62,12 +62,7 @@ const ReqProductSent: React.FC<ReqProductSentProps> = ({
       <Box sx={styles.modalBox}>
         <Box sx={styles.headerContainer}>
           <DualColorText
-            text1={`${!hasAccess ? t('product.reqProductSentModal.access') : t('product.reqProductSentModal.request')}\u00a0`}
-            text2={
-              !hasAccess
-                ? t('product.reqProductSentModal.request_sent')
-                : t('product.reqProductSentModal.sent')
-            }
+            text={`${!hasAccess ? t('product.reqProductSentModal.access') : t('product.reqProductSentModal.request')}\u00a0{${!hasAccess ? t('product.reqProductSentModal.request_sent') : t('product.reqProductSentModal.sent')}}`}
             fontSize="2em"
             fontWeight={800}
             inline

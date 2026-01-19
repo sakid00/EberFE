@@ -14,21 +14,42 @@ import { NavigationProvider } from '@/contexts/NavigationContext';
 import LoadingWrapper from '@/components/LoadingWrapper';
 import { PrefetchWrapper } from '@/components/PrefetchWrapper';
 
+// Base URL for metadata - required for proper Open Graph image URLs
+export const metadataBase = new URL('https://ebergroup.com');
+
 export const metadata: Metadata = {
-  title: 'EBER Group',
+  metadataBase: new URL('https://ebergroup.com'),
+  title: {
+    default: 'EBER Group',
+    template: '%s | EBER Group',
+  },
   description:
-    'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
+    'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
   keywords: [
     'EBER Group',
     'EBER',
+    'chemical manufacturing',
+    'petrochemical',
+    'Indonesia',
+    'specialty chemicals',
+    'resins',
+    'plasticizers',
     'corporate',
     'business solutions',
     'innovation',
   ],
   authors: [{ name: 'EBER Group' }],
+  creator: 'EBER Group',
+  publisher: 'EBER Group',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: 'EBER Group',
-    description: 'EBER Group - Excellence in Every Detail',
+    description:
+      'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
     url: 'https://ebergroup.com',
     siteName: 'EBER Group',
     images: [
@@ -36,7 +57,8 @@ export const metadata: Metadata = {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'EBER Group Logo',
+        alt: 'EBER Group - Excellence in Every Detail',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -45,8 +67,28 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'EBER Group',
-    description: 'EBER Group - Excellence in Every Detail',
-    images: ['/logo.png'],
+    description:
+      'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'EBER Group - Excellence in Every Detail',
+      },
+    ],
+    creator: '@ebergroup',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: '/logo.png',

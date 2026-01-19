@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import {
   Box,
   Button,
@@ -15,15 +14,21 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { headerStyles } from './style';
+import {
+  headerStyles,
+  aboutUsDescriptionStyle,
+  aboutUsFontSizes,
+} from './style';
 import ProgressiveBackgroundImage from '../ProgressiveBackgroundImage';
 import { ClientOnly } from '../ClientOnly';
 import { HeaderLoadingScreen } from '../ModernLoadingScreen';
 import { useDeviceType, useTranslation } from '@/hooks';
 import { useNavigation } from '@/contexts/NavigationContext';
 import { getPhoto } from '@/assets/photoAssets';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
-import { headerSectionStyles } from '@/containers/home/styles';
+import {
+  animationClasses,
+  headerSectionStyles,
+} from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
 
 const logo = '/eber_logo.png';
@@ -155,6 +160,9 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         value={langValue}
         onChange={onLanguageChange}
         sx={{ border: 0 }}
+        MenuProps={{
+          disableScrollLock: true,
+        }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
             <span style={{ fontSize: '1.1rem' }}>{value}</span>
@@ -345,49 +353,42 @@ const Header = () => {
   const homepageImage = useMemo(
     () => (
       <>
-        <Box
-          sx={{
-            position: 'relative',
-            left: '10%',
-            top: '-10%',
-            maxWidth: '50%',
-            zIndex: 1,
-          }}
-        >
+        <Box sx={headerStyles.homepageTitleSection}>
           <Typography
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            className={animationClasses.slideRight}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text1={`${t('home.title.as')}\u00a0`}
-            text2={t('home.title.sustainable')}
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             inline
             color="white"
             sx={headerSectionStyles.title}
+            className={animationClasses.slideRight}
           />
           <Typography
-            fontSize={'clamp(2em, 4vw, 5em)'}
+            className={animationClasses.slideRight}
+            fontSize={'clamp(2em, 3vw, 5em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.future')}
           </Typography>
           <Typography
-            color="white"
-            marginTop="1%"
-            maxWidth="80%"
-            fontSize={'clamp(0.8em, 1vw, 1em)'}
+            sx={headerStyles.homepageDescriptionText}
+            className={animationClasses.stagger}
           >
             {t('home.desc')}
           </Typography>
           <Box
             id="buttons-wrapper"
-            sx={{ display: 'flex', marginTop: '4%', gap: 2 }}
+            sx={headerStyles.homepageButtonsWrapper}
+            className={animationClasses.stagger}
           >
             <Button
               size="small"
@@ -406,49 +407,28 @@ const Header = () => {
             </Button>
           </Box>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            position: 'relative',
-            width: '100vw',
-            height: '100%',
-            maxWidth: '1000px',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-          }}
-        >
+        <Box sx={headerStyles.homepageImageContainer}>
           <Box
-            sx={{
-              position: 'relative',
-              width: '45%',
-              backgroundColor: 'rgba(255, 255, 255, 0.2)',
-              padding: '2%',
-              borderRadius: '10px',
-              top: '20%',
-              left: '30%',
-              borderBottomRightRadius: '100px',
-            }}
+            sx={headerStyles.homepageModalBox}
+            className={animationClasses.slideLeft}
           >
-            <Typography color="white" fontSize="0.9em" fontWeight={800}>
+            <Typography color="white" fontSize="0.85em" fontWeight={800}>
               {t('home.modal.title')}
             </Typography>
-            <Typography color="white" fontSize="0.9em" fontWeight={400}>
+            <Typography color="white" fontSize="0.85em" fontWeight={400}>
               {t('home.modal.desc')}
             </Typography>
           </Box>
           <Box
-            sx={{
-              position: 'relative',
-              zIndex: 1,
-            }}
+            sx={headerStyles.homepageImageWrapper}
+            className={animationClasses.slideRight}
           >
             <Image
-              src={getPhoto('subtract')}
+              src="/photo/subtract.png"
               alt="header-photo"
-              width={1000}
-              height={1000}
-              style={{ objectFit: 'contain' }}
+              width={900}
+              height={900}
+              style={headerStyles.contentImageStyle}
               loading="lazy"
             />
           </Box>
@@ -460,79 +440,40 @@ const Header = () => {
 
   const homepageImageMobile = useMemo(
     () => (
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: '500px',
-        }}
-      >
-        <Box
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            width: '100vw',
-            display: 'flex',
-            flexDirection: 'column',
-            top: '8%',
-            gap: 1,
-          }}
-        >
+      <Box sx={headerStyles.mobileHomepageContainer}>
+        <Box sx={headerStyles.mobileHomepageTitleSection}>
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text1={`${t('home.title.as')}\u00a0`}
-            text2={t('home.title.sustainable')}
+            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             inline
             color="white"
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           />
           <Typography
+            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.future')}
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            position: 'relative',
-            flex: 1,
-            zIndex: 1,
-            left: '2%',
-            display: 'flex',
-            flexDirection: 'column',
-            height: '50%',
-          }}
-        >
-          <Box
-            sx={{
-              position: 'relative',
-              flex: 1,
-              display: 'flex',
-              alignItems: 'flex-end',
-            }}
-          >
+        <Box sx={headerStyles.mobileHomepageContentSection}>
+          <Box sx={headerStyles.mobileHomepageImageWrapper}>
             <Box
-              sx={{
-                position: 'absolute',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                padding: '4%',
-                borderRadius: '10px',
-                top: '5vh',
-                left: '52%',
-                borderBottomRightRadius: '100px',
-              }}
+              sx={headerStyles.mobileHomepageModalBox}
+              className={animationClasses.slideLeft}
             >
               <Typography color="white" fontSize={'2.2vw'} fontWeight={800}>
                 {t('home.modal.title')}
@@ -541,14 +482,15 @@ const Header = () => {
                 {t('home.modal.desc')}
               </Typography>
             </Box>
-            <Image
-              src={getPhoto('subtract')}
-              alt="header-photo"
-              width={1000}
-              height={1000}
-              style={{ objectFit: 'contain' }}
-              loading="lazy"
-            />
+            <Box sx={headerStyles.mobileHomepageImage}>
+              <Image
+                src={getPhoto('subtract')}
+                alt="header-photo"
+                fill
+                loading="lazy"
+                className={animationClasses.slideRight}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -556,31 +498,59 @@ const Header = () => {
     [type, t]
   );
 
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/eber-compro.pdf';
+    link.download = 'eber-company-profile.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const aboutUsImage = useMemo(
     () => (
-      <Box
-        sx={{
-          position: 'relative',
-          width: dynamicStylingValue(type, '90%', '50%', '50%'),
-          height: dynamicStylingValue(type, '50%', '90%', '90%'),
-          top: dynamicStylingValue(type, '38%', '10%', '10%'),
-          left: dynamicStylingValue(type, '10%', '50vw', '50vw'),
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-        }}
-      >
-        <Image
-          src={getPhoto('tankiPerson')}
-          alt="header photo"
-          width={1000}
-          height={1000}
-          style={{ objectFit: 'contain' }}
-          loading="lazy"
-        />
-      </Box>
+      <>
+        <Box sx={headerStyles.aboutUsContentContainer(type)}>
+          <DualColorText
+            text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
+            fontSize={aboutUsFontSizes.title(type)}
+            fontWeight={800}
+            inline
+            color="white"
+            sx={headerStyles.aboutUsDualColorText(type)}
+          />
+          <Typography
+            fontSize={aboutUsFontSizes.title(type)}
+            fontWeight={800}
+            marginTop={aboutUsFontSizes.marginTop(type)}
+            sx={headerStyles.aboutUsGradientTitle(type)}
+          >
+            {t('about_us.title.background')}
+          </Typography>
+          <Typography style={aboutUsDescriptionStyle(type, language)}>
+            {t('about_us.desc')}
+          </Typography>
+          {type !== 'mobile' && (
+            <Button
+              size="small"
+              onClick={handleDownload}
+              sx={headerStyles.aboutUsDownloadButton}
+            >
+              {t('about_us.download_button')}
+            </Button>
+          )}
+        </Box>
+        <Box sx={headerStyles.aboutUsImageContainer(type)}>
+          <Image
+            src={getPhoto('tankiPerson')}
+            alt="header photo"
+            fill
+            loading="lazy"
+          />
+        </Box>
+      </>
     ),
-    [type]
+    [type, language]
   );
 
   return (
@@ -588,43 +558,58 @@ const Header = () => {
       <header style={headerStyles.header}>
         <ClientOnly fallback={<HeaderLoadingScreen />}>
           <ProgressiveBackgroundImage
-            src={getBackgroundImage('homepageHeaderBg')}
             alt="header background"
-            objectFit="fill"
             sx={headerStyles.backgroundImage(
               type,
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
-            priority={true}
-            quality={70}
-            placeholderColor="#4a5568"
+            customGradient={
+              isMobile
+                ? 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 98%, rgba(221, 156, 54, 1) 100%)'
+                : 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 84%, rgba(221, 156, 54, 1) 100%)'
+            }
+            roundedBottom={true}
+            roundedBottomRadius={
+              isMobile
+                ? '0 0 95% 95% / 0 0 10% 10%'
+                : '0% 0% 32% 85% / 0% 0% 15% 21%'
+            }
           >
-            <Image
-              src={
-                isMobile && !isTablet
-                  ? getPhoto('eberBig2Mobile')
-                  : getPhoto('eberBig2')
-              }
-              width={1000}
-              height={1000}
-              alt="header accessories"
+            <Box
               style={headerStyles.headerAccessories(type)}
-              loading="lazy"
-            />
+              className={animationClasses.slideRight}
+            >
+              <Image
+                src={
+                  isMobile && !isTablet
+                    ? getPhoto('eberBig2Mobile')
+                    : getPhoto('eberBig2')
+                }
+                width={1000}
+                height={1000}
+                alt="header accessories"
+                style={{
+                  objectFit: 'fill',
+                  width: '100%',
+                  height: '100%',
+                }}
+                loading="lazy"
+              />
+            </Box>
 
             {/* Main Header Container */}
-            <Box sx={headerStyles.container}>
+            <Box
+              sx={headerStyles.container}
+              style={{ marginBottom: isMobile ? '20px' : '70px' }}
+            >
               <LogoSection />
 
               {/* Desktop and Tablet Navigation */}
               {shouldShowDesktopNavigation(isMobile) && (
                 <Box
                   className="desktop-navigation"
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                  }}
+                  sx={headerStyles.desktopNavigationContainer}
                 >
                   <NavigationBar
                     animationKey={animationKey}
@@ -658,19 +643,17 @@ const Header = () => {
             </Box>
             {isHomePagePath && (
               <Box
-                sx={{
-                  position: 'relative',
-                  flexDirection: isMobile ? 'column' : 'row',
-                  display: 'flex',
-                  alignItems: 'center',
-                  paddingX: '5%',
-                  height: '100%',
-                }}
+                key={`homepage-content-${isMobile ? 'mobile' : 'desktop'}`}
+                sx={headerStyles.homepageContentWrapper(isMobile)}
               >
                 {isMobile ? homepageImageMobile : homepageImage}
               </Box>
             )}
-            {isAboutUsPagePath && aboutUsImage}
+            {isAboutUsPagePath && (
+              <Box sx={headerStyles.aboutUsPageWrapper(isMobile)}>
+                {aboutUsImage}
+              </Box>
+            )}
           </ProgressiveBackgroundImage>
         </ClientOnly>
       </header>

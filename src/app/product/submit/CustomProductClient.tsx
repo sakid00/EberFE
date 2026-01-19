@@ -14,8 +14,7 @@ const CustomProductClient = () => {
     <FormSubmitContainer
       title={t('custom_product.submit_application_title_small')}
       description={t('custom_product.submit_application_desc')}
-      text1={t("custom_product.submit_application_title.let's")}
-      text2={t('custom_product.submit_application_title.custom')}
+      text={`${t("custom_product.submit_application_title.let's")}{${t('custom_product.submit_application_title.custom')}}`}
       photo={getPhoto('labPerson')}
       imageStyle={imageStyle}
       type={type}

@@ -84,8 +84,7 @@ const ActivityDetailSkeleton: React.FC<ActivityDetailSkeletonProps> = ({ type })
         >
           {/* Sidebar Title */}
           <DualColorText
-            text1="Informasi"
-            text2="Lainnya"
+            text="Informasi {Lainnya}"
             fontSize={dynamicStylingValue(type, '0.8em', '1.5em', '1.5em')}
             fontWeight={800}
           />
