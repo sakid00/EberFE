@@ -49,8 +49,30 @@ export async function generateMetadata({
 
   if (!activity) {
     return {
-      title: 'Activity - EBER Group',
+      title: 'Activity',
       description: 'Activity details from EBER Group.',
+      openGraph: {
+        title: 'Activity - EBER Group',
+        description: 'Activity details from EBER Group.',
+        url: `https://ebergroup.com/activity/${id}`,
+        siteName: 'EBER Group',
+        images: [
+          {
+            url: '/logo.png',
+            width: 1200,
+            height: 630,
+            alt: 'EBER Group Activity',
+          },
+        ],
+        locale: 'en_US',
+        type: 'article',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Activity - EBER Group',
+        description: 'Activity details from EBER Group.',
+        images: ['/logo.png'],
+      },
     };
   }
 
@@ -60,21 +82,34 @@ export async function generateMetadata({
     activity.body_id?.replace(/<[^>]*>/g, '').slice(0, 160) ||
     'Activity details from EBER Group.';
 
+  const imageUrl = activity.image
+    ? `${process.env.NEXT_PUBLIC_IMAGE_ACTIVITY_BASE_URL}${activity.image}`
+    : '/logo.png';
+
   return {
-    title: `${title} - EBER Group`,
+    title: title,
     description,
     openGraph: {
       title: `${title} - EBER Group`,
       description,
       url: `https://ebergroup.com/activity/${id}`,
-      images: activity.image
-        ? [
-            {
-              url: `${process.env.NEXT_PUBLIC_IMAGE_ACTIVITY_BASE_URL}${activity.image}`,
-              alt: title,
-            },
-          ]
-        : undefined,
+      siteName: 'EBER Group',
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      locale: 'en_US',
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} - EBER Group`,
+      description,
+      images: [imageUrl],
     },
   };
 }

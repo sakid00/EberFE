@@ -5,7 +5,7 @@ import { CorporateSkeleton } from '@/components/Skeleton';
 import { Box } from '@mui/material';
 
 export const metadata: Metadata = {
-  title: 'Corporate - EBER Group',
+  title: 'Corporate',
   description:
     'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
   openGraph: {
@@ -13,6 +13,24 @@ export const metadata: Metadata = {
     description:
       'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
     url: 'https://ebergroup.com/corporate',
+    siteName: 'EBER Group',
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'EBER Group Corporate Information',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Corporate - EBER Group',
+    description:
+      'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
+    images: ['/logo.png'],
   },
 };
 
