@@ -576,7 +576,7 @@ const Header = () => {
             roundedBottomRadius={
               isMobile
                 ? '0 0 95% 95% / 0 0 10% 10%'
-                : '0% 0% 32% 85% / 0% 0% 15% 29% '
+                : '0% 0% 32% 85% / 0% 0% 15% 21%'
             }
           >
             <Image

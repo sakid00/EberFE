@@ -407,7 +407,7 @@ export const headerStyles = {
     flexDirection: isMobile ? 'column' : 'row',
     display: 'flex',
     alignItems: 'center',
-    paddingX: '5%',
+    paddingX: isMobile ? '8vw' : '5%',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: isMobile ? '100%' : '90%',
@@ -506,7 +506,8 @@ export const headerStyles = {
   mobileHomepageModalBox: {
     position: 'absolute',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    padding: '4%',
+    padding: '3%',
+    marginRight: '2%',
     borderRadius: '10px',
     bottom: '65%',
     left: '52%',
