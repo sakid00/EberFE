@@ -482,20 +482,15 @@ const Header = () => {
                 {t('home.modal.desc')}
               </Typography>
             </Box>
-            <Image
-              src="/photo/subtract.png"
-              alt="header-photo"
-              width={1000}
-              height={1000}
-              style={{
-                ...headerStyles.contentImageStyle,
-                position: 'absolute',
-                bottom: '-5%',
-                left: '-3%',
-              }}
-              loading="lazy"
-              className={animationClasses.slideRight}
-            />
+            <Box sx={headerStyles.mobileHomepageImage}>
+              <Image
+                src={getPhoto('subtract')}
+                alt="header-photo"
+                fill
+                loading="lazy"
+                className={animationClasses.slideRight}
+              />
+            </Box>
           </Box>
         </Box>
       </Box>
