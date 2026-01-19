@@ -36,20 +36,22 @@ export const headerStyles = {
     right: 0,
     top: '-30%',
     zIndex: 0,
-    objectFit: 'fill' as const,
   }),
   backgroundImage: (
     deviceType: DeviceType,
     isHomepage: boolean
   ): SxProps<Theme> => ({
     position: 'relative',
-    width: '100%',
+    width: deviceType === 'mobile' ? '100%' : '110%',
+    maxWidth: 'unset',
+    marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
-      '65vh',
-      isHomepage ? '80vh' : '50vh',
-      isHomepage ? '80vh' : '50vh'
+      isHomepage ? '120vw' : '65vh',
+      isHomepage ? '50vw' : '50vh',
+      isHomepage ? '50vw' : '50vh'
     ),
+    minHeight: isHomepage && deviceType !== 'mobile' ? '650px' : '300px',
     maxHeight: '1000px',
     alignItems: 'start',
     overflow: 'hidden',
@@ -79,7 +81,6 @@ export const headerStyles = {
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
     fontSize: '1rem',
-    marginRight: 1,
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',
@@ -180,7 +181,7 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '7vw',
+    width: '95px',
     maxWidth: '120px',
     height: 'auto',
     transition: ANIMATION.transition,
@@ -405,10 +406,10 @@ export const headerStyles = {
     flexDirection: isMobile ? 'column' : 'row',
     display: 'flex',
     alignItems: 'center',
-    paddingX: '5%',
+    paddingX: isMobile ? '8vw' : '0',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
-    maxWidth: '90%',
+    maxWidth: isMobile ? '100%' : '90%',
   }),
 
   // Homepage title section
@@ -444,7 +445,7 @@ export const headerStyles = {
     position: 'relative',
     width: '50%',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    padding: '2%',
+    padding: '3% 6% 3% 3%',
     borderRadius: '10px',
     top: '10%',
     left: '25%',
@@ -480,7 +481,7 @@ export const headerStyles = {
     width: '100vw',
     display: 'flex',
     flexDirection: 'column' as const,
-    top: '8%',
+    top: '5%',
     gap: 1,
   },
 
@@ -506,7 +507,8 @@ export const headerStyles = {
     position: 'absolute',
     width: '60%',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    padding: '4%',
+    padding: '3%',
+    marginRight: '2%',
     borderRadius: '10px',
     top: '5%',
     left: '52%',

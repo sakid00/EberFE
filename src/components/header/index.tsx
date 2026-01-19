@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import {
   Box,
   Button,
@@ -31,7 +30,6 @@ import {
   headerSectionStyles,
 } from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 const logo = '/eber_logo.png';
 const logoMobile = '/svg/eber-logo-color.svg';
@@ -162,6 +160,9 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         value={langValue}
         onChange={onLanguageChange}
         sx={{ border: 0 }}
+        MenuProps={{
+          disableScrollLock: true,
+        }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
             <span style={{ fontSize: '1.1rem' }}>{value}</span>
@@ -423,7 +424,7 @@ const Header = () => {
             className={animationClasses.slideRight}
           >
             <Image
-              src={getPhoto('subtract')}
+              src="/photo/subtract.png"
               alt="header-photo"
               width={900}
               height={900}
@@ -557,33 +558,51 @@ const Header = () => {
       <header style={headerStyles.header}>
         <ClientOnly fallback={<HeaderLoadingScreen />}>
           <ProgressiveBackgroundImage
-            src={getBackgroundImage('homepageHeaderBg')}
             alt="header background"
-            objectFit="fill"
             sx={headerStyles.backgroundImage(
               type,
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
-            priority={true}
-            quality={70}
-            placeholderColor="#4a5568"
+            customGradient={
+              isMobile
+                ? 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 98%, rgba(221, 156, 54, 1) 100%)'
+                : 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 84%, rgba(221, 156, 54, 1) 100%)'
+            }
+            roundedBottom={true}
+            roundedBottomRadius={
+              isMobile
+                ? '0 0 95% 95% / 0 0 10% 10%'
+                : '0% 0% 32% 85% / 0% 0% 15% 21%'
+            }
           >
-            <Image
-              src={
-                isMobile && !isTablet
-                  ? getPhoto('eberBig2Mobile')
-                  : getPhoto('eberBig2')
-              }
-              width={1000}
-              height={1000}
-              alt="header accessories"
+            <Box
               style={headerStyles.headerAccessories(type)}
-              loading="lazy"
-            />
+              className={animationClasses.slideRight}
+            >
+              <Image
+                src={
+                  isMobile && !isTablet
+                    ? getPhoto('eberBig2Mobile')
+                    : getPhoto('eberBig2')
+                }
+                width={1000}
+                height={1000}
+                alt="header accessories"
+                style={{
+                  objectFit: 'fill',
+                  width: '100%',
+                  height: '100%',
+                }}
+                loading="lazy"
+              />
+            </Box>
 
             {/* Main Header Container */}
-            <Box sx={headerStyles.container}>
+            <Box
+              sx={headerStyles.container}
+              style={{ marginBottom: isMobile ? '20px' : '70px' }}
+            >
               <LogoSection />
 
               {/* Desktop and Tablet Navigation */}
@@ -623,7 +642,10 @@ const Header = () => {
               )}
             </Box>
             {isHomePagePath && (
-              <Box sx={headerStyles.homepageContentWrapper(isMobile)}>
+              <Box
+                key={`homepage-content-${isMobile ? 'mobile' : 'desktop'}`}
+                sx={headerStyles.homepageContentWrapper(isMobile)}
+              >
                 {isMobile ? homepageImageMobile : homepageImage}
               </Box>
             )}

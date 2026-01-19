@@ -102,7 +102,7 @@ export const CustomProductSection = () => {
       <ProgressiveBackgroundImage
         src={getBackgroundImage('container1')}
         alt="container background"
-        objectFit={'fill'}
+        objectFit="fill"
         priority={true}
         quality={75}
         placeholderColor="#cbd5e0"
