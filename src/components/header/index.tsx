@@ -593,7 +593,7 @@ const Header = () => {
             />
 
             {/* Main Header Container */}
-            <Box sx={headerStyles.container} style={{ marginBottom: '70px' }}>
+            <Box sx={headerStyles.container} style={{ marginBottom: isMobile ? '0px' : '70px' }}>
               <LogoSection />
 
               {/* Desktop and Tablet Navigation */}
