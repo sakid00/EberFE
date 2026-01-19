@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { getBackgroundImage } from '@/assets/svgBackgrounds';
 import {
   Box,
   Button,
@@ -423,7 +422,7 @@ const Header = () => {
             className={animationClasses.slideRight}
           >
             <Image
-              src='/photo/subtract.png'
+              src="/photo/subtract.png"
               alt="header-photo"
               width={900}
               height={900}
@@ -482,16 +481,16 @@ const Header = () => {
               </Typography>
             </Box>
             <Image
-              src='/photo/subtract.png'
+              src="/photo/subtract.png"
               alt="header-photo"
               width={1000}
               height={1000}
-              style={{ ...headerStyles.contentImageStyle,
+              style={{
+                ...headerStyles.contentImageStyle,
                 position: 'absolute',
                 bottom: '-5%',
                 left: '-3%',
-               }
-            }
+              }}
               loading="lazy"
               className={animationClasses.slideRight}
             />
@@ -562,20 +561,21 @@ const Header = () => {
       <header style={headerStyles.header}>
         <ClientOnly fallback={<HeaderLoadingScreen />}>
           <ProgressiveBackgroundImage
-            src={getBackgroundImage('homepageHeaderBg')}
             alt="header background"
-            objectFit="fill"
             sx={headerStyles.backgroundImage(
               type,
               isHomePagePath || isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
-            priority={true}
-            quality={70}
-            placeholderColor="#4a5568"
-            useMobileGradient={true}
-            roundedBottom={isMobile && (isHomePagePath || isAboutUsPagePath)}
-            roundedBottomRadius="0 0 95% 95% / 0 0 50px 50px"
+            customGradient={
+              isMobile
+                ? 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 98%, rgba(221, 156, 54, 1) 100%)'
+                : 'linear-gradient(135deg, rgba(19, 64, 91, 1) 0%, rgba(120, 71, 145, 1) 84%, rgba(221, 156, 54, 1) 100%)'
+            }
+            roundedBottom={isHomePagePath || isAboutUsPagePath}
+            roundedBottomRadius={
+              isMobile ? '0 0 95% 95% / 0 0 10% 10%' : '0% 0% 33% 65% / 0% 0% 9% 15%'
+            }
           >
             <Image
               src={
@@ -631,7 +631,7 @@ const Header = () => {
               )}
             </Box>
             {isHomePagePath && (
-              <Box 
+              <Box
                 key={`homepage-content-${isMobile ? 'mobile' : 'desktop'}`}
                 sx={headerStyles.homepageContentWrapper(isMobile)}
               >

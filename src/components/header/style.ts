@@ -442,9 +442,9 @@ export const headerStyles = {
   // Homepage modal box
   homepageModalBox: {
     position: 'relative',
-    width: '45%',
+    width: '50%',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    padding: '2%',
+    padding: '3% 6% 3% 3%',
     borderRadius: '10px',
     top: '10%',
     left: '25%',
