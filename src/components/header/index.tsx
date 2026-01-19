@@ -574,7 +574,9 @@ const Header = () => {
             }
             roundedBottom={isHomePagePath || isAboutUsPagePath}
             roundedBottomRadius={
-              isMobile ? '0 0 95% 95% / 0 0 10% 10%' : '0% 0% 33% 65% / 0% 0% 9% 15%'
+              isMobile
+                ? '0 0 95% 95% / 0 0 10% 10%'
+                : '0% 0% 65% 100% / 0% 0% 12% 45% '
             }
           >
             <Image
@@ -591,7 +593,7 @@ const Header = () => {
             />
 
             {/* Main Header Container */}
-            <Box sx={headerStyles.container}>
+            <Box sx={headerStyles.container} style={{ marginBottom: '70px' }}>
               <LogoSection />
 
               {/* Desktop and Tablet Navigation */}
