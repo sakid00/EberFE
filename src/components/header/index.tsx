@@ -30,7 +30,6 @@ import {
   headerSectionStyles,
 } from '@/containers/home/styles';
 import DualColorText from '../dualColorText';
-import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 const logo = '/eber_logo.png';
 const logoMobile = '/svg/eber-logo-color.svg';
@@ -590,6 +589,7 @@ const Header = () => {
               alt="header accessories"
               style={headerStyles.headerAccessories(type)}
               loading="lazy"
+              className={animationClasses.slideRight}
             />
 
             {/* Main Header Container */}

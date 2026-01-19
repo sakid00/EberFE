@@ -72,7 +72,7 @@ export const headerSectionStyles = {
     }) as SxProps<Theme>,
 
   primaryButton: {
-    fontSize: '1em',
+    fontSize: '0.9em',
     color: COLORS.text.white,
     background: COLORS.primary.gradient,
     padding: 2,
@@ -83,7 +83,7 @@ export const headerSectionStyles = {
 
   secondaryButton: (type: DeviceType) =>
     ({
-      fontSize: '1em',
+      fontSize: '0.9em',
       color: dynamicStylingValue(
         type,
         '#784791',

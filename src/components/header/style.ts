@@ -27,6 +27,7 @@ const ANIMATION = {
 export const headerStyles = {
   header: {
     position: 'relative' as const,
+    maxWidth: '100vw',
   },
   headerAccessories: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
@@ -81,7 +82,6 @@ export const headerStyles = {
     color: isPathName ? COLORS.white : COLORS.whiteOpaque,
     fontWeight: isPathName ? '700' : '400',
     fontSize: '1rem',
-    marginRight: 1,
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',
@@ -182,7 +182,7 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '7vw',
+    width: '95px',
     maxWidth: '120px',
     height: 'auto',
     transition: ANIMATION.transition,
@@ -407,7 +407,7 @@ export const headerStyles = {
     flexDirection: isMobile ? 'column' : 'row',
     display: 'flex',
     alignItems: 'center',
-    paddingX: isMobile ? '8vw' : '5%',
+    paddingX: isMobile ? '8vw' : '0',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: isMobile ? '100%' : '90%',
