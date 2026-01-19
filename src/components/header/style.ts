@@ -27,7 +27,6 @@ const ANIMATION = {
 export const headerStyles = {
   header: {
     position: 'relative' as const,
-    maxWidth: '100vw',
   },
   headerAccessories: (deviceType: DeviceType) => ({
     position: 'absolute' as const,
@@ -44,6 +43,7 @@ export const headerStyles = {
   ): SxProps<Theme> => ({
     position: 'relative',
     width: deviceType === 'mobile' ? '100%' : '110%',
+    maxWidth: 'unset',
     marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
