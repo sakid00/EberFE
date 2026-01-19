@@ -486,7 +486,11 @@ const Header = () => {
               alt="header-photo"
               width={1000}
               height={1000}
-              style={headerStyles.contentImageStyle}
+              style={{ ...headerStyles.contentImageStyle,
+                position: 'absolute',
+                bottom: '-10%',
+               }
+            }
               loading="lazy"
               className={animationClasses.slideRight}
             />

@@ -46,7 +46,7 @@ export const headerStyles = {
     width: '100%',
     height: dynamicStylingValue(
       deviceType,
-      '65vh',
+      '120vw',
       isHomepage ? '80vh' : '50vh',
       isHomepage ? '80vh' : '50vh'
     ),
@@ -470,7 +470,7 @@ export const headerStyles = {
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center',
-    height: '500px',
+    height: '100%',
   },
 
   mobileHomepageTitleSection: {
@@ -479,7 +479,7 @@ export const headerStyles = {
     width: '100vw',
     display: 'flex',
     flexDirection: 'column' as const,
-    top: '8%',
+    top: '5%',
     gap: 1,
   },
 
@@ -506,7 +506,7 @@ export const headerStyles = {
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '4%',
     borderRadius: '10px',
-    top: '5vh',
+    bottom: '60%',
     left: '52%',
     borderBottomRightRadius: '100px',
   },
