@@ -631,7 +631,10 @@ const Header = () => {
               )}
             </Box>
             {isHomePagePath && (
-              <Box sx={headerStyles.homepageContentWrapper(isMobile)}>
+              <Box 
+                key={`homepage-content-${isMobile ? 'mobile' : 'desktop'}`}
+                sx={headerStyles.homepageContentWrapper(isMobile)}
+              >
                 {isMobile ? homepageImageMobile : homepageImage}
               </Box>
             )}
