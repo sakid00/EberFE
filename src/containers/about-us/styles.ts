@@ -373,6 +373,18 @@ export const corporateStyles: {
 
 // CertificationSection Styles
 export const certificationStyles = {
+  // Mobile image container
+  imageContainerMobile: {
+    position: 'relative',
+    width: '100%',
+    marginTop: '-45vw',
+    marginLeft: '5vw',
+    zIndex: 1000,
+  },
+  // Mobile image style
+  imageStyleMobile: {
+    objectFit: 'contain' as const,
+  },
   // Mobile download button
   mobileDownloadButton: {
     width: '100%',

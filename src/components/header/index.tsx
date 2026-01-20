@@ -542,27 +542,29 @@ const Header = () => {
               onClick={handleDownload}
               sx={headerStyles.aboutUsDownloadButton}
             >
-               <Image
+              <Image
                 src={downloadIcon}
                 alt="download icon"
                 width={16}
                 height={16}
                 style={{ marginRight: '8px' }}
               />
-               {t('about_us.download_button')}
+              {t('about_us.download_button')}
             </Button>
           )}
         </Box>
-        <Box sx={headerStyles.aboutUsImageContainer(type)}>
-          <Image
-            src={getPhoto('tankiPerson')}
-            alt="header photo"
-            width={1000}
-            height={1000}
-            style={headerStyles.contentImageStyle}
-            loading="lazy"
-          />
-        </Box>
+        {type !== 'mobile' && (
+          <Box sx={headerStyles.aboutUsImageContainer(type)}>
+            <Image
+              src={getPhoto('tankiPerson')}
+              alt="header photo"
+              width={1000}
+              height={1000}
+              style={headerStyles.contentImageStyle}
+              loading="lazy"
+            />
+          </Box>
+        )}
       </>
     ),
     [type, language]
@@ -576,7 +578,8 @@ const Header = () => {
             alt="header background"
             sx={headerStyles.backgroundImage(
               type,
-              isHomePagePath || isAboutUsPagePath
+              isHomePagePath,
+              isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
             customGradient={

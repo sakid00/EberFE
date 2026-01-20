@@ -39,7 +39,8 @@ export const headerStyles = {
   }),
   backgroundImage: (
     deviceType: DeviceType,
-    isHomepage: boolean
+    isHomepage: boolean,
+    isAboutUs: boolean
   ): SxProps<Theme> => ({
     position: 'relative',
     width: deviceType === 'mobile' ? '100%' : '110%',
@@ -47,12 +48,17 @@ export const headerStyles = {
     marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
-      isHomepage ? '120vw' : '65vh',
-      isHomepage ? '50vw' : '50vh',
-      isHomepage ? '50vw' : '50vh'
+      isHomepage || isAboutUs ? '120vw' : '65vh',
+      isHomepage || isAboutUs ? '50vw' : '50vh',
+      isHomepage || isAboutUs ? '50vw' : '50vh'
     ),
-    minHeight: isHomepage && deviceType !== 'mobile' ? '650px' : '300px',
-    maxHeight: '1000px',
+    minHeight:
+      (isHomepage || isAboutUs) && deviceType !== 'mobile'
+        ? '650px'
+        : isAboutUs && deviceType === 'mobile'
+          ? '430px'
+          : '300px',
+    maxHeight: isAboutUs && deviceType === 'mobile' ? '580px' : '1000px',
     alignItems: 'start',
     overflow: 'hidden',
     zIndex: 0,
@@ -406,10 +412,12 @@ export const headerStyles = {
     flexDirection: isMobile ? 'column' : 'row',
     display: 'flex',
     alignItems: 'center',
-    paddingX: isMobile ? '8vw' : '0',
+    paddingLeft: isMobile ? '8vw' : '0',
+    paddingRight: '8vw',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: isMobile ? '100%' : '90%',
+    alignSelf: 'center',
   }),
 
   // Homepage title section
@@ -517,8 +525,7 @@ export const headerStyles = {
   aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
     position: 'relative',
     width: dynamicStylingValue(deviceType, '100%', '60%', '70%'),
-    height: dynamicStylingValue(deviceType, '70%', '100%', '100%'),
-    bottom: dynamicStylingValue(deviceType, '0%', '-40%', '-5%'),
+    bottom: dynamicStylingValue(deviceType, '0%', '-22%', '-6%'),
     right: dynamicStylingValue(deviceType, '-5%', '-5%', '-5%'),
     zIndex: 1,
     display: 'flex',
@@ -535,7 +542,8 @@ export const headerStyles = {
     alignItems: 'flex-end',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: '100%',
-    paddingLeft: '5%',
+    paddingLeft: isMobile ? '8vw' : '5%',
+    paddingRight: isMobile ? '8vw' : '0',
   }),
 
   // About us content container
@@ -604,7 +612,7 @@ export const aboutUsDescriptionStyle = (
 // About us font sizes
 export const aboutUsFontSizes = {
   title: (deviceType: DeviceType) =>
-    dynamicStylingValue(deviceType, '2.5rem', '4em', 'clamp(2em, 4vw, 5em)'),
+    dynamicStylingValue(deviceType, '2.5rem', '3.5em', 'clamp(2em, 4vw, 5em)'),
   marginTop: (deviceType: DeviceType) =>
     dynamicStylingValue(deviceType, '-1vh', '-2vh', '-2vh'),
 };

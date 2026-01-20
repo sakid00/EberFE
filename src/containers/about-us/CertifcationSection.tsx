@@ -8,6 +8,7 @@ import { useCertificate, useTranslation } from '@/hooks';
 import { useEffect, useState, useCallback, useRef } from 'react';
 import downloadIcon from '../../../public/icon/download.svg';
 import Image from 'next/image';
+import { getPhoto } from '@/assets/photoAssets';
 
 const VISIBLE_CARDS_DESKTOP = 4;
 const VISIBLE_CARDS_MOBILE = 2;
@@ -24,8 +25,8 @@ export const CertificationSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mobileIndex, setMobileIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const mobileIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const mobileIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const isMobile = type === 'mobile';
   const visibleCards = isMobile ? VISIBLE_CARDS_MOBILE : VISIBLE_CARDS_DESKTOP;
@@ -101,19 +102,33 @@ export const CertificationSection = () => {
   return (
     <>
       {type === 'mobile' && (
-        <Button
-          onClick={handleDownload}
-          sx={certificationStyles.mobileDownloadButton}
-        >
-          <Image
-            src={downloadIcon}
-            alt="download icon"
-            width={16}
-            height={16}
-            style={{ marginRight: '8px' }}
-          />
-          {t('about_us.download_button')}
-        </Button>
+        <>
+          <Box
+          sx={certificationStyles.imageContainerMobile}
+          >
+            <Image
+              src={getPhoto('tankiPerson')}
+              alt="header photo"
+              width={1000}
+              height={1000}
+              style={certificationStyles.imageStyleMobile}
+              loading="lazy"
+            />
+          </Box>
+          <Button
+            onClick={handleDownload}
+            sx={certificationStyles.mobileDownloadButton}
+          >
+            <Image
+              src={downloadIcon}
+              alt="download icon"
+              width={16}
+              height={16}
+              style={{ marginRight: '8px' }}
+            />
+            {t('about_us.download_button')}
+          </Button>
+        </>
       )}
       <Box
         id="home-second-section"
