@@ -369,7 +369,7 @@ export const certificationStyles = {
   imageContainerMobile: {
     position: 'relative',
     width: '100%',
-    marginTop: '-45vw',
+    marginTop: '-55vw',
     marginLeft: '5vw',
     zIndex: 1000,
   },
