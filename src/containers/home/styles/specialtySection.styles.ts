@@ -7,6 +7,8 @@ export const specialtySectionStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingY: '10vh',
+    gap: 3,
   } as SxProps<Theme>,
 
   titleContainer: {

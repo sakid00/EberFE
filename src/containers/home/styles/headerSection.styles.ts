@@ -1,5 +1,11 @@
 import { Language } from '../../../contexts/TranslationContext';
-import { COLORS, dynamicStylingValue, DeviceType, SxProps, Theme } from './common';
+import {
+  COLORS,
+  dynamicStylingValue,
+  DeviceType,
+  SxProps,
+  Theme,
+} from './common';
 
 // Header Section Styles
 export const headerSectionStyles = {
@@ -75,7 +81,8 @@ export const headerSectionStyles = {
     fontSize: '0.9em',
     color: COLORS.text.white,
     background: COLORS.primary.gradient,
-    padding: 2,
+    paddingY: 1,
+    paddingX: 3,
     borderRadius: 10,
     fontWeight: 600,
     textTransform: 'none',
@@ -96,7 +103,8 @@ export const headerSectionStyles = {
         COLORS.background.transparent,
         COLORS.background.transparent
       ),
-      padding: 2,
+      paddingY: 1,
+      paddingX: 3,
       borderRadius: 10,
       fontWeight: 600,
       borderColor: COLORS.border.purple,

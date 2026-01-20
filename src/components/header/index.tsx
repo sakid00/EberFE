@@ -357,7 +357,7 @@ const Header = () => {
         <Box sx={headerStyles.homepageTitleSection}>
           <Typography
             className={animationClasses.slideRight}
-            fontSize={'clamp(2em, 3vw, 5em)'}
+            fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
@@ -365,7 +365,7 @@ const Header = () => {
           </Typography>
           <DualColorText
             text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
-            fontSize={'clamp(2em, 3vw, 5em)'}
+            fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
             inline
             color="white"
@@ -374,7 +374,7 @@ const Header = () => {
           />
           <Typography
             className={animationClasses.slideRight}
-            fontSize={'clamp(2em, 3vw, 5em)'}
+            fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
@@ -561,9 +561,7 @@ const Header = () => {
           )}
         </Box>
         {type !== 'mobile' && (
-          <Box
-            sx={headerStyles.aboutUsImageContainer(type)}       
-          >
+          <Box sx={headerStyles.aboutUsImageContainer(type)}>
             <Image
               src={getPhoto('tankiPerson')}
               alt="header photo"
