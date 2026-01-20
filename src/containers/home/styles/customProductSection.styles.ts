@@ -71,12 +71,12 @@ export const customProductSectionStyles = {
     whiteSpace: 'nowrap',
   } as SxProps<Theme>,
 
-  description: {
+  description: (type: DeviceType) => ({
     color: COLORS.text.light,
-    fontSize: '0.75rem',
+    fontSize: dynamicStylingValue(type, '0.75rem', '0.9rem', '0.75rem'),
     fontWeight: 400,
     marginTop: '20px',
-  },
+  }),
 
   button: (type: DeviceType) =>
     ({
@@ -103,17 +103,15 @@ export const customProductSectionStyles = {
     overflow: 'visible',
   },
   contentSxMobile: {
-    height: 'auto',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     paddingX: '5%',
-    marginBottom: '-25%',
   },
   contentContainerMobile: {
     position: 'relative',
-    bottom: '15vh',
+    bottom: '3%',
   },
   imageContainerMobile: {
     position: 'relative',

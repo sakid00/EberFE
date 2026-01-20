@@ -27,27 +27,27 @@ export const CustomProductSection = () => {
     () => (
       <>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.title}
         >
           {t('home.custom_product_section_title.make_it')}
         </Typography>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.titleMobileSecondText}
         >
           {t('home.custom_product_section_title.customize')}
         </Typography>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.title}
         >
           {t('home.custom_product_section_title.today')}
         </Typography>
-        <Typography sx={customProductSectionStyles.description}>
+        <Typography sx={customProductSectionStyles.description(type)}>
           {t('home.custom_product_section_desc')}
         </Typography>
         <Button
@@ -139,7 +139,7 @@ export const CustomProductSection = () => {
           >
             {t('home.custom_product_section_title.today')}
           </Typography>
-          <Typography sx={customProductSectionStyles.description}>
+          <Typography sx={customProductSectionStyles.description(type)}>
             {t('home.custom_product_section_desc')}
           </Typography>
           <Box>
