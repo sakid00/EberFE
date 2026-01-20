@@ -17,14 +17,14 @@ export const customProductSectionStyles = {
     containerName: 'custom-product-section',
   } as SxProps<Theme>,
 
-  imageContainerTransform: {
-    position: 'absolute',
-    width: '55%',
-    height: '70vh',
-    top: '2%',
-    left: '-3%',
+  imageContainerTransform: (type: DeviceType) => ({
+    position: 'relative',
+    width: dynamicStylingValue(type, '45%', '60%', '45%'),
+    alignSelf: 'flex-end',
+    justifySelf: 'flex-start',
     zIndex: 20,
-  } as SxProps<Theme>,
+    marginLeft: '-2%',
+  }) as SxProps<Theme>,
 
   mainContainer: {
     position: 'relative',
@@ -47,16 +47,17 @@ export const customProductSectionStyles = {
     justifyContent: 'center',
   } as SxProps<Theme>,
 
-  contentContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '60%',
-    width: '45%',
-    overflow: 'hidden',
-    wordWrap: 'break-word',
-    boxSizing: 'border-box',
-    marginLeft: '5%',
-  } as SxProps<Theme>,
+  contentContainer: (type: DeviceType) =>
+    ({
+      display: 'flex',
+      flexDirection: 'column',
+      maxWidth: '60%',
+      width: dynamicStylingValue(type, '55%', '45%', '55%'),
+      overflow: 'hidden',
+      wordWrap: 'break-word',
+      boxSizing: 'border-box',
+      marginLeft: '5%',
+    }) as SxProps<Theme>,
 
   title: {
     color: COLORS.text.white,
@@ -81,13 +82,11 @@ export const customProductSectionStyles = {
     ({
       color: COLORS.text.white,
       background: COLORS.primary.gradient,
-      paddingY: 2,
-      paddingX: 1,
+      paddingY: 1.5,
+      paddingX: 4,
       borderRadius: 10,
       fontWeight: 600,
-      width: dynamicStylingValue(type, '100%', '35%', '40%'),
-      height: '8%',
-      fontSize: '14px',
+      fontSize: dynamicStylingValue(type, '1rem', '0.7rem', '0.9rem'),
       marginTop: dynamicStylingValue(type, '15%', '5%', '5%'),
       textTransform: 'none',
     }) as SxProps<Theme>,
@@ -134,17 +133,18 @@ export const customProductSectionStyles = {
     width: '100vw',
     height: '70vh',
     marginTop: '20vh',
-    overflow: 'clip',
+    overflowY: 'clip',
+    overflowX: 'visible',
   } as SxProps<Theme>,
 
   progressiveBackgroundContentSx: {
     position: 'relative',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     overflow: 'visible',
-    paddingX: '5%',
+    paddingRight: '3%',
   } as SxProps<Theme>,
 };
 
