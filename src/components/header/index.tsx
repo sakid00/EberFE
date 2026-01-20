@@ -483,11 +483,16 @@ const Header = () => {
               </Typography>
             </Box>
             <Image
-              src={getPhoto('subtract')}
+              src="/photo/subtract.png"
               alt="header-photo"
               width={1000}
               height={1000}
-              style={headerStyles.contentImageStyle}
+              style={{
+                ...headerStyles.contentImageStyle,
+                position: 'absolute',
+                bottom: '-5%',
+                left: '-3%',
+              }}
               loading="lazy"
               className={animationClasses.slideRight}
             />

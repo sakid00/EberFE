@@ -471,7 +471,7 @@ export const headerStyles = {
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center',
-    height: '500px',
+    height: '100%',
   },
 
   mobileHomepageTitleSection: {
@@ -508,7 +508,7 @@ export const headerStyles = {
     padding: '3%',
     marginRight: '2%',
     borderRadius: '10px',
-    top: '5vh',
+    bottom: '65%',
     left: '52%',
     borderBottomRightRadius: '100px',
   },
