@@ -354,9 +354,11 @@ const Header = () => {
   const homepageImage = useMemo(
     () => (
       <>
-        <Box sx={headerStyles.homepageTitleSection}>
+        <Box
+          sx={headerStyles.homepageTitleSection}
+          className={animationClasses.slideRight}
+        >
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
@@ -370,13 +372,19 @@ const Header = () => {
             inline
             color="white"
             sx={headerSectionStyles.title}
-            className={animationClasses.slideRight}
           />
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={{
+              ...headerSectionStyles.title,
+              ...(language !== 'en' && {
+                background: 'linear-gradient(90deg, #DD9C36 0%, #F2C94C 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }),
+            }}
           >
             {t('home.title.future')}
           </Typography>
@@ -436,15 +444,17 @@ const Header = () => {
         </Box>
       </>
     ),
-    [type, t]
+    [type, t, language]
   );
 
   const homepageImageMobile = useMemo(
     () => (
       <Box sx={headerStyles.mobileHomepageContainer}>
-        <Box sx={headerStyles.mobileHomepageTitleSection}>
+        <Box
+          sx={headerStyles.mobileHomepageTitleSection}
+          className={animationClasses.slideRight}
+        >
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.titleMobile}
@@ -453,7 +463,6 @@ const Header = () => {
           </Typography>
           <DualColorText
             text={`${t('home.title.as')} {${t('home.title.sustainable')}}`}
-            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             inline
@@ -461,10 +470,17 @@ const Header = () => {
             sx={headerSectionStyles.titleMobile}
           />
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.titleMobile}
+            sx={{
+              ...headerSectionStyles.titleMobile,
+              ...(language !== 'en' && {
+                background: 'linear-gradient(90deg, #DD9C36 0%, #F2C94C 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }),
+            }}
           >
             {t('home.title.future')}
           </Typography>
@@ -501,7 +517,7 @@ const Header = () => {
         </Box>
       </Box>
     ),
-    [type, t]
+    [type, t, language]
   );
 
   const handleDownload = () => {
