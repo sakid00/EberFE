@@ -16,7 +16,7 @@ export const InnovationCard = ({ data, index }: InnovationCardProps) => {
   return (
     <Box
       id={`innovation-${index}`}
-      className={`flex flex-col justify-between items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[40%] h-[50%] min-h-[300px]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-8 px-6'} gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
+      className={`flex flex-col justify-between items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[40%]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-8 px-6'} gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`}
     >
       <Box className="flex justify-center items-center flex-shrink-0">
         <Image src={data.img} alt={`innovation-img-${index}`} />

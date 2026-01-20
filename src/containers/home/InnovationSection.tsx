@@ -20,7 +20,8 @@ export const InnovationSection = () => {
           <Image
             src={getPhoto('tanki')}
             alt="tangki-image"
-            fill
+            width={1000}
+            height={1000}
             loading="lazy"
           />
         </Box>
