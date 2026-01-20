@@ -38,7 +38,7 @@ const FormBox = ({
   buttonText?: string;
 }) => {
   const { type } = useDeviceType();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const pathname = usePathname();
   const {
     submitApplication,
@@ -181,7 +181,12 @@ const FormBox = ({
       <DualColorText
         text={text}
         inline
-        fontSize={dynamicStylingValue(type, '1em', '1.8em', '1.8em')}
+        fontSize={dynamicStylingValue(
+          type,
+          language === 'en' ? '1.25em' : '1em',
+          language === 'en' ? '1.25em' : '0.9em',
+          language === 'en' ? '1.6em' : '1.2em'
+        )}
         fontWeight={800}
       />
       <Typography sx={styles.descriptionText(type)}>{description}</Typography>
