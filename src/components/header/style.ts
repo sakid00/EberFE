@@ -542,7 +542,7 @@ export const headerStyles = {
     alignItems: 'flex-end',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: '100%',
-    paddingLeft: isMobile ? '8vw' : '5%',
+    paddingLeft: '8vw',
     paddingRight: isMobile ? '8vw' : '0',
   }),
 
