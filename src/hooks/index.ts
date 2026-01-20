@@ -35,3 +35,12 @@ export { default as useCertificate } from './useCertificate';
 
 // Contact form hook
 export { default as useContactForm } from './useContactForm';
+
+// Top products hook
+export { default as useTopProducts } from './useTopProducts';
+export type {
+  TopProduct,
+  TopProductItem,
+  TopProductCompany,
+  CompanyTopProducts,
+} from './useTopProducts';

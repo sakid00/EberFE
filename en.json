@@ -104,7 +104,12 @@
         "title": "Collaborative Innovation",
         "desc": "Partnering with industry leaders and research institutions to drive breakthrough innovations."
       }
-    }
+    },
+    "top_product_section_title": {
+      "our_top_products": "Our Top",
+      "products": "Products"
+    },
+    "top_product_section_desc": "Discover our selection of top-quality products designed to deliver reliability, performance, and long-lasting value across various applications."
   },
   "about_us": {
     "title": {

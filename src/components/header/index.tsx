@@ -452,7 +452,7 @@ const Header = () => {
             {t('home.title.innovating')}
           </Typography>
           <DualColorText
-            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+            text={`${t('home.title.as')} {${t('home.title.sustainable')}}`}
             className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}

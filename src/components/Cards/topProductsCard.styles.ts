@@ -1,0 +1,46 @@
+import { SxProps, Theme } from '@mui/material';
+import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
+
+// TopProductsCard Styles
+export const topProductsCardStyles = {
+  imageContainer: (type: DeviceType) =>
+    ({
+      position: 'relative',
+      width: dynamicStylingValue(type, '60%', '80%', '40%'),
+      height: dynamicStylingValue(type, '25%', '40%', '40%'),
+      bottom: dynamicStylingValue(type, '20%', '10%', '10%'),
+    }) as SxProps<Theme>,
+
+  contentContainer: (type: DeviceType) =>
+    ({
+      position: 'relative',
+      width: '100%',
+      height: dynamicStylingValue(type, '5%', '60%', '60%'),
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+      gap: '15%',
+    }) as SxProps<Theme>,
+
+  productText: (type: DeviceType) =>
+    ({
+      fontSize: dynamicStylingValue(type, '0.5em', '0.85em', '1em'),
+      fontWeight: 400,
+      color: '#4B5563',
+      textAlign: 'center',
+      marginTop: dynamicStylingValue(type, '10%', '0%', '0%'),
+    }) as SxProps<Theme>,
+};
+
+// Container class names based on device type
+export const getTopProductsCardClassName = (type: DeviceType, index: number) => {
+  const sizeClass = dynamicStylingValue(type, 'w-[100%] h-[80%]', 'w-[28%] h-[80%]', 'w-[28%] h-[100%]');
+  const paddingClass = type === 'mobile' ? 'py-2 px-1' : 'py-8 px-6';
+  return `flex flex-col justify-center items-center bg-white ${sizeClass} ${paddingClass} gap-2 rounded-2xl shadow-lg z-10 animate-stagger animate-delay-${(index + 1) * 100}`;
+};
+
+// Image styles
+export const topProductsImageStyle = {
+  objectFit: 'contain' as const,
+};

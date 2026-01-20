@@ -100,7 +100,12 @@
         "title": "Inovasi Kolaboratif",
         "desc": "Bekerja sama dengan pemimpin industri dan lembaga riset untuk mendorong terobosan baru."
       }
-    }
+    },
+    "top_product_section_title": {
+      "our_top_products": "Produk Terbaik Kami",
+      "products": "Kami"
+    },
+    "top_product_section_desc": "Temukan pilihan produk berkualitas tinggi yang dirancang untuk memberikan reliabilitas, performa, dan nilai jangka panjang di berbagai aplikasi."
   },
   "about_us": {
     "title": {
