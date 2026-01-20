@@ -13,13 +13,15 @@ export const subsidiaryCardStyles = {
       },
     }) as SxProps<Theme>,
 
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    height: '200px',
-    borderRadius: '10px',
-    overflow: 'hidden',
-  } as SxProps<Theme>,
+  imageContainer: (type: DeviceType) =>
+    ({
+      position: 'relative',
+      width: '100%',
+      height: dynamicStylingValue(type, '120px', '150px', '200px'),
+      minHeight: dynamicStylingValue(type, '120px', '150px', '200px'),
+      borderRadius: '10px',
+      overflow: 'hidden',
+    }) as SxProps<Theme>,
 
   title: (type: DeviceType) =>
     ({
@@ -29,7 +31,8 @@ export const subsidiaryCardStyles = {
       color: '#030712',
       alignSelf: 'flex-start',
       marginBottom: '8%',
-      height: '10%',
+      minHeight: '10%',
+
     }) as SxProps<Theme>,
 
   location: (type: DeviceType) =>

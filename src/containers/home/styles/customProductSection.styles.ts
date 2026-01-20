@@ -88,6 +88,7 @@ export const customProductSectionStyles = {
       fontWeight: 600,
       fontSize: dynamicStylingValue(type, '1rem', '0.7rem', '0.9rem'),
       marginTop: dynamicStylingValue(type, '15%', '5%', '5%'),
+      width: type === 'mobile' ? '100%' : 'auto',
       textTransform: 'none',
     }) as SxProps<Theme>,
 
