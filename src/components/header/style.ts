@@ -452,6 +452,7 @@ export const headerStyles = {
   homepageModalBox: {
     position: 'relative',
     width: '55%',
+    maxWidth: '300px',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '3% 6% 3% 3%',
     borderRadius: '10px',

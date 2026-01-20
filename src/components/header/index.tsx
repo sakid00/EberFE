@@ -393,7 +393,7 @@ const Header = () => {
           >
             <Button
               size="small"
-              sx={headerSectionStyles.primaryButton}
+              sx={headerSectionStyles.primaryButton(type)}
               onClick={() => handleNavigate('/product')}
             >
               {t('home.product_button')}

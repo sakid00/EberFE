@@ -77,8 +77,8 @@ export const headerSectionStyles = {
       marginBottom: dynamicStylingValue(type, '10vh', '0px', '0px'),
     }) as SxProps<Theme>,
 
-  primaryButton: {
-    fontSize: '0.9em',
+  primaryButton: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.9em', '0.6em', '0.9em'),
     color: COLORS.text.white,
     background: COLORS.primary.gradient,
     paddingY: 1,
@@ -86,11 +86,11 @@ export const headerSectionStyles = {
     borderRadius: 10,
     fontWeight: 600,
     textTransform: 'none',
-  } as SxProps<Theme>,
+  }) as SxProps<Theme>,
 
   secondaryButton: (type: DeviceType) =>
     ({
-      fontSize: '0.9em',
+      fontSize: dynamicStylingValue(type, '0.9em', '0.6em', '0.9em'),
       color: dynamicStylingValue(
         type,
         '#784791',
