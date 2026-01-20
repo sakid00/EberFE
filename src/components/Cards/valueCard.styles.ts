@@ -38,8 +38,8 @@ export const valueCardStyles = {
     dynamicStylingValue(
       type,
       'clamp(0.5rem, 2.5vw, 0.8rem)',
-      '16px',
-      '16px'
+      '10px',
+      '15px'
     ),
 };
 

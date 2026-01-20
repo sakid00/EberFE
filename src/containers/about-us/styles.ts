@@ -7,14 +7,13 @@ import { Language } from '@/contexts/TranslationContext';
 export const valueStyles = {
   valuesContainerMobile: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    borderRadius: '5%',
+    borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: '3%',
-    width: '80vw',
-    maxWidth: '100vw',
+    width: '100%',
     flex: 1,
     minHeight: 0,
     overflow: 'hidden',
@@ -24,9 +23,7 @@ export const valueStyles = {
 
   valuesContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    borderRadius: '5%',
-    top: '30%',
-    position: 'absolute',
+    borderRadius: '16px',
     zIndex: 100000,
     display: 'flex',
     flexDirection: 'column',
@@ -34,6 +31,7 @@ export const valueStyles = {
     alignItems: 'flex-start',
     maxWidth: '80%',
     padding: '2%',
+    marginBottom: '2%',
   } as SxProps<Theme>,
 
   valuesAndCharactersTitle: {
@@ -83,7 +81,7 @@ export const valueStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
   }),
 
@@ -108,6 +106,7 @@ export const valueStyles = {
     height: 'calc(100% + 28vh)',
     maxHeight: 'calc(100vh + 28vh)',
     overflow: 'hidden',
+    width: '100%',
   } as SxProps<Theme>,
 
   imageContainerMobile: {
@@ -154,11 +153,13 @@ export const valueStyles = {
 
   fieldPersonContainer: {
     position: 'absolute',
-    width: '60%',
     height: '110%',
     bottom: '0vh',
     left: '-3%',
     zIndex: 20,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    display: 'flex',
   } as SxProps<Theme>,
 
   valuesGrid: {

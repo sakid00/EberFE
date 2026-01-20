@@ -10,6 +10,7 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import { animationClasses } from '../home/styles';
 import { useMemo } from 'react';
 import container2 from '@/public/background/container2.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
@@ -137,7 +138,13 @@ export const ValueSection = () => {
         <Box sx={valueStyles.fieldPersonContainer}>
           <Image
             src={getPhoto('chemPerson')}
-            fill
+            width={1200}
+            height={1200}
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+              height: '100%',
+            }}
             loading="lazy"
             alt="field-person"
           />
@@ -145,7 +152,7 @@ export const ValueSection = () => {
 
         <Box sx={valueStyles.valuesContainer}>
           <Typography
-            fontSize={'1.2em'}
+            fontSize={dynamicStylingValue(type, '1em', '1em', '1.2em')}
             fontWeight={'600'}
             color="white"
             sx={valueStyles.valuesAndCharactersTitle}
@@ -158,7 +165,7 @@ export const ValueSection = () => {
             ))}
           </Box>
           <Typography
-            fontSize={'1.2em'}
+            fontSize={dynamicStylingValue(type, '1em', '1em', '1.2em')}
             fontWeight={'600'}
             color="white"
             sx={valueStyles.valuesAndCharactersTitle}
