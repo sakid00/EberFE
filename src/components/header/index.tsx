@@ -524,19 +524,25 @@ const Header = () => {
             inline
             color="white"
             sx={headerStyles.aboutUsDualColorText(type)}
+            className={animationClasses.slideRight}
           />
           <Typography
             fontSize={aboutUsFontSizes.title(type)}
             fontWeight={800}
             marginTop={aboutUsFontSizes.marginTop(type)}
             sx={headerStyles.aboutUsGradientTitle(type)}
+            className={animationClasses.slideRight}
           >
             {t('about_us.title.background')}
           </Typography>
-          <Typography style={aboutUsDescriptionStyle(type, language)}>
+          <Typography
+            style={aboutUsDescriptionStyle(type, language)}
+            className={animationClasses.stagger}
+          >
             {t('about_us.desc')}
           </Typography>
           {type !== 'mobile' && (
+            <Box className={animationClasses.stagger}>
             <Button
               size="small"
               onClick={handleDownload}
@@ -551,10 +557,14 @@ const Header = () => {
               />
               {t('about_us.download_button')}
             </Button>
+            </Box>
           )}
         </Box>
         {type !== 'mobile' && (
-          <Box sx={headerStyles.aboutUsImageContainer(type)}>
+          <Box
+            sx={headerStyles.aboutUsImageContainer(type)}
+            className={animationClasses.slideLeft}
+          >
             <Image
               src={getPhoto('tankiPerson')}
               alt="header photo"
