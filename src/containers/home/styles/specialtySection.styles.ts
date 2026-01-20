@@ -34,7 +34,6 @@ export const specialtySectionStyles = {
   cardsContainer: {
     width: '100vw',
     maxWidth: '2000px',
-    height: '25vh',
     maxHeight: '80vh',
     paddingX: '10%',
     display: 'flex',
