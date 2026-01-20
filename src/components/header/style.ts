@@ -568,7 +568,8 @@ export const headerStyles = {
     color: 'white',
     background:
       'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
-    padding: 2,
+    paddingX: 3,
+    paddingY: 1,
     borderRadius: 10,
     fontWeight: 600,
     textTransform: 'none',

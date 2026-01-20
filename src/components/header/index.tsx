@@ -10,6 +10,7 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
+import downloadIcon from '../../../public/icon/download.svg';
 import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
@@ -541,7 +542,14 @@ const Header = () => {
               onClick={handleDownload}
               sx={headerStyles.aboutUsDownloadButton}
             >
-              {t('about_us.download_button')}
+               <Image
+                src={downloadIcon}
+                alt="download icon"
+                width={16}
+                height={16}
+                style={{ marginRight: '8px' }}
+              />
+               {t('about_us.download_button')}
             </Button>
           )}
         </Box>

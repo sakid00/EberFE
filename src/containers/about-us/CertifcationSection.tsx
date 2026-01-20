@@ -6,6 +6,8 @@ import { certificationStyles } from './styles';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { useCertificate, useTranslation } from '@/hooks';
 import { useEffect, useState, useCallback, useRef } from 'react';
+import downloadIcon from '../../../public/icon/download.svg';
+import Image from 'next/image';
 
 const VISIBLE_CARDS_DESKTOP = 4;
 const VISIBLE_CARDS_MOBILE = 2;
@@ -103,6 +105,13 @@ export const CertificationSection = () => {
           onClick={handleDownload}
           sx={certificationStyles.mobileDownloadButton}
         >
+          <Image
+            src={downloadIcon}
+            alt="download icon"
+            width={16}
+            height={16}
+            style={{ marginRight: '8px' }}
+          />
           {t('about_us.download_button')}
         </Button>
       )}
