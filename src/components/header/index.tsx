@@ -517,24 +517,24 @@ const Header = () => {
     () => (
       <>
         <Box sx={headerStyles.aboutUsContentContainer(type)}>
-          <DualColorText
-            text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
-            fontSize={aboutUsFontSizes.title(type)}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerStyles.aboutUsDualColorText(type)}
-            className={animationClasses.slideRight}
-          />
-          <Typography
-            fontSize={aboutUsFontSizes.title(type)}
-            fontWeight={800}
-            marginTop={aboutUsFontSizes.marginTop(type)}
-            sx={headerStyles.aboutUsGradientTitle(type)}
-            className={animationClasses.slideRight}
-          >
-            {t('about_us.title.background')}
-          </Typography>
+          <Box className={animationClasses.slideRight}>
+            <DualColorText
+              text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
+              fontSize={aboutUsFontSizes.title(type)}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerStyles.aboutUsDualColorText(type)}
+            />
+            <Typography
+              fontSize={aboutUsFontSizes.title(type)}
+              fontWeight={800}
+              marginTop={aboutUsFontSizes.marginTop(type)}
+              sx={headerStyles.aboutUsGradientTitle(type)}
+            >
+              {t('about_us.title.background')}
+            </Typography>
+          </Box>
           <Typography
             style={aboutUsDescriptionStyle(type, language)}
             className={animationClasses.stagger}
@@ -543,27 +543,26 @@ const Header = () => {
           </Typography>
           {type !== 'mobile' && (
             <Box className={animationClasses.stagger}>
-            <Button
-              size="small"
-              onClick={handleDownload}
-              sx={headerStyles.aboutUsDownloadButton}
-            >
-              <Image
-                src={downloadIcon}
-                alt="download icon"
-                width={16}
-                height={16}
-                style={{ marginRight: '8px' }}
-              />
-              {t('about_us.download_button')}
-            </Button>
+              <Button
+                size="small"
+                onClick={handleDownload}
+                sx={headerStyles.aboutUsDownloadButton}
+              >
+                <Image
+                  src={downloadIcon}
+                  alt="download icon"
+                  width={16}
+                  height={16}
+                  style={{ marginRight: '8px' }}
+                />
+                {t('about_us.download_button')}
+              </Button>
             </Box>
           )}
         </Box>
         {type !== 'mobile' && (
           <Box
-            sx={headerStyles.aboutUsImageContainer(type)}
-            className={animationClasses.slideLeft}
+            sx={headerStyles.aboutUsImageContainer(type)}       
           >
             <Image
               src={getPhoto('tankiPerson')}
@@ -572,6 +571,7 @@ const Header = () => {
               height={1000}
               style={headerStyles.contentImageStyle}
               loading="lazy"
+              className={animationClasses.slideRight}
             />
           </Box>
         )}
@@ -605,9 +605,12 @@ const Header = () => {
             }
             overflow={isAboutUsPagePath ? 'visible' : 'hidden'}
           >
-            <Box
+            <motion.div
+              key={`header-accessories-${animationKey}`}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               style={headerStyles.headerAccessories(type)}
-              className={animationClasses.slideRight}
             >
               <Image
                 src={
@@ -625,7 +628,7 @@ const Header = () => {
                 }}
                 loading="lazy"
               />
-            </Box>
+            </motion.div>
 
             {/* Main Header Container */}
             <Box
@@ -679,7 +682,10 @@ const Header = () => {
               </Box>
             )}
             {isAboutUsPagePath && (
-              <Box sx={headerStyles.aboutUsPageWrapper(isMobile)}>
+              <Box
+                key={`about-us-content-${isMobile ? 'mobile' : 'desktop'}`}
+                sx={headerStyles.aboutUsPageWrapper(isMobile)}
+              >
                 {aboutUsImage}
               </Box>
             )}

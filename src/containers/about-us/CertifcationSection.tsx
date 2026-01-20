@@ -9,6 +9,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import downloadIcon from '../../../public/icon/download.svg';
 import Image from 'next/image';
 import { getPhoto } from '@/assets/photoAssets';
+import { animationClasses } from '../home/styles';
 
 const VISIBLE_CARDS_DESKTOP = 4;
 const VISIBLE_CARDS_MOBILE = 2;
@@ -102,9 +103,10 @@ export const CertificationSection = () => {
   return (
     <>
       {type === 'mobile' && (
-        <>
+        <Box className={animationClasses.onScroll}>
           <Box
-          sx={certificationStyles.imageContainerMobile}
+            sx={certificationStyles.imageContainerMobile}
+            className={animationClasses.slideRight}
           >
             <Image
               src={getPhoto('tankiPerson')}
@@ -115,20 +117,22 @@ export const CertificationSection = () => {
               loading="lazy"
             />
           </Box>
-          <Button
-            onClick={handleDownload}
-            sx={certificationStyles.mobileDownloadButton}
-          >
-            <Image
-              src={downloadIcon}
-              alt="download icon"
-              width={16}
-              height={16}
-              style={{ marginRight: '8px' }}
-            />
-            {t('about_us.download_button')}
-          </Button>
-        </>
+          <Box className={animationClasses.stagger}>
+            <Button
+              onClick={handleDownload}
+              sx={certificationStyles.mobileDownloadButton}
+            >
+              <Image
+                src={downloadIcon}
+                alt="download icon"
+                width={16}
+                height={16}
+                style={{ marginRight: '8px' }}
+              />
+              {t('about_us.download_button')}
+            </Button>
+          </Box>
+        </Box>
       )}
       <Box
         id="home-second-section"
