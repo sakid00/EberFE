@@ -549,7 +549,9 @@ const Header = () => {
           <Image
             src={getPhoto('tankiPerson')}
             alt="header photo"
-            fill
+            width={1000}
+            height={1000}
+            style={headerStyles.contentImageStyle}
             loading="lazy"
           />
         </Box>
@@ -580,6 +582,7 @@ const Header = () => {
                 ? '0 0 95% 95% / 0 0 10% 10%'
                 : '0% 0% 32% 85% / 0% 0% 15% 21%'
             }
+            overflow={isAboutUsPagePath ? 'visible' : 'hidden'}
           >
             <Box
               style={headerStyles.headerAccessories(type)}

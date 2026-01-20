@@ -516,11 +516,13 @@ export const headerStyles = {
   // About us image container
   aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
     position: 'relative',
-    width: dynamicStylingValue(deviceType, '100%', '50%', '70%'),
-    height: dynamicStylingValue(deviceType, '70%', '90%', '100%'),
-    top: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
-    left: dynamicStylingValue(deviceType, '5%', '50vw', '7%'),
+    width: dynamicStylingValue(deviceType, '100%', '60%', '70%'),
+    height: dynamicStylingValue(deviceType, '70%', '100%', '100%'),
+    bottom: dynamicStylingValue(deviceType, '0%', '-40%', '-5%'),
+    right: dynamicStylingValue(deviceType, '-5%', '-5%', '-5%'),
     zIndex: 1,
+    display: 'flex',
+    justifyContent: 'flex-end',
   }),
 
   // About us page wrapper
@@ -531,10 +533,9 @@ export const headerStyles = {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    height: '100vh',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: '100%',
-    paddingX: '5%',
+    paddingLeft: '5%',
   }),
 
   // About us content container
@@ -542,7 +543,7 @@ export const headerStyles = {
     position: 'relative',
     alignSelf: 'center',
     width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
-    bottom: dynamicStylingValue(deviceType, '0', '5%', '5%'),
+    bottom: dynamicStylingValue(deviceType, '0', '10%', '15%'),
     left: dynamicStylingValue(deviceType, '0', '5%', '5%'),
   }),
 
@@ -563,7 +564,6 @@ export const headerStyles = {
 
   // About us download button
   aboutUsDownloadButton: {
-    width: '30%',
     fontSize: '1em',
     color: 'white',
     background:
