@@ -17,10 +17,13 @@ export const subsidiaryCardStyles = {
     ({
       position: 'relative',
       width: '100%',
-      height: dynamicStylingValue(type, '120px', '150px', '200px'),
-      minHeight: dynamicStylingValue(type, '120px', '150px', '200px'),
+      height: dynamicStylingValue(type, '120px', '120px', '170px'),
+      minHeight: dynamicStylingValue(type, '120px', '120px', '170px'),
       borderRadius: '10px',
       overflow: 'hidden',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     }) as SxProps<Theme>,
 
   title: (type: DeviceType) =>
