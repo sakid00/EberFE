@@ -37,7 +37,7 @@ export const valueCardStyles = {
   titleFontSize: (type: DeviceType) =>
     dynamicStylingValue(
       type,
-      'clamp(0.5rem, 2.5vw, 0.8rem)',
+      'clamp(0.5rem, 1.6vw, 0.8rem)',
       '10px',
       '15px'
     ),
