@@ -82,7 +82,7 @@ export const footerStyles = {
     flexDirection: dynamicStylingValue(deviceType, 'column', 'row', 'row'),
     marginY: 4,
     width: dynamicStylingValue(deviceType, '100%', '70%', '100%'),
-    gap: 8,
+    gap: dynamicStylingValue(deviceType, 4, 8, 8),
   }),
 
   sectionTitle: (deviceType: DeviceType) =>
