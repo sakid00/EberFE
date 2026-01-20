@@ -15,7 +15,6 @@ export const valueStyles = {
     padding: 'clamp(12px, 4%, 24px)',
     width: '100%',
     boxSizing: 'border-box',
-    marginBottom: '5%',
   } as SxProps<Theme>,
 
   valuesContainer: {
@@ -58,7 +57,6 @@ export const valueStyles = {
 
   imageBackgroundMobile: {
     width: '100vw',
-    minHeight: '100vh',
     height: 'auto',
     overflow: 'visible',
     marginTop: '30vh',

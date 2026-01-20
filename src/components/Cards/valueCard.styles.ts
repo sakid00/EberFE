@@ -3,7 +3,7 @@ import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 
 // ValueCard Styles
 export const valueCardStyles = {
-  container: (isMobile: boolean, containerHeight: string): SxProps<Theme> => ({
+  container: (isMobile: boolean, containerHeight: string, isLastOdd: boolean): SxProps<Theme> => ({
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     backdropFilter: 'blur(8px)',
     WebkitBackdropFilter: 'blur(8px)',
@@ -13,6 +13,11 @@ export const valueCardStyles = {
     minWidth: 0,
     overflow: 'hidden',
     boxSizing: 'border-box',
+    ...(isMobile && isLastOdd && {
+      gridColumn: 'span 2',
+      maxWidth: '50%',
+      justifySelf: 'center',
+    }),
   }),
 
   imageContainer: (isMobile: boolean): SxProps<Theme> => ({
