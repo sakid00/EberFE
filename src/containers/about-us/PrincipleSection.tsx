@@ -70,7 +70,7 @@ export const PrincipleSection = () => {
         <ImageBackground
           src={getBackgroundImage('container1Mobile')}
           alt="container"
-          objectFit="fill"
+          objectFit={'fill'}
           className={animationClasses.slideRight}
           sx={principleStyles.imageBackgroundMobile}
           contentSx={principleStyles.contentSxMobile}
@@ -113,30 +113,32 @@ export const PrincipleSection = () => {
           height: dynamicStylingValue(type, '80vh', '100vh', '80vh'),
           marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
           position: 'relative',
+          overflow: 'visible',
+          overflowY: 'clip',
         }}
         contentSx={{
           position: 'relative',
           marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'flex-end',
           alignItems: 'center',
-          paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+          paddingX: dynamicStylingValue(type, '5%', '10px', '20px'),
         }}
       >
         <Box sx={principleStyles.fieldPersonContainer(type)}>
           <Image
             src={getPhoto('fieldPerson3')}
             alt="field-person"
-            fill
+            width={900}
+            height={900}
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+            }}
             loading="lazy"
           />
         </Box>
-
-        <Box
-          className="w-full flex justify-center"
-          sx={principleStyles.spacerBox}
-        />
 
         {content}
       </ImageBackground>

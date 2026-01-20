@@ -289,20 +289,22 @@ export const principleStyles: {
   },
   contentContainerMobile: {
     position: 'relative',
-    bottom: '5vh',
+    bottom: '20px',
   },
   imageContainerMobile: {
     position: 'relative',
-    width: '100%',
+    left: '5%',
+    width: '90%',
     zIndex: 1000,
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '85%', '40vw', '40vw'),
-    height: dynamicStylingValue(type, '38%', '90%', '90%'),
-    top: dynamicStylingValue(type, '4%', '10%', '10%'),
+    width: dynamicStylingValue(type, '45%', '55%', '45%'),
+    bottom: dynamicStylingValue(type, '-5%', '0%', '0%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
     zIndex: 20,
+    display: 'flex',
+    alignItems: 'flex-end',
   }),
   mainContainer: {
     background:
@@ -317,7 +319,7 @@ export const principleStyles: {
     ({
       display: 'flex',
       flexDirection: 'column',
-      maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
+      width: dynamicStylingValue(type, '100%', '45%', '55%'),
       padding: dynamicStylingValue(type, '10%', '0px', '0px'),
       borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
       backgroundColor: dynamicStylingValue(
@@ -333,13 +335,13 @@ export const principleStyles: {
       'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    fontSize: dynamicStylingValue(type, '1.5em', '3em', '3em'),
+    fontSize: dynamicStylingValue(type, '1.5em', '2.5em', '3em'),
     fontWeight: 700,
     lineHeight: '1.2',
   }),
   backgroundTextWhite: (type: DeviceType) => ({
     color: 'white',
-    fontSize: dynamicStylingValue(type, '1.5em', '3em', '3em'),
+    fontSize: dynamicStylingValue(type, '1.5em', '2.5em', '3em'),
     fontWeight: 700,
     lineHeight: '1.2',
   }),
