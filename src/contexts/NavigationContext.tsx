@@ -21,7 +21,7 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
   const router = useRouter();
   const pathname = usePathname();
   const previousPathname = useRef<string | null>(null);
-  const navigationTimeout = useRef<NodeJS.Timeout | null>(null);
+  const navigationTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Track navigation state
   useEffect(() => {
@@ -33,6 +33,9 @@ export const NavigationProvider: React.FC<NavigationProviderProps> = ({ children
     if (previousPathname.current !== pathname) {
       setIsFirstLoad(false);
       setIsNavigating(true);
+      
+      // Scroll to top on navigation
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       
       // Auto-complete navigation immediately
       navigationTimeout.current = setTimeout(() => {

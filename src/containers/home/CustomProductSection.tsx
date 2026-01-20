@@ -27,27 +27,27 @@ export const CustomProductSection = () => {
     () => (
       <>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.title}
         >
           {t('home.custom_product_section_title.make_it')}
         </Typography>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.titleMobileSecondText}
         >
           {t('home.custom_product_section_title.customize')}
         </Typography>
         <Typography
-          fontSize={'1.4em'}
+          fontSize={'1.2em'}
           fontWeight={800}
           sx={customProductSectionStyles.title}
         >
           {t('home.custom_product_section_title.today')}
         </Typography>
-        <Typography sx={customProductSectionStyles.description}>
+        <Typography sx={customProductSectionStyles.description(type)}>
           {t('home.custom_product_section_desc')}
         </Typography>
         <Button
@@ -111,45 +111,45 @@ export const CustomProductSection = () => {
         contentSx={customProductSectionStyles.progressiveBackgroundContentSx}
       >
         <Box
-          sx={customProductSectionStyles.imageContainerTransform}
+          sx={customProductSectionStyles.imageContainerTransform(type)}
           data-critical
         >
           <Image
             src={getPhoto('fieldPerson2')}
             alt="field-person"
-            fill
+            width={1000}
+            height={1000}
+            style={fieldPersonImageStyles.desktop}
             loading="lazy"
           />
         </Box>
-
-        <Box sx={customProductSectionStyles.spacer} />
         <Box
-          sx={customProductSectionStyles.contentContainer}
-          className={animationClasses.slideRight}
+          sx={customProductSectionStyles.contentContainer(type)}
         >
           <DualColorText
             text={`${t('home.custom_product_section_title.make_it')}{${t('home.custom_product_section_title.customize')}}`}
-            fontSize="2.2em"
+            fontSize={dynamicStylingValue(type, '1.4em', '1.3em', '2.2em')}
             color="white"
             fontWeight={700}
           />
           <Typography
-            fontSize="2.2em"
+            fontSize={dynamicStylingValue(type, '1.4em', '1.3em', '2.2em')}
             fontWeight={700}
             sx={customProductSectionStyles.title}
           >
             {t('home.custom_product_section_title.today')}
           </Typography>
-          <Typography sx={customProductSectionStyles.description}>
+          <Typography sx={customProductSectionStyles.description(type)}>
             {t('home.custom_product_section_desc')}
           </Typography>
-
+          <Box>
           <Button
             sx={customProductSectionStyles.button(type)}
             onClick={handleCustomProductClick}
           >
             {t('home.custom_product_button')}
           </Button>
+          </Box>
         </Box>
       </ProgressiveBackgroundImage>
     </Box>

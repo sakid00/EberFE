@@ -18,10 +18,11 @@ export const innovationSectionStyles = {
   imageContainer: (type: DeviceType) =>
     ({
       position: dynamicStylingValue(type, 'relative', 'absolute', 'absolute'),
+      display: 'flex',
+      justifyContent: 'flex-end',
       alignSelf: 'flex-end',
       width: dynamicStylingValue(type, '100%', '80%', '80%'),
-      height: dynamicStylingValue(type, '20%', '90vh', '90vh'),
-      right: dynamicStylingValue(type, '-10%', '-15%', '-15%'),
+      right: dynamicStylingValue(type, '-10%', '-15%', '-17%'),
       bottom: dynamicStylingValue(type, '0%', '20%', '20%'),
     }) as SxProps<Theme>,
 

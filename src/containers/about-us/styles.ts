@@ -7,26 +7,20 @@ import { Language } from '@/contexts/TranslationContext';
 export const valueStyles = {
   valuesContainerMobile: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    borderRadius: '5%',
+    borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '3%',
-    width: '80vw',
-    maxWidth: '100vw',
-    flex: 1,
-    minHeight: 0,
-    overflow: 'hidden',
+    padding: 'clamp(12px, 4%, 24px)',
+    width: '100%',
     boxSizing: 'border-box',
     marginBottom: '5%',
   } as SxProps<Theme>,
 
   valuesContainer: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
-    borderRadius: '5%',
-    top: '30%',
-    position: 'absolute',
+    borderRadius: '16px',
     zIndex: 100000,
     display: 'flex',
     flexDirection: 'column',
@@ -34,6 +28,7 @@ export const valueStyles = {
     alignItems: 'flex-start',
     maxWidth: '80%',
     padding: '2%',
+    marginBottom: '2%',
   } as SxProps<Theme>,
 
   valuesAndCharactersTitle: {
@@ -63,7 +58,8 @@ export const valueStyles = {
 
   imageBackgroundMobile: {
     width: '100vw',
-    height: '100vh',
+    minHeight: '100vh',
+    height: 'auto',
     overflow: 'visible',
     marginTop: '30vh',
   } as SxProps<Theme>,
@@ -83,7 +79,7 @@ export const valueStyles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
   }),
 
@@ -93,21 +89,18 @@ export const valueStyles = {
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingX: '5%',
-    marginBottom: '-20%',
-    height: 'calc(100vh + 28vh)',
-    minHeight: 0,
+    paddingBottom: '5%',
+    height: 'auto',
   } as SxProps<Theme>,
 
   contentContainerMobile: {
     position: 'relative',
     bottom: '28vh',
+    marginBottom: '-28vh',
     display: 'flex',
     flexDirection: 'column',
-    flex: 1,
-    minHeight: 0,
-    height: 'calc(100% + 28vh)',
-    maxHeight: 'calc(100vh + 28vh)',
-    overflow: 'hidden',
+    height: 'auto',
+    width: '100%',
   } as SxProps<Theme>,
 
   imageContainerMobile: {
@@ -154,11 +147,13 @@ export const valueStyles = {
 
   fieldPersonContainer: {
     position: 'absolute',
-    width: '60%',
     height: '110%',
     bottom: '0vh',
     left: '-3%',
     zIndex: 20,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-start',
+    display: 'flex',
   } as SxProps<Theme>,
 
   valuesGrid: {
@@ -186,42 +181,39 @@ export const valueStyles = {
     maxWidth: '100%',
     position: 'relative',
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gridTemplateRows: 'repeat(3, minmax(0, 1fr))',
-    gap: '8px',
-    padding: '8px',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridAutoRows: 'minmax(80px, auto)',
+    gap: 'clamp(8px, 2vw, 16px)',
+    padding: 'clamp(8px, 2vw, 16px)',
     justifyItems: 'stretch',
     alignItems: 'stretch',
     zIndex: 100000,
     boxSizing: 'border-box',
-    flex: 1,
-    minHeight: 0,
   } as SxProps<Theme>,
 
   valuesGridCharactersMobile: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    gridTemplateRows: 'repeat(3, minmax(0, 1fr))',
+    gridTemplateColumns: 'repeat(2, 1fr)',
+    gridAutoRows: 'minmax(80px, auto)',
     position: 'relative',
-    gap: '8px',
-    padding: '8px',
+    gap: 'clamp(8px, 2vw, 16px)',
+    padding: 'clamp(8px, 2vw, 16px)',
     zIndex: 100000,
     width: '100%',
     maxWidth: '100%',
     justifyItems: 'stretch',
     alignItems: 'stretch',
     boxSizing: 'border-box',
-    flex: 1,
-    minHeight: 0,
   } as SxProps<Theme>,
 
   // Mobile card wrapper for last odd item
   mobileCardWrapper: (isLastOdd: boolean): SxProps<Theme> => ({
-    width: isLastOdd ? 'calc(50% - 4px)' : '100%',
+    width: '100%',
     height: '100%',
-    minHeight: 0,
+    minHeight: '80px',
     ...(isLastOdd && {
-      gridColumn: '1 / -1',
+      gridColumn: 'span 2',
+      maxWidth: '50%',
       justifySelf: 'center',
     }),
   }),
@@ -289,20 +281,22 @@ export const principleStyles: {
   },
   contentContainerMobile: {
     position: 'relative',
-    bottom: '5vh',
+    bottom: '20px',
   },
   imageContainerMobile: {
     position: 'relative',
-    width: '100%',
+    left: '5%',
+    width: '90%',
     zIndex: 1000,
   },
   fieldPersonContainer: (type: DeviceType) => ({
     position: 'absolute',
-    width: dynamicStylingValue(type, '85%', '40vw', '40vw'),
-    height: dynamicStylingValue(type, '38%', '90%', '90%'),
-    top: dynamicStylingValue(type, '4%', '10%', '10%'),
+    width: dynamicStylingValue(type, '45%', '55%', '45%'),
+    bottom: dynamicStylingValue(type, '-5%', '0%', '0%'),
     left: dynamicStylingValue(type, '7%', '-2%', '-2%'),
     zIndex: 20,
+    display: 'flex',
+    alignItems: 'flex-end',
   }),
   mainContainer: {
     background:
@@ -317,7 +311,7 @@ export const principleStyles: {
     ({
       display: 'flex',
       flexDirection: 'column',
-      maxWidth: dynamicStylingValue(type, '100%', '35%', '35%'),
+      width: dynamicStylingValue(type, '100%', '45%', '55%'),
       padding: dynamicStylingValue(type, '10%', '0px', '0px'),
       borderRadius: dynamicStylingValue(type, '5%', '0px', '0px'),
       backgroundColor: dynamicStylingValue(
@@ -333,13 +327,13 @@ export const principleStyles: {
       'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
-    fontSize: dynamicStylingValue(type, '1.5em', '3em', '3em'),
+    fontSize: dynamicStylingValue(type, '1.5em', '2.5em', '3em'),
     fontWeight: 700,
     lineHeight: '1.2',
   }),
   backgroundTextWhite: (type: DeviceType) => ({
     color: 'white',
-    fontSize: dynamicStylingValue(type, '1.5em', '3em', '3em'),
+    fontSize: dynamicStylingValue(type, '1.5em', '2.5em', '3em'),
     fontWeight: 700,
     lineHeight: '1.2',
   }),
@@ -373,6 +367,18 @@ export const corporateStyles: {
 
 // CertificationSection Styles
 export const certificationStyles = {
+  // Mobile image container
+  imageContainerMobile: {
+    position: 'relative',
+    width: '100%',
+    marginTop: '-45vw',
+    marginLeft: '5vw',
+    zIndex: 1000,
+  },
+  // Mobile image style
+  imageStyleMobile: {
+    objectFit: 'contain' as const,
+  },
   // Mobile download button
   mobileDownloadButton: {
     width: '100%',
