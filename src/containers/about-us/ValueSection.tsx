@@ -87,8 +87,8 @@ export const ValueSection = () => {
               <Image
                 src={getPhoto('chemPerson')}
                 alt="field-person"
-                width={100}
-                height={100}
+                width={400}
+                height={400}
                 loading="lazy"
                 style={valueImageStyles.mobileChemPerson}
               />

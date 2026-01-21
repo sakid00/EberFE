@@ -78,10 +78,10 @@ export const PrincipleSection = () => {
           <Box sx={principleStyles.contentContainerMobile}>
             <Box sx={principleStyles.imageContainerMobile}>
               <Image
-                src={getPhoto('fieldPerson3')}
+                src="/photo/fieldPerson3.png"
                 alt="field-person"
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 loading="lazy"
                 style={{
                   objectFit: 'fill',
@@ -128,7 +128,7 @@ export const PrincipleSection = () => {
       >
         <Box sx={principleStyles.fieldPersonContainer(type)}>
           <Image
-            src={getPhoto('fieldPerson3')}
+            src="/photo/fieldPerson3.png"
             alt="field-person"
             width={900}
             height={900}

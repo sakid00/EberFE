@@ -14,16 +14,10 @@ export interface IDualColorTextProps {
   fontSize?: string;
   sx?: SxProps<Theme>;
   className?: string;
+  wrap?: boolean;
 }
 
-const gradientStyle: React.CSSProperties = {
-  background:
-    'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  whiteSpace: 'nowrap',
-  flexShrink: 0,
-};
+
 
 const DualColorText = ({
   text,
@@ -33,14 +27,24 @@ const DualColorText = ({
   fontSize,
   sx,
   className,
+  wrap = false,
 }: IDualColorTextProps) => {
   const defaultStyle: React.CSSProperties = {
     color: color ?? 'black',
     fontWeight: fontWeight ?? 800,
     fontSize: fontSize ?? '1em',
-    whiteSpace: 'nowrap',
+    whiteSpace: wrap ? 'normal' : 'nowrap',
     flexShrink: 0,
   };
+
+  const gradientStyle: React.CSSProperties = {
+  background:
+    'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  whiteSpace: wrap ? 'normal' : 'nowrap',
+  flexShrink: 0,
+};
 
   if (!text) return null;
 

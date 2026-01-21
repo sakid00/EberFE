@@ -166,7 +166,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
-            <span style={{ fontSize: '1.1rem' }}>{value}</span>
+            <span style={{ fontSize: '16px' }}>{value}</span>
             <Image
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
@@ -365,14 +365,24 @@ const Header = () => {
           >
             {t('home.title.innovating')}
           </Typography>
-          <DualColorText
-            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
-            fontSize={'clamp(3em, 4vw, 7em)'}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerSectionStyles.title}
-          />
+          {language === 'en' ? (
+            <DualColorText
+              text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+              fontSize={'clamp(3em, 4vw, 7em)'}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerSectionStyles.title}
+            />
+          ) : (
+            <Typography
+              fontSize={'clamp(3em, 4vw, 7em)'}
+              fontWeight={800}
+              sx={headerSectionStyles.title}
+            >
+              {t('home.title.as')} {t('home.title.sustainable')}
+            </Typography>
+          )}
           <Typography
             fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
@@ -461,14 +471,24 @@ const Header = () => {
           >
             {t('home.title.innovating')}
           </Typography>
-          <DualColorText
-            text={`${t('home.title.as')} {${t('home.title.sustainable')}}`}
-            fontSize={'9vw'}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerSectionStyles.titleMobile}
-          />
+          {language === 'en' ? (
+            <DualColorText
+              text={`${t('home.title.as')} {${t('home.title.sustainable')}}`}
+              fontSize={'9vw'}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerSectionStyles.titleMobile}
+            />
+          ) : (
+            <Typography
+              fontSize={'9vw'}
+              fontWeight={800}
+              sx={headerSectionStyles.titleMobile}
+            >
+              {t('home.title.as')} {t('home.title.sustainable')}
+            </Typography>
+          )}
           <Typography
             fontSize={'9vw'}
             fontWeight={800}
