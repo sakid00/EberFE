@@ -7,6 +7,7 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import emptyIcon from '@/public/icon/empty-career.svg';
 import Image from 'next/image';
 import { ICareerList } from '@/app/careers/CareersClient';
+import { dynamicStylingValue } from '../home/styles/common';
 
 interface ICareerContainer {
   careerList: ICareerList[];
@@ -59,16 +60,12 @@ const CareerContainer = ({
     <Box sx={styles.mainContainer(type)}>
       <Box sx={styles.infoCard(type)}>
         <DualColorText
-          text={`${t('careers.title.our')}${t('careers.title.open')}`}
-          fontSize='1.7em'
+          text={`${t('careers.title.our')} {${t('careers.title.open')} ${t('careers.title.roles')}}`}
+          fontSize={dynamicStylingValue(type, '1.7em', '1.1em', '1.5em')}
           inline
-          sx={{
-            flexWrap: 'wrap',
-          }}
+          wrap
+          fontWeight={800}
         />
-        <Typography fontSize={'1.7em'} sx={styles.rolesTitle}>
-          {t('careers.title.roles')}
-        </Typography>
         <Typography sx={styles.descriptionText}>{t('careers.desc')}</Typography>
         <Typography sx={styles.contactLabel}>
           {t('careers.contact_label')}
