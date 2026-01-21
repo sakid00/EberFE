@@ -153,7 +153,7 @@ const CorporateContainer = () => {
         inline={false}
         fontSize={dynamicStylingValue(
           type,
-          '1.3em',
+          language === 'en' ? '1.3em' : '0.9em',
           language === 'en' ? '0.6em' : '0.5em',
           language === 'en' ? '0.8em' : '0.6em'
         )}
