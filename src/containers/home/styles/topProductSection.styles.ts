@@ -13,7 +13,7 @@ export const topProductSectionStyles = {
   contentContainer: (type: DeviceType) =>
     ({
       position: 'relative',
-      marginTop: dynamicStylingValue(type, '10%', '12%', '5%'),
+      marginTop: dynamicStylingValue(type, '10%', '15%', '5%'),
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -39,7 +39,7 @@ export const topProductSectionStyles = {
       gap: '2%',
       width: dynamicStylingValue(type, '100%', '90%', '90%'),
       height: dynamicStylingValue(type, '50vh', '50vh', '50vh'),
-      top: '10%',
+      top: dynamicStylingValue(type, '10%', '5%', '10%'),
       justifyContent: 'center',
       alignItems: 'center',
     }) as SxProps<Theme>,
