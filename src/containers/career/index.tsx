@@ -59,8 +59,8 @@ const CareerContainer = ({
     <Box sx={styles.mainContainer(type)}>
       <Box sx={styles.infoCard(type)}>
         <DualColorText
-          text={`${t('careers.title.our')}{${t('careers.title.open')}}`}
-          fontSize={'1.7em'}
+          text={`${t('careers.title.our')}${t('careers.title.open')}`}
+          fontSize='1.7em'
           inline
           sx={{
             flexWrap: 'wrap',

@@ -198,13 +198,9 @@ const FormBox = ({
         <DualColorText
           text={text}
           inline
-          fontSize={dynamicStylingValue(
-            type,
-            language === 'en' ? '1.25em' : '0.85em',
-            language === 'en' ? '1.25em' : '0.9em',
-            language === 'en' ? '1.6em' : '1.2em'
-          )}
+          fontSize={dynamicStylingValue(type, '1.25em', '1.25em', '1.6em')}
           fontWeight={800}
+          wrap={true}
         />
         <Typography sx={styles.descriptionText(type)}>{description}</Typography>
         <Box sx={styles.formRow(type)}>
