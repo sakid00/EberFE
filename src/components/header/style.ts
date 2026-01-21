@@ -90,7 +90,7 @@ export const headerStyles = {
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',
-    borderRadius: BORDER_RADIUS.small,
+    borderRadius: BORDER_RADIUS.large,
     backgroundColor: 'transparent',
     border: 'none',
     transition: ANIMATION.transition,
