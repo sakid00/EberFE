@@ -73,7 +73,7 @@ export const customProductSectionStyles = {
 
   description: (type: DeviceType) => ({
     color: COLORS.text.light,
-    fontSize: dynamicStylingValue(type, '0.75rem', '0.9rem', '0.75rem'),
+    fontSize: dynamicStylingValue(type, '0.75rem', '0.9rem', '1rem'),
     fontWeight: 400,
     marginTop: '20px',
   }),
