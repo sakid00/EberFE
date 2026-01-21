@@ -187,19 +187,18 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '95px',
-    maxWidth: '120px',
+    width: '115px',
     height: 'auto',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
       textAlign: 'center',
-      fontSize: '0.875rem',
+      fontSize: '16px',
       fontWeight: '500',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: '0.5vh',
+      paddingY: '10px',
     },
     '& .MuiSelect-icon': {
       color: COLORS.white,

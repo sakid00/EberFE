@@ -166,7 +166,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
-            <span style={{ fontSize: '1.1rem' }}>{value}</span>
+            <span style={{ fontSize: '16px' }}>{value}</span>
             <Image
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
