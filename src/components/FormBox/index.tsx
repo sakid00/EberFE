@@ -200,7 +200,7 @@ const FormBox = ({
           inline
           fontSize={dynamicStylingValue(
             type,
-            language === 'en' ? '1.25em' : '1em',
+            language === 'en' ? '1.25em' : '0.85em',
             language === 'en' ? '1.25em' : '0.9em',
             language === 'en' ? '1.6em' : '1.2em'
           )}

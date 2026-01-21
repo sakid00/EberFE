@@ -20,7 +20,7 @@ export const footerStyles = {
   // About us page background (mobile)
   aboutUsBgContainer: {
     position: 'absolute',
-    bottom: '100%',
+    bottom: '95%',
     right: 0,
     zIndex: -1,
     width: '100%',

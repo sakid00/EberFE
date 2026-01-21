@@ -12,6 +12,7 @@ import DualColorText, {
 } from '@/components/dualColorText/index';
 import { useState } from 'react';
 import { DeviceType, dynamicStylingValue } from '@/hooks/useDeviceType';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export interface listType {
   type: string;
@@ -55,6 +56,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
   fontSize,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(true);
+  const { language } = useTranslation();
 
   const renderListValues = (items: listType[]) => {
     const listItems = items.map((val, index) => {
@@ -158,7 +160,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text={text}
         fontSize={
-          fontSize ?? dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')
+          fontSize ?? dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '1.7em', '1.7em')
         }
         fontWeight={800}
         inline={inline ?? false}
@@ -167,7 +169,7 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       {secondaryText && (
         <DualColorText
           text={`{${secondaryText}}`}
-          fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
+          fontSize={dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '1.7em', '1.7em')}
           fontWeight={800}
           inline
         />
