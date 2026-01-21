@@ -23,7 +23,7 @@ export const SubsidiariesSection = () => {
       >
         <DualColorText
           text={`${t('home.subsidiaries_section_title.eber_group')}\u00a0{${t('home.subsidiaries_section_title.subsidiaries')}}`}
-          fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
           fontWeight={800}
           inline
         />

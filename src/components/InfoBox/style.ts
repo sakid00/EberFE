@@ -10,16 +10,17 @@ export const styles = {
     zIndex: 1,
     marginTop: dynamicStylingValue(type, '5%', '0', '0'),
     maxWidth: dynamicStylingValue(type, '100%', '30%', '30%'),
+    width: dynamicStylingValue(type, '100%', '30%', '30%'),
   }),
 
-  infoCard: {
+  infoCard: (type: DeviceType) => ({
     backgroundColor: 'white',
-    width: 'fit-content',
+    width: dynamicStylingValue(type, '100%', 'fit-content', 'fit-content'),
     paddingY: '20px',
     paddingX: '40px',
     borderRadius: '12px',
     boxShadow: '0 25px 50px -12px rgb(0 0 0 / 0.25)',
-  },
+  }),
 
   infoItemContainer: {
     display: 'flex',

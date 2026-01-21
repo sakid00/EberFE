@@ -73,7 +73,7 @@ export const customProductSectionStyles = {
 
   description: (type: DeviceType) => ({
     color: COLORS.text.light,
-    fontSize: dynamicStylingValue(type, '0.75rem', '0.9rem', '0.75rem'),
+    fontSize: dynamicStylingValue(type, '0.75rem', '0.9rem', '1rem'),
     fontWeight: 400,
     marginTop: '20px',
   }),
@@ -88,6 +88,7 @@ export const customProductSectionStyles = {
       fontWeight: 600,
       fontSize: dynamicStylingValue(type, '1rem', '0.7rem', '0.9rem'),
       marginTop: dynamicStylingValue(type, '15%', '5%', '5%'),
+      width: type === 'mobile' ? '100%' : 'auto',
       textTransform: 'none',
     }) as SxProps<Theme>,
 

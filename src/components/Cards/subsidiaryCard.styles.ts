@@ -13,23 +13,31 @@ export const subsidiaryCardStyles = {
       },
     }) as SxProps<Theme>,
 
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    height: '200px',
-    borderRadius: '10px',
-    overflow: 'hidden',
-  } as SxProps<Theme>,
+  imageContainer: (type: DeviceType) =>
+    ({
+      position: 'relative',
+      width: '100%',
+      height: dynamicStylingValue(type, '120px', '120px', '170px'),
+      minHeight: dynamicStylingValue(type, '120px', '120px', '170px'),
+      borderRadius: '10px',
+      overflow: 'hidden',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }) as SxProps<Theme>,
 
   title: (type: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(type, '0.9em', '1.2em', '1.5em'),
+      fontSize: dynamicStylingValue(type, '0.9em', '1em', '1.2em'),
       textAlign: 'left',
       fontWeight: 800,
       color: '#030712',
       alignSelf: 'flex-start',
       marginBottom: '8%',
-      height: '10%',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      maxWidth: dynamicStylingValue(type, '34vw', '17vw', '17vw'),
     }) as SxProps<Theme>,
 
   location: (type: DeviceType) =>
@@ -44,6 +52,11 @@ export const subsidiaryCardStyles = {
       fontSize: dynamicStylingValue(type, '0.75em', '0.8em', '1em'),
       textAlign: 'start',
       color: '#4B5563',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      display: '-webkit-box',
+      WebkitLineClamp: 4,
+      '-webkit-box-orient': 'vertical',
     }) as SxProps<Theme>,
 };
 

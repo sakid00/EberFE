@@ -7,6 +7,7 @@ import { useTranslation } from '@/hooks';
 import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import useContactForm from '@/hooks/useContactForm';
+import Image, { StaticImageData } from 'next/image';
 
 interface FormData {
   firstName: string;
@@ -30,15 +31,19 @@ const FormBox = ({
   text,
   formBoxStyle,
   buttonText,
+  photo,
+  imageStyle,
 }: {
   title: string;
   description: string;
   text: string;
   formBoxStyle?: React.CSSProperties;
   buttonText?: string;
+  photo: string | StaticImageData;
+  imageStyle?: React.CSSProperties;
 }) => {
   const { type } = useDeviceType();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const pathname = usePathname();
   const {
     submitApplication,
@@ -176,170 +181,190 @@ const FormBox = ({
     }
   };
   return (
-    <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
-      <Typography sx={styles.getInTouchText}>{title}</Typography>
-      <DualColorText
-        text={text}
-        inline
-        fontSize={dynamicStylingValue(type, '1em', '1.8em', '1.8em')}
-        fontWeight={800}
-      />
-      <Typography sx={styles.descriptionText(type)}>{description}</Typography>
-      <Box sx={styles.formRow(type)}>
-        <Box sx={styles.halfWidthBox(type)}>
-          <InputLabel sx={styles.inputLabel}>
-            {t('form_field.first_name')}
-          </InputLabel>
-          <TextField
-            className={dynamicStylingValue(
-              type,
-              classNames.lastNameField,
-              classNames.firstNameField,
-              classNames.firstNameField
-            )}
-            placeholder={t('form_field.first_name')}
-            value={formData.firstName}
-            onChange={handleInputChange('firstName')}
-            error={!!errors.firstName}
-            helperText={errors.firstName}
-            sx={styles.textField}
-            InputProps={{
-              sx: styles.textFieldInput,
-            }}
+    <>
+      {type === 'mobile' && photo && (
+        <Box sx={imageStyle}>
+          <Image
+            src={photo}
+            alt="photo"
+            width={500}
+            height={500}
+            style={{ width: '100%', height: 'auto' }}
           />
         </Box>
-        <Box sx={styles.halfWidthBox(type)}>
-          <InputLabel sx={styles.inputLabel}>
-            {t('form_field.last_name')}
-          </InputLabel>
-          <TextField
-            className={classNames.lastNameField}
-            placeholder={t('form_field.last_name')}
-            value={formData.lastName}
-            onChange={handleInputChange('lastName')}
-            error={!!errors.lastName}
-            helperText={errors.lastName}
-            sx={styles.textField}
-            InputProps={{
-              sx: styles.textFieldInput,
-            }}
-          />
+      )}
+      <Box sx={[styles.formBox, formBoxStyle ?? {}]}>
+        <Typography sx={styles.getInTouchText}>{title}</Typography>
+        <DualColorText
+          text={text}
+          inline
+          fontSize={dynamicStylingValue(
+            type,
+            language === 'en' ? '1.25em' : '1em',
+            language === 'en' ? '1.25em' : '0.9em',
+            language === 'en' ? '1.6em' : '1.2em'
+          )}
+          fontWeight={800}
+        />
+        <Typography sx={styles.descriptionText(type)}>{description}</Typography>
+        <Box sx={styles.formRow(type)}>
+          <Box sx={styles.halfWidthBox(type)}>
+            <InputLabel sx={styles.inputLabel}>
+              {t('form_field.first_name')}
+            </InputLabel>
+            <TextField
+              className={dynamicStylingValue(
+                type,
+                classNames.lastNameField,
+                classNames.firstNameField,
+                classNames.firstNameField
+              )}
+              placeholder={t('form_field.first_name')}
+              value={formData.firstName}
+              onChange={handleInputChange('firstName')}
+              error={!!errors.firstName}
+              helperText={errors.firstName}
+              sx={styles.textField}
+              InputProps={{
+                sx: styles.textFieldInput,
+              }}
+            />
+          </Box>
+          <Box sx={styles.halfWidthBox(type)}>
+            <InputLabel sx={styles.inputLabel}>
+              {t('form_field.last_name')}
+            </InputLabel>
+            <TextField
+              className={classNames.lastNameField}
+              placeholder={t('form_field.last_name')}
+              value={formData.lastName}
+              onChange={handleInputChange('lastName')}
+              error={!!errors.lastName}
+              helperText={errors.lastName}
+              sx={styles.textField}
+              InputProps={{
+                sx: styles.textFieldInput,
+              }}
+            />
+          </Box>
         </Box>
-      </Box>
-      <Box sx={styles.fieldContainer}>
-        <InputLabel sx={styles.inputLabel}>{t('form_field.email')}</InputLabel>
-        <TextField
-          className={classNames.emailField}
-          placeholder={t('form_field.email')}
-          type="email"
-          value={formData.email}
-          onChange={handleInputChange('email')}
-          error={!!errors.email}
-          helperText={errors.email}
-          sx={styles.textField}
-          InputProps={{
-            sx: styles.textFieldInput,
-          }}
-        />
-      </Box>
-      <Box sx={styles.fieldContainer}>
-        <InputLabel sx={styles.inputLabel}>
-          {t('form_field.message')}
-        </InputLabel>
-        <TextField
-          className={classNames.messageField}
-          multiline
-          rows={7}
-          placeholder=""
-          value={formData.message}
-          onChange={handleInputChange('message')}
-          sx={styles.textField}
-          InputProps={{
-            sx: styles.textFieldInput,
-          }}
-        />
-      </Box>
-      {isCareerPage && (
         <Box sx={styles.fieldContainer}>
           <InputLabel sx={styles.inputLabel}>
-            {t('careers.upload_cv_label')}
+            {t('form_field.email')}
           </InputLabel>
-          <Box sx={styles.fileUploadContainer}>
-            <input
-              type="file"
-              accept=".pdf"
-              onChange={handleFileChange}
-              style={{ display: 'none' }}
-              id="cv-upload"
-            />
-            <label htmlFor="cv-upload">
-              <Button
-                component="span"
-                variant="outlined"
-                disabled={isSubmitting}
-                sx={styles.fileUploadButton}
-              >
-                {formData.cvFile
-                  ? `Selected: ${formData.cvFile.name}`
-                  : t('careers.upload_cv_button')}
-              </Button>
-            </label>
-            {errors.cvFile && (
-              <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
-            )}
-            <Typography sx={styles.disclaimerText}>
-              {t('careers.upload_cv_desc')}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography sx={styles.consentTitle}>
-              {t('careers.consent.title')}
-            </Typography>
-            <Typography sx={styles.consentDesc}>
-              {t('careers.consent.desc_p1')}
-            </Typography>
-            <Typography sx={styles.consentDesc}>
-              {t('careers.consent.desc_p2')}
-            </Typography>
-            <Typography sx={styles.consentDesc}>
-              {t('careers.consent.desc_p3')}
-            </Typography>
-            <TextParser
-              text={t('careers.consent.desc_p4')}
-              sx={styles.consentDesc}
-              patterns={[
-                {
-                  pattern: /Submit/gi,
-                  style: { fontWeight: 700 },
-                },
-                {
-                  pattern: /Kirim/gi,
-                  style: { fontWeight: 700 },
-                },
-              ]}
-            />
-          </Box>
+          <TextField
+            className={classNames.emailField}
+            placeholder={t('form_field.email')}
+            type="email"
+            value={formData.email}
+            onChange={handleInputChange('email')}
+            error={!!errors.email}
+            helperText={errors.email}
+            sx={styles.textField}
+            InputProps={{
+              sx: styles.textFieldInput,
+            }}
+          />
         </Box>
-      )}
-      {submitError && (
-        <Typography sx={styles.errorText}>{submitError}</Typography>
-      )}
-      {isSuccess && (
-        <Typography sx={styles.uploadSuccessText}>
-          {t('contact_us.submit_success') ||
-            'Application submitted successfully!'}
-        </Typography>
-      )}
-      <Button
-        sx={styles.submitButton}
-        onClick={handleSubmit}
-        disabled={isSubmitting}
-      >
-        {isSubmitting
-          ? 'Submitting...'
-          : (buttonText ?? t('contact_us.submit_application_button'))}
-      </Button>
-    </Box>
+        <Box sx={styles.fieldContainer}>
+          <InputLabel sx={styles.inputLabel}>
+            {t('form_field.message')}
+          </InputLabel>
+          <TextField
+            className={classNames.messageField}
+            multiline
+            rows={7}
+            placeholder=""
+            value={formData.message}
+            onChange={handleInputChange('message')}
+            sx={styles.textField}
+            InputProps={{
+              sx: styles.textFieldInput,
+            }}
+          />
+        </Box>
+        {isCareerPage && (
+          <Box sx={styles.fieldContainer}>
+            <InputLabel sx={styles.inputLabel}>
+              {t('careers.upload_cv_label')}
+            </InputLabel>
+            <Box sx={styles.fileUploadContainer}>
+              <input
+                type="file"
+                accept=".pdf"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                id="cv-upload"
+              />
+              <label htmlFor="cv-upload">
+                <Button
+                  component="span"
+                  variant="outlined"
+                  disabled={isSubmitting}
+                  sx={styles.fileUploadButton}
+                >
+                  {formData.cvFile
+                    ? `Selected: ${formData.cvFile.name}`
+                    : t('careers.upload_cv_button')}
+                </Button>
+              </label>
+              {errors.cvFile && (
+                <Typography sx={styles.errorText}>{errors.cvFile}</Typography>
+              )}
+              <Typography sx={styles.disclaimerText}>
+                {t('careers.upload_cv_desc')}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography sx={styles.consentTitle}>
+                {t('careers.consent.title')}
+              </Typography>
+              <Typography sx={styles.consentDesc}>
+                {t('careers.consent.desc_p1')}
+              </Typography>
+              <Typography sx={styles.consentDesc}>
+                {t('careers.consent.desc_p2')}
+              </Typography>
+              <Typography sx={styles.consentDesc}>
+                {t('careers.consent.desc_p3')}
+              </Typography>
+              <TextParser
+                text={t('careers.consent.desc_p4')}
+                sx={styles.consentDesc}
+                patterns={[
+                  {
+                    pattern: /Submit/gi,
+                    style: { fontWeight: 700 },
+                  },
+                  {
+                    pattern: /Kirim/gi,
+                    style: { fontWeight: 700 },
+                  },
+                ]}
+              />
+            </Box>
+          </Box>
+        )}
+        {submitError && (
+          <Typography sx={styles.errorText}>{submitError}</Typography>
+        )}
+        {isSuccess && (
+          <Typography sx={styles.uploadSuccessText}>
+            {t('contact_us.submit_success') ||
+              'Application submitted successfully!'}
+          </Typography>
+        )}
+        <Button
+          sx={styles.submitButton}
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+        >
+          {isSubmitting
+            ? 'Submitting...'
+            : (buttonText ?? t('contact_us.submit_application_button'))}
+        </Button>
+      </Box>
+    </>
   );
 };
 

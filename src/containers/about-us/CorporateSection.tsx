@@ -17,7 +17,7 @@ export const CorporateSection = () => {
       <div className="animate-fade-in">
         <DualColorText
           text={`${t('about_us.corporate_section_title.corporate')}\u00a0{${t('about_us.corporate_section_title.governance')}}`}
-          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
           fontWeight={700}
           inline
         />
@@ -26,7 +26,7 @@ export const CorporateSection = () => {
         flexWrap={'wrap'}
         className=" text-[#4B5563] animate-fade-in"
         textAlign={'center'}
-        fontSize={dynamicStylingValue(type, '0.8em', '1.2em', '1.2em')}
+        fontSize={dynamicStylingValue(type, '0.75rem', '1.5rem', '1.5rem')}
         style={corporateStyles.description(type)}
       >
         {t('about_us.corporate_section_desc')}

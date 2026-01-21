@@ -48,6 +48,7 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
 
   return (
     <Box sx={{ ...styles.container(type), ...containerStyle }}>
+      {type !== 'mobile' && (
       <Box sx={imageStyle}>
         <Image
           src={photo}
@@ -61,7 +62,8 @@ const InfoBox: React.FC<IInfoBoxProps> = ({
           alt="image"
         />
       </Box>
-      <Box sx={styles.infoCard}>{infoListMap}</Box>
+      )}
+      <Box sx={styles.infoCard(type)}>{infoListMap}</Box>
     </Box>
   );
 };

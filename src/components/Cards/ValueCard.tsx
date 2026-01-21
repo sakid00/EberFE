@@ -13,6 +13,7 @@ interface ValueCardProps {
   index: number;
   isCharacter?: boolean;
   isMobile?: boolean;
+  isLastOdd?: boolean;
 }
 
 export const ValueCard = ({
@@ -20,6 +21,7 @@ export const ValueCard = ({
   index,
   isMobile = false,
   isCharacter = false,
+  isLastOdd = false,
 }: ValueCardProps) => {
   const { t } = useTranslation();
   const { type } = useDeviceType();
@@ -30,7 +32,7 @@ export const ValueCard = ({
     <Box
       id={`value-${index}`}
       className={getContainerClassName(type, index)}
-      sx={valueCardStyles.container(isMobile, containerHeight)}
+      sx={valueCardStyles.container(isMobile, containerHeight, isLastOdd)}
     >
       <Box sx={valueCardStyles.imageContainer(isMobile)}>
         <Image

@@ -36,7 +36,7 @@ export const footerStyles = {
       bottom: 0,
       zIndex: 10,
       minWidth: dynamicStylingValue(type, '40%', '10vw', '10vw'),
-      maxWidth: dynamicStylingValue(type, '100%', '40vw', '40vw'),
+      maxWidth: dynamicStylingValue(type, '90%', '40vw', '40vw'),
     }) as SxProps<Theme>,
 
   headerSection: (deviceType: DeviceType) => ({
@@ -71,7 +71,7 @@ export const footerStyles = {
 
   descriptionText: (deviceType: DeviceType) =>
     ({
-      fontSize: dynamicStylingValue(deviceType, '0.75em', '1rem', '0.9rem'),
+      fontSize: dynamicStylingValue(deviceType, '0.75em', '0.8rem', '0.9rem'),
       fontWeight: 400,
       color: '#F9FAFB',
       whiteSpace: 'pre-line',
@@ -82,7 +82,7 @@ export const footerStyles = {
     flexDirection: dynamicStylingValue(deviceType, 'column', 'row', 'row'),
     marginY: 4,
     width: dynamicStylingValue(deviceType, '100%', '70%', '100%'),
-    gap: 8,
+    gap: dynamicStylingValue(deviceType, 4, 8, 8),
   }),
 
   sectionTitle: (deviceType: DeviceType) =>
@@ -139,7 +139,7 @@ export const footerImageStyles = {
     alignSelf: 'start' as const,
   },
   aboutUsBgImage: {
-    objectFit: 'fill' as const,
+    objectFit: 'cover' as const,
     width: '100%',
     height: '100%',
   },

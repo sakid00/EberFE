@@ -1,0 +1,16 @@
+# Robots.txt for Eber Group
+# Allow all crawlers to access all content
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of API routes and internal paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Disallow non-existent legacy paths
+Disallow: /portfolio/
+
+# Sitemap location
+Sitemap: https://ebergroup.com/sitemap.xml

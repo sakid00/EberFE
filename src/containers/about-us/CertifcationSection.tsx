@@ -141,7 +141,7 @@ export const CertificationSection = () => {
         <Box className="flex flex-col animate-fade-in justify-center">
           <DualColorText
             text={`${t('about_us.certification_section_title.our')}\u00a0{${t('about_us.certification_section_title.certification')}}`}
-            fontSize={dynamicStylingValue(type, '1.5em', '2rem', '3rem')}
+            fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
             fontWeight={700}
             inline
           />
@@ -150,7 +150,7 @@ export const CertificationSection = () => {
           flexWrap={'wrap'}
           className=" text-[#4B5563] animate-fade-in"
           textAlign={'center'}
-          fontSize={dynamicStylingValue(type, '1.2rem', '1.5rem', '1.5rem')}
+           fontSize={dynamicStylingValue(type, '0.75rem', '1.5rem', '1.5rem')}
           style={certificationStyles.description(type)}
         >
           {t('about_us.certification_section_desc')}

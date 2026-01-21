@@ -56,9 +56,9 @@ export const headerStyles = {
       (isHomepage || isAboutUs) && deviceType !== 'mobile'
         ? '650px'
         : isAboutUs && deviceType === 'mobile'
-          ? '430px'
+          ? '510px'
           : '300px',
-    maxHeight: isAboutUs && deviceType === 'mobile' ? '580px' : '1000px',
+    maxHeight: isAboutUs && deviceType === 'mobile' ? '700px' : '1000px',
     alignItems: 'start',
     overflow: 'hidden',
     zIndex: 0,

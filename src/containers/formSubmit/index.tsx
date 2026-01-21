@@ -49,6 +49,8 @@ const FormSubmitContainer = ({
     <Box sx={styles.containerBox(type)}>
       <FormBox
         title={title}
+        photo={photo}
+        imageStyle={imageStyle}
         description={
           description ??
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur odio nobis reprehenderit nulla nisi recusandae nemo similique facilis ex ducimus quos beatae, magni exercitationem dolorum omnis ipsa. Ratione, officia quaerat?'
@@ -60,7 +62,7 @@ const FormSubmitContainer = ({
       <InfoBox
         infoList={customInfoList || infoList}
         photo={photo}
-        imageStyle={{ ...styles.imageStyle, ...imageStyle }}
+        imageStyle={imageStyle}
         type={type}
         containerStyle={containerStyle}
       />

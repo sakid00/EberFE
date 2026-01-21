@@ -32,9 +32,7 @@ export const ValueSection = () => {
             const isLastOdd =
               index === VALUES_DATA.length - 1 && VALUES_DATA.length % 2 === 1;
             return (
-              <Box key={index} sx={valueStyles.mobileCardWrapper(isLastOdd)}>
-                <ValueCard data={data} index={index} isMobile />
-              </Box>
+                <ValueCard data={data} index={index} isMobile isLastOdd={isLastOdd} />
             );
           })}
         </Box>
