@@ -62,7 +62,7 @@ export const PrincipleSection = () => {
         </Typography>
       </Box>
     );
-  }, [type]);
+  }, [type, t]);
 
   if (type === 'mobile') {
     return (
