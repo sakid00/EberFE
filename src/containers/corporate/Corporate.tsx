@@ -217,7 +217,7 @@ const CorporateContainer = () => {
               )}
             </Grid>
           ) : (
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 2 }}>
               {currentCompanyDetail.box_1.data.map((item, index) => (
                 <Box key={index}>
                   {infoboxContainer(
@@ -245,7 +245,7 @@ const CorporateContainer = () => {
               ))}
             </Grid>
           ) : (
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, marginTop: 2 }}>
               {currentCompanyDetail.box_2.data.map((item, index) => (
                 <Box key={index}>
                   {infoboxContainer2(item.name ?? '', item.data ?? '')}

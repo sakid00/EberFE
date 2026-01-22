@@ -53,24 +53,50 @@ export const SpecialtySection = () => {
         sx={specialtySectionStyles.titleContainer}
         className={animationClasses.fadeIn}
       >
-        <DualColorText
-          text={`${t('home.specialty_section_title.leader_in')}\u00a0{${t('home.specialty_section_title.high_performance')}}`}
-          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
-          fontWeight={800}
-          inline
-          wrap
-          sx={{
-            textAlign: 'center'
-          }}
-        />
-        <Typography
-          fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
-          fontWeight={800}
-          sx={specialtySectionStyles.title}
-          className={animationClasses.fadeIn}
-        >
-          {t('home.specialty_section_title.specialty_materials')}
-        </Typography>
+        {language === 'en' ? (
+          <>
+            <DualColorText
+              text={`${t('home.specialty_section_title.leader_in')}\u00a0{${t('home.specialty_section_title.high_performance')}}`}
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
+              fontWeight={800}
+              inline
+              wrap
+              sx={{
+                textAlign: 'center',
+              }}
+            />
+            <Typography
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
+              fontWeight={800}
+              sx={specialtySectionStyles.title}
+              className={animationClasses.fadeIn}
+            >
+              {t('home.specialty_section_title.specialty_materials')}
+            </Typography>
+          </>
+        ) : (
+          <>
+            {' '}
+            <Typography
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
+              fontWeight={800}
+              sx={specialtySectionStyles.title}
+              className={animationClasses.fadeIn}
+            >
+              {t('home.specialty_section_title.leader_in')}
+            </Typography>
+            <DualColorText
+              text={`{${t('home.specialty_section_title.high_performance')}}\u00a0${t('home.specialty_section_title.specialty_materials')}`}
+              fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
+              fontWeight={800}
+              inline
+              wrap
+              sx={{
+                textAlign: 'center',
+              }}
+            />
+          </>
+        )}
       </Box>
       <Typography
         sx={specialtySectionStyles.description(type)}
