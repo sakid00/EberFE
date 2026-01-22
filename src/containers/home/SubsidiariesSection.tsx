@@ -26,6 +26,10 @@ export const SubsidiariesSection = () => {
           fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
           fontWeight={800}
           inline
+          wrap
+          sx={{
+            textAlign: 'center'
+          }}
         />
       </Box>
       <Typography
