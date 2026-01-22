@@ -10,6 +10,7 @@ import { useDeviceType, useTranslation } from '@/hooks';
 import { animationClasses } from '../home/styles';
 import { useMemo } from 'react';
 import container2 from '@/public/background/container2.png';
+import { dynamicStylingValue } from '@/hooks/useDeviceType';
 
 export const ValueSection = () => {
   const { type } = useDeviceType();
@@ -31,9 +32,7 @@ export const ValueSection = () => {
             const isLastOdd =
               index === VALUES_DATA.length - 1 && VALUES_DATA.length % 2 === 1;
             return (
-              <Box key={index} sx={valueStyles.mobileCardWrapper(isLastOdd)}>
-                <ValueCard data={data} index={index} isMobile />
-              </Box>
+                <ValueCard data={data} index={index} isMobile isLastOdd={isLastOdd} />
             );
           })}
         </Box>
@@ -88,8 +87,8 @@ export const ValueSection = () => {
               <Image
                 src={getPhoto('chemPerson')}
                 alt="field-person"
-                width={100}
-                height={100}
+                width={400}
+                height={400}
                 loading="lazy"
                 style={valueImageStyles.mobileChemPerson}
               />
@@ -137,7 +136,13 @@ export const ValueSection = () => {
         <Box sx={valueStyles.fieldPersonContainer}>
           <Image
             src={getPhoto('chemPerson')}
-            fill
+            width={1200}
+            height={1200}
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+              height: '100%',
+            }}
             loading="lazy"
             alt="field-person"
           />
@@ -145,7 +150,7 @@ export const ValueSection = () => {
 
         <Box sx={valueStyles.valuesContainer}>
           <Typography
-            fontSize={'1.2em'}
+            fontSize={dynamicStylingValue(type, '1em', '1em', '1.2em')}
             fontWeight={'600'}
             color="white"
             sx={valueStyles.valuesAndCharactersTitle}
@@ -158,7 +163,7 @@ export const ValueSection = () => {
             ))}
           </Box>
           <Typography
-            fontSize={'1.2em'}
+            fontSize={dynamicStylingValue(type, '1em', '1em', '1.2em')}
             fontWeight={'600'}
             color="white"
             sx={valueStyles.valuesAndCharactersTitle}

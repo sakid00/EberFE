@@ -1,5 +1,11 @@
 import { Language } from '../../../contexts/TranslationContext';
-import { COLORS, dynamicStylingValue, DeviceType, SxProps, Theme } from './common';
+import {
+  COLORS,
+  dynamicStylingValue,
+  DeviceType,
+  SxProps,
+  Theme,
+} from './common';
 
 // Header Section Styles
 export const headerSectionStyles = {
@@ -71,19 +77,20 @@ export const headerSectionStyles = {
       marginBottom: dynamicStylingValue(type, '10vh', '0px', '0px'),
     }) as SxProps<Theme>,
 
-  primaryButton: {
-    fontSize: '0.9em',
+  primaryButton: (type: DeviceType) => ({
+    fontSize: dynamicStylingValue(type, '0.9em', '0.6em', '0.9em'),
     color: COLORS.text.white,
     background: COLORS.primary.gradient,
-    padding: 2,
+    paddingY: 1,
+    paddingX: 3,
     borderRadius: 10,
     fontWeight: 600,
     textTransform: 'none',
-  } as SxProps<Theme>,
+  }) as SxProps<Theme>,
 
   secondaryButton: (type: DeviceType) =>
     ({
-      fontSize: '0.9em',
+      fontSize: dynamicStylingValue(type, '0.9em', '0.6em', '0.9em'),
       color: dynamicStylingValue(
         type,
         '#784791',
@@ -96,7 +103,8 @@ export const headerSectionStyles = {
         COLORS.background.transparent,
         COLORS.background.transparent
       ),
-      padding: 2,
+      paddingY: 1,
+      paddingX: 3,
       borderRadius: 10,
       fontWeight: 600,
       borderColor: COLORS.border.purple,

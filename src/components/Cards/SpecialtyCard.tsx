@@ -16,7 +16,7 @@ export const SpecialtyCard = ({ data, index }: SpecialtyCardProps) => {
   return (
     <Box
       id={`specialty-${index}`}
-      className={`flex flex-col justify-center items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[90%] min-h-[250px] max-h-[1000px]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-6 px-6'} gap-2 rounded-2xl shadow-lg `}
+      className={`flex flex-col justify-s items-center bg-white ${type === 'mobile' ? 'w-[100%] h-[100%]' : 'w-[90%] min-h-[250px] max-h-[1000px]'} ${type === 'mobile' ? 'px-5 py-6' : 'py-6 px-6'} gap-2 rounded-2xl shadow-lg `}
     >
       <Box className="flex justify-center items-center">
         <Image

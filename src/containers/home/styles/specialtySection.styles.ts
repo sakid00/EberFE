@@ -7,6 +7,8 @@ export const specialtySectionStyles = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingY: '10vh',
+    gap: 3,
   } as SxProps<Theme>,
 
   titleContainer: {
@@ -34,7 +36,6 @@ export const specialtySectionStyles = {
   cardsContainer: {
     width: '100vw',
     maxWidth: '2000px',
-    height: '25vh',
     maxHeight: '80vh',
     paddingX: '10%',
     display: 'flex',

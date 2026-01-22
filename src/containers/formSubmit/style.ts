@@ -14,8 +14,4 @@ export const styles = {
     width: dynamicStylingValue(type, '100vw', '50vw', '50vw'),
     maxWidth: dynamicStylingValue(type, '100%', '50%', '50%'),
   }),
-  imageStyle: {
-    zIndex: -1000,
-    position: 'relative' as const,
-  },
 };

@@ -10,7 +10,7 @@ import { animationClasses } from '../home/styles';
 import { useMemo } from 'react';
 
 export const PrincipleSection = () => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { type } = useDeviceType();
 
   const content = useMemo(() => {
@@ -19,13 +19,13 @@ export const PrincipleSection = () => {
         className="flex flex-col justify-center animate-slide-right"
         sx={principleStyles.contentContainer(type)}
       >
-        <Typography sx={principleStyles.backgroundTextWhite(type)}>
+        <Typography sx={language === 'en' ? principleStyles.backgroundTextWhite(type) : principleStyles.backgroundText(type)}>
           {t('about_us.principle_section_title.our_guiding')}
         </Typography>
-        <Typography sx={principleStyles.backgroundText(type)}>
+        <Typography sx={ language === 'en' ? principleStyles.backgroundText(type) : principleStyles.backgroundTextWhite(type)}>
           {t('about_us.principle_section_title.principle')}
         </Typography>
-        <Typography sx={principleStyles.backgroundText(type)}>
+        <Typography sx={language === 'en' ? principleStyles.backgroundText(type) : principleStyles.backgroundTextWhite(type)}>
           {t('about_us.principle_section_title.future')}
         </Typography>
         <Typography
@@ -62,7 +62,7 @@ export const PrincipleSection = () => {
         </Typography>
       </Box>
     );
-  }, [type]);
+  }, [type, t]);
 
   if (type === 'mobile') {
     return (
@@ -70,7 +70,7 @@ export const PrincipleSection = () => {
         <ImageBackground
           src={getBackgroundImage('container1Mobile')}
           alt="container"
-          objectFit="fill"
+          objectFit={'fill'}
           className={animationClasses.slideRight}
           sx={principleStyles.imageBackgroundMobile}
           contentSx={principleStyles.contentSxMobile}
@@ -78,10 +78,10 @@ export const PrincipleSection = () => {
           <Box sx={principleStyles.contentContainerMobile}>
             <Box sx={principleStyles.imageContainerMobile}>
               <Image
-                src={getPhoto('fieldPerson3')}
+                src="/photo/fieldPerson3.png"
                 alt="field-person"
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 loading="lazy"
                 style={{
                   objectFit: 'fill',
@@ -113,30 +113,32 @@ export const PrincipleSection = () => {
           height: dynamicStylingValue(type, '80vh', '100vh', '80vh'),
           marginTop: dynamicStylingValue(type, '20vh', '0px', '0px'),
           position: 'relative',
+          overflow: 'visible',
+          overflowY: 'clip',
         }}
         contentSx={{
           position: 'relative',
           marginTop: dynamicStylingValue(type, '20%', '0px', '0px'),
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'center',
+          justifyContent: 'flex-end',
           alignItems: 'center',
-          paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+          paddingX: dynamicStylingValue(type, '5%', '10px', '20px'),
         }}
       >
         <Box sx={principleStyles.fieldPersonContainer(type)}>
           <Image
-            src={getPhoto('fieldPerson3')}
+            src="/photo/fieldPerson3.png"
             alt="field-person"
-            fill
+            width={900}
+            height={900}
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+            }}
             loading="lazy"
           />
         </Box>
-
-        <Box
-          className="w-full flex justify-center"
-          sx={principleStyles.spacerBox}
-        />
 
         {content}
       </ImageBackground>

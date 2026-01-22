@@ -5,6 +5,7 @@ import {
   SubsidiariesSection,
   InnovationSection,
   useScrollAnimation,
+  TopProductSection,
 } from '../containers/home';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   return (
     <>
       <SpecialtySection />
+      <TopProductSection />
       <CustomProductSection />
       <SubsidiariesSection />
       <InnovationSection />

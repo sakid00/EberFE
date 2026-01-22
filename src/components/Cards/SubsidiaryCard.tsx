@@ -31,11 +31,12 @@ export const SubsidiaryCard = ({ data, index }: SubsidiaryCardProps) => {
       className={getContainerClassName(type, index)}
       sx={subsidiaryCardStyles.container(type)}
     >
-      <Box sx={subsidiaryCardStyles.imageContainer}>
+      <Box sx={subsidiaryCardStyles.imageContainer(type)}>
         <Image
           src={data.img}
           alt={`subsidiary-img-${index}`}
-          fill
+          width={200}
+          height={200}
           style={subsidiaryImageStyle}
           sizes="(max-width: 768px) 100vw, 40vw"
         />

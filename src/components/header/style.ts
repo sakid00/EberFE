@@ -39,7 +39,8 @@ export const headerStyles = {
   }),
   backgroundImage: (
     deviceType: DeviceType,
-    isHomepage: boolean
+    isHomepage: boolean,
+    isAboutUs: boolean
   ): SxProps<Theme> => ({
     position: 'relative',
     width: deviceType === 'mobile' ? '100%' : '110%',
@@ -47,12 +48,17 @@ export const headerStyles = {
     marginLeft: deviceType === 'mobile' ? '0' : '-5%',
     height: dynamicStylingValue(
       deviceType,
-      isHomepage ? '120vw' : '65vh',
-      isHomepage ? '50vw' : '50vh',
-      isHomepage ? '50vw' : '50vh'
+      isHomepage || isAboutUs ? '120vw' : '65vh',
+      isHomepage || isAboutUs ? '50vw' : '50vh',
+      isHomepage || isAboutUs ? '50vw' : '50vh'
     ),
-    minHeight: isHomepage && deviceType !== 'mobile' ? '650px' : '300px',
-    maxHeight: '1000px',
+    minHeight:
+      (isHomepage || isAboutUs) && deviceType !== 'mobile'
+        ? '650px'
+        : isAboutUs && deviceType === 'mobile'
+          ? '510px'
+          : '300px',
+    maxHeight: isAboutUs && deviceType === 'mobile' ? '700px' : '1000px',
     alignItems: 'start',
     overflow: 'hidden',
     zIndex: 0,
@@ -84,7 +90,7 @@ export const headerStyles = {
     marginBottom: 0,
     minWidth: 'auto',
     padding: '8px 16px',
-    borderRadius: BORDER_RADIUS.small,
+    borderRadius: BORDER_RADIUS.large,
     backgroundColor: 'transparent',
     border: 'none',
     transition: ANIMATION.transition,
@@ -181,19 +187,18 @@ export const headerStyles = {
   languageSelect: {
     backgroundColor: COLORS.whiteBackground,
     borderRadius: BORDER_RADIUS.large,
-    width: '95px',
-    maxWidth: '120px',
+    width: '115px',
     height: 'auto',
     transition: ANIMATION.transition,
     '& .MuiSelect-select': {
       color: COLORS.white,
       textAlign: 'center',
-      fontSize: '0.875rem',
+      fontSize: '16px',
       fontWeight: '500',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: '0.5vh',
+      paddingY: '10px',
     },
     '& .MuiSelect-icon': {
       color: COLORS.white,
@@ -406,10 +411,12 @@ export const headerStyles = {
     flexDirection: isMobile ? 'column' : 'row',
     display: 'flex',
     alignItems: 'center',
-    paddingX: isMobile ? '8vw' : '0',
+    paddingLeft: isMobile ? '8vw' : '0',
+    paddingRight: '8vw',
     height: '100%',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: isMobile ? '100%' : '90%',
+    alignSelf: 'center',
   }),
 
   // Homepage title section
@@ -443,7 +450,8 @@ export const headerStyles = {
   // Homepage modal box
   homepageModalBox: {
     position: 'relative',
-    width: '45%',
+    width: '55%',
+    maxWidth: '300px',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     padding: '3% 6% 3% 3%',
     borderRadius: '10px',
@@ -516,11 +524,12 @@ export const headerStyles = {
   // About us image container
   aboutUsImageContainer: (deviceType: DeviceType): SxProps<Theme> => ({
     position: 'relative',
-    width: dynamicStylingValue(deviceType, '100%', '50%', '70%'),
-    height: dynamicStylingValue(deviceType, '70%', '90%', '100%'),
-    top: dynamicStylingValue(deviceType, '0%', '10%', '10%'),
-    left: dynamicStylingValue(deviceType, '5%', '50vw', '7%'),
+    width: dynamicStylingValue(deviceType, '100%', '60%', '70%'),
+    bottom: dynamicStylingValue(deviceType, '0%', '-22%', '-6%'),
+    right: dynamicStylingValue(deviceType, '-5%', '-5%', '-5%'),
     zIndex: 1,
+    display: 'flex',
+    justifyContent: 'flex-end',
   }),
 
   // About us page wrapper
@@ -531,10 +540,10 @@ export const headerStyles = {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
-    height: '100vh',
     maxHeight: isMobile ? '90%' : '100%',
     maxWidth: '100%',
-    paddingX: '5%',
+    paddingLeft: '8vw',
+    paddingRight: isMobile ? '8vw' : '0',
   }),
 
   // About us content container
@@ -542,7 +551,7 @@ export const headerStyles = {
     position: 'relative',
     alignSelf: 'center',
     width: dynamicStylingValue(deviceType, '100%', '50%', '50%'),
-    bottom: dynamicStylingValue(deviceType, '0', '5%', '5%'),
+    bottom: dynamicStylingValue(deviceType, '0', '10%', '15%'),
     left: dynamicStylingValue(deviceType, '0', '5%', '5%'),
   }),
 
@@ -563,12 +572,12 @@ export const headerStyles = {
 
   // About us download button
   aboutUsDownloadButton: {
-    width: '30%',
     fontSize: '1em',
     color: 'white',
     background:
       'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
-    padding: 2,
+    paddingX: 3,
+    paddingY: 1,
     borderRadius: 10,
     fontWeight: 600,
     textTransform: 'none',
@@ -603,7 +612,7 @@ export const aboutUsDescriptionStyle = (
 // About us font sizes
 export const aboutUsFontSizes = {
   title: (deviceType: DeviceType) =>
-    dynamicStylingValue(deviceType, '2.5rem', '4em', 'clamp(2em, 4vw, 5em)'),
+    dynamicStylingValue(deviceType, '2.5rem', '3.5em', 'clamp(2em, 4vw, 5em)'),
   marginTop: (deviceType: DeviceType) =>
     dynamicStylingValue(deviceType, '-1vh', '-2vh', '-2vh'),
 };

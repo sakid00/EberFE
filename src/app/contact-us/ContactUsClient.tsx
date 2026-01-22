@@ -10,11 +10,17 @@ const ContactUsClient = () => {
   const imageStyle =
     type === 'mobile'
       ? ({
-          position: 'absolute',
-          top: '28vh',
-          right: '5vw',
-          width: 'max-content',
-          height: '40vh',
+          position: 'relative',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: 'auto',
+          maxWidth: '90vw',
+          alignSelf: 'center',
+          right: '6%',
+          marginTop: '-30vh',
+          marginBottom: '-15vw',
         } as CSSProperties)
       : ({
           top: '2vw',
@@ -23,6 +29,8 @@ const ContactUsClient = () => {
           width: '35vw',
           minwidth: '20%',
           height: 'auto',
+          zIndex: -1000,
+          position: 'relative' as const,
         } as CSSProperties);
 
   return (
@@ -38,4 +46,3 @@ const ContactUsClient = () => {
 };
 
 export default ContactUsClient;
-

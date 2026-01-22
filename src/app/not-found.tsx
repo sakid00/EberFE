@@ -5,16 +5,16 @@ export const metadata: Metadata = {
   title: 'Page Not Found',
   description: 'The page you are looking for could not be found.',
   openGraph: {
-    title: 'Page Not Found - EBER Group',
+    title: 'Page Not Found - EBER Petrochemical',
     description: 'The page you are looking for could not be found.',
     url: 'https://ebergroup.com',
-    siteName: 'EBER Group',
+    siteName: 'EBER Petrochemical',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'EBER Group',
+        alt: 'EBER Petrochemical',
       },
     ],
     locale: 'en_US',

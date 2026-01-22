@@ -11,7 +11,7 @@ import { useDeviceType, useTranslation } from '@/hooks';
 
 export const InnovationSection = () => {
   const { type } = useDeviceType();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   return (
     <Box id="home-fifth-section" sx={innovationSectionStyles.container}>
@@ -20,7 +20,8 @@ export const InnovationSection = () => {
           <Image
             src={getPhoto('tanki')}
             alt="tangki-image"
-            fill
+            width={1000}
+            height={1000}
             loading="lazy"
           />
         </Box>
@@ -35,13 +36,14 @@ export const InnovationSection = () => {
             <>
               <DualColorText
                 text={`${t('home.innovation_section_title.driving')}\u00a0{${t('home.innovation_section_title.innovation')}}`}
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
                 fontWeight={700}
                 color="#030712"
                 inline
+                wrap
               />
               <Typography
-                fontSize={dynamicStylingValue(type, '1.5em', '2em', '3em')}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
                 fontWeight={700}
                 sx={innovationSectionStyles.subtitle}
               >

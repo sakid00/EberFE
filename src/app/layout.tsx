@@ -20,12 +20,13 @@ export const metadataBase = new URL('https://ebergroup.com');
 export const metadata: Metadata = {
   metadataBase: new URL('https://ebergroup.com'),
   title: {
-    default: 'EBER Group',
-    template: '%s | EBER Group',
+    default: 'EBER Petrochemical',
+    template: '%s | EBER Petrochemical',
   },
   description:
-    'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
+    'EBER Petrochemical - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
   keywords: [
+    'EBER Petrochemical',
     'EBER Group',
     'EBER',
     'chemical manufacturing',
@@ -47,17 +48,17 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: 'EBER Group',
+    title: 'EBER Petrochemical',
     description:
-      'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
+      'EBER Petrochemical - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
     url: 'https://ebergroup.com',
-    siteName: 'EBER Group',
+    siteName: 'EBER Petrochemical',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'EBER Group - Excellence in Every Detail',
+        alt: 'EBER Petrochemical - Excellence in Every Detail',
         type: 'image/png',
       },
     ],
@@ -66,15 +67,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'EBER Group',
+    title: 'EBER Petrochemical',
     description:
-      'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
+      'EBER Petrochemical - Excellence in Every Detail. Leading provider of innovative solutions and high-performance chemical manufacturing in Indonesia.',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'EBER Group - Excellence in Every Detail',
+        alt: 'EBER Petrochemical - Excellence in Every Detail',
       },
     ],
     creator: '@ebergroup',
@@ -221,7 +222,7 @@ export default function RootLayout({
                     <div className="mobile-container max-w-full h-full relative overflow-hidden">
                       <Header />
                       <Box
-                        className={`px-[5vw] md:px-[10vw] mb-[40vh] h-full w-full`}
+                        className={`px-[5vw] md:px-[10vw] mb-[30vh] h-full w-full`}
                       >
                         <ParticlesBackground />
                         {children}

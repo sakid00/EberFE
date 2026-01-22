@@ -11,3 +11,4 @@ export {
   customProductSectionStyles,
   fieldPersonImageStyles,
 } from './customProductSection.styles';
+export { topProductSectionStyles, getTitleFontSize } from './topProductSection.styles';

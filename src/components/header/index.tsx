@@ -10,6 +10,7 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
+import downloadIcon from '../../../public/icon/download.svg';
 import { useEffect, useState, useRef, useMemo } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { usePathname } from 'next/navigation';
@@ -165,7 +166,7 @@ const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         }}
         renderValue={(value) => (
           <Box sx={headerStyles.languageSelectValue}>
-            <span style={{ fontSize: '1.1rem' }}>{value}</span>
+            <span style={{ fontSize: '16px' }}>{value}</span>
             <Image
               src={value === 'IDN' ? idFlag : enFlag}
               alt={`${value} flag`}
@@ -353,29 +354,47 @@ const Header = () => {
   const homepageImage = useMemo(
     () => (
       <>
-        <Box sx={headerStyles.homepageTitleSection}>
+        <Box
+          sx={headerStyles.homepageTitleSection}
+          className={animationClasses.slideRight}
+        >
           <Typography
-            className={animationClasses.slideRight}
-            fontSize={'clamp(2em, 3vw, 5em)'}
+            fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
             sx={headerSectionStyles.title}
           >
             {t('home.title.innovating')}
           </Typography>
-          <DualColorText
-            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
-            fontSize={'clamp(2em, 3vw, 5em)'}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerSectionStyles.title}
-            className={animationClasses.slideRight}
-          />
+          {language === 'en' ? (
+            <DualColorText
+              text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
+              fontSize={'clamp(3em, 4vw, 7em)'}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerSectionStyles.title}
+            />
+          ) : (
+            <Typography
+              fontSize={'clamp(3em, 4vw, 7em)'}
+              fontWeight={800}
+              sx={headerSectionStyles.title}
+            >
+              {t('home.title.as')} {t('home.title.sustainable')}
+            </Typography>
+          )}
           <Typography
-            className={animationClasses.slideRight}
-            fontSize={'clamp(2em, 3vw, 5em)'}
+            fontSize={'clamp(3em, 4vw, 7em)'}
             fontWeight={800}
-            sx={headerSectionStyles.title}
+            sx={{
+              ...headerSectionStyles.title,
+              ...(language !== 'en' && {
+                background: 'linear-gradient(90deg, #DD9C36 0%, #F2C94C 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }),
+            }}
           >
             {t('home.title.future')}
           </Typography>
@@ -392,7 +411,7 @@ const Header = () => {
           >
             <Button
               size="small"
-              sx={headerSectionStyles.primaryButton}
+              sx={headerSectionStyles.primaryButton(type)}
               onClick={() => handleNavigate('/product')}
             >
               {t('home.product_button')}
@@ -435,35 +454,53 @@ const Header = () => {
         </Box>
       </>
     ),
-    [type, t]
+    [type, t, language]
   );
 
   const homepageImageMobile = useMemo(
     () => (
       <Box sx={headerStyles.mobileHomepageContainer}>
-        <Box sx={headerStyles.mobileHomepageTitleSection}>
+        <Box
+          sx={headerStyles.mobileHomepageTitleSection}
+          className={animationClasses.slideRight}
+        >
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
             sx={headerSectionStyles.titleMobile}
           >
             {t('home.title.innovating')}
           </Typography>
-          <DualColorText
-            text={`${t('home.title.as')}\u00a0{${t('home.title.sustainable')}}`}
-            className={animationClasses.slideRight}
-            fontSize={'9vw'}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerSectionStyles.titleMobile}
-          />
+          {language === 'en' ? (
+            <DualColorText
+              text={`${t('home.title.as')} {${t('home.title.sustainable')}}`}
+              fontSize={'9vw'}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerSectionStyles.titleMobile}
+            />
+          ) : (
+            <Typography
+              fontSize={'9vw'}
+              fontWeight={800}
+              sx={headerSectionStyles.titleMobile}
+            >
+              {t('home.title.as')} {t('home.title.sustainable')}
+            </Typography>
+          )}
           <Typography
-            className={animationClasses.slideRight}
             fontSize={'9vw'}
             fontWeight={800}
-            sx={headerSectionStyles.titleMobile}
+            sx={{
+              ...headerSectionStyles.titleMobile,
+              ...(language !== 'en' && {
+                background: 'linear-gradient(90deg, #DD9C36 0%, #F2C94C 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }),
+            }}
           >
             {t('home.title.future')}
           </Typography>
@@ -500,7 +537,7 @@ const Header = () => {
         </Box>
       </Box>
     ),
-    [type, t]
+    [type, t, language]
   );
 
   const handleDownload = () => {
@@ -516,43 +553,62 @@ const Header = () => {
     () => (
       <>
         <Box sx={headerStyles.aboutUsContentContainer(type)}>
-          <DualColorText
-            text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
-            fontSize={aboutUsFontSizes.title(type)}
-            fontWeight={800}
-            inline
-            color="white"
-            sx={headerStyles.aboutUsDualColorText(type)}
-          />
+          <Box className={animationClasses.slideRight}>
+            <DualColorText
+              text={`${t('about_us.title.our')}\u00a0{${t('about_us.title.company')}}`}
+              fontSize={aboutUsFontSizes.title(type)}
+              fontWeight={800}
+              inline
+              color="white"
+              sx={headerStyles.aboutUsDualColorText(type)}
+            />
+            <Typography
+              fontSize={aboutUsFontSizes.title(type)}
+              fontWeight={800}
+              marginTop={aboutUsFontSizes.marginTop(type)}
+              sx={headerStyles.aboutUsGradientTitle(type)}
+            >
+              {t('about_us.title.background')}
+            </Typography>
+          </Box>
           <Typography
-            fontSize={aboutUsFontSizes.title(type)}
-            fontWeight={800}
-            marginTop={aboutUsFontSizes.marginTop(type)}
-            sx={headerStyles.aboutUsGradientTitle(type)}
+            style={aboutUsDescriptionStyle(type, language)}
+            className={animationClasses.stagger}
           >
-            {t('about_us.title.background')}
-          </Typography>
-          <Typography style={aboutUsDescriptionStyle(type, language)}>
             {t('about_us.desc')}
           </Typography>
           {type !== 'mobile' && (
-            <Button
-              size="small"
-              onClick={handleDownload}
-              sx={headerStyles.aboutUsDownloadButton}
-            >
-              {t('about_us.download_button')}
-            </Button>
+            <Box className={animationClasses.stagger}>
+              <Button
+                size="small"
+                onClick={handleDownload}
+                sx={headerStyles.aboutUsDownloadButton}
+              >
+                <Image
+                  src={downloadIcon}
+                  alt="download icon"
+                  width={16}
+                  height={16}
+                  style={{ marginRight: '8px' }}
+                />
+                {t('about_us.download_button')}
+              </Button>
+            </Box>
           )}
         </Box>
-        <Box sx={headerStyles.aboutUsImageContainer(type)}>
-          <Image
-            src={getPhoto('tankiPerson')}
-            alt="header photo"
-            fill
-            loading="lazy"
-          />
-        </Box>
+        {type !== 'mobile' && (
+          <Box sx={headerStyles.aboutUsImageContainer(type)}>
+            <Image
+              src={getPhoto('tankiPerson')}
+              alt="header photo"
+              width={1000}
+              height={1000}
+              style={headerStyles.contentImageStyle}
+              loading="lazy"
+              className={animationClasses.slideRight}
+            />
+          </Box>
+        )}
       </>
     ),
     [type, language]
@@ -566,7 +622,8 @@ const Header = () => {
             alt="header background"
             sx={headerStyles.backgroundImage(
               type,
-              isHomePagePath || isAboutUsPagePath
+              isHomePagePath,
+              isAboutUsPagePath
             )}
             contentSx={headerStyles.backgroundImageContent}
             customGradient={
@@ -580,10 +637,14 @@ const Header = () => {
                 ? '0 0 95% 95% / 0 0 10% 10%'
                 : '0% 0% 32% 85% / 0% 0% 15% 21%'
             }
+            overflow={isAboutUsPagePath ? 'visible' : 'hidden'}
           >
-            <Box
+            <motion.div
+              key={`header-accessories-${animationKey}`}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
               style={headerStyles.headerAccessories(type)}
-              className={animationClasses.slideRight}
             >
               <Image
                 src={
@@ -601,7 +662,7 @@ const Header = () => {
                 }}
                 loading="lazy"
               />
-            </Box>
+            </motion.div>
 
             {/* Main Header Container */}
             <Box
@@ -655,7 +716,10 @@ const Header = () => {
               </Box>
             )}
             {isAboutUsPagePath && (
-              <Box sx={headerStyles.aboutUsPageWrapper(isMobile)}>
+              <Box
+                key={`about-us-content-${isMobile ? 'mobile' : 'desktop'}`}
+                sx={headerStyles.aboutUsPageWrapper(isMobile)}
+              >
                 {aboutUsImage}
               </Box>
             )}

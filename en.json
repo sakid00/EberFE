@@ -56,6 +56,7 @@
     "custom_product_section_desc": "EBER Group’s expertise in specialty materials is supported by a strong in-house R&D team, enabling us to provide innovative solutions that improve products and processes in the infrastructure, construction, automotive, environmental, and manufacturing sectors.",
     "subsidiaries_section_title": {
       "eber_group": "EBER Group",
+      "company": "",
       "subsidiaries": "Subsidiaries"
     },
     "subsidiaries_section_desc": "As an integrated chemical group, EBER Group oversees four leading manufacturing companies strategically located across Indonesia. Each subsidiary has its own specialization, collectively strengthening EBER Group’s position as a key player in the national petrochemical industry.",
@@ -104,7 +105,12 @@
         "title": "Collaborative Innovation",
         "desc": "Partnering with industry leaders and research institutions to drive breakthrough innovations."
       }
-    }
+    },
+    "top_product_section_title": {
+      "our_top_products": "Our Top",
+      "products": "Products"
+    },
+    "top_product_section_desc": "Discover our selection of top-quality products designed to deliver reliability, performance, and long-lasting value across various applications."
   },
   "about_us": {
     "title": {

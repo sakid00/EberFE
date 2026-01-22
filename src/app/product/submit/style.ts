@@ -1,19 +1,27 @@
-import { CSSProperties } from "react";
+import { maxWidth } from '@mui/system';
+import { CSSProperties } from 'react';
 
 export const styles = {
   imageStyle: {
+    top: '3vw',
+    left: '4vw',
+    width: '40vw',
+    minwidth: '20%',
+    height: 'auto',
     zIndex: -1000,
-    maxWidth: '100vw',
-    width: '45vw',
-    height: '40vh',
-    left: '30%',
-    bottom: '15vw',
+    position: 'relative' as const,
+    marginTop: '-10vw',
   },
   imageStyleMobile: {
-    position: 'absolute',
-    left: '0',
-    top: '18vh',
-    width: '100vw',
-    height: '60vh',
+    position: 'relative',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 'auto',
+    maxWidth: '90vw',
+    alignSelf: 'center',
+    marginTop: '-30vh',
+    marginBottom: '-15vw',
   } as CSSProperties,
 };

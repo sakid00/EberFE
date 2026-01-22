@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, TypographyProps } from '@mui/material';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface TextParserProps extends Omit<TypographyProps, 'children'> {
   text: string;
@@ -17,6 +18,7 @@ const TextParser: React.FC<TextParserProps> = ({
   defaultStyle = {},
   ...typographyProps
 }) => {
+  const { language } = useTranslation();
   const parseText = (inputText: string): React.ReactNode[] => {
     if (patterns.length === 0) {
       return [inputText];
@@ -36,12 +38,20 @@ const TextParser: React.FC<TextParserProps> = ({
       'gi'
     );
 
+    // Determine styles based on language
+    const isReversed = language !== 'en';
+    // Get the first pattern's style for reversing (used for non-matched text when reversed)
+    const patternStyle = patterns[0]?.style || {};
+
     let match: RegExpExecArray | null;
     while ((match = combinedPattern.exec(inputText)) !== null) {
       // Add text before the match
       if (match.index > lastIndex) {
         elements.push(
-          <span key={`text-${keyCounter++}`} style={defaultStyle}>
+          <span
+            key={`text-${keyCounter++}`}
+            style={isReversed ? { ...defaultStyle, ...patternStyle } : defaultStyle}
+          >
             {inputText.slice(lastIndex, match.index)}
           </span>
         );
@@ -59,10 +69,14 @@ const TextParser: React.FC<TextParserProps> = ({
         elements.push(
           <Component
             key={`match-${keyCounter++}`}
-            style={{
-              ...defaultStyle,
-              ...matchedPattern.style,
-            }}
+            style={
+              isReversed
+                ? defaultStyle
+                : {
+                    ...defaultStyle,
+                    ...matchedPattern.style,
+                  }
+            }
           >
             {match[0]}
           </Component>
@@ -82,7 +96,10 @@ const TextParser: React.FC<TextParserProps> = ({
     // Add remaining text
     if (lastIndex < inputText.length) {
       elements.push(
-        <span key={`text-${keyCounter++}`} style={defaultStyle}>
+        <span
+          key={`text-${keyCounter++}`}
+          style={isReversed ? { ...defaultStyle, ...patternStyle } : defaultStyle}
+        >
           {inputText.slice(lastIndex)}
         </span>
       );
