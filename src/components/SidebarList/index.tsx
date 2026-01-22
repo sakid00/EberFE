@@ -160,18 +160,20 @@ const SidebarList: React.FC<ISidebarListProps> = ({
       <DualColorText
         text={text}
         fontSize={
-          fontSize ?? dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '1.7em', '1.7em')
+          fontSize ?? dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')
         }
         fontWeight={800}
         inline={inline ?? false}
         sx={sx}
+        wrap
       />
       {secondaryText && (
         <DualColorText
           text={`{${secondaryText}}`}
-          fontSize={dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '1.7em', '1.7em')}
+          fontSize={dynamicStylingValue(type, '1.5em', '1.7em', '1.7em')}
           fontWeight={800}
           inline
+          wrap
         />
       )}
       <Box

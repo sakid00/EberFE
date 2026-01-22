@@ -151,12 +151,7 @@ const CorporateContainer = () => {
         list={companyList}
         text={`${t('home.subsidiaries_section_title.eber_group')} {${t('home.subsidiaries_section_title.subsidiaries')}}`}
         inline={false}
-        fontSize={dynamicStylingValue(
-          type,
-          language === 'en' ? '1.3em' : '0.9em',
-          language === 'en' ? '0.6em' : '0.5em',
-          language === 'en' ? '0.8em' : '0.6em'
-        )}
+        fontSize={dynamicStylingValue(type, '1.3em', '0.6em', '0.8em')}
         type={type}
       />
       <Box sx={styles.contentContainer(type)}>

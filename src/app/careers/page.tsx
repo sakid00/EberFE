@@ -4,19 +4,19 @@ import CareersClient from './CareersClient';
 export const metadata: Metadata = {
   title: 'Careers',
   description:
-    'Join EBER Group - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
+    'Join EBER Petrochemical - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
   openGraph: {
-    title: 'Careers - EBER Group',
+    title: 'Careers - EBER Petrochemical',
     description:
-      'Join EBER Group - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
+      'Join EBER Petrochemical - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
     url: 'https://ebergroup.com/careers',
-    siteName: 'EBER Group',
+    siteName: 'EBER Petrochemical',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Careers at EBER Group',
+        alt: 'Careers at EBER Petrochemical',
       },
     ],
     locale: 'en_US',
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Careers - EBER Group',
+    title: 'Careers - EBER Petrochemical',
     description:
-      'Join EBER Group - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
+      'Join EBER Petrochemical - explore open positions and be part of a company that drives innovation, sustainability, and growth in the petrochemical industry.',
     images: ['/logo.png'],
   },
 };

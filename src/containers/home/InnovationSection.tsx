@@ -36,13 +36,14 @@ export const InnovationSection = () => {
             <>
               <DualColorText
                 text={`${t('home.innovation_section_title.driving')}\u00a0{${t('home.innovation_section_title.innovation')}}`}
-               fontSize={dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '2em', '2.5em')}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
                 fontWeight={700}
                 color="#030712"
                 inline
+                wrap
               />
               <Typography
-                fontSize={dynamicStylingValue(type, language === 'en' ? '1.5em' : '1.1em', '2em', '2.5em')}
+                fontSize={dynamicStylingValue(type, '1.5em', '2em', '2.5em')}
                 fontWeight={700}
                 sx={innovationSectionStyles.subtitle}
               >

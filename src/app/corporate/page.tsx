@@ -7,19 +7,19 @@ import { Box } from '@mui/material';
 export const metadata: Metadata = {
   title: 'Corporate',
   description:
-    'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
+    'EBER Petrochemical corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
   openGraph: {
-    title: 'Corporate - EBER Group',
+    title: 'Corporate - EBER Petrochemical',
     description:
-      'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
+      'EBER Petrochemical corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
     url: 'https://ebergroup.com/corporate',
-    siteName: 'EBER Group',
+    siteName: 'EBER Petrochemical',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'EBER Group Corporate Information',
+        alt: 'EBER Petrochemical Corporate Information',
       },
     ],
     locale: 'en_US',
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Corporate - EBER Group',
+    title: 'Corporate - EBER Petrochemical',
     description:
-      'EBER Group corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
+      'EBER Petrochemical corporate information - learn about our organizational structure, leadership, and business operations across Indonesia.',
     images: ['/logo.png'],
   },
 };
