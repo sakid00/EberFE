@@ -10,7 +10,7 @@ import { animationClasses } from '../home/styles';
 import { useMemo } from 'react';
 
 export const PrincipleSection = () => {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const { type } = useDeviceType();
 
   const content = useMemo(() => {
@@ -19,13 +19,13 @@ export const PrincipleSection = () => {
         className="flex flex-col justify-center animate-slide-right"
         sx={principleStyles.contentContainer(type)}
       >
-        <Typography sx={principleStyles.backgroundTextWhite(type)}>
+        <Typography sx={language === 'en' ? principleStyles.backgroundTextWhite(type) : principleStyles.backgroundText(type)}>
           {t('about_us.principle_section_title.our_guiding')}
         </Typography>
-        <Typography sx={principleStyles.backgroundText(type)}>
+        <Typography sx={ language === 'en' ? principleStyles.backgroundText(type) : principleStyles.backgroundTextWhite(type)}>
           {t('about_us.principle_section_title.principle')}
         </Typography>
-        <Typography sx={principleStyles.backgroundText(type)}>
+        <Typography sx={language === 'en' ? principleStyles.backgroundText(type) : principleStyles.backgroundTextWhite(type)}>
           {t('about_us.principle_section_title.future')}
         </Typography>
         <Typography
