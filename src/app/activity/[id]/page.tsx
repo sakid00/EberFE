@@ -50,18 +50,18 @@ export async function generateMetadata({
   if (!activity) {
     return {
       title: 'Activity',
-      description: 'Activity details from EBER Group.',
+      description: 'Activity details from EBER Petrochemical.',
       openGraph: {
-        title: 'Activity - EBER Group',
-        description: 'Activity details from EBER Group.',
+        title: 'Activity - EBER Petrochemical',
+        description: 'Activity details from EBER Petrochemical.',
         url: `https://ebergroup.com/activity/${id}`,
-        siteName: 'EBER Group',
+        siteName: 'EBER Petrochemical',
         images: [
           {
             url: '/logo.png',
             width: 1200,
             height: 630,
-            alt: 'EBER Group Activity',
+            alt: 'EBER Petrochemical Activity',
           },
         ],
         locale: 'en_US',
@@ -69,8 +69,8 @@ export async function generateMetadata({
       },
       twitter: {
         card: 'summary_large_image',
-        title: 'Activity - EBER Group',
-        description: 'Activity details from EBER Group.',
+        title: 'Activity - EBER Petrochemical',
+        description: 'Activity details from EBER Petrochemical.',
         images: ['/logo.png'],
       },
     };
@@ -80,7 +80,7 @@ export async function generateMetadata({
   const description =
     activity.body_en?.replace(/<[^>]*>/g, '').slice(0, 160) ||
     activity.body_id?.replace(/<[^>]*>/g, '').slice(0, 160) ||
-    'Activity details from EBER Group.';
+    'Activity details from EBER Petrochemical.';
 
   const imageUrl = activity.image
     ? `${process.env.NEXT_PUBLIC_IMAGE_ACTIVITY_BASE_URL}${activity.image}`
@@ -90,10 +90,10 @@ export async function generateMetadata({
     title: title,
     description,
     openGraph: {
-      title: `${title} - EBER Group`,
+      title: `${title} - EBER Petrochemical`,
       description,
       url: `https://ebergroup.com/activity/${id}`,
-      siteName: 'EBER Group',
+      siteName: 'EBER Petrochemical',
       images: [
         {
           url: imageUrl,
@@ -107,7 +107,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${title} - EBER Group`,
+      title: `${title} - EBER Petrochemical`,
       description,
       images: [imageUrl],
     },

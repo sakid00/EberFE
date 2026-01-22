@@ -4,19 +4,19 @@ import ContactUsClient from './ContactUsClient';
 export const metadata: Metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with EBER Group - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
+    'Get in touch with EBER Petrochemical - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
   openGraph: {
-    title: 'Contact Us - EBER Group',
+    title: 'Contact Us - EBER Petrochemical',
     description:
-      'Get in touch with EBER Group - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
+      'Get in touch with EBER Petrochemical - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
     url: 'https://ebergroup.com/contact-us',
-    siteName: 'EBER Group',
+    siteName: 'EBER Petrochemical',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Contact EBER Group',
+        alt: 'Contact EBER Petrochemical',
       },
     ],
     locale: 'en_US',
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Us - EBER Group',
+    title: 'Contact Us - EBER Petrochemical',
     description:
-      'Get in touch with EBER Group - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
+      'Get in touch with EBER Petrochemical - reach out for questions, product information, or potential collaborations. Our team is ready to assist you.',
     images: ['/logo.png'],
   },
 };
