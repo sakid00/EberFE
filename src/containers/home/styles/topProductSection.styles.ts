@@ -6,6 +6,7 @@ export const topProductSectionStyles = {
     ({
       width: '100%',
       height: dynamicStylingValue(type, '35vh', '35vh', '40vh'),
+      maxHeight: dynamicStylingValue(type, '250px', '500px', '500px'),
       position: 'relative',
       overflow: 'visible',
     }) as SxProps<Theme>,

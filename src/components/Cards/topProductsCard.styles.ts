@@ -5,10 +5,10 @@ import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 export const topProductsCardStyles = {
   imageContainer: (type: DeviceType) =>
     ({
+      position: 'relative',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      position: 'relative',
       width: dynamicStylingValue(type, '60%', '80%', '40%'),
       height: dynamicStylingValue(type, '25%', '40%', '40%'),
     }) as SxProps<Theme>,
@@ -27,6 +27,10 @@ export const topProductsCardStyles = {
 
   productText: (type: DeviceType) =>
     ({
+      paddingY: '5%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
       fontSize: dynamicStylingValue(type, '0.5em', '0.85em', '1em'),
       fontWeight: 400,
       color: '#4B5563',
@@ -36,8 +40,8 @@ export const topProductsCardStyles = {
 
 // Container class names based on device type
 export const getTopProductsCardClassName = (type: DeviceType, index: number) => {
-  const sizeClass = dynamicStylingValue(type, 'w-[100%] h-[80%]', 'w-[28%] h-[80%]', 'w-[28%] h-[100%]');
-  const paddingClass = type === 'mobile' ? 'py-2 px-1' : 'py-2 px-6';
+  const sizeClass = dynamicStylingValue(type, 'w-[100%]', 'w-[28%]', 'w-[28%]');
+  const paddingClass = type === 'mobile' ? 'py-5 px-1' : 'py-6 px-6';
   return `flex flex-col justify-center items-center bg-white ${sizeClass} ${paddingClass} gap-2 rounded-2xl shadow-lg z-10 animate-stagger animate-delay-${(index + 1) * 100}`;
 };
 
