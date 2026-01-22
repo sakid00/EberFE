@@ -20,6 +20,7 @@ export const topProductSectionStyles = {
       justifyContent: 'center',
       alignItems: 'center',
       paddingX: dynamicStylingValue(type, '5%', '0px', '0px'),
+      paddingTop: dynamicStylingValue(type, '0px', '5%', '5%'),
     }) as SxProps<Theme>,
 
   description: (type: DeviceType) =>
@@ -48,4 +49,4 @@ export const topProductSectionStyles = {
 
 // Title styling values (separate for DualColorText component props)
 export const getTitleFontSize = (type: DeviceType) =>
-  dynamicStylingValue(type, '1.5em', '2.5em', '3em');
+  dynamicStylingValue(type, '1.5em', '2em', '2.5em');

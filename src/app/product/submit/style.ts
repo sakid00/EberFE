@@ -1,4 +1,3 @@
-import { maxWidth } from '@mui/system';
 import { CSSProperties } from 'react';
 
 export const styles = {
@@ -14,14 +13,15 @@ export const styles = {
   },
   imageStyleMobile: {
     position: 'relative',
-    width: '100%',
+    width: '115vw',
+    maxWidth: '115vw',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: 'auto',
-    maxWidth: '90vw',
     alignSelf: 'center',
-    marginTop: '-30vh',
-    marginBottom: '-15vw',
+    marginTop: '-35vh',
+    marginBottom: '-20vw',
+    left: '0%',
   } as CSSProperties,
 };

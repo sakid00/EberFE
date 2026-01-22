@@ -21,7 +21,7 @@ export const TopProductSection = () => {
   return (
     <Box
       id="home-top-product-section"
-      className="relative flex flex-col items-center py-[10vh]"
+      className="relative flex flex-col items-center py-[10vh] mb-[20vh]"
     >
       <ImageBackground
         className={animationClasses.slideRight}
