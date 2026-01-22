@@ -17,7 +17,7 @@ import { useMemo } from 'react';
 
 export const CustomProductSection = () => {
   const { type } = useDeviceType();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const router = useRouter();
   const handleCustomProductClick = () => {
     router.push('/product/submit');
@@ -127,7 +127,7 @@ export const CustomProductSection = () => {
           sx={customProductSectionStyles.contentContainer(type)}
         >
           <DualColorText
-            text={`${t('home.custom_product_section_title.make_it')}\u00a0{${t('home.custom_product_section_title.customize')}}`}
+            text={language === 'en' ? `${t('home.custom_product_section_title.make_it')}\u00a0{${t('home.custom_product_section_title.customize')}}` : `{${t('home.custom_product_section_title.make_it')}}\u00a0${t('home.custom_product_section_title.customize')}`}
             fontSize={dynamicStylingValue(type, '1.4em', '1.3em', '2.2em')}
             color="white"
             fontWeight={700}
