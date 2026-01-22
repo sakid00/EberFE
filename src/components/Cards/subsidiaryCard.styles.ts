@@ -62,7 +62,7 @@ export const subsidiaryCardStyles = {
 
 // Container class names based on device type
 export const getContainerClassName = (type: DeviceType, index: number) =>
-  `flex flex-col justify-start items-start bg-white ${type === 'mobile' ? 'w-[100%]' : 'w-[30%] max-w-[600px]'} h-auto p-3 px-4 gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`;
+  `flex flex-col justify-start items-start bg-white ${type === 'mobile' ? 'w-[100%]' : 'w-[30%] max-w-[600px]'} h-auto ${ type === 'mobile' ? 'p-3 px-4' : 'p-4 px-6'} gap-2 rounded-2xl shadow-lg animate-stagger animate-delay-${(index + 1) * 100}`;
 
 // Image styles
 export const subsidiaryImageStyle = {

@@ -40,7 +40,7 @@ export const subsidiariesSectionStyles = {
     paddingX: '10%',
     display: 'flex',
     flexDirection: 'row',
-    gap: 1.5,
+    gap: 3,
     marginTop: 5,
   } as SxProps<Theme>,
 
