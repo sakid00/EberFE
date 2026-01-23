@@ -419,13 +419,11 @@ const PDFViewer = ({
       if (flipbookWrapperRef.current) {
         const containerWidth = flipbookWrapperRef.current.offsetWidth;
         const containerHeight = flipbookWrapperRef.current.offsetHeight;
-        // Use 50% of container width for the flipbook
         const flipbookWidth = Math.floor(containerWidth * 0.1);
-        // Maintain aspect ratio (roughly A4 paper ratio ~1:1.4)
         const flipbookHeight = Math.floor(containerHeight * 0.5);
         setFlipbookDimensions({
-          width: Math.max(600, flipbookWidth), // Minimum 200px width
-          height: Math.max(800, flipbookHeight), // Minimum 280px height
+          width: Math.max(550, flipbookWidth), // Minimum 200px width
+          height: Math.max(700, flipbookHeight), // Minimum 280px height
         });
       }
     };
@@ -625,9 +623,9 @@ const PDFViewer = ({
                   height={isMobile ? 450 : flipbookDimensions.height}
                   size="fixed"
                   minWidth={200}
-                  maxWidth={1000}
+                  maxWidth={500}
                   minHeight={280}
-                  maxHeight={1000}
+                  maxHeight={500}
                   showCover={true}
                   ref={bookRef}
                   className="pdf-flipbook"
