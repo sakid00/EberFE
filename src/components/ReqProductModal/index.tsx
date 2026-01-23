@@ -181,16 +181,14 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
           </Box>
           <Typography sx={styles.titleText}>
             <span
-              style={{ color: '#030712' }}
-            >{`${t('product.reqProductModal.just_share_a_few_details')}\u00a0`}</span>
-            <span
               style={{
                 background:
                   'linear-gradient(90deg, rgba(252, 204, 44, 1), rgba(253, 117, 5, 1))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}
-            >
+            >{`${t('product.reqProductModal.just_share_a_few_details')}`}</span>
+            <span style={{ color: '#030712' }}>
               {t(
                 'product.reqProductModal.we_ll_give_you_instant_access_to_the_information_you_need'
               )}
@@ -251,7 +249,9 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
               }}
             />
             <Typography
-              sx={errors.phoneNumber ? styles.helperText : styles.helperTextPhone}
+              sx={
+                errors.phoneNumber ? styles.helperText : styles.helperTextPhone
+              }
             >
               {errors.phoneNumber || 'Must start with +62'}
             </Typography>
@@ -273,7 +273,9 @@ const ReqProductModal: React.FC<ReqProductModalProps> = ({
               }}
             />
             {errors.companyName && (
-              <Typography sx={styles.helperText}>{errors.companyName}</Typography>
+              <Typography sx={styles.helperText}>
+                {errors.companyName}
+              </Typography>
             )}
           </Box>
           <Box sx={styles.fieldContainer}>
