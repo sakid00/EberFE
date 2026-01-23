@@ -156,7 +156,7 @@ const Footer = () => {
           <Box className="flex justify-center items-center">
             <CopyrightIcon sx={footerStyles.copyrightIcon} />
             <Typography sx={footerStyles.copyrightText}>
-              2025 EBER Group. All right reserved
+              2026 EBER Group. All right reserved
             </Typography>
           </Box>
         </Box>
