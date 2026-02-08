@@ -45,10 +45,12 @@ const ProductTable: React.FC<ProductTableProps> = ({
       )}
       <TableContainer
         component={Paper}
+        elevation={0}
         sx={{
           ...styles.tableContainer(type),
           opacity: isLoading ? 0.5 : 1,
           transition: 'opacity 0.2s ease-in-out',
+          border: '1px solid #E5E7EB',
         }}
       >
       <Table sx={styles.table(type)} size="small" aria-label="products table">
@@ -78,18 +80,23 @@ const ProductTable: React.FC<ProductTableProps> = ({
                 {row.productCode}
               </TableCell>
               <TableCell align="center" sx={styles.tableDataCell(type)}>
-                {row.application}
-              </TableCell>
-              <TableCell
-                align="center"
-                sx={styles.tableDataCellWrappable(type)}
-              >
-                {row.perfFeature}
+                {row.group}
               </TableCell>
               <TableCell align="center" sx={styles.tableDataCell(type)}>
-                {row.typeOfProd}
+                {row.segment}
               </TableCell>
-              <TableCell align="center">{row.getMoreDetail}</TableCell>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
+                {row.groupSbu}
+              </TableCell>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
+                {row.sbuName}
+              </TableCell>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
+                {row.groupName}
+              </TableCell>
+              <TableCell align="center" sx={styles.tableDataCell(type)}>
+                {row.getMoreDetail}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

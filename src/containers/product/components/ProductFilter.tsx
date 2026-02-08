@@ -7,22 +7,34 @@ import { useDeviceType } from '@/hooks/useDeviceType';
 import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductFilter: React.FC<ProductFilterProps> = ({
-  productTypes,
-  productApplications,
+  segmentOptions,
+  grpSbuOptions,
+  sbuNameOptions,
+  grpNameOptions,
   isSeeAllProduct,
   setIsSeeAllProduct,
-  filterByType,
-  setFilterByType,
-  filterByApplication,
+  filterBySegment,
+  setFilterBySegment,
+  filterByGrpSbu,
+  setFilterByGrpSbu,
+  filterBySbuName,
+  setFilterBySbuName,
+  filterByGrpName,
+  setFilterByGrpName,
   searchQuery,
   setSearchQuery,
-  handleChangeFilterByType,
-  handleChangeApplication,
+  handleChangeSegment,
+  handleChangeGrpSbu,
+  handleChangeSbuName,
+  handleChangeGrpName,
 }) => {
   const { t } = useTranslation();
   const handleSeeAllToggle = () => {
     setIsSeeAllProduct(!isSeeAllProduct);
-    setFilterByType([]);
+    setFilterBySegment([]);
+    setFilterByGrpSbu([]);
+    setFilterBySbuName([]);
+    setFilterByGrpName([]);
     setSearchQuery('');
   };
 
@@ -47,28 +59,45 @@ const ProductFilter: React.FC<ProductFilterProps> = ({
         </Button>
 
         <FilterSelect
-          id="type-of-product"
-          value={filterByType}
-          onChange={handleChangeFilterByType}
-          options={productTypes}
-          placeholder={t('product.type_of_product')}
-          hasSelection={filterByType.length > 0}
+          id="segment"
+          value={filterBySegment}
+          onChange={handleChangeSegment}
+          options={segmentOptions}
+          placeholder={t('product.filter_segment')}
+          hasSelection={filterBySegment.length > 0}
         />
 
         <FilterSelect
-          id="application"
-          value={filterByApplication}
-          onChange={handleChangeApplication}
-          options={productApplications}
-          placeholder={t('product.application')}
-          hasSelection={filterByApplication.length > 0}
-          isApplication={true}
+          id="grp-sbu"
+          value={filterByGrpSbu}
+          onChange={handleChangeGrpSbu}
+          options={grpSbuOptions}
+          placeholder={t('product.filter_group_sbu')}
+          hasSelection={filterByGrpSbu.length > 0}
+        />
+
+        <FilterSelect
+          id="sbu-name"
+          value={filterBySbuName}
+          onChange={handleChangeSbuName}
+          options={sbuNameOptions}
+          placeholder={t('product.filter_sbu_name')}
+          hasSelection={filterBySbuName.length > 0}
+        />
+
+        <FilterSelect
+          id="grp-name"
+          value={filterByGrpName}
+          onChange={handleChangeGrpName}
+          options={grpNameOptions}
+          placeholder={t('product.filter_group_name')}
+          hasSelection={filterByGrpName.length > 0}
         />
       </Box>
 
       <TextField
         id="search-product"
-        placeholder={t('product.search_by_application_product_code_or_feature')}
+        placeholder={t('product.search_product')}
         value={searchQuery}
         onChange={handleSearchChange}
         sx={styles.searchField(type)}

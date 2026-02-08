@@ -38,7 +38,9 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
           disableUnderline
           startAdornment={
             <InputAdornment position="start">
-              <Typography fontSize={'1em'}>{placeholder}</Typography>
+              <Typography sx={{ fontSize: '0.85em', whiteSpace: 'nowrap' }}>
+                {placeholder}
+              </Typography>
             </InputAdornment>
           }
         />

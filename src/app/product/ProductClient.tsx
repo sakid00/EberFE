@@ -22,23 +22,27 @@ import * as Sentry from '@sentry/nextjs';
 
 const cellTitles = [
   'product.product_table.product_code',
-  'product.product_table.application',
-  'product.product_table.performance_feature',
-  'product.product_table.type_of_product',
+  'product.product_table.group',
+  'product.product_table.segment',
+  'product.product_table.group_sbu',
+  'product.product_table.sbu_name',
+  'product.product_table.group_name',
   'product.product_table.get_more_detail',
 ];
 
 export interface IrowData {
   productCode: string;
-  application: string;
-  perfFeature: string;
-  typeOfProd: string;
+  group: string;
+  segment: string;
+  groupSbu: string;
+  sbuName: string;
+  groupName: string;
   getMoreDetail: ReactNode;
 }
 
 // Component that uses useSearchParams - needs to be wrapped in Suspense
 const ProductsPageContent = () => {
-  const { language, t } = useTranslation();
+  const { t } = useTranslation();
   const { type } = useDeviceType();
   const {
     getProduct,
@@ -51,8 +55,10 @@ const ProductsPageContent = () => {
   } = useProduct();
   const searchParams = useSearchParams();
   const [isSeeAllProduct, setIsSeeAllProduct] = useState<boolean>(true);
-  const [filterByType, setFilterByType] = useState<string[]>([]);
-  const [filterByApplication, setFilterByApplication] = useState<string[]>([]);
+  const [filterBySegment, setFilterBySegment] = useState<string[]>([]);
+  const [filterByGrpSbu, setFilterByGrpSbu] = useState<string[]>([]);
+  const [filterBySbuName, setFilterBySbuName] = useState<string[]>([]);
+  const [filterByGrpName, setFilterByGrpName] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [openReqModal, setOpenReqModal] = useState<boolean>(false);
   const [openSentModal, setOpenSentModal] = useState<boolean>(false);
@@ -64,29 +70,37 @@ const ProductsPageContent = () => {
     useState<boolean>(false);
 
   // Dynamic filter data from API
-  const productTypes = filters.types.length > 0 ? filters.types : [];
-
-  const productApplications =
-    filters.applications.length > 0 ? filters.applications : [];
+  const segmentOptions = filters.segments.length > 0 ? filters.segments : [];
+  const grpSbuOptions = filters.grpSbus.length > 0 ? filters.grpSbus : [];
+  const sbuNameOptions = filters.sbuNames.length > 0 ? filters.sbuNames : [];
+  const grpNameOptions = filters.grpNames.length > 0 ? filters.grpNames : [];
 
   const fetchProducts = useCallback(
     (page: number = currentPage) => {
       const requestParams: {
         page: number;
         pageSize: number;
-        type?: string;
-        application?: string;
+        segment?: string;
+        grpSbu?: string;
+        sbuName?: string;
+        grpName?: string;
       } = {
         page,
         pageSize: itemsPerPage,
       };
 
       // Add filters if they are selected
-      if (filterByType.length > 0) {
-        requestParams.type = filterByType.join(','); // Join multiple types
+      if (filterBySegment.length > 0) {
+        requestParams.segment = filterBySegment.join(',');
       }
-      if (filterByApplication.length > 0) {
-        requestParams.application = filterByApplication.join(','); // Join multiple applications
+      if (filterByGrpSbu.length > 0) {
+        requestParams.grpSbu = filterByGrpSbu.join(',');
+      }
+      if (filterBySbuName.length > 0) {
+        requestParams.sbuName = filterBySbuName.join(',');
+      }
+      if (filterByGrpName.length > 0) {
+        requestParams.grpName = filterByGrpName.join(',');
       }
 
       getProduct(requestParams).catch((error) => {
@@ -96,14 +110,14 @@ const ProductsPageContent = () => {
         });
       });
     },
-    [getProduct, filterByType, filterByApplication, currentPage, itemsPerPage]
+    [getProduct, filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, currentPage, itemsPerPage]
   );
 
   // Fetch products when filters or page change, or on component mount
   useEffect(() => {
     fetchProducts(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterByApplication, filterByType, currentPage]);
+  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, currentPage]);
 
   // Check access parameter from URL
   useEffect(() => {
@@ -142,12 +156,14 @@ const ProductsPageContent = () => {
 
   const createData = ({
     productCode,
-    application,
-    perfFeature,
-    typeOfProd,
+    group,
+    segment,
+    groupSbu,
+    sbuName,
+    groupName,
     getMoreDetail,
   }: IrowData) => {
-    return { productCode, application, perfFeature, typeOfProd, getMoreDetail };
+    return { productCode, group, segment, groupSbu, sbuName, groupName, getMoreDetail };
   };
 
   const handleTokenReceived = () => {
@@ -193,22 +209,13 @@ const ProductsPageContent = () => {
         if (searchQuery.trim()) {
           const query = searchQuery.toLowerCase().trim();
           filteredProducts = products.filter((product) => {
-            const application =
-              language === 'en'
-                ? product.application_en
-                : product.application_id;
-            const perfFeature =
-              language === 'en'
-                ? product.performanceFeature_en
-                : product.performanceFeature_id;
-
             return (
               (product.code?.toLowerCase() || '').includes(query) ||
-              (
-                application?.toLowerCase() || product.application?.toLowerCase()
-              ).includes(query) ||
-              (perfFeature?.toLowerCase() || '').includes(query) ||
-              (product.type?.toLowerCase() || '').includes(query)
+              (product.it_mfg?.toLowerCase() || '').includes(query) ||
+              (product.segment?.toLowerCase() || '').includes(query) ||
+              (product.grp_sbu?.toLowerCase() || '').includes(query) ||
+              (product.sbu_name?.toLowerCase() || '').includes(query) ||
+              (product.grp_name?.toLowerCase() || '').includes(query)
             );
           });
         }
@@ -216,15 +223,11 @@ const ProductsPageContent = () => {
         const rows = filteredProducts.map((product) =>
           createData({
             productCode: product.code,
-            application:
-              (language === 'en'
-                ? product.application_en
-                : product.application_id) ?? product.application,
-            perfFeature:
-              language === 'en'
-                ? product.performanceFeature_en
-                : product.performanceFeature_id,
-            typeOfProd: product.type,
+            group: product.it_mfg ?? '-',
+            segment: product.segment ?? '-',
+            groupSbu: product.grp_sbu ?? '-',
+            sbuName: product.sbu_name ?? '-',
+            groupName: product.grp_name ?? '-',
             getMoreDetail: (
               <Button
                 variant="text"
@@ -265,9 +268,11 @@ const ProductsPageContent = () => {
       const fallbackRows = [
         createData({
           productCode: 'Sample Product',
-          application: 'Sample Application',
-          perfFeature: 'Sample Feature',
-          typeOfProd: 'Sample Type',
+          group: '-',
+          segment: '-',
+          groupSbu: '-',
+          sbuName: '-',
+          groupName: '-',
           getMoreDetail: (
             <Button
               variant="text"
@@ -295,7 +300,6 @@ const ProductsPageContent = () => {
       };
     }, [
       products,
-      language,
       searchQuery,
       handleRequestClick,
       pagination,
@@ -308,28 +312,50 @@ const ProductsPageContent = () => {
   useEffect(() => {
     setCurrentPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterByType, filterByApplication, searchQuery]);
+  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, searchQuery]);
 
-  const handleChangeFilterByType = (
-    event: SelectChangeEvent<typeof filterByType>
+  const handleChangeSegment = (
+    event: SelectChangeEvent<typeof filterBySegment>
   ) => {
     setIsSeeAllProduct(false);
-    const newFilterByType =
+    const val =
       typeof event.target.value === 'string'
         ? event.target.value.split(',')
         : event.target.value;
-    setFilterByType(newFilterByType);
+    setFilterBySegment(val);
   };
 
-  const handleChangeApplication = (
-    event: SelectChangeEvent<typeof filterByApplication>
+  const handleChangeGrpSbu = (
+    event: SelectChangeEvent<typeof filterByGrpSbu>
   ) => {
     setIsSeeAllProduct(false);
-    const newFilterByApplication =
+    const val =
       typeof event.target.value === 'string'
         ? event.target.value.split(',')
         : event.target.value;
-    setFilterByApplication(newFilterByApplication);
+    setFilterByGrpSbu(val);
+  };
+
+  const handleChangeSbuName = (
+    event: SelectChangeEvent<typeof filterBySbuName>
+  ) => {
+    setIsSeeAllProduct(false);
+    const val =
+      typeof event.target.value === 'string'
+        ? event.target.value.split(',')
+        : event.target.value;
+    setFilterBySbuName(val);
+  };
+
+  const handleChangeGrpName = (
+    event: SelectChangeEvent<typeof filterByGrpName>
+  ) => {
+    setIsSeeAllProduct(false);
+    const val =
+      typeof event.target.value === 'string'
+        ? event.target.value.split(',')
+        : event.target.value;
+    setFilterByGrpName(val);
   };
 
   const handlePageChange = (
@@ -346,7 +372,7 @@ const ProductsPageContent = () => {
         <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
           {t('product.title')}
         </Typography>
-        <TableSkeleton rows={10} columns={5} type={type} showHeader={true} />
+        <TableSkeleton rows={10} columns={7} type={type} showHeader={true} />
       </Box>
     );
   }
@@ -358,19 +384,28 @@ const ProductsPageContent = () => {
   return (
     <>
       <ProductContainer
-        productTypes={productTypes}
-        productApplications={productApplications}
+        segmentOptions={segmentOptions}
+        grpSbuOptions={grpSbuOptions}
+        sbuNameOptions={sbuNameOptions}
+        grpNameOptions={grpNameOptions}
         cellTitles={cellTitles}
         rows={displayedRows}
         isSeeAllProduct={isSeeAllProduct}
         setIsSeeAllProduct={setIsSeeAllProduct}
-        filterByType={filterByType}
-        setFilterByType={setFilterByType}
-        filterByApplication={filterByApplication}
+        filterBySegment={filterBySegment}
+        setFilterBySegment={setFilterBySegment}
+        filterByGrpSbu={filterByGrpSbu}
+        setFilterByGrpSbu={setFilterByGrpSbu}
+        filterBySbuName={filterBySbuName}
+        setFilterBySbuName={setFilterBySbuName}
+        filterByGrpName={filterByGrpName}
+        setFilterByGrpName={setFilterByGrpName}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
-        handleChangeFilterByType={handleChangeFilterByType}
-        handleChangeApplication={handleChangeApplication}
+        handleChangeSegment={handleChangeSegment}
+        handleChangeGrpSbu={handleChangeGrpSbu}
+        handleChangeSbuName={handleChangeSbuName}
+        handleChangeGrpName={handleChangeGrpName}
         currentPage={currentPage}
         totalPages={filteredTotalPages}
         totalItems={filteredTotalItems}
@@ -405,7 +440,7 @@ const ProductClient = () => {
           <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
             Loading...
           </Typography>
-          <TableSkeleton rows={10} columns={5} type={type} showHeader={true} />
+          <TableSkeleton rows={10} columns={7} type={type} showHeader={true} />
         </Box>
       }
     >

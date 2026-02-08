@@ -23,16 +23,23 @@ export interface ProductData {
   id: number;
   code: string;
   application: string;
-  application_en: string;
-  application_id: string;
-  performanceFeature_en: string;
-  performanceFeature_id: string;
+  application_en: string | null;
+  application_id: string | null;
+  performanceFeature_en: string | null;
+  performanceFeature_id: string | null;
   type: string;
+  it_mfg: string | null;
+  segment: string | null;
+  sbu_name: string | null;
+  grp_name: string | null;
+  grp_sbu: string | null;
 }
 
 export interface ProductFilters {
-  types: string[];
-  applications: string[];
+  segments: string[];
+  grpSbus: string[];
+  sbuNames: string[];
+  grpNames: string[];
 }
 
 export interface ProductPagination {
@@ -355,8 +362,10 @@ const initialCareerState: CareerState = {
 const initialProductState: ProductState = {
   products: [],
   filters: {
-    types: [],
-    applications: [],
+    segments: [],
+    grpSbus: [],
+    sbuNames: [],
+    grpNames: [],
   },
   pagination: null,
   isLoading: false,
@@ -983,8 +992,10 @@ export const useProductState = () => {
     lastUpdated: state.product.lastUpdated,
     hasProducts: state.product.products.length > 0,
     hasFilters:
-      state.product.filters.types.length > 0 ||
-      state.product.filters.applications.length > 0,
+      state.product.filters.segments.length > 0 ||
+      state.product.filters.grpSbus.length > 0 ||
+      state.product.filters.sbuNames.length > 0 ||
+      state.product.filters.grpNames.length > 0,
   };
 };
 

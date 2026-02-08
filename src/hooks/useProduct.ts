@@ -9,22 +9,32 @@ import * as Sentry from '@sentry/nextjs';
 
 interface ProductResponseData {
   application: string;
-  application_en: string;
-  application_id: string;
+  application_en: string | null;
+  application_id: string | null;
   code: string;
   createdAt: string;
   id: number;
-  performanceFeature: string;
-  performanceFeature_en: string;
-  performanceFeature_id: string;
+  performanceFeature: string | null;
+  performanceFeature_en: string | null;
+  performanceFeature_id: string | null;
   status: boolean;
   type: string;
   updatedAt: string;
+  it_mfg: string | null;
+  segment: string | null;
+  sbu_name: string | null;
+  grp_name: string | null;
+  grp_sbu: string | null;
+  coid: string | null;
 }
 
 interface ProductFilterData {
   types?: string[];
   applications?: string[];
+  segments?: string[];
+  grpSbus?: string[];
+  sbuNames?: string[];
+  grpNames?: string[];
 }
 
 interface ProductPaginationData {
@@ -36,8 +46,10 @@ interface ProductPaginationData {
 interface ProductRequest {
   page: number;
   pageSize: number;
-  type?: string;
-  application?: string;
+  segment?: string;
+  grpSbu?: string;
+  sbuName?: string;
+  grpName?: string;
 }
 
 interface FormDataRequest {
@@ -79,11 +91,17 @@ const useProduct = () => {
         });
 
         // Add optional query parameters with proper encoding
-        if (request.type) {
-          queryParams.set('type', request.type);
+        if (request.segment) {
+          queryParams.set('segment', request.segment);
         }
-        if (request.application) {
-          queryParams.set('application', request.application);
+        if (request.grpSbu) {
+          queryParams.set('grp_sbu', request.grpSbu);
+        }
+        if (request.sbuName) {
+          queryParams.set('sbu_name', request.sbuName);
+        }
+        if (request.grpName) {
+          queryParams.set('grp_name', request.grpName);
         }
 
         const finalUrl = `/products?${queryParams.toString()}`;
@@ -114,8 +132,10 @@ const useProduct = () => {
         // Extract filter data from response
         if (filterData) {
           const filters = {
-            types: filterData.types || [],
-            applications: filterData.applications || [],
+            segments: filterData.segments || [],
+            grpSbus: filterData.grpSbus || [],
+            sbuNames: filterData.sbuNames || [],
+            grpNames: filterData.grpNames || [],
           };
           actions.fetchFiltersSuccess(filters);
         }
@@ -148,6 +168,11 @@ const useProduct = () => {
           performanceFeature_en: product.performanceFeature_en,
           performanceFeature_id: product.performanceFeature_id,
           type: product.type,
+          it_mfg: product.it_mfg,
+          segment: product.segment,
+          sbu_name: product.sbu_name,
+          grp_name: product.grp_name,
+          grp_sbu: product.grp_sbu,
         }));
 
         actions.fetchProductsSuccess(transformedData, pagination);

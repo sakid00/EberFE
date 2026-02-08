@@ -2,25 +2,36 @@ import { SelectChangeEvent } from '@mui/material';
 
 export interface IRowData {
   productCode: string;
-  application: string;
-  perfFeature: string;
-  typeOfProd: string;
+  group: string;
+  segment: string;
+  groupSbu: string;
+  sbuName: string;
+  groupName: string;
   getMoreDetail: React.ReactNode;
 }
 export interface ProductContainerProps {
-  productTypes: string[];
-  productApplications: string[];
+  segmentOptions: string[];
+  grpSbuOptions: string[];
+  sbuNameOptions: string[];
+  grpNameOptions: string[];
   cellTitles: string[];
   rows: IRowData[];
   isSeeAllProduct: boolean;
   setIsSeeAllProduct: (value: boolean) => void;
-  filterByType: string[];
-  setFilterByType: (value: string[]) => void;
-  filterByApplication: string[];
+  filterBySegment: string[];
+  setFilterBySegment: (value: string[]) => void;
+  filterByGrpSbu: string[];
+  setFilterByGrpSbu: (value: string[]) => void;
+  filterBySbuName: string[];
+  setFilterBySbuName: (value: string[]) => void;
+  filterByGrpName: string[];
+  setFilterByGrpName: (value: string[]) => void;
   searchQuery: string;
   setSearchQuery: (value: string) => void;
-  handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
-  handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeSegment: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeGrpSbu: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeSbuName: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeGrpName: (event: SelectChangeEvent<string[]>) => void;
   // Pagination props
   currentPage: number;
   totalPages: number;
@@ -36,17 +47,26 @@ export interface CustomizationHeaderProps {
 }
 
 export interface ProductFilterProps {
-  productTypes: string[];
-  productApplications: string[];
+  segmentOptions: string[];
+  grpSbuOptions: string[];
+  sbuNameOptions: string[];
+  grpNameOptions: string[];
   isSeeAllProduct: boolean;
   setIsSeeAllProduct: (value: boolean) => void;
-  filterByType: string[];
-  setFilterByType: (value: string[]) => void;
-  filterByApplication: string[];
+  filterBySegment: string[];
+  setFilterBySegment: (value: string[]) => void;
+  filterByGrpSbu: string[];
+  setFilterByGrpSbu: (value: string[]) => void;
+  filterBySbuName: string[];
+  setFilterBySbuName: (value: string[]) => void;
+  filterByGrpName: string[];
+  setFilterByGrpName: (value: string[]) => void;
   searchQuery: string;
   setSearchQuery: (value: string) => void;
-  handleChangeFilterByType: (event: SelectChangeEvent<string[]>) => void;
-  handleChangeApplication: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeSegment: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeGrpSbu: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeSbuName: (event: SelectChangeEvent<string[]>) => void;
+  handleChangeGrpName: (event: SelectChangeEvent<string[]>) => void;
 }
 
 export interface ProductTableProps {

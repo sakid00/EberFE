@@ -7,19 +7,28 @@ import { useDeviceType } from '@/hooks';
 import { useTranslation } from '@/hooks/useTranslation';
 
 const ProductContainer: React.FC<ProductContainerProps> = ({
-  productApplications,
-  productTypes,
+  segmentOptions,
+  grpSbuOptions,
+  sbuNameOptions,
+  grpNameOptions,
   cellTitles,
   rows,
   isSeeAllProduct,
   setIsSeeAllProduct,
-  filterByType,
-  setFilterByType,
-  filterByApplication,
+  filterBySegment,
+  setFilterBySegment,
+  filterByGrpSbu,
+  setFilterByGrpSbu,
+  filterBySbuName,
+  setFilterBySbuName,
+  filterByGrpName,
+  setFilterByGrpName,
   searchQuery,
   setSearchQuery,
-  handleChangeFilterByType,
-  handleChangeApplication,
+  handleChangeSegment,
+  handleChangeGrpSbu,
+  handleChangeSbuName,
+  handleChangeGrpName,
   currentPage,
   totalPages,
   totalItems,
@@ -39,17 +48,26 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
         <CustomizationHeader onCustomProductClick={handleCustomProductClick} />
 
         <ProductFilter
-          productTypes={productTypes}
-          productApplications={productApplications}
+          segmentOptions={segmentOptions}
+          grpSbuOptions={grpSbuOptions}
+          sbuNameOptions={sbuNameOptions}
+          grpNameOptions={grpNameOptions}
           isSeeAllProduct={isSeeAllProduct}
           setIsSeeAllProduct={setIsSeeAllProduct}
-          filterByType={filterByType}
-          setFilterByType={setFilterByType}
-          filterByApplication={filterByApplication}
+          filterBySegment={filterBySegment}
+          setFilterBySegment={setFilterBySegment}
+          filterByGrpSbu={filterByGrpSbu}
+          setFilterByGrpSbu={setFilterByGrpSbu}
+          filterBySbuName={filterBySbuName}
+          setFilterBySbuName={setFilterBySbuName}
+          filterByGrpName={filterByGrpName}
+          setFilterByGrpName={setFilterByGrpName}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          handleChangeFilterByType={handleChangeFilterByType}
-          handleChangeApplication={handleChangeApplication}
+          handleChangeSegment={handleChangeSegment}
+          handleChangeGrpSbu={handleChangeGrpSbu}
+          handleChangeSbuName={handleChangeSbuName}
+          handleChangeGrpName={handleChangeGrpName}
         />
 
         <ProductTable cellTitles={cellTitles} rows={rows} isLoading={isLoading} />

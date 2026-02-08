@@ -67,69 +67,100 @@ export const styles = {
       '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     position: 'relative' as const,
     zIndex: 10,
+    gap: '8px',
   }),
 
   filterButtonContainer: (type: DeviceType) => ({
     display: 'flex',
-    flexDirection: dynamicStylingValue(type, 'column', 'row', 'row'),
-    width: dynamicStylingValue(type, '100%', '70%', '70%'),
-    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
-    gap: '1%',
-    marginRight: '1%',
+    flexDirection: 'row' as const,
+    alignItems: 'center',
+    gap: '8px',
+    flexShrink: 0,
+    overflowX: 'auto' as const,
+    scrollBehavior: 'smooth' as const,
+    flexGrow: 1,
+    minWidth: 0,
+    // Hide scrollbar but keep scrolling
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    msOverflowStyle: 'none' as const,
+    scrollbarWidth: 'none' as const,
   }),
 
   // Filter button base style
-  getFilterButtonStyle: (isActive: boolean, type: DeviceType) => ({
+  getFilterButtonStyle: (isActive: boolean, _type: DeviceType) => ({
     display: 'flex',
     color: isActive ? '#784791' : '#4B5563',
     backgroundColor: isActive ? '#D6CBE3' : '#F3F5F7',
-    borderColor: isActive ? '#784791' : '#4B5563',
-    borderWidth: isActive ? 1 : 0,
-    borderRadius: '20px',
-    width: dynamicStylingValue(type, '100%', '20%', '20%'),
+    borderColor: isActive ? '#784791' : 'transparent',
+    borderWidth: 1,
+    borderStyle: 'solid' as const,
+    borderRadius: '24px',
+    whiteSpace: 'nowrap' as const,
+    flexShrink: 0,
+    minWidth: 'fit-content',
+    padding: '6px 16px',
     textTransform: 'none' as const,
-    fontSize: '0.875em',
+    fontSize: '0.85em',
     fontWeight: 500,
-    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
+    lineHeight: 1.5,
   }),
 
   // Select dropdown base style
-  getSelectStyle: (hasSelection: boolean, type: DeviceType) => ({
+  getSelectStyle: (hasSelection: boolean, _type: DeviceType) => ({
     color: hasSelection ? '#784791' : '#4B5563',
     backgroundColor: hasSelection ? '#D6CBE3' : '#F3F5F7',
-    borderColor: hasSelection ? '#784791' : '#4B5563',
-    borderWidth: hasSelection ? 1 : 0,
-    padding: '16px',
-    borderRadius: '20px',
-    width: dynamicStylingValue(type, '100%', '40%', '40%'),
+    borderColor: hasSelection ? '#784791' : 'transparent',
+    borderWidth: 1,
+    borderStyle: 'solid' as const,
+    padding: '4px 12px',
+    borderRadius: '24px',
+    whiteSpace: 'nowrap' as const,
+    flexShrink: 0,
+    minWidth: 'fit-content',
     textTransform: 'none' as const,
-    fontSize: '0.875em',
+    fontSize: '0.85em',
     fontWeight: 500,
-    marginBottom: dynamicStylingValue(type, '5%', '0px', '0px'),
     '& .MuiSelect-select': {
       padding: 0,
+      paddingRight: '24px !important',
     },
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none',
+    },
+    '& .MuiSelect-icon': {
+      right: 4,
+      fontSize: '1.2em',
+      color: hasSelection ? '#784791' : '#6B7280',
     },
   }),
 
-  getApplicationSelectStyle: (hasSelection: boolean, type: DeviceType) => ({
+  getApplicationSelectStyle: (hasSelection: boolean, _type: DeviceType) => ({
     color: hasSelection ? '#784791' : '#4B5563',
     backgroundColor: hasSelection ? '#D6CBE3' : '#F3F5F7',
-    borderColor: hasSelection ? '#784791' : '#4B5563',
-    borderWidth: hasSelection ? 1 : 0,
-    padding: '16px',
-    borderRadius: '20px',
-    width: dynamicStylingValue(type, '100%', '40%', '40%'),
+    borderColor: hasSelection ? '#784791' : 'transparent',
+    borderWidth: 1,
+    borderStyle: 'solid' as const,
+    padding: '4px 12px',
+    borderRadius: '24px',
+    whiteSpace: 'nowrap' as const,
+    flexShrink: 0,
+    minWidth: 'fit-content',
     textTransform: 'none' as const,
-    fontSize: '0.875em',
+    fontSize: '0.85em',
     fontWeight: 500,
     '& .MuiSelect-select': {
       padding: 0,
+      paddingRight: '24px !important',
     },
     '& .MuiOutlinedInput-notchedOutline': {
       border: 'none',
+    },
+    '& .MuiSelect-icon': {
+      right: 4,
+      fontSize: '1.2em',
+      color: hasSelection ? '#784791' : '#6B7280',
     },
   }),
 
@@ -145,21 +176,26 @@ export const styles = {
     justifyContent: 'center',
     backgroundColor: '#C1B0D3',
     width: 'fit-content',
-    paddingX: '12px',
-    paddingY: '4px',
+    paddingX: '10px',
+    paddingY: '2px',
+    fontSize: '0.85em',
   },
 
   selectedText: {
-    marginLeft: '8px',
+    marginLeft: '6px',
     color: '#784791',
+    fontSize: '0.85em',
   },
 
   // Search field styles
   searchField: (type: DeviceType) => ({
-    width: dynamicStylingValue(type, '100%', '40%', '40%'),
-    borderRadius: '20px',
+    width: dynamicStylingValue(type, '180px', '200px', '220px'),
+    minWidth: dynamicStylingValue(type, '150px', '180px', '200px'),
+    flexShrink: 0,
+    borderRadius: '24px',
     '& .MuiOutlinedInput-root': {
-      borderRadius: '20px',
+      borderRadius: '24px',
+      height: '38px',
       '& fieldset': {
         borderWidth: 0,
       },
@@ -174,11 +210,13 @@ export const styles = {
 
   searchInput: {
     backgroundColor: '#F3F5F7',
-    fontSize: '0.875em',
+    fontSize: '0.85em',
   },
 
   searchIcon: {
-    marginRight: '16px',
+    marginRight: '8px',
+    fontSize: '1.1em',
+    color: '#6B7280',
   },
 
   // Table styles
@@ -222,16 +260,18 @@ export const styles = {
 
   tableHeaderRow: {
     backgroundColor: '#F9FAFB',
-    border: 0,
+    '& .MuiTableCell-root': {
+      borderBottom: '1px solid #E5E7EB',
+    },
   },
 
   tableHeaderCell: (type: DeviceType) => ({
     fontWeight: 600,
-    fontSize: '1.2em',
-    padding: '32px',
+    fontSize: dynamicStylingValue(type, '0.85em', '0.9em', '1.2em'),
+    padding: dynamicStylingValue(type, '14px 10px', '16px 12px', '16px 12px'),
     color: '#784791',
     // Only set minWidth on mobile for horizontal scroll
-    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    minWidth: dynamicStylingValue(type, '100px', 'auto', 'auto'),
     // Allow text wrapping on desktop/tablet
     whiteSpace: dynamicStylingValue(
       type,
@@ -245,14 +285,18 @@ export const styles = {
     '&:last-child td, &:last-child th': {
       border: 0,
     },
+    '& .MuiTableCell-root': {
+      borderBottom: '1px solid #F3F4F6',
+    },
   },
 
   tableCodeCell: (type: DeviceType) => ({
-    backgroundColor: '#F9FAFB',
-    fontSize: '1em',
+    fontSize: dynamicStylingValue(type, '0.85em', '0.875em', '0.875em'),
     fontWeight: 400,
+    color: '#374151',
+    padding: dynamicStylingValue(type, '14px 10px', '16px 12px', '16px 12px'),
     // Only set minWidth on mobile
-    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    minWidth: dynamicStylingValue(type, '100px', 'auto', 'auto'),
     // Allow text wrapping on desktop/tablet
     whiteSpace: dynamicStylingValue(
       type,
@@ -263,10 +307,12 @@ export const styles = {
   }),
 
   tableDataCell: (type: DeviceType) => ({
-    fontSize: '1em',
+    fontSize: dynamicStylingValue(type, '0.85em', '0.875em', '0.875em'),
     fontWeight: 400,
+    color: '#374151',
+    padding: dynamicStylingValue(type, '14px 10px', '16px 12px', '16px 12px'),
     // Only set minWidth on mobile
-    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    minWidth: dynamicStylingValue(type, '100px', 'auto', 'auto'),
     // Allow text wrapping on desktop/tablet
     whiteSpace: dynamicStylingValue(
       type,
@@ -277,16 +323,17 @@ export const styles = {
   }),
 
   tableDataCellWrappable: (type: DeviceType) => ({
-    fontSize: '1em',
+    fontSize: dynamicStylingValue(type, '0.85em', '0.875em', '0.875em'),
     fontWeight: 400,
+    color: '#374151',
     // Only set minWidth on mobile
-    minWidth: dynamicStylingValue(type, '120px', 'auto', 'auto'),
+    minWidth: dynamicStylingValue(type, '100px', 'auto', 'auto'),
     whiteSpace: 'normal' as const,
     wordWrap: 'break-word' as const,
     // Responsive maxWidth
     maxWidth: dynamicStylingValue(type, '200px', 'none', 'none'),
     lineHeight: '1.4',
-    padding: '16px',
+    padding: dynamicStylingValue(type, '14px 10px', '16px 12px', '16px 12px'),
   }),
 
   // Pagination styles
@@ -383,10 +430,10 @@ export const classNames = {
   searchInput: 'bg-[#F3F5F7]',
   searchIcon: 'mr-4',
   tableContainer: 'mt-4 relative z-10',
-  tableHeaderRow: 'bg-[#F9FAFB] border-0',
-  tableHeaderCell: 'p-8 text-[#784791]',
-  tableCodeCell: 'bg-[#F9FAFB] text-[1em] font-[400]',
-  tableDataCell: 'text-[1em] font-[400]',
+  tableHeaderRow: 'bg-[#F0EBF4]',
+  tableHeaderCell: 'p-4 text-[#784791] font-medium text-[0.9em]',
+  tableCodeCell: 'text-[0.875em] font-[400] text-[#374151] p-4',
+  tableDataCell: 'text-[0.875em] font-[400] text-[#374151] p-4',
   tableDataCellWrappable:
-    'text-[1em] font-[400] whitespace-normal break-words max-w-[200px] leading-[1.4] p-4',
+    'text-[0.875em] font-[400] text-[#374151] whitespace-normal break-words max-w-[200px] leading-[1.4] p-4',
 };
