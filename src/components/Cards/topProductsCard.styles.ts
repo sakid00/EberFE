@@ -3,6 +3,16 @@ import { DeviceType, dynamicStylingValue } from '../../hooks/useDeviceType';
 
 // TopProductsCard Styles
 export const topProductsCardStyles = {
+  container: (type: DeviceType) =>
+    ({
+      cursor: 'pointer',
+      transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+      '&:hover': {
+        transform: 'translateY(-4px)',
+        boxShadow: '0 10px 20px rgba(0, 0, 0, 0.15)',
+      },
+    }) as SxProps<Theme>,
+
   imageContainer: (type: DeviceType) =>
     ({
       position: 'relative',

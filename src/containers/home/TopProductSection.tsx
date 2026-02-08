@@ -7,7 +7,11 @@ import DualColorText from '@/components/dualColorText';
 import { useTopProducts, useTranslation } from '@/hooks';
 import { TopProductsCard } from '@/components/Cards/TopProductsCard';
 import { useEffect } from 'react';
-import { animationClasses, topProductSectionStyles, getTitleFontSize } from './styles';
+import {
+  animationClasses,
+  topProductSectionStyles,
+  getTitleFontSize,
+} from './styles';
 
 export const TopProductSection = () => {
   const { type } = useDeviceType();
@@ -36,7 +40,7 @@ export const TopProductSection = () => {
           fontSize={getTitleFontSize(type)}
           fontWeight={700}
           inline
-          color='white'
+          color="white"
           className={animationClasses.slideLeft}
         />
         <Typography
@@ -46,9 +50,19 @@ export const TopProductSection = () => {
           {t('home.top_product_section_desc')}
         </Typography>
         <Box sx={topProductSectionStyles.cardsContainer(type)}>
-          {topProductsData.map((item, index) => (
-            item.topProducts.length > 0 && <TopProductsCard key={item.company.name} data={item.topProducts.map((product) => product.product.code ?? '')} companyName={item.company.name} index={index} />
-          ))}
+          {topProductsData.map(
+            (item, index) =>
+              item.topProducts.length > 0 && (
+                <TopProductsCard
+                  key={item.company.name}
+                  data={item.topProducts.map(
+                    (product) => product.product.code ?? ''
+                  )}
+                  companyName={item.company.name}
+                  index={index}
+                />
+              )
+          )}
         </Box>
       </ImageBackground>
     </Box>

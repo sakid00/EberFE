@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { getPhoto } from "@/assets/photoAssets";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import {
   topProductsCardStyles,
@@ -17,6 +18,12 @@ interface TopProductsCardProps {
 
 export const TopProductsCard = ({ data, index, companyName }: TopProductsCardProps) => {
   const { type } = useDeviceType();
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/product');
+  };
+
   const companyImage = useMemo(() => {
     const name = companyName?.toLowerCase() ?? '';
 
@@ -39,7 +46,9 @@ export const TopProductsCard = ({ data, index, companyName }: TopProductsCardPro
   return (
     <Box
       id={`top-products-${index}`}
+      onClick={handleClick}
       className={getTopProductsCardClassName(type, index)}
+      sx={topProductsCardStyles.container(type)}
     >
       <Box sx={topProductsCardStyles.imageContainer(type)}>
         <Image src={companyImage} width={1000} height={1000} style={topProductsImageStyle} alt={`top-products-img-${index}`} />
