@@ -56,7 +56,7 @@ export const TopProductSection = () => {
                 <TopProductsCard
                   key={item.company.name}
                   data={item.topProducts.map(
-                    (product) => product.product.code ?? ''
+                    (product) => product.product.segment ?? ''
                   )}
                   companyName={item.company.name}
                   index={index}

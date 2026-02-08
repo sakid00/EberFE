@@ -10,6 +10,7 @@ export interface TopProduct {
   application_id: string | null;
   type: string;
   status: boolean;
+  segment?: string;
 }
 
 // Top product item with rank
