@@ -1,8 +1,6 @@
 import {
   Box,
   Checkbox,
-  Input,
-  InputAdornment,
   ListItemText,
   MenuItem,
   Select,
@@ -33,26 +31,22 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
       value={value}
       IconComponent={KeyboardArrowDown}
       sx={selectStyle}
-      input={
-        <Input
-          disableUnderline
-          startAdornment={
-            <InputAdornment position="start">
-              <Typography sx={{ fontSize: '0.85em', whiteSpace: 'nowrap' }}>
-                {placeholder}
-              </Typography>
-            </InputAdornment>
-          }
-        />
-      }
+      displayEmpty
       multiple
       onChange={onChange}
       renderValue={(selected) => (
-        <Box sx={styles.selectedCounter}>
-          <Box sx={styles.selectedBadge}>{selected.length}</Box>
-          <Typography variant="body2" sx={styles.selectedText}>
-            Selected
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <Typography sx={{ fontSize: '0.85em', whiteSpace: 'nowrap' }}>
+            {placeholder}
           </Typography>
+          {selected.length > 0 && (
+            <Box sx={styles.selectedCounter}>
+              <Box sx={styles.selectedBadge}>{selected.length}</Box>
+              <Typography variant="body2" sx={styles.selectedText}>
+                Selected
+              </Typography>
+            </Box>
+          )}
         </Box>
       )}
     >

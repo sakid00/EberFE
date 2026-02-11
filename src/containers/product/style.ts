@@ -62,7 +62,7 @@ export const styles = {
     padding: '16px 20px',
     marginTop: '16px',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     boxShadow:
       '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     position: 'relative' as const,
@@ -100,7 +100,7 @@ export const styles = {
     whiteSpace: 'nowrap' as const,
     flexShrink: 0,
     minWidth: 'fit-content',
-    padding: '6px 16px',
+    padding: '18px 16px',
     textTransform: 'none' as const,
     fontSize: '0.85em',
     fontWeight: 500,
@@ -114,7 +114,7 @@ export const styles = {
     borderColor: hasSelection ? '#784791' : 'transparent',
     borderWidth: 1,
     borderStyle: 'solid' as const,
-    padding: '4px 12px',
+    padding: '18px 16px',
     borderRadius: '24px',
     whiteSpace: 'nowrap' as const,
     flexShrink: 0,
@@ -195,7 +195,7 @@ export const styles = {
     borderRadius: '24px',
     '& .MuiOutlinedInput-root': {
       borderRadius: '24px',
-      height: '38px',
+      height: '60px',
       '& fieldset': {
         borderWidth: 0,
       },
