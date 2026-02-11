@@ -126,6 +126,83 @@ export const styles = {
     fontWeight: 400,
     marginTop: '3%',
   },
+
+  // Success modal styles (same as ReqProductSent)
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  backdrop: {
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+  },
+
+  modalBox: {
+    width: '50%',
+    maxWidth: '100%',
+    maxHeight: '90vh',
+    overflow: 'auto',
+    padding: '32px',
+    borderRadius: '12px',
+    backgroundColor: 'white',
+    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+    outline: 'none',
+    '@media (max-width: 768px)': {
+      width: '90%',
+      maxWidth: '90%',
+      padding: '24px',
+    },
+  },
+
+  modalHeaderContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '24px',
+  },
+
+  modalCloseIcon: {
+    cursor: 'pointer',
+    color: '#4B5563',
+    fontSize: '24px',
+    '&:hover': {
+      color: '#374151',
+    },
+  },
+
+  modalMessageText: {
+    fontSize: '1em',
+    fontWeight: 400,
+    color: '#4B5563',
+    lineHeight: 1.6,
+    marginBottom: '32px',
+  },
+
+  modalConfirmButton: {
+    color: 'white',
+    background:
+      'linear-gradient(to right, rgba(255, 138, 0, 1), rgba(245, 75, 2, 1))',
+    width: '100%',
+    borderRadius: '20px',
+    fontSize: '0.9em',
+    fontWeight: 500,
+    textTransform: 'none' as const,
+    padding: '12px 24px',
+    boxShadow: '0 4px 12px rgba(255, 138, 0, 0.3)',
+    transition: 'all 0.2s ease-in-out',
+    '&:hover': {
+      background:
+        'linear-gradient(to right, rgba(255, 138, 0, 0.9), rgba(245, 75, 2, 0.9))',
+      boxShadow: '0 6px 16px rgba(255, 138, 0, 0.4)',
+      transform: 'translateY(-1px)',
+    },
+    '&:active': {
+      transform: 'translateY(1px)',
+      boxShadow: '0 2px 8px rgba(255, 138, 0, 0.3)',
+    },
+  },
 };
 
 export const classNames = {

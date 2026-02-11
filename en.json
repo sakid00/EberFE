@@ -247,6 +247,21 @@
     "submit_application_button": "Submit",
     "submit_success": "Application submitted successfully"
   },
+  "success_modal": {
+    "career": {
+      "title": "Application\u00a0{Submitted!}",
+      "desc": "Thank you for your interest in joining EBER Group! Your application has been submitted successfully. Our HR team will review your application and get back to you soon."
+    },
+    "product": {
+      "title": "Request\u00a0{Sent!}",
+      "desc": "Thank you! Your product request has been submitted successfully. Our team will review your request and contact you with more information."
+    },
+    "contact_us": {
+      "title": "Message\u00a0{Sent!}",
+      "desc": "Thank you for reaching out to us! Your message has been submitted successfully. Our team will get back to you as soon as possible."
+    },
+    "got_it": "Got It"
+  },
   "custom_product": {
     "submit_application_title_small": "Talk to Us!",
     "submit_application_title": {

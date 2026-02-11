@@ -243,6 +243,21 @@
     "submit_application_button": "Kirim",
     "submit_success": "Aplikasi berhasil dikirim"
   },
+  "success_modal": {
+    "career": {
+      "title": "Lamaran\u00a0{Terkirim!}",
+      "desc": "Terima kasih atas ketertarikan Anda untuk bergabung dengan EBER Group! Lamaran Anda telah berhasil dikirim. Tim HR kami akan meninjau lamaran Anda dan menghubungi Anda segera."
+    },
+    "product": {
+      "title": "Permintaan\u00a0{Terkirim!}",
+      "desc": "Terima kasih! Permintaan produk Anda telah berhasil dikirim. Tim kami akan meninjau permintaan Anda dan menghubungi Anda dengan informasi lebih lanjut."
+    },
+    "contact_us": {
+      "title": "Pesan\u00a0{Terkirim!}",
+      "desc": "Terima kasih telah menghubungi kami! Pesan Anda telah berhasil dikirim. Tim kami akan segera menghubungi Anda."
+    },
+    "got_it": "Mengerti"
+  },
   "custom_product": {
     "submit_application_title_small": "Hubungi Kami!",
     "submit_application_title": {

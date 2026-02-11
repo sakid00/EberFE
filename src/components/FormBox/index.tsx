@@ -1,11 +1,12 @@
 import DualColorText from '@/components/dualColorText/index';
 import TextParser from '@/components/TextParser/index';
-import { Box, Button, InputLabel, TextField, Typography } from '@mui/material';
+import { Box, Button, InputLabel, Modal, TextField, Typography } from '@mui/material';
+import { Close } from '@mui/icons-material';
 import { styles, classNames } from './style';
 import { dynamicStylingValue, useDeviceType } from '@/hooks/useDeviceType';
 import { useTranslation } from '@/hooks';
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import useContactForm from '@/hooks/useContactForm';
 import Image, { StaticImageData } from 'next/image';
 
@@ -45,6 +46,7 @@ const FormBox = ({
   const { type } = useDeviceType();
   const { t, language } = useTranslation();
   const pathname = usePathname();
+  const router = useRouter();
   const {
     submitApplication,
     isSubmitting,
@@ -53,6 +55,7 @@ const FormBox = ({
   } = useContactForm();
   const isCareerPage = pathname?.includes('/careers/submit');
   const isProduct = pathname?.includes('/product/submit');
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -178,7 +181,40 @@ const FormBox = ({
         message: '',
         cvFile: null,
       });
+      setOpenSuccessModal(true);
     }
+  };
+
+  const getSuccessModalContent = () => {
+    if (isCareerPage) {
+      return {
+        title: t('success_modal.career.title'),
+        desc: t('success_modal.career.desc'),
+      };
+    } else if (isProduct) {
+      return {
+        title: t('success_modal.product.title'),
+        desc: t('success_modal.product.desc'),
+      };
+    }
+    return {
+      title: t('success_modal.contact_us.title'),
+      desc: t('success_modal.contact_us.desc'),
+    };
+  };
+
+  const handleCloseModal = () => {
+    router.push('/');
+    setTimeout(() => {
+      setOpenSuccessModal(false);
+    }, 500);
+  };
+
+  const handleGotIt = () => {
+    router.push('/');
+    setTimeout(() => {
+      setOpenSuccessModal(false);
+    }, 500);
   };
   return (
     <>
@@ -344,12 +380,6 @@ const FormBox = ({
         {submitError && (
           <Typography sx={styles.errorText}>{submitError}</Typography>
         )}
-        {isSuccess && (
-          <Typography sx={styles.uploadSuccessText}>
-            {t('contact_us.submit_success') ||
-              'Application submitted successfully!'}
-          </Typography>
-        )}
         <Button
           sx={styles.submitButton}
           onClick={handleSubmit}
@@ -360,6 +390,34 @@ const FormBox = ({
             : (buttonText ?? t('contact_us.submit_application_button'))}
         </Button>
       </Box>
+
+      <Modal
+        open={openSuccessModal}
+        onClose={handleCloseModal}
+        sx={styles.modal}
+        BackdropProps={{
+          sx: styles.backdrop,
+        }}
+      >
+        <Box sx={styles.modalBox}>
+          <Box sx={styles.modalHeaderContainer}>
+            <DualColorText
+              text={getSuccessModalContent().title}
+              fontSize="2em"
+              fontWeight={800}
+              inline
+              color="#030712"
+            />
+            <Close sx={styles.modalCloseIcon} onClick={handleCloseModal} />
+          </Box>
+          <Typography sx={styles.modalMessageText}>
+            {getSuccessModalContent().desc}
+          </Typography>
+          <Button sx={styles.modalConfirmButton} onClick={handleGotIt}>
+            {t('success_modal.got_it')}
+          </Button>
+        </Box>
+      </Modal>
     </>
   );
 };
