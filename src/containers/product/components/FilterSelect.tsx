@@ -36,7 +36,7 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
       onChange={onChange}
       renderValue={(selected) => (
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Typography sx={{ fontSize: '0.85em', whiteSpace: 'nowrap' }}>
+          <Typography sx={{ fontSize: '1em', whiteSpace: 'nowrap' }}>
             {placeholder}
           </Typography>
           {selected.length > 0 && (
@@ -53,7 +53,10 @@ const FilterSelect: React.FC<FilterSelectProps> = ({
       {options.map((option) => (
         <MenuItem key={option} value={option}>
           <Checkbox checked={value.includes(option)} />
-          <ListItemText primary={option} />
+          <ListItemText
+            primary={option}
+            primaryTypographyProps={{ sx: { fontSize: '0.85em' } }}
+          />
         </MenuItem>
       ))}
     </Select>

@@ -62,25 +62,25 @@ export const styles = {
     padding: '16px 20px',
     marginTop: '16px',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    alignItems: dynamicStylingValue(type, 'stretch', 'center', 'center'),
     boxShadow:
       '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     position: 'relative' as const,
     zIndex: 10,
     gap: '8px',
+    overflow: 'hidden',
   }),
 
-  filterButtonContainer: (type: DeviceType) => ({
+  filterButtonContainer: (_type: DeviceType) => ({
     display: 'flex',
     flexDirection: 'row' as const,
     alignItems: 'center',
     gap: '8px',
-    flexShrink: 0,
+    flexShrink: 1,
     overflowX: 'auto' as const,
     scrollBehavior: 'smooth' as const,
     flexGrow: 1,
     minWidth: 0,
-    // Hide scrollbar but keep scrolling
     '&::-webkit-scrollbar': {
       display: 'none',
     },
