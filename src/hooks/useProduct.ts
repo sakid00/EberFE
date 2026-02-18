@@ -50,6 +50,7 @@ interface ProductRequest {
   grpSbu?: string;
   sbuName?: string;
   grpName?: string;
+  search?: string;
 }
 
 interface FormDataRequest {
@@ -102,6 +103,9 @@ const useProduct = () => {
         }
         if (request.grpName) {
           queryParams.set('grp_name', request.grpName);
+        }
+        if (request.search) {
+          queryParams.set('search', request.search);
         }
 
         const finalUrl = `/products?${queryParams.toString()}`;

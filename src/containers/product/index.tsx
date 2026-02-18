@@ -70,7 +70,11 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
           handleChangeGrpName={handleChangeGrpName}
         />
 
-        <ProductTable cellTitles={cellTitles} rows={rows} isLoading={isLoading} />
+        <ProductTable
+          cellTitles={cellTitles}
+          rows={rows}
+          isLoading={isLoading}
+        />
       </Box>
 
       {/* Pagination Controls */}
@@ -118,18 +122,6 @@ const ProductContainer: React.FC<ProductContainerProps> = ({
           </Stack>
         </Box>
       )}
-
-      {/* <ReqProductModal
-        openModal={openReqModal}
-        setOpenModal={setOpenReqModal}
-        onSuccessfulSubmission={onTokenReceived}
-        onShowSentModal={onShowSentModal}
-      />
-      <ReqProductSent
-        openModal={openSentModal}
-        setOpenModal={setOpenSentModal}
-        email={submittedEmail}
-      /> */}
     </>
   );
 };

@@ -7,6 +7,7 @@ import {
   ReactNode,
   useState,
   useEffect,
+  useRef,
   useMemo,
   useCallback,
   Suspense,
@@ -68,6 +69,22 @@ const ProductsPageContent = () => {
   const [submittedEmail, setSubmittedEmail] = useState<string>('');
   const [isRequestingProduct, setIsRequestingProduct] =
     useState<boolean>(false);
+  const [debouncedSearch, setDebouncedSearch] = useState<string>('');
+  const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    debounceTimerRef.current = setTimeout(() => {
+      setDebouncedSearch(searchQuery.trim());
+    }, 400);
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, [searchQuery]);
 
   // Dynamic filter data from API
   const segmentOptions = filters.segments.length > 0 ? filters.segments : [];
@@ -84,12 +101,12 @@ const ProductsPageContent = () => {
         grpSbu?: string;
         sbuName?: string;
         grpName?: string;
+        search?: string;
       } = {
         page,
         pageSize: itemsPerPage,
       };
 
-      // Add filters if they are selected
       if (filterBySegment.length > 0) {
         requestParams.segment = filterBySegment.join(',');
       }
@@ -102,6 +119,9 @@ const ProductsPageContent = () => {
       if (filterByGrpName.length > 0) {
         requestParams.grpName = filterByGrpName.join(',');
       }
+      if (debouncedSearch) {
+        requestParams.search = debouncedSearch;
+      }
 
       getProduct(requestParams).catch((error) => {
         Sentry.captureException(error, {
@@ -110,14 +130,13 @@ const ProductsPageContent = () => {
         });
       });
     },
-    [getProduct, filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, currentPage, itemsPerPage]
+    [getProduct, filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch, currentPage, itemsPerPage]
   );
 
-  // Fetch products when filters or page change, or on component mount
   useEffect(() => {
     fetchProducts(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, currentPage]);
+  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch, currentPage]);
 
   // Check access parameter from URL
   useEffect(() => {
@@ -198,29 +217,10 @@ const ProductsPageContent = () => {
     [requestProduct]
   );
 
-  // Transform API data to table rows with client-side search filtering
-  // Note: Pagination is handled server-side, but search is still client-side for quick filtering
   const { displayedRows, filteredTotalPages, filteredTotalItems } =
     useMemo(() => {
       if (products?.length > 0) {
-        let filteredProducts = products;
-
-        // Apply search filter if search query exists (client-side filtering)
-        if (searchQuery.trim()) {
-          const query = searchQuery.toLowerCase().trim();
-          filteredProducts = products.filter((product) => {
-            return (
-              (product.code?.toLowerCase() || '').includes(query) ||
-              (product.it_mfg?.toLowerCase() || '').includes(query) ||
-              (product.segment?.toLowerCase() || '').includes(query) ||
-              (product.grp_sbu?.toLowerCase() || '').includes(query) ||
-              (product.sbu_name?.toLowerCase() || '').includes(query) ||
-              (product.grp_name?.toLowerCase() || '').includes(query)
-            );
-          });
-        }
-
-        const rows = filteredProducts.map((product) =>
+        const rows = products.map((product) =>
           createData({
             productCode: product.code,
             group: product.it_mfg ?? '-',
@@ -249,22 +249,13 @@ const ProductsPageContent = () => {
           })
         );
 
-        // If search is applied, use filtered count; otherwise use server pagination
-        const isSearching = searchQuery.trim().length > 0;
-        const totalItems = isSearching
-          ? filteredProducts.length
-          : pagination?.totalItems || products.length;
-        const totalPages = isSearching
-          ? Math.ceil(filteredProducts.length / itemsPerPage)
-          : pagination?.totalPages || 1;
-
         return {
           displayedRows: rows,
-          filteredTotalPages: totalPages,
-          filteredTotalItems: totalItems,
+          filteredTotalPages: pagination?.totalPages || 1,
+          filteredTotalItems: pagination?.totalItems || products.length,
         };
       }
-      // Fallback static data
+
       const fallbackRows = [
         createData({
           productCode: 'Sample Product',
@@ -300,19 +291,16 @@ const ProductsPageContent = () => {
       };
     }, [
       products,
-      searchQuery,
       handleRequestClick,
       pagination,
-      itemsPerPage,
       t,
       isRequestingProduct,
     ]);
 
-  // Reset to first page when filters or search query change
   useEffect(() => {
     setCurrentPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, searchQuery]);
+  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch]);
 
   const handleChangeSegment = (
     event: SelectChangeEvent<typeof filterBySegment>
