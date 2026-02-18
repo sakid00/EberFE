@@ -22,6 +22,7 @@ import ReqProductModal from '@/components/ReqProductModal/index';
 import * as Sentry from '@sentry/nextjs';
 
 const cellTitles = [
+  'product.product_table.coid',
   'product.product_table.product_code',
   'product.product_table.group',
   'product.product_table.segment',
@@ -32,6 +33,7 @@ const cellTitles = [
 ];
 
 export interface IrowData {
+  coid: string;
   productCode: string;
   group: string;
   segment: string;
@@ -174,6 +176,7 @@ const ProductsPageContent = () => {
   }, [searchParams]);
 
   const createData = ({
+    coid,
     productCode,
     group,
     segment,
@@ -182,7 +185,7 @@ const ProductsPageContent = () => {
     groupName,
     getMoreDetail,
   }: IrowData) => {
-    return { productCode, group, segment, groupSbu, sbuName, groupName, getMoreDetail };
+    return { coid, productCode, group, segment, groupSbu, sbuName, groupName, getMoreDetail };
   };
 
   const handleTokenReceived = () => {
@@ -222,6 +225,7 @@ const ProductsPageContent = () => {
       if (products?.length > 0) {
         const rows = products.map((product) =>
           createData({
+            coid: product.coid ?? '-',
             productCode: product.code,
             group: product.it_mfg ?? '-',
             segment: product.segment ?? '-',
@@ -258,6 +262,7 @@ const ProductsPageContent = () => {
 
       const fallbackRows = [
         createData({
+          coid: '-',
           productCode: 'Sample Product',
           group: '-',
           segment: '-',
@@ -360,7 +365,7 @@ const ProductsPageContent = () => {
         <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
           {t('product.title')}
         </Typography>
-        <TableSkeleton rows={10} columns={7} type={type} showHeader={true} />
+        <TableSkeleton rows={10} columns={8} type={type} showHeader={true} />
       </Box>
     );
   }
@@ -428,7 +433,7 @@ const ProductClient = () => {
           <Typography variant="h4" sx={{ marginBottom: 3, fontWeight: 700 }}>
             Loading...
           </Typography>
-          <TableSkeleton rows={10} columns={7} type={type} showHeader={true} />
+          <TableSkeleton rows={10} columns={8} type={type} showHeader={true} />
         </Box>
       }
     >

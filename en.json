@@ -299,6 +299,7 @@
     "make_it_yours": "Make it Yours",
     "customize_your_product": "Customize Your Product",
     "product_table": {
+      "coid": "Company",
       "product_code": "Product Code",
       "group": "Group",
       "segment": "Segment",

@@ -1,6 +1,7 @@
 import { SelectChangeEvent } from '@mui/material';
 
 export interface IRowData {
+  coid: string;
   productCode: string;
   group: string;
   segment: string;

@@ -77,6 +77,14 @@ const ProductTable: React.FC<ProductTableProps> = ({
                 scope="row"
                 sx={styles.tableCodeCell(type)}
               >
+                {row.coid}
+              </TableCell>
+              <TableCell
+                component="th"
+                align="center"
+                scope="row"
+                sx={styles.tableCodeCell(type)}
+              >
                 {row.productCode}
               </TableCell>
               <TableCell align="center" sx={styles.tableDataCell(type)}>

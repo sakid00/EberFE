@@ -177,6 +177,7 @@ const useProduct = () => {
           sbu_name: product.sbu_name,
           grp_name: product.grp_name,
           grp_sbu: product.grp_sbu,
+          coid: product.coid,
         }));
 
         actions.fetchProductsSuccess(transformedData, pagination);

@@ -33,6 +33,7 @@ export interface ProductData {
   sbu_name: string | null;
   grp_name: string | null;
   grp_sbu: string | null;
+  coid: string | null;
 }
 
 export interface ProductFilters {

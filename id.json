@@ -295,6 +295,7 @@
     "make_it_yours": "Solusi Tepat,",
     "customize_your_product": "Produk Kustommu",
     "product_table": {
+      "coid": "Perusahaan",
       "product_code": "Kode Produk",
       "group": "Grup",
       "segment": "Segmen",
