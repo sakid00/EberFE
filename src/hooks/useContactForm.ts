@@ -56,19 +56,37 @@ const useContactForm = (): UseContactFormReturn => {
       setIsSuccess(false);
 
       try {
-        const formData = new FormData();
-        formData.append('firstname', data.firstName);
-        formData.append('lastname', data.lastName);
-        formData.append('email', data.email);
-        formData.append('message', data.message || '');
-
-        if (data.file) {
-          formData.append('file', data.file);
+        // Use FormData for CAREER (file upload) and JSON for others
+        const isCareer = data.sendTo === 'CAREER';
+        
+        let body: FormData | Record<string, string>;
+        
+        if (isCareer) {
+          // Use FormData for career applications (file upload required)
+          const formData = new FormData();
+          formData.append('firstname', data.firstName);
+          formData.append('lastname', data.lastName);
+          formData.append('email', data.email);
+          formData.append('message', data.message || '');
+          
+          if (data.file) {
+            formData.append('file', data.file);
+          }
+          
+          body = formData;
+        } else {
+          // Use JSON for contact and product submissions
+          body = {
+            firstname: data.firstName,
+            lastname: data.lastName,
+            email: data.email,
+            message: data.message || '',
+          };
         }
 
         const response = await api.execute(getEndpoint(data.sendTo), {
           method: 'POST',
-          body: formData,
+          body,
         });
 
         if (response.error) {

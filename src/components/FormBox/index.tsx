@@ -137,7 +137,10 @@ const FormBox = ({
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Message is optional - no validation required
+    // Message validation - minimum 10 characters
+    if (formData.message.trim().length > 0 && formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
 
     // CV file validation for career page
     if (isCareerPage && !formData.cvFile) {
@@ -309,11 +312,15 @@ const FormBox = ({
             placeholder=""
             value={formData.message}
             onChange={handleInputChange('message')}
+            error={!!errors.message}
             sx={styles.textField}
             InputProps={{
               sx: styles.textFieldInput,
             }}
           />
+          {errors.message && (
+            <Typography sx={styles.errorText}>{errors.message}</Typography>
+          )}
         </Box>
         {isCareerPage && (
           <Box sx={styles.fieldContainer}>
