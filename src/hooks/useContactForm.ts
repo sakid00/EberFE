@@ -45,7 +45,7 @@ const useContactForm = (): UseContactFormReturn => {
       case 'CONTACT_US':
         return '/email/send/contact';
       case 'PRODUCT':
-        return '/email/send/custom-products';
+        return '/email/send/custom-product';
     }
   }, []);
 
@@ -58,9 +58,9 @@ const useContactForm = (): UseContactFormReturn => {
       try {
         // Use FormData for CAREER (file upload) and JSON for others
         const isCareer = data.sendTo === 'CAREER';
-        
+
         let body: FormData | Record<string, string>;
-        
+
         if (isCareer) {
           // Use FormData for career applications (file upload required)
           const formData = new FormData();
@@ -68,11 +68,11 @@ const useContactForm = (): UseContactFormReturn => {
           formData.append('lastname', data.lastName);
           formData.append('email', data.email);
           formData.append('message', data.message || '');
-          
+
           if (data.file) {
             formData.append('file', data.file);
           }
-          
+
           body = formData;
         } else {
           // Use JSON for contact and product submissions
