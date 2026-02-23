@@ -68,7 +68,6 @@ export const styles = {
     position: 'relative' as const,
     zIndex: 10,
     gap: '8px',
-    overflow: 'hidden',
   }),
 
   filterButtonContainer: (_type: DeviceType) => ({
@@ -81,11 +80,23 @@ export const styles = {
     scrollBehavior: 'smooth' as const,
     flexGrow: 1,
     minWidth: 0,
+    paddingBottom: '4px',
     '&::-webkit-scrollbar': {
-      display: 'none',
+      height: '6px',
     },
-    msOverflowStyle: 'none' as const,
-    scrollbarWidth: 'none' as const,
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: '#f1f1f1',
+      borderRadius: '3px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#c1c1c1',
+      borderRadius: '3px',
+      '&:hover': {
+        backgroundColor: '#a8a8a8',
+      },
+    },
+    scrollbarWidth: 'thin' as const,
+    scrollbarColor: '#c1c1c1 #f1f1f1',
   }),
 
   // Filter button base style
@@ -220,6 +231,57 @@ export const styles = {
   },
 
   // Table styles
+  tableWrapper: {
+    position: 'relative' as const,
+  },
+
+  tableLoadingOverlay: {
+    position: 'absolute' as const,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    zIndex: 10,
+    borderRadius: 1,
+  },
+
+  tableContainerOuter: (type: DeviceType, isLoading: boolean) => ({
+    marginTop: '16px',
+    position: 'relative' as const,
+    zIndex: 10,
+    borderRadius: '20px',
+    overflow: 'hidden',
+    overflowX: dynamicStylingValue(type, 'auto', 'visible', 'visible'),
+    scrollBehavior: 'smooth',
+    opacity: isLoading ? 0.5 : 1,
+    transition: 'opacity 0.2s ease-in-out',
+    border: '1px solid #E5E7EB',
+    ...(type === 'mobile' && {
+      '&::-webkit-scrollbar': {
+        height: '8px',
+      },
+      '&::-webkit-scrollbar-track': {
+        backgroundColor: '#f1f1f1',
+        borderRadius: '4px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#c1c1c1',
+        borderRadius: '4px',
+        '&:hover': {
+          backgroundColor: '#a8a8a8',
+        },
+      },
+    }),
+  }),
+
+  emptyStateCell: {
+    border: 0,
+  },
+
   tableContainer: (type: DeviceType) => ({
     marginTop: '16px',
     position: 'relative' as const,
@@ -335,6 +397,35 @@ export const styles = {
     lineHeight: '1.4',
     padding: dynamicStylingValue(type, '14px 10px', '16px 12px', '16px 12px'),
   }),
+
+  // Empty state styles
+  emptyState: {
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '60px 20px',
+    gap: '16px',
+  },
+
+  emptyImage: (type: DeviceType) => ({
+    width: dynamicStylingValue(type, '120px', '150px', '150px'),
+    height: 'auto',
+  }),
+
+  emptyTitle: {
+    fontSize: '1.2em',
+    fontWeight: 700,
+    color: '#030712',
+  },
+
+  emptyDescription: {
+    fontSize: '0.9em',
+    fontWeight: 400,
+    color: '#4B5563',
+    textAlign: 'center' as const,
+    maxWidth: '300px',
+  },
 
   // Pagination styles
   paginationContainer: (type: DeviceType) => ({

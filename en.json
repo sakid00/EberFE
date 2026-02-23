@@ -334,6 +334,8 @@
       "sent": "Sent!",
       "desc": "Thank you! Your request has been sent successfully. Our EBER team will contact you soon with more information.",
       "got_it": "Got It"
-    }
+    },
+    "empty_list_title": "Product not found",
+    "empty_list_desc": "No products match the selected data or filter."
   }
 }

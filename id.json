@@ -330,6 +330,8 @@
       "sent": "Terkirim!",
       "desc": "Terima kasih! Permohonan Anda telah berhasil terkirim. Tim kami akan segera menghubungi Anda dengan informasi lebih lanjut.",
       "got_it": "Mengerti"
-    }
+    },
+    "empty_list_title": "Produk tidak ditemukan",
+    "empty_list_desc": "Tidak ada produk yang sesuai dengan data atau filter yang dipilih."
   }
 }

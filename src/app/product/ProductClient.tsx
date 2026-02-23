@@ -132,13 +132,29 @@ const ProductsPageContent = () => {
         });
       });
     },
-    [getProduct, filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch, currentPage, itemsPerPage]
+    [
+      getProduct,
+      filterBySegment,
+      filterByGrpSbu,
+      filterBySbuName,
+      filterByGrpName,
+      debouncedSearch,
+      currentPage,
+      itemsPerPage,
+    ]
   );
 
   useEffect(() => {
     fetchProducts(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch, currentPage]);
+  }, [
+    filterBySegment,
+    filterByGrpSbu,
+    filterBySbuName,
+    filterByGrpName,
+    debouncedSearch,
+    currentPage,
+  ]);
 
   // Check access parameter from URL
   useEffect(() => {
@@ -185,7 +201,16 @@ const ProductsPageContent = () => {
     groupName,
     getMoreDetail,
   }: IrowData) => {
-    return { coid, productCode, group, segment, groupSbu, sbuName, groupName, getMoreDetail };
+    return {
+      coid,
+      productCode,
+      group,
+      segment,
+      groupSbu,
+      sbuName,
+      groupName,
+      getMoreDetail,
+    };
   };
 
   const handleTokenReceived = () => {
@@ -259,53 +284,23 @@ const ProductsPageContent = () => {
           filteredTotalItems: pagination?.totalItems || products.length,
         };
       }
-
-      const fallbackRows = [
-        createData({
-          coid: '-',
-          productCode: 'Sample Product',
-          group: '-',
-          segment: '-',
-          groupSbu: '-',
-          sbuName: '-',
-          groupName: '-',
-          getMoreDetail: (
-            <Button
-              variant="text"
-              sx={{
-                color: '#784791',
-                fontSize: '1em',
-                fontWeight: 400,
-                textTransform: 'none',
-              }}
-              onClick={() => handleRequestClick('Sample Product')}
-              disabled={isRequestingProduct}
-              startIcon={
-                <Image src={emailIcon} width={16} height={16} alt="email" />
-              }
-            >
-              {t('product.request_product')}
-            </Button>
-          ),
-        }),
-      ];
       return {
-        displayedRows: fallbackRows,
+        displayedRows: [],
         filteredTotalPages: 1,
         filteredTotalItems: 1,
       };
-    }, [
-      products,
-      handleRequestClick,
-      pagination,
-      t,
-      isRequestingProduct,
-    ]);
+    }, [products, handleRequestClick, pagination, t, isRequestingProduct]);
 
   useEffect(() => {
     setCurrentPage(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterBySegment, filterByGrpSbu, filterBySbuName, filterByGrpName, debouncedSearch]);
+  }, [
+    filterBySegment,
+    filterByGrpSbu,
+    filterBySbuName,
+    filterByGrpName,
+    debouncedSearch,
+  ]);
 
   const handleChangeSegment = (
     event: SelectChangeEvent<typeof filterBySegment>
