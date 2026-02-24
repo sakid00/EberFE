@@ -92,9 +92,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/logo.png',
-    shortcut: '/logo.png',
-    apple: '/logo.png',
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 };
 
@@ -118,6 +118,43 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
         <meta name="emotion-insertion-point" content="" />
+
+        {/* Structured Data - Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'EBER Group',
+              url: 'https://ebergroup.com',
+              logo: 'https://ebergroup.com/logo.png',
+              description: 'EBER Group - Excellence in Every Detail. Leading provider of innovative solutions and services.',
+            }),
+          }}
+        />
+
+        {/* Structured Data - WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'EBER Group',
+              url: 'https://ebergroup.com',
+              description: 'EBER Group - Excellence in Every Detail',
+              publisher: {
+                '@type': 'Organization',
+                name: 'EBER Group',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://ebergroup.com/logo.png',
+                },
+              },
+            }),
+          }}
+        />
 
         {/* Resource hints for better loading performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
