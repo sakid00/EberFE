@@ -46,7 +46,7 @@ const useTopProducts = () => {
   const [error, setError] = useState<string | null>(null);
 
   const api = useApi({
-    baseURL: 'https://fish.ebergroup.com/api/v1',
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
     defaultHeaders: {},
     timeout: 10000,
     retries: 3,
