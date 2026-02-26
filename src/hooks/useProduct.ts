@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import {
   useProductContext,
   ProductData,
@@ -72,14 +72,16 @@ interface IRequestProduct {
   onSuccess: () => void;
 }
 
+const productApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useProduct = () => {
   const { state, actions } = useProductContext();
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(productApiConfig);
 
   const getProduct = useCallback(
     async (request: ProductRequest) => {
@@ -110,7 +112,7 @@ const useProduct = () => {
 
         const finalUrl = `/products?${queryParams.toString()}`;
 
-        const response = await api.execute(finalUrl, {
+        const response = await execute(finalUrl, {
           method: 'GET',
         });
 
@@ -199,13 +201,13 @@ const useProduct = () => {
         throw error;
       }
     },
-    [actions, api]
+    [actions, execute]
   );
 
   const applyInstantAccess = useCallback(
     async (props: IFormData) => {
       try {
-        const response = await api.execute('/form-submissions/instant-access', {
+        const response = await execute('/form-submissions/instant-access', {
           method: 'POST',
           body: {
             fullName: props.formData.fullName,
@@ -238,13 +240,13 @@ const useProduct = () => {
         throw error;
       }
     },
-    [api, actions]
+    [execute, actions]
   );
 
   const requestProduct = useCallback(
     async (props: IRequestProduct) => {
       try {
-        const response = await api.execute(
+        const response = await execute(
           '/form-submissions/send-product-email',
           {
             method: 'POST',
@@ -276,7 +278,7 @@ const useProduct = () => {
         throw error;
       }
     },
-    [api, actions]
+    [execute, actions]
   );
 
   // Additional helper functions

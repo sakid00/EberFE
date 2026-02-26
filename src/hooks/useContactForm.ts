@@ -1,6 +1,6 @@
 'use client';
 
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import { useCallback, useState } from 'react';
 import * as Sentry from '@sentry/nextjs';
 
@@ -27,16 +27,18 @@ interface UseContactFormReturn {
   reset: () => void;
 }
 
+const contactFormApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  timeout: 30000,
+  retries: 1,
+};
+
 const useContactForm = (): UseContactFormReturn => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    timeout: 30000, // 30 seconds for file uploads
-    retries: 1,
-  });
+  const { execute } = useApi(contactFormApiConfig);
 
   const getEndpoint = useCallback((sendTo: ContactFormData['sendTo']) => {
     switch (sendTo) {
@@ -84,7 +86,7 @@ const useContactForm = (): UseContactFormReturn => {
           };
         }
 
-        const response = await api.execute(getEndpoint(data.sendTo), {
+        const response = await execute(getEndpoint(data.sendTo), {
           method: 'POST',
           body,
         });
@@ -138,7 +140,7 @@ const useContactForm = (): UseContactFormReturn => {
         setIsSubmitting(false);
       }
     },
-    [api]
+    [execute]
   );
 
   const reset = useCallback(() => {

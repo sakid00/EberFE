@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import {
   useCertificateContext,
   CertificateData,
@@ -29,14 +29,16 @@ interface CertificateApiResponse {
   data: CertificateResponsePayload;
 }
 
+const certificateApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useCertificate = () => {
   const { state, actions } = useCertificateContext();
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(certificateApiConfig);
 
   const getCertificates = useCallback(
     async (request: CertificateRequest) => {
@@ -50,7 +52,7 @@ const useCertificate = () => {
 
         const finalUrl = `/certificates?${queryParams.toString()}`;
 
-        const response = await api.execute(finalUrl, {
+        const response = await execute(finalUrl, {
           method: 'GET',
         });
 
@@ -86,7 +88,7 @@ const useCertificate = () => {
         throw error;
       }
     },
-    [actions, api]
+    [actions, execute]
   );
 
   const clearError = useCallback(() => {

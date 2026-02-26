@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import { useActivityContext, ActivityData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 import * as Sentry from '@sentry/nextjs';
@@ -23,14 +23,16 @@ interface ActivityRequest {
   group?: string;
 }
 
+const activityApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useActivity = () => {
   const { state, actions } = useActivityContext();
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(activityApiConfig);
 
   const getActivities = useCallback(
     async (request: ActivityRequest) => {
@@ -55,7 +57,7 @@ const useActivity = () => {
 
         const finalUrl = `/articles?${queryParams.toString()}`;
 
-        const response = await api.execute(finalUrl, {
+        const response = await execute(finalUrl, {
           method: 'GET',
         });
 
@@ -116,7 +118,7 @@ const useActivity = () => {
         throw error;
       }
     },
-    [actions, api]
+    [actions, execute]
   );
 
   const getActivityById = useCallback(
@@ -136,7 +138,7 @@ const useActivity = () => {
 
         const finalUrl = `/articles/${id}`;
 
-        const response = await api.execute(finalUrl, {
+        const response = await execute(finalUrl, {
           method: 'GET',
         });
 
@@ -291,7 +293,7 @@ const useActivity = () => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [actions, api]
+    [actions, execute]
   );
 
   // Additional helper functions

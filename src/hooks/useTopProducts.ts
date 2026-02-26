@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import { useState, useCallback } from 'react';
 import * as Sentry from '@sentry/nextjs';
 
@@ -40,24 +40,26 @@ interface TopProductsApiResponse {
   data: CompanyTopProducts[];
 }
 
+const apiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useTopProducts = () => {
   const [data, setData] = useState<CompanyTopProducts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const api = useApi({
-    baseURL: 'https://fish.ebergroup.com/api/v1',
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(apiConfig);
 
   const getTopProducts = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const response = await api.execute('/company-top-products', {
+      const response = await execute('/company-top-products', {
         method: 'GET',
       });
 
@@ -89,7 +91,7 @@ const useTopProducts = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [api]);
+  }, [execute]);
 
   const clearError = useCallback(() => {
     setError(null);

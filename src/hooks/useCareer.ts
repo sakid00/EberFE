@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import { useCareerContext, CareerData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 import * as Sentry from '@sentry/nextjs';
@@ -32,14 +32,16 @@ interface uploadCVFileResponseData {
   };
 }
 
+const careerApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useCareer = () => {
   const { state, actions } = useCareerContext();
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(careerApiConfig);
 
   const getCareer = useCallback(
     async (request: CareerRequest) => {
@@ -51,7 +53,7 @@ const useCareer = () => {
           pageSize: request.pageSize.toString(),
         });
 
-        const response = await api.execute(
+        const response = await execute(
           `/careers?${queryParams.toString()}`,
           {
             method: 'GET',
@@ -93,7 +95,7 @@ const useCareer = () => {
         throw error;
       }
     },
-    [actions, api]
+    [actions, execute]
   );
 
   // Additional helper functions
@@ -111,7 +113,7 @@ const useCareer = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await api.execute('/upload/file', {
+        const response = await execute('/upload/file', {
           method: 'POST',
           body: formData,
           // Remove headers completely to let browser set proper Content-Type with boundary
@@ -150,7 +152,7 @@ const useCareer = () => {
         throw new Error(errorMessage);
       }
     },
-    [api]
+    [execute]
   );
 
   return {

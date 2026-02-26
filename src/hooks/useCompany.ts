@@ -1,4 +1,4 @@
-import { useApi } from './useApi';
+import { useApi, ApiConfig } from './useApi';
 import { useCompanyContext, CompanyData } from '../contexts/DataProvider';
 import { useCallback } from 'react';
 import { useNavigationCache } from './useNavigationCache';
@@ -67,15 +67,17 @@ interface CompanyRequest {
   pageSize: number;
 }
 
+const companyApiConfig: ApiConfig = {
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+  defaultHeaders: {},
+  timeout: 10000,
+  retries: 3,
+};
+
 const useCompany = () => {
   const { state, actions } = useCompanyContext();
   const cache = useNavigationCache<CompanyData[]>('companies');
-  const api = useApi({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
-    defaultHeaders: {},
-    timeout: 10000,
-    retries: 3,
-  });
+  const { execute } = useApi(companyApiConfig);
 
   const getCompany = useCallback(
     async (request: CompanyRequest) => {
@@ -102,7 +104,7 @@ const useCompany = () => {
           pageSize: request.pageSize.toString(),
         });
 
-        const response = await api.execute(
+        const response = await execute(
           `/admin-company-profile?${queryParams.toString()}`,
           {
             method: 'GET',
@@ -151,7 +153,7 @@ const useCompany = () => {
         throw error;
       }
     },
-    [actions, api, cache, state.companies, state.isLoading]
+    [actions, execute, cache, state.companies, state.isLoading]
   );
 
   // Additional helper functions

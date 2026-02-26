@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useReducer, ReactNode } from 'react';
+import React, { createContext, useContext, useReducer, useMemo, ReactNode } from 'react';
 
 // ===== CAREER API TYPES =====
 export interface CareerData {
@@ -757,7 +757,8 @@ interface DataProviderProps {
 export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(dataReducer, initialState);
 
-  const actions = {
+  // dispatch is stable (from useReducer), so actions is only created once
+  const actions = useMemo(() => ({
     // Career Actions
     careerFetchStart: () => dispatch({ type: 'CAREER_FETCH_START' }),
     careerFetchSuccess: (careers: CareerData[]) =>
@@ -849,12 +850,12 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
 
     // Global Actions
     resetAllData: () => dispatch({ type: 'RESET_ALL_DATA' }),
-  };
+  }), [dispatch]);
 
-  const contextValue: DataContextType = {
+  const contextValue: DataContextType = useMemo(() => ({
     state,
     actions,
-  };
+  }), [state, actions]);
 
   return (
     <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
@@ -876,98 +877,92 @@ export const useDataContext = () => {
 export const useCareerContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.career,
-    actions: {
-      fetchCareersStart: actions.careerFetchStart,
-      fetchCareersSuccess: actions.careerFetchSuccess,
-      fetchCareersError: actions.careerFetchError,
-      clearError: actions.careerClearError,
-      resetState: actions.careerReset,
-    },
-  };
+  const careerActions = useMemo(() => ({
+    fetchCareersStart: actions.careerFetchStart,
+    fetchCareersSuccess: actions.careerFetchSuccess,
+    fetchCareersError: actions.careerFetchError,
+    clearError: actions.careerClearError,
+    resetState: actions.careerReset,
+  }), [actions]);
+
+  return { state: state.career, actions: careerActions };
 };
 
 // Specialized hook for product data
 export const useProductContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.product,
-    actions: {
-      fetchProductsStart: actions.productFetchStart,
-      fetchProductsSuccess: actions.productFetchSuccess,
-      fetchProductsError: actions.productFetchError,
-      fetchFiltersSuccess: actions.productFiltersSuccess,
-      clearError: actions.productClearError,
-      resetState: actions.productReset,
-    },
-  };
+  const productActions = useMemo(() => ({
+    fetchProductsStart: actions.productFetchStart,
+    fetchProductsSuccess: actions.productFetchSuccess,
+    fetchProductsError: actions.productFetchError,
+    fetchFiltersSuccess: actions.productFiltersSuccess,
+    clearError: actions.productClearError,
+    resetState: actions.productReset,
+  }), [actions]);
+
+  return { state: state.product, actions: productActions };
 };
 
 // Specialized hook for company data
 export const useCompanyContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.company,
-    actions: {
-      fetchCompaniesStart: actions.companyFetchStart,
-      fetchCompaniesSuccess: actions.companyFetchSuccess,
-      fetchCompanyDetailSuccess: actions.companyDetailFetchSuccess,
-      fetchCompaniesError: actions.companyFetchError,
-      clearError: actions.companyClearError,
-      resetState: actions.companyReset,
-    },
-  };
+  const companyActions = useMemo(() => ({
+    fetchCompaniesStart: actions.companyFetchStart,
+    fetchCompaniesSuccess: actions.companyFetchSuccess,
+    fetchCompanyDetailSuccess: actions.companyDetailFetchSuccess,
+    fetchCompaniesError: actions.companyFetchError,
+    clearError: actions.companyClearError,
+    resetState: actions.companyReset,
+  }), [actions]);
+
+  return { state: state.company, actions: companyActions };
 };
 
 // Specialized hook for activity data
 export const useActivityContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.activity,
-    actions: {
-      fetchActivitiesStart: actions.activityFetchStart,
-      fetchActivitiesSuccess: actions.activityFetchSuccess,
-      fetchActivitiesError: actions.activityFetchError,
-      clearError: actions.activityClearError,
-      resetState: actions.activityReset,
-    },
-  };
+  const activityActions = useMemo(() => ({
+    fetchActivitiesStart: actions.activityFetchStart,
+    fetchActivitiesSuccess: actions.activityFetchSuccess,
+    fetchActivitiesError: actions.activityFetchError,
+    clearError: actions.activityClearError,
+    resetState: actions.activityReset,
+  }), [actions]);
+
+  return { state: state.activity, actions: activityActions };
 };
 
 // Specialized hook for certificate data
 export const useCertificateContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.certificate,
-    actions: {
-      fetchCertificatesStart: actions.certificateFetchStart,
-      fetchCertificatesSuccess: actions.certificateFetchSuccess,
-      fetchCertificatesError: actions.certificateFetchError,
-      clearError: actions.certificateClearError,
-      resetState: actions.certificateReset,
-    },
-  };
+  const certificateActions = useMemo(() => ({
+    fetchCertificatesStart: actions.certificateFetchStart,
+    fetchCertificatesSuccess: actions.certificateFetchSuccess,
+    fetchCertificatesError: actions.certificateFetchError,
+    clearError: actions.certificateClearError,
+    resetState: actions.certificateReset,
+  }), [actions]);
+
+  return { state: state.certificate, actions: certificateActions };
 };
 
 // Specialized hook for next API data (PLACEHOLDER)
 export const useNextApiContext = () => {
   const { state, actions } = useDataContext();
 
-  return {
-    state: state.nextApi,
-    actions: {
-      fetchStart: actions.nextApiFetchStart,
-      fetchSuccess: actions.nextApiFetchSuccess,
-      fetchError: actions.nextApiFetchError,
-      clearError: actions.nextApiClearError,
-      resetState: actions.nextApiReset,
-    },
-  };
+  const nextApiActions = useMemo(() => ({
+    fetchStart: actions.nextApiFetchStart,
+    fetchSuccess: actions.nextApiFetchSuccess,
+    fetchError: actions.nextApiFetchError,
+    clearError: actions.nextApiClearError,
+    resetState: actions.nextApiReset,
+  }), [actions]);
+
+  return { state: state.nextApi, actions: nextApiActions };
 };
 
 // Read-only hooks for components that only need to consume data
